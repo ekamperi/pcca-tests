@@ -1,0 +1,106 @@
+[OPENBSD]
+desc: _PC_LINK_MAX              value: 32767            +SUPPORTED+
+desc: _PC_MAX_CANON             value: -1               [INVALID: Invalid argument]
+desc: _PC_MAX_INPUT             value: -1               [INVALID: Invalid argument]
+desc: _PC_NAME_MAX              value: 255              +SUPPORTED+
+desc: _PC_PATH_MAX              value: 1024             +SUPPORTED+
+desc: _PC_PIPE_BUF              value: 512              +SUPPORTED+
+desc: _PC_CHOWN_RESTRICTED      value: 1                +SUPPORTED+
+desc: _PC_NO_TRUNC              value: 1                +SUPPORTED+
+desc: _PC_VDISABLE              value: -1               [INVALID: Invalid argument]
+
+
+[Linux thinkalex 2.6.27.19-thinkalex #1 SMP PREEMPT i686 GNU/Linux]
+desc: _PC_FILESIZEBITS		value: 64		+SUPPORTED+
+desc: _PC_LINK_MAX        	value: 32000     	+SUPPORTED+
+desc: _PC_MAX_CANON       	value: 255       	+SUPPORTED+
+desc: _PC_MAX_INPUT       	value: 255       	+SUPPORTED+
+desc: _PC_NAME_MAX        	value: 255       	+SUPPORTED+
+desc: _PC_PATH_MAX        	value: 4096      	+SUPPORTED+
+desc: _PC_PIPE_BUF        	value: 4096      	+SUPPORTED+
+desc: _PC_2_SYMLINKS      	value: 1         	+SUPPORTED+
+desc: _PC_ALLOC_SIZE_MIN  	value: 4096      	+SUPPORTED+
+desc: _PC_REC_INCR_XFER_SIZE	value: -1        	[NO LIMIT]
+desc: _PC_REC_MAX_XFER_SIZE	value: -1        	[NO LIMIT]
+desc: _PC_REC_MIN_XFER_SIZE	value: 4096      	+SUPPORTED+
+desc: _PC_REC_XFER_ALIGN  	value: 4096      	+SUPPORTED+
+desc: _PC_SYMLINK_MAX     	value: -1        	[NO LIMIT]
+desc: _PC_CHOWN_RESTRICTED	value: 1         	+SUPPORTED+
+desc: _PC_NO_TRUNC        	value: 1         	+SUPPORTED+
+desc: _PC_VDISABLE        	value: 0         	+SUPPORTED+
+desc: _PC_ASYNC_IO        	value: -1        	[NO LIMIT]
+desc: _PC_PRIO_IO         	value: -1        	[NO LIMIT]
+desc: _PC_SYNC_IO         	value: -1        	[NO LIMIT]
+
+
+[Linux ftp 2.6.16.60 #1 Tue Jan 29 11:59:31 EET 2008 i686 GNU/Linux]
+desc: _PC_FILESIZEBITS          value: 64               +SUPPORTED+
+desc: _PC_LINK_MAX              value: 32000            +SUPPORTED+
+desc: _PC_MAX_CANON             value: 255              +SUPPORTED+
+desc: _PC_MAX_INPUT             value: 255              +SUPPORTED+
+desc: _PC_NAME_MAX              value: 255              +SUPPORTED+
+desc: _PC_PATH_MAX              value: 4096             +SUPPORTED+
+desc: _PC_PIPE_BUF              value: 4096             +SUPPORTED+
+desc: _PC_2_SYMLINKS            value: 1                +SUPPORTED+
+desc: _PC_ALLOC_SIZE_MIN        value: 4096             +SUPPORTED+
+desc: _PC_REC_INCR_XFER_SIZE    value: -1               [NO LIMIT]
+desc: _PC_REC_MAX_XFER_SIZE     value: -1               [NO LIMIT]
+desc: _PC_REC_MIN_XFER_SIZE     value: 4096             +SUPPORTED+
+desc: _PC_REC_XFER_ALIGN        value: 4096             +SUPPORTED+
+desc: _PC_SYMLINK_MAX           value: -1               [NO LIMIT]
+desc: _PC_CHOWN_RESTRICTED      value: 1                +SUPPORTED+
+desc: _PC_NO_TRUNC              value: 1                +SUPPORTED+
+desc: _PC_VDISABLE              value: 0                +SUPPORTED+
+desc: _PC_ASYNC_IO              value: -1               [NO LIMIT]
+desc: _PC_PRIO_IO               value: -1               [NO LIMIT]
+desc: _PC_SYNC_IO               value: -1               [NO LIMIT]
+
+
+[Tuxillo -- Linux 2.6.24.5-xxxx-std-ipv4-32 #1 SMP i686 GNU/Linux]
+desc: _PC_FILESIZEBITS          value: 64               +SUPPORTED+
+desc: _PC_LINK_MAX              value: 32000            +SUPPORTED+
+desc: _PC_MAX_CANON             value: 255              +SUPPORTED+
+desc: _PC_MAX_INPUT             value: 255              +SUPPORTED+
+desc: _PC_NAME_MAX              value: 255              +SUPPORTED+
+desc: _PC_PATH_MAX              value: 4096             +SUPPORTED+
+desc: _PC_PIPE_BUF              value: 4096             +SUPPORTED+
+desc: _PC_2_SYMLINKS            value: 1                +SUPPORTED+
+desc: _PC_ALLOC_SIZE_MIN        value: 4096             +SUPPORTED+
+desc: _PC_REC_INCR_XFER_SIZE    value: -1               [NO LIMIT]
+desc: _PC_REC_MAX_XFER_SIZE     value: -1               [NO LIMIT]
+desc: _PC_REC_MIN_XFER_SIZE     value: 4096             +SUPPORTED+
+desc: _PC_REC_XFER_ALIGN        value: 4096             +SUPPORTED+
+desc: _PC_SYMLINK_MAX           value: -1               [NO LIMIT]
+desc: _PC_CHOWN_RESTRICTED      value: 1                +SUPPORTED+
+desc: _PC_NO_TRUNC              value: 1                +SUPPORTED+
+desc: _PC_VDISABLE              value: 0                +SUPPORTED+
+desc: _PC_ASYNC_IO              value: -1               [NO LIMIT]
+desc: _PC_PRIO_IO               value: -1               [NO LIMIT]
+desc: _PC_SYNC_IO               value: -1               [NO LIMIT]
+
+
+[SunOS 5.10]
+<ricudis> sunray2:[root]/tmp# ./a.out
+<ricudis> desc: _PC_FILESIZEBITS          value: -1               [NO LIMIT]
+<ricudis> desc: _PC_LINK_MAX              value: 32767            +SUPPORTED+
+<ricudis> desc: _PC_MAX_CANON             value: 256              +SUPPORTED+
+<ricudis> desc: _PC_MAX_INPUT             value: 512              +SUPPORTED+
+<ricudis> desc: _PC_NAME_MAX              value: 255              +SUPPORTED+
+<ricudis> desc: _PC_PATH_MAX              value: 1024             +SUPPORTED+
+<ricudis> desc: _PC_PIPE_BUF              value: 5120             +SUPPORTED+
+<ricudis> desc: _PC_2_SYMLINKS            value: 1                +SUPPORTED+
+<ricudis> desc: _PC_ALLOC_SIZE_MIN        value: -1               [INVALID: Invalid argument]
+<ricudis> desc: _PC_REC_INCR_XFER_SIZE    value: -1               [INVALID: Invalid argument]
+<ricudis> desc: _PC_REC_MAX_XFER_SIZE     value: -1               [INVALID: Invalid argument]
+<ricudis> desc: _PC_REC_MIN_XFER_SIZE     value: -1               [INVALID: Invalid argument]
+<ricudis> desc: _PC_REC_XFER_ALIGN        value: -1               [INVALID: Invalid argument]
+<ricudis> desc: _PC_SYMLINK_MAX           value: 1024             +SUPPORTED+
+<ricudis> desc: _PC_CHOWN_RESTRICTED      value: 1                +SUPPORTED+
+<ricudis> desc: _PC_NO_TRUNC              value: 1                +SUPPORTED+
+<ricudis> desc: _PC_VDISABLE              value: 0                +SUPPORTED+
+<ricudis> desc: _PC_ASYNC_IO              value: 1                +SUPPORTED+
+<ricudis> desc: _PC_PRIO_IO               value: -1               [INVALID: Invalid argument]
+<ricudis> desc: _PC_SYNC_IO               value: 1                +SUPPORTED+
+<ricudis> sunray2:[root]/tmp# uname -a
+<ricudis> SunOS sunray2 5.10 Generic sun4u sparc SUNW,Sun-Fire-480R
+<ricudis> sunray2:[root]/tmp#                                       

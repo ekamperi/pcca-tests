@@ -1,0 +1,144 @@
+[NETBSD-5]
+<jdc_> desc: _SC_MAPPED_FILES          value: 1                +SUPPORTED+
+<jdc_> desc: _SC_MEMLOCK               value: 1                +SUPPORTED+
+<jdc_> desc: _SC_MEMLOCK_RANGE         value: 1                +SUPPORTED+
+<jdc_> desc: _SC_MEMORY_PROTECTION     value: 1                +SUPPORTED+
+<jdc_> desc: _SC_SEMAPHORES            value: 200112           +SUPPORTED+
+<jdc_> desc: _SC_FSYNC                 value: 1                +SUPPORTED+
+<jdc_> desc: _SC_SYNCHRONIZED_IO       value: 1                +SUPPORTED+
+<jdc_> desc: _SC_TIMERS                value: 200112           +SUPPORTED+
+<jdc_> desc: _SC_PAGESIZE              value: 8192             +SUPPORTED+
+<jdc_> NetBSD 5.0_RC2 NetBSD 5.0_RC2 (ULTRA-PCI.MP) #0: 2009  sparc64
+
+
+[LATEST OSX]
+desc: _SC_ASYNCHRONOUS_IO	value: -1		[NOT SUPPORTED]
+desc: _SC_MAPPED_FILES    	value: 200112    	+SUPPORTED+
+desc: _SC_MEMLOCK         	value: -1        	[NOT SUPPORTED]
+desc: _SC_MEMLOCK_RANGE   	value: -1        	[NOT SUPPORTED]
+desc: _SC_MEMORY_PROTECTION	value: 200112    	+SUPPORTED+
+desc: _SC_MESSAGE_PASSING 	value: -1        	[NOT SUPPORTED]
+desc: _SC_PRIORITIZED_IO  	value: -1        	[NOT SUPPORTED]
+desc: _SC_PRIORITY_SCHEDULING	value: -1        	[NOT SUPPORTED]
+desc: _SC_REALTIME_SIGNALS	value: -1        	[NOT SUPPORTED]
+desc: _SC_SEMAPHORES      	value: -1        	[NOT SUPPORTED]
+desc: _SC_FSYNC           	value: 200112    	+SUPPORTED+
+desc: _SC_SHARED_MEMORY_OBJECTS	value: -1        	[NOT SUPPORTED]
+desc: _SC_SYNCHRONIZED_IO 	value: -1        	[NOT SUPPORTED]
+desc: _SC_TIMERS          	value: -1        	[NOT SUPPORTED]
+desc: _SC_AIO_LISTIO_MAX  	value: 90        	+SUPPORTED+
+desc: _SC_AIO_MAX         	value: 90        	+SUPPORTED+
+desc: _SC_AIO_PRIO_DELTA_MAX	value: -1        	[NOT SUPPORTED]
+desc: _SC_DELAYTIMER_MAX  	value: -1        	[NOT SUPPORTED]
+desc: _SC_MQ_OPEN_MAX     	value: -1        	[NOT SUPPORTED]
+desc: _SC_PAGESIZE        	value: 4096      	+SUPPORTED+
+desc: _SC_RTSIG_MAX       	value: -1        	[NOT SUPPORTED]
+desc: _SC_SEM_NSEMS_MAX   	value: 87381     	+SUPPORTED+
+desc: _SC_SEM_VALUE_MAX   	value: 32767     	+SUPPORTED+
+desc: _SC_SIGQUEUE_MAX    	value: -1        	[NOT SUPPORTED]
+desc: _SC_TIMER_MAX       	value: -1        	[NOT SUPPORTED]
+
+
+[NETBSD 4.0.1]
+desc: _SC_MAPPED_FILES		value: 1		+SUPPORTED+
+desc: _SC_MEMLOCK         	value: 1         	+SUPPORTED+
+desc: _SC_MEMLOCK_RANGE   	value: 1         	+SUPPORTED+
+desc: _SC_MEMORY_PROTECTION	value: 1         	+SUPPORTED+
+desc: _SC_SEMAPHORES      	value: 200112    	+SUPPORTED+
+desc: _SC_FSYNC           	value: 1         	+SUPPORTED+
+desc: _SC_SYNCHRONIZED_IO 	value: 1         	+SUPPORTED+
+desc: _SC_TIMERS          	value: 200112    	+SUPPORTED+
+desc: _SC_PAGESIZE        	value: 4096      	+SUPPORTED+
+
+
+[GENTOO LINUX]
+desc: _SC_ASYNCHRONOUS_IO       value: 200112           +SUPPORTED+
+desc: _SC_MAPPED_FILES          value: 200112           +SUPPORTED+
+desc: _SC_MEMLOCK               value: 200112           +SUPPORTED+
+desc: _SC_MEMLOCK_RANGE         value: 200112           +SUPPORTED+
+desc: _SC_MEMORY_PROTECTION     value: 200112           +SUPPORTED+
+desc: _SC_MESSAGE_PASSING       value: 200112           +SUPPORTED+
+desc: _SC_PRIORITIZED_IO        value: 200112           +SUPPORTED+
+desc: _SC_PRIORITY_SCHEDULING   value: 200112           +SUPPORTED+
+desc: _SC_REALTIME_SIGNALS      value: 200112           +SUPPORTED+
+desc: _SC_SEMAPHORES            value: 200112           +SUPPORTED+
+desc: _SC_FSYNC                 value: 200112           +SUPPORTED+
+desc: _SC_SHARED_MEMORY_OBJECTS value: 200112           +SUPPORTED+
+desc: _SC_SYNCHRONIZED_IO       value: 200112           +SUPPORTED+
+desc: _SC_TIMERS                value: 200112           +SUPPORTED+
+desc: _SC_AIO_LISTIO_MAX        value: -1               [NOT SUPPORTED]
+desc: _SC_AIO_MAX               value: -1               [NOT SUPPORTED]
+desc: _SC_AIO_PRIO_DELTA_MAX    value: 20               +SUPPORTED+
+desc: _SC_DELAYTIMER_MAX        value: 2147483647       +SUPPORTED+
+desc: _SC_MQ_OPEN_MAX           value: -1               [NOT SUPPORTED]
+desc: _SC_PAGESIZE              value: 4096             +SUPPORTED+
+desc: _SC_RTSIG_MAX             value: 32               +SUPPORTED+
+desc: _SC_SEM_NSEMS_MAX         value: -1               [NOT SUPPORTED]
+desc: _SC_SEM_VALUE_MAX         value: 2147483647       +SUPPORTED+
+desc: _SC_SIGQUEUE_MAX          value: -1               [NOT SUPPORTED]
+desc: _SC_TIMER_MAX             value: -1               [NOT SUPPORTED]
+
+
+[OPENBSD 4.3 GENERIC amd64]
+<skullY> desc: _SC_FSYNC                 value: 1                +SUPPORTED+
+<skullY> desc: _SC_PAGESIZE              value: 4096             +SUPPORTED+
+<skullY> desc: _SC_SEM_NSEMS_MAX         value: 60               +SUPPORTED+
+<skullY> desc: _SC_SEM_VALUE_MAX         value: 60               +SUPPORTED+
+
+[FREEBSD]
+$ uname -a
+FreeBSD 7.1-RELEASE FreeBSD 7.1-RELEASE #0: Fri Jan  9  amd64
+desc: _SC_ASYNCHRONOUS_IO 						       value: 0			+SUPPORTED+
+desc: _SC_MAPPED_FILES    						       value: 200112    	+SUPPORTED+
+desc: _SC_MEMLOCK         						       value: -1        	[NOT SUPPORTED]
+desc: _SC_MEMLOCK_RANGE   						       value: 200112    	+SUPPORTED+
+desc: _SC_MEMORY_PROTECTION						       value: 200112    	+SUPPORTED+
+desc: _SC_MESSAGE_PASSING 						       value: 200112    	+SUPPORTED+
+desc: _SC_PRIORITIZED_IO  						       value: -1        	[NOT SUPPORTED]
+desc: _SC_PRIORITY_SCHEDULING						       value: 200112    	+SUPPORTED+
+desc: _SC_REALTIME_SIGNALS						       value: 200112    	+SUPPORTED+
+desc: _SC_SEMAPHORES      						       value: -1        	[NOT SUPPORTED]
+desc: _SC_FSYNC           						       value: 200112    	+SUPPORTED+
+desc: _SC_SHARED_MEMORY_OBJECTS						       value: 200112    	+SUPPORTED+
+desc: _SC_SYNCHRONIZED_IO 						       value: -1        	[NOT SUPPORTED]
+desc: _SC_TIMERS          						       value: 200112    	+SUPPORTED+
+desc: _SC_AIO_LISTIO_MAX  						       value: -1        	[NOT SUPPORTED]
+desc: _SC_AIO_MAX         						       value: -1        	[NOT SUPPORTED]
+desc: _SC_AIO_PRIO_DELTA_MAX						       value: -1        	[NOT SUPPORTED]
+desc: _SC_DELAYTIMER_MAX  						       value: 2147483647	+SUPPORTED+
+desc: _SC_MQ_OPEN_MAX     						       value: -1        	[NOT SUPPORTED]
+desc: _SC_PAGESIZE        						       value: 4096      	+SUPPORTED+
+desc: _SC_RTSIG_MAX       						       value: 62        	+SUPPORTED+
+desc: _SC_SEM_NSEMS_MAX   						       value: -1        	[NOT SUPPORTED]
+desc: _SC_SEM_VALUE_MAX   						       value: -1        	[NOT SUPPORTED]
+desc: _SC_SIGQUEUE_MAX    						       value: 128       	+SUPPORTED+
+desc: _SC_TIMER_MAX       						       value: 32        	+SUPPORTED+
+
+
+[SOLARIS 10]
+SunOS b1000.local.network 5.10 Generic_138888-05 sun4u sparc SUNW,Sun-Blade-1000
+desc: _SC_ASYNCHRONOUS_IO       value: 1                +SUPPORTED+
+desc: _SC_MAPPED_FILES          value: 1                +SUPPORTED+
+desc: _SC_MEMLOCK               value: 1                +SUPPORTED+
+desc: _SC_MEMLOCK_RANGE         value: 1                +SUPPORTED+
+desc: _SC_MEMORY_PROTECTION     value: 1                +SUPPORTED+
+desc: _SC_MESSAGE_PASSING       value: 1                +SUPPORTED+
+desc: _SC_PRIORITIZED_IO        value: -1               [NOT SUPPORTED]
+desc: _SC_PRIORITY_SCHEDULING   value: 1                +SUPPORTED+
+desc: _SC_REALTIME_SIGNALS      value: 1                +SUPPORTED+
+desc: _SC_SEMAPHORES            value: 1                +SUPPORTED+
+desc: _SC_FSYNC                 value: 1                +SUPPORTED+
+desc: _SC_SHARED_MEMORY_OBJECTS value: 1                +SUPPORTED+
+desc: _SC_SYNCHRONIZED_IO       value: 1                +SUPPORTED+
+desc: _SC_TIMERS                value: 1                +SUPPORTED+
+desc: _SC_AIO_LISTIO_MAX        value: 4096             +SUPPORTED+
+desc: _SC_AIO_MAX               value: -1               [NOT SUPPORTED]
+desc: _SC_AIO_PRIO_DELTA_MAX    value: 0                +SUPPORTED+
+desc: _SC_DELAYTIMER_MAX        value: 2147483647       +SUPPORTED+
+desc: _SC_MQ_OPEN_MAX           value: -1               [NOT SUPPORTED]
+desc: _SC_PAGESIZE              value: 8192             +SUPPORTED+
+desc: _SC_RTSIG_MAX             value: 8                +SUPPORTED+
+desc: _SC_SEM_NSEMS_MAX         value: 2147483647       +SUPPORTED+
+desc: _SC_SEM_VALUE_MAX         value: 2147483647       +SUPPORTED+
+desc: _SC_SIGQUEUE_MAX          value: 32               +SUPPORTED+
+desc: _SC_TIMER_MAX             value: 32               +SUPPORTED+
