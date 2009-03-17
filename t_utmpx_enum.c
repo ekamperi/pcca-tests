@@ -21,13 +21,16 @@ int main(void)
 
 	/* Loop over the whole database. */
 	while (!feof(fp)) {
-		if (fread(&ut, sizeof(ut), 1, fp) < 1 && !feof(fp)) {
-			perror("fread");
-			fclose(fp);
-			exit(EXIT_FAILURE);
+		if (fread(&ut, sizeof(ut), 1, fp) < 1) {
+			if (!feof(fp)) {
+				perror("fread");
+				fclose(fp);
+				exit(EXIT_FAILURE);
+			}
+		} else {
+			printf("ut_name = %-20s\tut_id = %-20s\tut_line = %-20s\t"
+			    "ut_host = %s\n", ut.ut_name, ut.ut_id, ut.ut_line, ut.ut_host);
 		}
-		printf("ut_name = %-20s\tut_id = %-20s\tut_line = %-20s\t"
-		    "ut_host = %s\n", ut.ut_name, ut.ut_id, ut.ut_line, ut.ut_host);
 	}
 
 	/* Close database. */
