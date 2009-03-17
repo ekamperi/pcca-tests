@@ -14,17 +14,17 @@ int main(void)
 	struct utmpx *rv;
 	struct stat sb;
 
-	/* There must exist a /var/run/utmpx file */
+	/* There must exist a /var/run/utmpx file. */
 	if (stat(_PATH_UTMPX, &sb) == -1) {
 		if (errno == ENOENT) {
 			errx(EXIT_FAILURE, "there must exist a /var/run/utmpx file");
 		}
 	}
 
-	/* Zero out utmpx structure */
+	/* Zero out the utmpx structure. */
 	bzero(&myent, sizeof(myent));
 
-	/* Populate the utmpx structure */
+	/* Populate the utmpx structure. */
 	strcpy(myent.ut_name, "t_utmpx_loginx");
 	strcpy(myent.ut_id, "10");
 	strcpy(myent.ut_line, "ttyv0");
@@ -33,7 +33,7 @@ int main(void)
 
 	loginx(&myent);
 
-	/* Close database */
+	/* Close database. */
 	endutxent();
 
 	rv = getutxent();
@@ -44,7 +44,7 @@ int main(void)
 	assert(strcmp(rv->ut_host, "voyager") == 0);
 	assert(rv->ut_type == LOGIN_PROCESS);
 
-	/* Close database */
+	/* Close database. */
 	endutxent();
 
 	return (EXIT_SUCCESS);
