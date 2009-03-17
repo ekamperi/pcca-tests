@@ -32,11 +32,16 @@ int main(void)
 	strcpy(myent.ut_host, "voyager");
 	myent.ut_type = LOGIN_PROCESS;
 
+	/* Update database. */
 	loginx(&myent);
 
 	/* Close database. */
 	endutxent();
 
+	/*
+	 * Get next entry from database;
+	 * since we just closed it, getutexnt(3) will reopen it.
+	*/
 	rv = getutxent();
 	assert(rv != NULL);
 	assert(strcmp(rv->ut_name, "t_utmpx_loginx") == 0);
