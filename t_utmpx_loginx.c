@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <libutil.h>
 #include <utmpx.h>
 #include <sys/types.h>
@@ -14,6 +15,11 @@ int main(void)
 	struct utmpx myent;
 	struct utmpx *rv;
 	struct stat sb;
+
+	/* It must be run with root privileges. */
+	if (geteuid() != 0) {
+		errx(EXIT_FAILURE,
+		    "it must be run with root privileges");	}
 
 	/* There must exist a /var/run/utmpx file. */
 	if (stat(_PATH_UTMPX, &sb) == -1) {
