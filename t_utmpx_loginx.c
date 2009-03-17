@@ -40,7 +40,7 @@ int main(void)
 
 	/*
 	 * Get next entry from database;
-	 * since we just closed it, getutexnt(3) will reopen it.
+	 * since we just closed it, getutxent(3) will reopen it.
 	*/
 	rv = getutxent();
 	assert(rv != NULL);

@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	assert(isatty(fd) == 1);
 	close(fd);
 
-	/* invalild tty */
+	/* invalid tty */
 	fd = open(argv[0], O_RDONLY);
 	assert(fd >= 0);
 	assert(isatty(fd) == 0 && errno == ENOTTY);
