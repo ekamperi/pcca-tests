@@ -53,5 +53,7 @@ int main(void)
 	/* Close database. */
 	endutxent();
 
+	printf("passed\n");
+
 	return (EXIT_SUCCESS);
 }
