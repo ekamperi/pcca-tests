@@ -21,7 +21,7 @@ int main(void)
 
 	/* Loop over the whole database. */
 	while (!feof(fp)) {
-		if (fread(&ut, sizeof(ut), 1, fp) < 1  && !feof(fp)) {
+		if (fread(&ut, sizeof(ut), 1, fp) < 1 && !feof(fp)) {
 			perror("fread");
 			fclose(fp);
 			exit(EXIT_FAILURE);
