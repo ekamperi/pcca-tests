@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <libutil.h>
-#include <utmpx.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <libutil.h>
+#include <utmpx.h>
 
 #define NUSERS 10	/* Number of users to simulate. */
 
