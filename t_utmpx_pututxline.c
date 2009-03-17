@@ -27,9 +27,8 @@ int main(void)
 
 	/*
 	 * There must exist a /var/run/utmpx file.
-	 * Subsequent calls will overwrite existing user entries
-	 * in utmpx database, so there is no need to be empty
-	 * at the first place.
+	 * Subsequent calls will overwrite existing user entries in utmpx
+	 * database, so there is no need to be empty at the first place.
 	 */
 	if (stat(_PATH_UTMPX, &sb) == -1) {
 		if (errno == ENOENT) {
@@ -54,20 +53,18 @@ int main(void)
 	}
 
 	/*
-	 * Reset utmpx database, so that the next getutxent() call
-	 * will get the first entry. Closing the database and deferring
-	 * to getutxent() the responsibility to open it, would have
-	 * the same effect.
+	 * Reset utmpx database, so that the next getutxent() call  will get the
+	 * first entry. Closing the database and deferring to getutxent() the
+	 * responsibility to open it, would have the same effect.
 	 */
 	setutxent();
 
 	/* Loop through the whole utmpx database. */
 	for (i = 0; i < NUSERS; i++) {
-		/* getutxent() might fail if the end of utmpx database
-		 * has been reached (which is clearly not the case here,
-		 * since we read exactly as many entries as we write),
-		 * or due to problems reading from database. That's why,
-		 * treat errors as fatal.
+		/* getutxent() might fail if the end of utmpx database has been
+		 * reached (which is clearly not the case here, since we read
+		 * exactly as many entries as we write), or due to problems
+		 * reading from database. That's why, treat errors as fatal.
 		 */
 		rv = getutxent();
 		assert(rv != NULL);
