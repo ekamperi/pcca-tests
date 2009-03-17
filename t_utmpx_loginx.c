@@ -49,7 +49,7 @@ int main(void)
 		myent.ut_pid = i;
 
 		/* Update database. */
-		loginx(&myent);
+		assert(pututxline(&myent) != NULL);
 	}
 
 	/*
