@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#if defined(_NETBSD_SOURCE)
+#include <util.h>
+#else
 #include <libutil.h>
+#endif
 #include <utmpx.h>
 
 int main(void)
