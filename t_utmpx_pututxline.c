@@ -22,7 +22,8 @@ int main(void)
 	/* It must be run with root privileges. */
 	if (geteuid() != 0) {
 		errx(EXIT_FAILURE,
-		    "it must be run with root privileges");	}
+		    "it must be run with root privileges");
+	}
 
 	/*
 	 * There must exist a /var/run/utmpx file.
