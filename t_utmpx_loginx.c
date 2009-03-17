@@ -17,7 +17,8 @@ int main(void)
 	/* There must exist a /var/run/utmpx file. */
 	if (stat(_PATH_UTMPX, &sb) == -1) {
 		if (errno == ENOENT) {
-			errx(EXIT_FAILURE, "there must exist a /var/run/utmpx file");
+			errx(EXIT_FAILURE,
+			    "there must exist a /var/run/utmpx file");
 		}
 	}
 
