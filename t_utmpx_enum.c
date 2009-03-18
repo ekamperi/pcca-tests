@@ -28,8 +28,9 @@ int main(void)
 				exit(EXIT_FAILURE);
 			}
 		} else {
-			printf("ut_name = %-20s\tut_id = %-20s\tut_line = %-20s\t"
-			    "ut_host = %s\n", ut.ut_name, ut.ut_id, ut.ut_line, ut.ut_host);
+			printf("ut_name = %-20s\tut_id = %-20s\t"
+			    "ut_line = %-20s\tut_host = %s\n",
+			    ut.ut_name, ut.ut_id, ut.ut_line, ut.ut_host);
 		}
 	}
 
