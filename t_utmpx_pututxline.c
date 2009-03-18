@@ -14,7 +14,7 @@
 
 int main(void)
 {
-	struct utmpx myent;
+	struct utmpx ut;
 	struct utmpx *rv;
 	struct stat sb;
 	size_t i;
@@ -39,17 +39,17 @@ int main(void)
 
 	for (i = 0; i < NUSERS; i++) {
 		/* XXX: how does pututxline() identify a user in database ? */
-                memset(&myent, 0, sizeof(myent));
+                memset(&ut, 0, sizeof(ut));
 
-                snprintf(myent.ut_id, sizeof(myent.ut_id), "X%u", i);
-		strncpy(myent.ut_name, "user", sizeof(myent.ut_name));
-		strncpy(myent.ut_line, "tty", sizeof(myent.ut_line));
-		strncpy(myent.ut_host, "voyager", sizeof(myent.ut_host));
-		myent.ut_type = USER_PROCESS;
-		myent.ut_pid = i;
+                snprintf(ut.ut_id, sizeof(ut.ut_id), "X%u", i);
+		strncpy(ut.ut_name, "user", sizeof(ut.ut_name));
+		strncpy(ut.ut_line, "tty", sizeof(ut.ut_line));
+		strncpy(ut.ut_host, "voyager", sizeof(ut.ut_host));
+		ut.ut_type = USER_PROCESS;
+		ut.ut_pid = i;
 
 		/* Update database. */
-		assert(pututxline(&myent) != NULL);
+		assert(pututxline(&ut) != NULL);
 	}
 
 	/*
