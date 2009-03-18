@@ -26,10 +26,10 @@ int main(int argc, char *argv[])
 	iocb.aio_buf = mybuf;
 
 	/* Issue an asynchronous read request. */
-	assert (aio_read(&iocb) != -1);
+	assert(aio_read(&iocb) != -1);
 
 	/* Wait for request to complete. */
-	while (aio_error(&iocb) == EINPROGRESS)
+	while(aio_error(&iocb) == EINPROGRESS)
 		/* VOID */ ;
 
 	/* Get the final status of request. */
