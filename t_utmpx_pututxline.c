@@ -1,4 +1,4 @@
-\#include <assert.h>
+#include <assert.h>
 #include <err.h>
 #include <errno.h>
 #include <stdio.h>
@@ -25,17 +25,15 @@ int main(void)
 		    "it must be run with root privileges");
 	}
 
-	/* There must exist an empty /var/run/utmpx file. */
+	/* There must exist an empty utmpx file. */
 	if (stat(_PATH_UTMPX, &sb) == -1) {
 		if (errno == ENOENT) {
 			errx(EXIT_FAILURE,
-			    "there must exist an empty /var/run/utmpx file");
+			    "there must exist an empty " _PATH_UTMPX " file");
 		}
 	} else {
-		if (sb.st_size != 0) {
-			errx(EXIT_FAILURE,
-			    "/var/run/utmpx must be empty");
-		}
+		if (sb.st_size != 0)
+			errx(EXIT_FAILURE, _PATH_UTMPX " must be empty");
 	}
 
 	for (i = 0; i < NUSERS; i++) {
