@@ -1,4 +1,4 @@
-#include <assert.h>
+\#include <assert.h>
 #include <err.h>
 #include <errno.h>
 #include <stdio.h>
@@ -25,15 +25,16 @@ int main(void)
 		    "it must be run with root privileges");
 	}
 
-	/*
-	 * There must exist a /var/run/utmpx file.
-	 * Subsequent calls will overwrite existing user entries in utmpx
-	 * database, so there is no need to be empty at the first place.
-	 */
+	/* There must exist an empty /var/run/utmpx file. */
 	if (stat(_PATH_UTMPX, &sb) == -1) {
 		if (errno == ENOENT) {
 			errx(EXIT_FAILURE,
-			    "there must exist a /var/run/utmpx file");
+			    "there must exist an empty /var/run/utmpx file");
+		}
+	} else {
+		if (sb.st_size != 0) {
+			errx(EXIT_FAILURE,
+			    "/var/run/utmpx must be empty");
 		}
 	}
 
@@ -70,6 +71,8 @@ int main(void)
 		assert(rv != NULL);
 
 		/* Verify entries. */
+		snprintf(ut.ut_id, sizeof(ut.ut_id), "X%u", i);
+		assert(strcmp(rv->ut_id, ut.ut_id) == 0);
 		assert(strcmp(rv->ut_name, "user") == 0);
 		assert(strcmp(rv->ut_line, "tty") == 0);
 		assert(strcmp(rv->ut_host, "voyager") == 0);
