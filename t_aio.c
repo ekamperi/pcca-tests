@@ -38,5 +38,7 @@ int main(int argc, char *argv[])
 	/* Close file. */
 	close(fd);
 
+	printf("passed\n");
+
 	return (EXIT_SUCCESS);
 }
