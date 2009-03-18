@@ -39,7 +39,7 @@ int main(void)
 
 	for (i = 0; i < NUSERS; i++) {
 		/* XXX: how does pututxline() identify a user in database ? */
-                bzero(&myent, sizeof(myent));
+                memset(&myent, 0, sizeof(myent));
 
                 snprintf(myent.ut_id, sizeof(myent.ut_id), "X%u", i);
 		strncpy(myent.ut_name, "user", sizeof(myent.ut_name));
