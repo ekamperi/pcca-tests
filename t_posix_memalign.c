@@ -14,7 +14,7 @@ int main(void)
 	 */
 	old_errno = errno;
 
-	 /* alignment parameter is not a power of 2 */
+	/* alignment parameter is not a power of 2 */
 	assert(posix_memalign(&ptr, 1 + (sizeof(void *) << 5), 100) == EINVAL);
 	assert(old_errno == errno);
 
