@@ -26,6 +26,11 @@ int main(void)
 	assert(posix_memalign(&ptr, sizeof(void *), 100) == 0);
 	free(ptr);
 
+	/* is it possible to realloc() memory allocated via posix_memalign() ? */
+	ptr = realloc(ptr, 200);
+	assert(ptr != NULL);
+	free(ptr);
+
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
