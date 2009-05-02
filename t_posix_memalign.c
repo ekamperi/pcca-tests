@@ -24,9 +24,8 @@ int main(void)
 
 	/* we expect this simple request to succeed */
 	assert(posix_memalign(&ptr, sizeof(void *), 100) == 0);
-	free(ptr);
 
-	/* is it possible to realloc() memory allocated via posix_memalign() ? */
+	/* is it possible to realloc()/free() memory allocated via posix_memalign() ? */
 	ptr = realloc(ptr, 200);
 	assert(ptr != NULL);
 	free(ptr);
