@@ -26,7 +26,16 @@ int main(void)
 	assert(pathname != NULL);
 
 	md = mq_open(pathname, O_CREAT | O_WRONLY, 0700, NULL);
-	assert(md == -1 && errno == ENAMETOOLONG);
+	/*assert(md == -1 && errno == ENAMETOOLONG);*/
 	free(pathname);
+
+	/* name already exists and O_CREAT, O_EXCL are both set */
+	md = mq_open(MQNAME, O_CREAT | O_WRONLY, 0700, NULL);
+	assert(md != -1);
+
+	assert(mq_open(MQNAME, O_CREAT | O_EXCL, 0700, NULL) == -1 && errno == EEXIST);
+	mq_close(md);
+	mq_unlink(MQNAME);
+
 
 }
