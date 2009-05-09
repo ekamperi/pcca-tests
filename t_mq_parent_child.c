@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>	/* fork() */
 
-#define	MQNAME	"/mqueue1"
+#define	MQNAME	"/mqueue10"
 
 static void diep(const char *s);
 
@@ -15,7 +15,7 @@ int main(void)
 	mqd_t md;
 	pid_t pid;
 
-	/* create a message queue for write only with default perms */
+	/* create a message queue for write only with default parameters */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0777, NULL);
 	if (md == -1)
 		diep("mq_open");
