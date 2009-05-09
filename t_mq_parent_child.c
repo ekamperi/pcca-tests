@@ -52,7 +52,7 @@ int main(void)
 		if (rv == -1)
 			diep("child: mq_close");
 
-		/* remove the message queue */
+		/* remove the message queue from the system */
 		rv = mq_unlink(MQNAME);
 		if (rv == -1)
 			diep("mq_unlink");
