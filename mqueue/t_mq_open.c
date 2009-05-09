@@ -37,4 +37,5 @@ int main(void)
 	mq_close(md);
 	mq_unlink(MQNAME);
 
+	printf("passed\n");
 }
