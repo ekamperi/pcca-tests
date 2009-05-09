@@ -10,7 +10,7 @@ static void diep(const char *s);
 
 int main(void)
 {
-	const char *msg = "Parent says hello";
+	const char msg[] = "Parent says hello";
 	int rv;
 	mqd_t md;
 	pid_t pid;
