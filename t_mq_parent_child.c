@@ -41,7 +41,7 @@ int main(void)
 		if (md == -1)
 			diep("child: mq_open");
 
-		char msg_recvd[10000];
+		char msg_recvd[8192];	/* implementation defined */
 		rv = mq_receive(md, msg_recvd, sizeof(msg_recvd), NULL);
 		if (rv == -1) 
 			diep("child: mq_receive");
