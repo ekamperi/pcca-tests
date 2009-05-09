@@ -6,13 +6,14 @@
 
 #define	MQNAME	"/mqueue10"
 
+mqd_t md;
+
 static void diep(const char *s);
 
 int main(void)
 {
 	const char msg[] = "Parent says hello";
 	int rv;
-	mqd_t md;
 	pid_t pid;
 
 	/* create a message queue for write only with default parameters */
@@ -61,11 +62,22 @@ int main(void)
 		
 	}
 
-  return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }
 
 void diep(const char *s)
 {
 	perror(s);
+
+	/*
+	 * Message queues' name & resources are persistent, i.e., they live
+	 * even after the process dies. That's why, disassociate and destroy
+	 * the queue on failure, or else we might end up with zombie queues and
+	 * hit the limit of max open queues.
+	 * Also, we don't care about the return value of the following calls.
+	 */
+	mq_close(md);
+	mq_unlink(MQNAME);
+
 	exit(EXIT_FAILURE);
 }
