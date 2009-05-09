@@ -13,15 +13,15 @@ int main(void)
 	mqd_t md;
        	int rv;
 
-	/* invalid mqueue name */
+	/* Invalid mqueue name. */
 	md = mq_open("", O_CREAT | O_WRONLY, 0700, NULL);
 	assert (md == -1 && errno == EINVAL);
 
-	/* O_CREAT is not set and the named mqueue doesn't exist */
+	/* O_CREAT is not set and the named mqueue doesn't exist. */
 	md = mq_open("nonexistentmqueuename", O_WRONLY, 0700, NULL);
 	/*assert (md == -1 && errno == EINVAL);*/
 
-	/* pathname is too long */
+	/* Pathname is too long. */
 	char *pathname = malloc(2 * PATH_MAX);
 	assert(pathname != NULL);
 
@@ -29,13 +29,12 @@ int main(void)
 	/*assert(md == -1 && errno == ENAMETOOLONG);*/
 	free(pathname);
 
-	/* name already exists and O_CREAT, O_EXCL are both set */
+	/* Name already exists and O_CREAT, O_EXCL are both set. */
 	md = mq_open(MQNAME, O_CREAT | O_WRONLY, 0700, NULL);
 	assert(md != -1);
 
 	assert(mq_open(MQNAME, O_CREAT | O_EXCL, 0700, NULL) == -1 && errno == EEXIST);
 	mq_close(md);
 	mq_unlink(MQNAME);
-
 
 }
