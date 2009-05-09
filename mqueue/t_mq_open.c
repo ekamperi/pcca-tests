@@ -7,7 +7,6 @@
 #define	MQNAME	"/t_mq_open"
 #define	PATH_MAX 1024	/* XXX */
 
-
 int main(void)
 {
 	mqd_t md;
