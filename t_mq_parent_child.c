@@ -45,7 +45,7 @@ int main(void)
 		if (rv == -1) 
 			diep("child: mq_receive");
 
-		printf("child received message: %s\n", msg);
+		printf("child received message: %s\n", msg_recvd);
 
 		/* disassociate with message queue */
 		rv = mq_close(md);
