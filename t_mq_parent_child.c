@@ -16,7 +16,7 @@ int main(void)
 	pid_t pid;
 
 	/* create a message queue for write only with default parameters */
-	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0777, NULL);
+	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
 	if (md == -1)
 		diep("mq_open");
 
