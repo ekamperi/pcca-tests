@@ -19,7 +19,7 @@ int main(void)
 
 	/* O_CREAT is not set and the named mqueue doesn't exist. */
 	md = mq_open("nonexistentmqueuename", O_WRONLY, 0700, NULL);
-	/*assert (md == -1 && errno == EINVAL);*/
+	/*assert (md == -1 && errno == ENOENT);*/
 
 	/* Pathname is too long. */
 	char *pathname = malloc(2 * PATH_MAX);
