@@ -25,7 +25,7 @@ int main(void)
 	char *pathname = malloc(2 * PATH_MAX);
 	assert(pathname != NULL);
 
-	md = mq_open(pathname, O_CREAT | O_WRONLY, 0700, NULL);
+	/*md = mq_open(pathname, O_CREAT | O_WRONLY, 0700, NULL);*/
 	/*assert(md == -1 && errno == ENAMETOOLONG);*/
 	free(pathname);
 
