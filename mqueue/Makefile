@@ -1,4 +1,4 @@
-all: t_mq_open t_mq_close t_mq_parent_child
+all: t_mq_open t_mq_close t_mq_parent_child t_mq_send
 
 CC=gcc
 LIB=-lrt
@@ -11,6 +11,9 @@ t_mq_close: t_mq_close.c
 
 t_mq_parent_child: t_mq_parent_child.c
 	$(CC) $(LIB) t_mq_parent_child.c -o t_mq_parent_child
+
+t_mq_send: t_mq_send.c
+	$(CC) $(LIB) t_mq_send.c -o t_mq_send
 
 clean:
 	rm -f t_mq_*[^.c]
