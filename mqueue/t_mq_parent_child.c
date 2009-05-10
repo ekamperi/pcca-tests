@@ -16,49 +16,49 @@ int main(void)
 	int rv;
 	pid_t pid;
 
-	/* create a message queue for write only with default parameters */
+	/* Create a message queue for write only with default parameters. */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
 	if (md == -1)
 		diep("mq_open");
 
-	/* send message */
+	/* Send message. */
 	rv = mq_send(md, msg, sizeof(msg), /* priority */ 0);
 	if (rv == -1)
 		diep("mq_send");
 
-	/* disassociate with message queue */
+	/* Disassociate with message queue. */
 	rv = mq_close(md);
 	if (rv == -1)
 		diep("mq_close");
 
-	/* fork and have child read the message from parent */
+	/* Fork and have child read the message from parent. */
 	pid = fork();
 	if (pid == -1) {
 		diep("fork");
 	} else if (pid == 0) {
-		/* we are inside the child */
+		/* We are inside the child. */
 		md = mq_open(MQNAME, O_RDONLY);
 		if (md == -1)
 			diep("child: mq_open");
 
-		char msg_recvd[8192];	/* implementation defined */
+		char msg_recvd[8192];	/* Implementation defined. */
 		rv = mq_receive(md, msg_recvd, sizeof(msg_recvd), NULL);
 		if (rv == -1) 
 			diep("child: mq_receive");
 
 		printf("child received message: %s\n", msg_recvd);
 
-		/* disassociate with message queue */
+		/* Disassociate with message queue. */
 		rv = mq_close(md);
 		if (rv == -1)
 			diep("child: mq_close");
 
-		/* remove the message queue from the system */
+		/* Remove the message queue from the system. */
 		rv = mq_unlink(MQNAME);
 		if (rv == -1)
 			diep("mq_unlink");
 	} else {
-		/* we are inside the parent */
+		/* We are inside the parent. */
 		
 	}
 
