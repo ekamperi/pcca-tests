@@ -12,7 +12,7 @@ int main(void)
 	mqd_t md;
 	int rv;
 
-	md = mq_open("/mq123", O_RDONLY);
+	md = mq_open("/tmqss", O_RDONLY);
 	if (md == -1)
 		diep("mq_open");
 
