@@ -11,7 +11,6 @@
 int main(void)
 {
 	mqd_t md;
-       	int rv;
 
 	/* Invalid mqueue name. */
 	md = mq_open("", O_CREAT | O_WRONLY, 0700, NULL);
@@ -38,4 +37,6 @@ int main(void)
 	mq_unlink(MQNAME);
 
 	printf("passed\n");
+
+	return (EXIT_SUCCESS);
 }

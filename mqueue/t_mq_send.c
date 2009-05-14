@@ -43,4 +43,6 @@ int main(void)
 	mq_close(md);
 
 	printf("passed\n");
+
+	return (EXIT_SUCCESS);
 }

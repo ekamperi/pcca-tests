@@ -23,6 +23,8 @@ int main(void)
 	rv = mq_close(md);
 	if (rv == -1)
 		diep("mq_close");
+
+	return (EXIT_SUCCESS);
 }
 
 void diep(const char *s)
