@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>	/* fork() */
 
-#define	MQNAME	"/mqueue10"
+#define	MQNAME	"/mqueue101"
 
 mqd_t md;
 
