@@ -30,6 +30,11 @@ int main(void)
 	if (rv == -1)
 		diep("mq_close");
 
+	/* Remove the message queue from the system. */
+	rv = mq_unlink(MQNAME);
+	if (rv == -1)
+		diep("mq_unlink);
+
 	return (EXIT_SUCCESS);
 }
 
