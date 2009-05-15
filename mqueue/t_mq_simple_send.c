@@ -4,16 +4,19 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#define	MQNAME	"/tmqss"
+
+mqd_t md;
+
 static void diep(const char *s);
 
 int main(void)
 {
 	const char msg[] = "this is a test";
-	mqd_t md;
 	int rv;
 
 	/* Create a message queue for write only with default parameters. */
-	md = mq_open("/tmqss", O_CREAT | O_EXCL | O_WRONLY, 0777, NULL);
+	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0777, NULL);
 	if (md == -1)
 		diep("mq_open");
 
@@ -33,5 +36,9 @@ int main(void)
 void diep(const char *s)
 {
         perror(s);
+
+	mq_close(md);
+	mq_unlink(MQNAME);
+
         exit(EXIT_FAILURE);
 }
