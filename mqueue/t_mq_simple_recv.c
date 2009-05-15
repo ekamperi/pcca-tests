@@ -4,12 +4,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#define	MQNAME "/tmqss"
+
+mqd_t md;
+
 static void diep(const char *s);
 
 int main(void)
 {
 	char msg[8192];	/* Implementation defined. */
-	mqd_t md;
 	int rv;
 
 	/* Open message queue for read only. */
@@ -33,5 +36,9 @@ int main(void)
 void diep(const char *s)
 {
         perror(s);
+
+	mq_close(md);
+	mq_unlink(MQNAME);
+
         exit(EXIT_FAILURE);
 }
