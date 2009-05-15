@@ -1,5 +1,5 @@
-all: t_mq_open t_mq_close t_mq_parent_child t_mq_send t_mq_simple_send \
-     t_mq_simple_recv
+all: t_mq_oc t_mq_open t_mq_close t_mq_parent_child t_mq_send t_mq_simple_send \
+     t_mq_simple_recv t_mq_unlink
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -8,6 +8,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 LIB=-lrt
+
+t_mq_oc: t_mq_oc.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_oc.c -o oc
 
 t_mq_open: t_mq_open.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_open.c -o t_mq_open
@@ -26,6 +29,9 @@ t_mq_simple_send: t_mq_simple_send.c
 
 t_mq_simple_recv: t_mq_simple_recv.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_simple_recv.c -o t_mq_simple_recv
+
+t_mq_unlink: t_mq_unlink.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_unlink.c -o t_mq_unlink
 
 clean:
 	git clean -f
