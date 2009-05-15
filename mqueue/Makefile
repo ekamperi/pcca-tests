@@ -28,9 +28,9 @@ t_mq_simple_recv: t_mq_simple_recv.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_simple_recv.c -o t_mq_simple_recv
 
 clean:
-	rm -f t_mq_*[^.c]
-	rm -f *~
-	rm -f \#*
-	rm -f a.out
+	git clean -f
+
+
+
 
 
