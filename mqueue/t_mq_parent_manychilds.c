@@ -1,11 +1,16 @@
 #include <assert.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <mqueue.h>
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <unistd.h>	/* fork() */
 
-#define	MQNAME	"/mqueue101"
+#include <sys/types.h>
+#include <sys/wait.h>
+
+#define	MQNAME	"/tmqpmc2"
 
 mqd_t md;
 
@@ -13,19 +18,30 @@ static void diep(const char *s);
 
 int main(void)
 {
-	const char msg[] = "Parent says hello";
-	int rv;
+	/* Parent recites a poem. */
+	const char *msg[] = { "But I, being poor, have only my dreams;",
+			      "I have spread my dreams under your feet;",
+			      "Tread softly because you tread on my",
+			      "dreams.",
+			      "W.B. Yeats" };
+	int i, rv;
 	pid_t pid;
 
-	/* Create a message queue for write only with default parameters. */
-	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
+	/*
+	 * Create a message queue
+	 * Write only and non-block mode with default parameters.
+	 */
+	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_NONBLOCK | O_WRONLY,
+		     0700, NULL);
 	if (md == -1)
 		diep("mq_open");
 
-	/* Send message. */
-	rv = mq_send(md, msg, sizeof(msg), /* priority */ 0);
-	if (rv == -1)
-		diep("mq_send");
+	/* Send messages. */
+	for (i = 0; i < sizeof(msg) / sizeof(msg[0]); i++) {
+		rv = mq_send(md, msg[i], strlen(msg[i]), /* priority */ 0);
+		if (rv == -1)
+			diep("mq_send");
+	}
 
 	/* Disassociate with message queue. */
 	rv = mq_close(md);
@@ -37,17 +53,25 @@ int main(void)
 	if (pid == -1) {
 		diep("fork");
 	} else if (pid == 0) {
-		/* We are inside the child. */
+		/* We are inside the first child. */
 		md = mq_open(MQNAME, O_RDONLY);
 		if (md == -1)
-			diep("child: mq_open");
+			diep("child1: mq_open");
 
 		char msg_recvd[8192];	/* Implementation defined. */
-		rv = mq_receive(md, msg_recvd, sizeof(msg_recvd), NULL);
-		if (rv == -1) 
-			diep("child: mq_receive");
+		memset(msg_recvd, 0, sizeof(msg_recvd));
+		for (;;) {
+			rv = mq_receive(md, msg_recvd, sizeof(msg_recvd), NULL);
+			if (rv == -1) {
+				if (errno == EAGAIN)
+					break;
+				else
+					diep("child: mq_receive");
 
-		printf("child received message: %s\n", msg_recvd);
+			}
+
+			printf("%s\n", msg_recvd);
+		}
 
 		/* Disassociate with message queue. */
 		rv = mq_close(md);
@@ -60,13 +84,15 @@ int main(void)
 			diep("mq_unlink");
 	} else {
 		/* We are inside the parent. */
-		
+		int status;
+		wait(&status);
 	}
 
 	return EXIT_SUCCESS;
 }
 
-void diep(const char *s)
+static void
+diep(const char *s)
 {
 	perror(s);
 
