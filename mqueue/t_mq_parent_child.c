@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <mqueue.h>
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <unistd.h>	/* fork() */
 
@@ -47,7 +48,7 @@ int main(void)
 		if (rv == -1) 
 			diep("child: mq_receive");
 
-		printf("child received message: %s\n", msg_recvd);
+		assert(strcmp(msg_recvd, msg) == 0);
 
 		/* Disassociate with message queue. */
 		rv = mq_close(md);
@@ -58,6 +59,8 @@ int main(void)
 		rv = mq_unlink(MQNAME);
 		if (rv == -1)
 			diep("mq_unlink");
+
+		printf("passed\n");
 	} else {
 		/* We are inside the parent. */
 		
