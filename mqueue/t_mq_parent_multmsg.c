@@ -38,7 +38,7 @@ int main(void)
 
 	/* Send messages. */
 	for (i = 0; i < sizeof(msg) / sizeof(msg[0]); i++) {
-		rv = mq_send(md, msg[i], strlen(msg[i]), /* priority */ 0);
+		rv = mq_send(md, msg[i], strlen(msg[i]) + 1, /* priority */ 0);
 		if (rv == -1)
 			diep("mq_send");
 	}
