@@ -6,7 +6,6 @@ all:    t_mq_open		\
 	t_mq_send		\
 	t_mq_simple_send	\
 	t_mq_simple_recv	\
-	t_mq_unlink
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -40,13 +39,5 @@ t_mq_simple_send: t_mq_simple_send.c
 t_mq_simple_recv: t_mq_simple_recv.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_simple_recv.c -o t_mq_simple_recv
 
-t_mq_unlink: t_mq_unlink.c
-	$(CC) $(CCFLAGS) $(LIB) t_mq_unlink.c -o t_mq_unlink
-
 clean:
 	git clean -f
-
-
-
-
-
