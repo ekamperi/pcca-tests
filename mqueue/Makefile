@@ -1,5 +1,11 @@
-all: t_mq_open t_mq_openclose t_mq_close t_mq_parent_child t_mq_send t_mq_simple_send \
-     t_mq_simple_recv t_mq_unlink
+all:    t_mq_open		\
+	t_mq_openclose		\
+	t_mq_close		\
+	t_mq_parent_child	\
+	t_mq_send		\
+	t_mq_simple_send	\
+	t_mq_simple_recv	\
+	t_mq_unlink
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
