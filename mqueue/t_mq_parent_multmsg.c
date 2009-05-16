@@ -56,10 +56,9 @@ int main(void)
 		/* We are inside the child. */
 		md = mq_open(MQNAME, O_RDONLY);
 		if (md == -1)
-			diep("child1: mq_open");
+			diep("child: mq_open");
 
 		char msg_recvd[8192];	/* Implementation defined. */
-		memset(msg_recvd, 0, sizeof(msg_recvd));
 		for (;;) {
 			rv = mq_receive(md, msg_recvd, sizeof(msg_recvd), NULL);
 			if (rv == -1) {
