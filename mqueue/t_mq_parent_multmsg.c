@@ -53,7 +53,7 @@ int main(void)
 	if (pid == -1) {
 		diep("fork");
 	} else if (pid == 0) {
-		/* We are inside the first child. */
+		/* We are inside the child. */
 		md = mq_open(MQNAME, O_RDONLY);
 		if (md == -1)
 			diep("child1: mq_open");
