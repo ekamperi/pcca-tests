@@ -1,4 +1,4 @@
-all: t_mq_oc t_mq_open t_mq_close t_mq_parent_child t_mq_send t_mq_simple_send \
+all: t_mq_open t_mq_openclose t_mq_close t_mq_parent_child t_mq_send t_mq_simple_send \
      t_mq_simple_recv t_mq_unlink
 
 CC=gcc
@@ -9,11 +9,11 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 LIB=-lrt
 
-t_mq_oc: t_mq_oc.c
-	$(CC) $(CCFLAGS) $(LIB) t_mq_oc.c -o oc
-
 t_mq_open: t_mq_open.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_open.c -o t_mq_open
+
+t_mq_openclose: t_mq_openclose.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_openclose.c -o t_mq_openclose
 
 t_mq_close: t_mq_close.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_close.c -o t_mq_close
