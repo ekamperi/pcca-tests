@@ -12,12 +12,6 @@ int main(void)
 {
 	mqd_t md;
 
-#if 0
-	/* Invalid mqueue name. */
-	md = mq_open("", O_CREAT | O_WRONLY, 0700, NULL);
-	assert (md == -1 && errno == EINVAL);
-#endif
-
 	/* O_CREAT is not set and the named mqueue doesn't exist. */
 	md = mq_open("nonexistentmqueuename", O_WRONLY, 0700, NULL);
 	assert (md == -1 && errno == ENOENT);
@@ -27,7 +21,7 @@ int main(void)
 	assert(pathname != NULL);
 
 	md = mq_open(pathname, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
-	assert(md == -1);// && errno == ENAMETOOLONG);
+	assert(md == -1 && errno == ENAMETOOLONG);
 	free(pathname);
 
 	/* Name already exists and O_CREAT, O_EXCL are both set. */
