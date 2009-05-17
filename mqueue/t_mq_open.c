@@ -4,6 +4,7 @@
 #include <mqueue.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>	/* memset() */
 
 #define	MQNAME	"/t_mq_open1"
 #define	PATH_MAX 1024	/* XXX */
@@ -19,6 +20,7 @@ int main(void)
 	/* Pathname is too long. */
 	char *pathname = malloc(2 * PATH_MAX);
 	assert(pathname != NULL);
+	memset(pathname, 0xff, 2 * PATH_MAX);	/* Make sure we don't terminate prematurely. */
 
 	md = mq_open(pathname, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
 	assert(md == -1 && errno == ENAMETOOLONG);
