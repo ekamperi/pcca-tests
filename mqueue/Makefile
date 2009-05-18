@@ -5,6 +5,7 @@ all:    t_mq_open		\
 	t_mq_parent_multmsg	\
 	t_mq_send		\
 	t_mq_setattr		\
+	t_mq_timedsend
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -34,6 +35,9 @@ t_mq_send: t_mq_send.c
 
 t_mq_setattr: t_mq_setattr.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_setattr.c -o t_mq_setattr
+
+t_mq_timedsend: t_mq_timedsend.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_timedsend.c -o t_mq_timedsend
 
 clean:
 	git clean -f
