@@ -59,7 +59,7 @@ int main(void)
 			diep("child: mq_open");
 
 		char msg_recvd[8192];	/* Implementation defined. */
-		for (;;) {
+		for (i = 0; ; i++) {
 			rv = mq_receive(md, msg_recvd, sizeof(msg_recvd), NULL);
 			if (rv == -1) {
 				if (errno == EAGAIN)
@@ -69,7 +69,8 @@ int main(void)
 
 			}
 
-			printf("%s\n", msg_recvd);
+			/*printf("%s\n", msg_recvd);*/
+			assert(strcmp(msg_recvd, msg[i]) == 0);
 		}
 
 		/* Disassociate with message queue. */
@@ -81,6 +82,8 @@ int main(void)
 		rv = mq_unlink(MQNAME);
 		if (rv == -1)
 			diep("mq_unlink");
+
+		printf("passed\n");
 	} else {
 		/* We are inside the parent. */
 		int status;
