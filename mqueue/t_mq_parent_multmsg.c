@@ -24,7 +24,8 @@ int main(void)
 			      "Tread softly because you tread on my",
 			      "dreams.",
 			      "W.B. Yeats" };
-	int i, rv;
+	size_t i;
+	int rv;
 	pid_t pid;
 
 	/*
