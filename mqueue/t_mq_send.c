@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>	/* memset() */
 
-#define	MQNAME	"/tmqs3"
+#define	MQNAME	"/tmqs"
 #ifndef MQ_PRIO_MAX
 #define MQ_PRIO_MAX	32768	/* XXX: linux specific */
 #endif
@@ -43,6 +43,19 @@ int main(void)
 
 	char *p;
 	rv = mq_send(md, p, 32768, /* priority */ 0);
+	assert(rv == -1 && errno == EMSGSIZE);
+
+	mq_close(md);
+	mq_unlink(MQNAME);
+
+	/* Same as previous but use a non-default maximum message size. */
+	memset(&attr, 0, sizeof(attr));
+	attr.mq_maxmsg = 1;	/* Maximum number of messages. */
+	attr.mq_msgsize = 50;	/* Maximum message size. */
+	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, &attr);
+	assert(md != -1);
+
+	rv = mq_send(md, p, 100, /* priority */ 0);
 	assert(rv == -1 && errno == EMSGSIZE);
 
 	mq_close(md);
