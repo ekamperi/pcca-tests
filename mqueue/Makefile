@@ -5,8 +5,6 @@ all:    t_mq_open		\
 	t_mq_parent_multmsg	\
 	t_mq_send		\
 	t_mq_setattr		\
-	t_mq_simple_send	\
-	t_mq_simple_recv	\
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -36,12 +34,6 @@ t_mq_send: t_mq_send.c
 
 t_mq_setattr: t_mq_setattr.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_setattr.c -o t_mq_setattr
-
-t_mq_simple_send: t_mq_simple_send.c
-	$(CC) $(CCFLAGS) $(LIB) t_mq_simple_send.c -o t_mq_simple_send
-
-t_mq_simple_recv: t_mq_simple_recv.c
-	$(CC) $(CCFLAGS) $(LIB) t_mq_simple_recv.c -o t_mq_simple_recv
 
 clean:
 	git clean -f
