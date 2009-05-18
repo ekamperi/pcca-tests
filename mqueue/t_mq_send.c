@@ -34,8 +34,9 @@ int main(void)
 	/*
 	 * Message size is larger than maximum allowed message size.
 	 * The latter is implementation defined. In NetBSD happens to
-	 * be 1024 as defined in sys/mqueue.h. We use a "sufficiently"
-	 * large value to cover other implemenetations as well.
+	 * be 16*1024 as defined in sys/mqueue.h and kern/sys_mqueue.c.
+	 * We use a "sufficiently" large value to cover other
+	 * implemenetations as well.
 	 */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
 	assert(md != -1);
