@@ -4,6 +4,7 @@ all:    t_mq_open		\
 	t_mq_parent_child	\
 	t_mq_parent_multmsg	\
 	t_mq_send		\
+	t_mq_setattr		\
 	t_mq_simple_send	\
 	t_mq_simple_recv	\
 
@@ -32,6 +33,9 @@ t_mq_parent_multmsg: t_mq_parent_multmsg.c
 
 t_mq_send: t_mq_send.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_send.c -o t_mq_send
+
+t_mq_setattr: t_mq_setattr.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_setattr.c -o t_mq_setattr
 
 t_mq_simple_send: t_mq_simple_send.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_simple_send.c -o t_mq_simple_send
