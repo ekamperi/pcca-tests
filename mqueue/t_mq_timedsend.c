@@ -37,6 +37,14 @@ int main(void)
 	assert(mq_timedsend(md, "foo", sizeof("foo"), /* priority */ 0,
 			    &abs_timeout) == -1 && errno == ETIMEDOUT);
 
+
+	/* Try to send a second message to the queue with a non expired timeout. */
+	abs_timeout.tv_sec = time(NULL) + 5;
+
+
+	assert(mq_timedsend(md, "foo", sizeof("foo"), /* priority */ 0,
+			    &abs_timeout) != -1);
+
 	mq_close(md);
 	mq_unlink(MQNAME);
 
