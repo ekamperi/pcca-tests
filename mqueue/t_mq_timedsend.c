@@ -43,7 +43,7 @@ int main(void)
 
 
 	assert(mq_timedsend(md, "foo", sizeof("foo"), /* priority */ 0,
-			    &abs_timeout) != -1);
+			    &abs_timeout) == -1);
 
 	mq_close(md);
 	mq_unlink(MQNAME);
