@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>	/* fork() */
+#include <sys/wait.h>
 
 #define	MQNAME	"/tmqpc"
 
@@ -63,7 +64,8 @@ int main(void)
 		printf("passed\n");
 	} else {
 		/* We are inside the parent. */
-		
+		int status;
+		wait(&status);
 	}
 
 	return EXIT_SUCCESS;
