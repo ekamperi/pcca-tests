@@ -32,16 +32,8 @@ int main(void)
 	/* Send a message to fill the queue. */
 	assert(mq_send(md, "foo", sizeof("foo"), /* priority */ 0) != -1);
 
-	/* `0' seconds since 00:00:00 GMT 1 January 1970 */
-	abs_timeout.tv_sec = 0;
-	abs_timeout.tv_nsec = 0;
-
-	/* Try to send a second message to the queue with an expired timeout. */
-	assert(mq_timedsend(md, "foo", sizeof("foo"), /* priority */ 0,
-		&abs_timeout) == -1 && errno == ETIMEDOUT);
-
-	/* Try to send a second message to the queue with a non expired timeout. */
-	abs_timeout.tv_sec = time(NULL) + 5;
+	/* Timeout in 3 seconds, if the queue doesn't empty. */
+	abs_timeout.tv_sec = 3;
 	abs_timeout.tv_nsec = 0;
 
 	assert(mq_timedsend(md, "foo", sizeof("foo"), /* priority */ 0,
