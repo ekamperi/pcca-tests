@@ -28,12 +28,15 @@ int main(void)
 	FD_SET(md, &ms);
 	assert(FD_ISSET(md, &ms));	/* Just a sanity check. */
 
-	/* Wait for 1 second. */
-	abs_timeout.tv_sec = 1;
+	/* Wait for 2 seconds. */
+	abs_timeout.tv_sec = 2;
 	abs_timeout.tv_usec = 0;
 
 	/* This should time out. */
 	assert(select(md + 1, &ms, NULL, NULL, &abs_timeout) == 0);
+
+	FD_SET(md, &ms);
+	assert(FD_ISSET(md, &ms));	/* Just a sanity check. */
 
 	/* Fork. */
 	pid = fork();
