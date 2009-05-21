@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>	/* memset() */
 
-#define	MQNAME	"/tmqs"
+#define	MQNAME	"/tmqssdasdaasd"
 #ifndef MQ_PRIO_MAX
 #define MQ_PRIO_MAX	32768	/* XXX: linux specific */
 #endif
@@ -23,7 +23,7 @@ int main(void)
 
 	/* Priority is out of range (0...MQ_PRIO_MAX-1) */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
-	assert(md != -1);
+	assert(md != 1);
 
 	rv = mq_send(md, "foo", sizeof("foo"), 2*MQ_PRIO_MAX);
 	assert(rv == -1 && errno == EINVAL);
@@ -55,8 +55,14 @@ int main(void)
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, &attr);
 	assert(md != -1);
 
-	rv = mq_send(md, p, 100, /* priority */ 0);
+	p = malloc(2 * attr.mq_msgsize);
+	assert(p != NULL);
+	memset(p, 0xff, 2 * attr.mq_msgsize);	/* Make sure we don't terminate prematurely */
+
+	rv = mq_send(md, p, 2 * attr.mq_msgsize, /* priority */ 0);
 	assert(rv == -1 && errno == EMSGSIZE);
+
+	free(p);
 
 	mq_close(md);
 	mq_unlink(MQNAME);
