@@ -7,7 +7,7 @@
 #include <string.h>
 #include <unistd.h>	/* fork() */
 
-#define MQNAME	"/tmqsel"
+#define MQNAME	"/2tam"
 
 int main(void)
 {
@@ -26,6 +26,7 @@ int main(void)
 
 	/* Add message queue descriptor to set. */
 	FD_SET(md, &ms);
+	assert(FD_ISSET(md, &ms));	/* Just a sanity check. */
 
 	/* Wait for 1 second. */
 	abs_timeout.tv_sec = 1;
@@ -40,20 +41,22 @@ int main(void)
 
 	if (pid == 0) {
 		/* We are inside the child. */
-		assert(mq_send(md, msg, sizeof(msg), /* priority */ 0) != -1);
+		/* Wait for parent to block on select(). */
+		sleep(1);
 
+		/* Send message. */
+		assert(mq_send(md, msg, sizeof(msg), /* priority */ 0) != -1);
 	} else {
 		/* We are inside the parent. */
-		assert(select(md + 1, &ms, NULL, NULL, &abs_timeout) != -1);
+		assert(select(md + 1, &ms, NULL, NULL, &abs_timeout) == 1);
+		assert(FD_ISSET(md, &ms));
 
-		if (FD_ISSET(md, &ms)) {
-			char msg_recvd[8192];	/* Implementation defined. */
-			assert(mq_receive(md, msg_recvd, sizeof(msg_recvd), NULL) != -1);
-			assert(strcmp(msg_recvd, msg) == 0);
+		char msg_recvd[8192];	/* Implementation defined. */
+		assert(mq_receive(md, msg_recvd, sizeof(msg_recvd), NULL) != -1);
+		assert(strcmp(msg_recvd, msg) == 0);
 
-			/* Remove message queue descriptor from the set. */
-			FD_CLR(md, &ms);
-		}
+		/* Remove message queue descriptor from the set. */
+		FD_CLR(md, &ms);
 
 		/*
 		 * At this point we know for sure that the child has completed,
