@@ -7,7 +7,7 @@
 #include <string.h>
 #include <unistd.h>	/* fork() */
 
-#define MQNAME	"/2tam"
+#define MQNAME	"/tmqsel"
 
 int main(void)
 {
@@ -18,7 +18,7 @@ int main(void)
 	pid_t pid;
 
 	/* Create a message queue for write only with default parameters. */
-	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
+	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_RDWR, 0777, NULL);
 	assert(md != -1);
 
 	/* Initialize descriptor set to null set. */
@@ -48,7 +48,7 @@ int main(void)
 		assert(mq_send(md, msg, sizeof(msg), /* priority */ 0) != -1);
 	} else {
 		/* We are inside the parent. */
-		assert(select(md + 1, &ms, NULL, NULL, &abs_timeout) == 1);
+		assert(select(md + 1, &ms, NULL, NULL, &abs_timeout) > 0);
 		assert(FD_ISSET(md, &ms));
 
 		char msg_recvd[8192];	/* Implementation defined. */
