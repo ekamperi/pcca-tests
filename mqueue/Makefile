@@ -62,6 +62,9 @@ run:
 	@printf "t_mq_parent_multmsg: "
 	@-./t_mq_parent_multmsg
 
+	@printf "t_mq_select........: "
+	@-./t_mq_select
+
 	@printf "t_mq_send..........: "
 	@-./t_mq_send
 
