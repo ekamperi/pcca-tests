@@ -3,6 +3,7 @@ all:    t_mq_open		\
 	t_mq_close		\
 	t_mq_parent_child	\
 	t_mq_parent_multmsg	\
+	t_mq_select		\
 	t_mq_send		\
 	t_mq_setattr		\
 	t_mq_timedsend
@@ -29,6 +30,9 @@ t_mq_parent_child: t_mq_parent_child.c
 
 t_mq_parent_multmsg: t_mq_parent_multmsg.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_parent_multmsg.c -o t_mq_parent_multmsg
+
+t_mq_select: t_mq_select.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_select.c -o t_mq_select
 
 t_mq_send: t_mq_send.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_send.c -o t_mq_send
