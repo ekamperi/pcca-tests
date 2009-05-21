@@ -4,6 +4,8 @@
 #include <mqueue.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>	/* fork() */
 
 #define MQNAME	"/tmqsel"
 
@@ -50,7 +52,7 @@ int main(void)
 			assert(strcmp(msg_recvd, msg) == 0);
 
 			/* Remove message queue descriptor from the set. */
-			FD_CLR(fd, &ms);
+			FD_CLR(md, &ms);
 		}
 
 		/*
