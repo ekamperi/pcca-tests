@@ -44,7 +44,7 @@ int main(void)
 		if (rv != 0)
 			perror("getrlimit");
 
-		printf("desc: %-20s\tvalue: %-10lu\tvalue: %-10lu\n",
+		printf("desc: %-20s\tcurrent val: %-10lu\thard limit: %-10lu\n",
 		    rle->rl_desc, rlmp.rlim_cur, rlmp.rlim_max);
 	}
 
