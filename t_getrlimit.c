@@ -1,3 +1,4 @@
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>	/* memset() */
@@ -48,8 +49,10 @@ int main(void)
 		if (rv != 0)
 			perror("getrlimit");
 
-		printf("desc: %-20s\tcurrent val: %-10lu\thard limit: %-10lu\n",
-		    rle->rl_desc, rlmp.rlim_cur, rlmp.rlim_max);
+		printf("desc: %-20s\tcurrent val: %-20ju\thard limit: %-20ju\n",
+		    rle->rl_desc,
+		    (uintmax_t)rlmp.rlim_cur,
+		    (uintmax_t)rlmp.rlim_max);
 	}
 
 	return (EXIT_SUCCESS);
