@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>	/* memset() */
 #include <sys/resource.h>
 
 struct rlentry {
@@ -35,6 +36,9 @@ int main(void)
 	struct rlimit rlmp;
         const struct rlentry *rle;
 	int rv;
+
+	/* Zero out rlimit structure. */
+	memset(&rlmp, 0, sizeof(struct rlimit));
 
         for (rle = rltable; rle != NULL; rle++) {
 		if (rle->rl_desc == NULL && rle->rl_name == -1)
