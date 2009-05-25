@@ -18,8 +18,6 @@ int main(void)
          */
 #ifdef __DragonFly__
         assert(getrlimit(RLIMIT_STACK, 0) == -1 && errno == EFAULT);
-#else
-	printf("asdsad");
 #endif
 
 
