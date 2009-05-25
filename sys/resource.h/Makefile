@@ -30,7 +30,7 @@ clean:
 	git clean -f
 
 run:
-	@printf "t_getpriority.: "
+	@printf "t_getpriority..: "
 	@-./t_getpriority
 
 	@printf "t_getrlimit....: "
