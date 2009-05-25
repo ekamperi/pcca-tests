@@ -16,6 +16,10 @@ int main(void)
 	assert(setpriority(PRIO_USER, -1, /* nice */ 0) == -1
 	    && errno == ESRCH);
 
+        /* Try to mess around with the mother of all process. */
+        assert(setpriority(PRIO_PROCESS, 1, /* nice */ 0) == -1
+	    && errno == EPERM);
+
 	/* Be bad and try to lower our nice value, without having privilege. */
 	pid = getpid();
 
