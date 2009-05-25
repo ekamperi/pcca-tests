@@ -27,13 +27,6 @@ int main(void)
 	assert(setpriority(PRIO_PROCESS, pid, /* nice */ -10) == -1
 	    && errno == EACCES);
 
-	/*
-	 * POSIX says that we couldn't _change_ (thus not even increase)
-	 * our nice value.
-	 */
-	assert(setpriority(PRIO_PROCESS, pid, /* nice */ 10) == -1
-            && errno == EACCES);
-
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
