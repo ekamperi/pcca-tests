@@ -46,7 +46,7 @@ int main(void)
 		fprintf(stderr, "soft: %lld\thard: %lld\n",
 		    newrlm.rlim_cur, newrlm.rlim_max);
 	} else {
-		fprintf(stderr, "Skipping check.\n");
+		fprintf(stderr, "(skipping check)\t");
 	}
 #endif
 
@@ -61,7 +61,7 @@ int main(void)
 	if (rlm.rlim_max + 1 > rlm.rlim_max++)
 		assert(setrlimit(RLIMIT_STACK, &rlm) == -1 && errno == EPERM);
 	else
-		fprintf(stderr, "Skipping check.\n");
+		fprintf(stderr, "(skipping check)\t");
 
 	/*
 	 * Supply invalid address for the rlimit structure.
