@@ -2,6 +2,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>	/* for pid_t */
 #include <sys/resource.h>
 
 int main(void)
