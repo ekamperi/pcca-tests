@@ -35,5 +35,3 @@ int  setpriority(int, id_t, int);
 int  setrlimit(int, const struct rlimit *);
 
 but we miss id_t type; we use int instead. id_t should be typedef'd in sys/types.h
-setpriority() lets us increase our nice value, whereas POSIX says that not even this
-should be possible. see kern_resouce.c/donice() function
