@@ -19,7 +19,6 @@ int main(void)
 	/* Be bad and try to lower our nice value, without having privilege. */
 	pid = getpid();
 
-	errno = 0;
 	assert(setpriority(PRIO_PROCESS, pid, /* nice */ -10) == -1
 	    && errno == EACCES);
 
@@ -27,7 +26,6 @@ int main(void)
 	 * POSIX says that we couldn't _change_ (thus not even increase)
 	 * our nice value.
 	 */
-	errno = 0;
 	assert(setpriority(PRIO_PROCESS, pid, /* nice */ 10) == -1
             && errno == EACCES);
 
