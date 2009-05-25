@@ -1,0 +1,38 @@
+constants:
+PRIO_PROCESS	yes
+PRIO_PGRP	yes
+PRIO_USER	yes
+
+type:
+rlim_t		yes, but it's defined as signed integer (quad_t) in sys/types.h, whereas POSIX expects unsigned.
+
+RLIM_INFINITY	yes
+RLIM_SAVED_MAX	no	unpresentable saved hard limit
+RLIM_SAVED_CUR	no	unpresentable saved soft limit
+
+contants:
+RUSAGE_SELF	yes
+RUSAGE_CHILDREN yes
+
+structures:
+rlimit	yes
+rusage	yes
+
+contants:
+RLIMIT_CORE	 yes
+RLIMIT_CPU	 yes
+RLIMIT_DATA	 yes
+RLIMIT_FSIZE	 yes
+RLIMIT_NOFILE	 yes
+RLIMIT_STACK	 yes
+RLIMIT_AS	 no (pending)
+
+We have all of these:
+int  getpriority(int, id_t);
+int  getrlimit(int, struct rlimit *);
+int  getrusage(int, struct rusage *);
+int  setpriority(int, id_t, int);
+int  setrlimit(int, const struct rlimit *);
+
+but we miss id_t type; we use int instead. id_t should be typedef'd in sys/types.h
+
