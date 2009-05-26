@@ -1,0 +1,249 @@
+int fpclassify(real-floating x);			yes
+int isfinite(real-floating x);				yes
+int isinf(real-floating x);				yes
+int isnan(real-floating x);				yes
+int isnormal(real-floating x);				yes
+int signbit(real-floating x);				yes
+int isgreater(real-floating x, real-floating y);	yes
+int isgreaterequal(real-floating x, real-floating y);	yes
+int isless(real-floating x, real-floating y);		yes
+int islessequal(real-floating x, real-floating y);	yes
+int islessgreater(real-floating x, real-floating y);	yes
+int isunordered(real-floating x, real-floating y);	yes
+
+*XSI_VISIBLE*	yes
+M_E		yes
+M_LOG2E		yes
+M_LOG10E	yes
+M_LN2		yes
+M_LN10		yes
+M_PI		yes
+M_PI_2		yes
+M_PI_4		yes
+M_1_PI		yes
+M_2_PI		yes
+M_2_SQRTPI	yes
+M_SQRT2		yes
+M_SQRT1_2	yes
+
+MAXFLOAT	yes
+HUGE_VAL	yes
+HUGE_VALF	yes
+HUGE_VALL	yes
+INFINITY	yes
+NAN		yes
+
+*ISO C99*	yes
+FP_INFINITE	yes
+FP_NAN		yes
+FP_NORMAL	yes
+FP_SUBNORMAL	yes
+FP_ZERO		yes
+
+
+macros:
+FP_ILOGB0	no
+FP_ILOGBNAN	no
+
+macros:
+MATH_ERRNO	no
+MATH_ERREXCEPT	no
+
+math_errhandling no
+
+ANSI/POSIX
+double      acos(double);			proto-yes	manpage-ok
+float       acosf(float);			proto-yes	manpage-ok
+double      acosh(double);			proto-yes	manpage-ok	XSI_VISIBLE > 500, why ?
+float       acoshf(float);			proto-yes	manpage-ok	ISOC99
+long double acoshl(long double);		no			no
+long double acosl(long double);			no			no
+double      asin(double);			proto-yes	manpage-ok
+float       asinf(float);			proto-yes	manpage-ok
+double      asinh(double);			proto-yes	manpage-ok	XSI_VISIBLE > 500, why ?
+float       asinhf(float);			proto-yes	manpage-ok
+long double asinhl(long double);		no			no
+long double asinl(long double);			no			no
+double      atan(double);			proto-yes	manpage-ok
+double      atan2(double, double);		proto-yes	manpage-ok
+float       atan2f(float, float);		proto-yes	manpage-ok
+long double atan2l(long double, long double);	no			no
+float       atanf(float);			proto-yes	manpage-ok
+double      atanh(double);			proto-yes	manpage-ok	XSI_VISIBLE > 500, why?
+float       atanhf(float);			proto-yes	manpage-ok
+long double atanhl(long double);		no			no
+long double atanl(long double);			no			no
+double      cbrt(double);			proto-yes	manpage-ok	XSI_VISIBLE> >= 500, why?2~?
+float       cbrtf(float);			proto-yes	manpage-ok
+long double cbrtl(long double);			no		no
+double      ceil(double);			proto-yes	manpage-ok
+float       ceilf(float);			proto-yes	manpage-ok
+long double ceill(long double);			no		no
+double      copysign(double, double);		proto-yes	manpage-ok
+float       copysignf(float, float);		proto-yes	manpage-ok	_DF_VISIBLE, why?
+long double copysignl(long double, long double);no		no
+double      cos(double);			proto-yes	manpage-ok
+float       cosf(float);			proto-yes	manpage-ok
+double      cosh(double);			proto-yes	manpage-ok
+float       coshf(float);			proto-yes	manpage-ok
+long double coshl(long double);			no		no
+long double cosl(long double);			no		no
+double      erf(double);			proto-yes	manpage-ok	XSI_VISIBLE, why?
+double      erfc(double);			protoy-yes	manpage-ok	XSI_VISIBLE, why?
+float       erfcf(float);			proto-yes	manpage-ok
+long double erfcl(long double);			no		no
+float       erff(float);			proto-yes	manpage-ok
+long double erfl(long double);			no		no
+double      exp(double);			proto-yes	manpage-ok
+double      exp2(double);			no		no
+float       exp2f(float);			no		no
+long double exp2l(long double);			no		no
+float       expf(float);			proto-yes	proto-yes
+long double expl(long double);			no		no
+double      expm1(double);			proto-yes	manpage-ok	XSI_VISIBLE >= 500, why?
+float       expm1f(float);			proto-yes	manpage-ok
+long double expm1l(long double);		no		no
+double      fabs(double);			proto-yes	manpage-ok
+float       fabsf(float);			proto-yes	manpage-ok
+long double fabsl(long double);			no		no
+double      fdim(double, double);		no		no
+float       fdimf(float, float);		no		no
+long double fdiml(long double, long double);	no		no
+double      floor(double);			proto-yes	manpage-ok
+float       floorf(float);			proto-yes	manpage-ok
+long double floorl(long double);		no		no
+double      fma(double, double, double);	no		no
+float       fmaf(float, float, float);		no		no
+long double fmal(long double, long double, long double);	no	no
+double      fmax(double, double);		no		no
+float       fmaxf(float, float);		no		no
+long double fmaxl(long double, long double);	no		no
+double      fmin(double, double);		no		no
+float       fminf(float, float);		no		no
+long double fminl(long double, long double);	no		no
+double      fmod(double, double);		proto-yes	manpage-ok
+float       fmodf(float, float);		proto-yes	manpage-ok
+long double fmodl(long double, long double);	no		no
+double      frexp(double, int *);		proto-yes	manpage-ok
+float       frexpf(float value, int *);		proto-yes	manpage-ok
+long double frexpl(long double value, int *);	proto-yes	manpage-ok
+double      hypot(double, double);		proto-yes	manpage-ok	XSI_VISIBLE > 0, why?
+float       hypotf(float, float);		proto-yes	manpage-ok
+long double hypotl(long double, long double);	no		no
+int         ilogb(double);			proto-yes	manpage-ok	XSI_VISIBLE >= 500, why?
+int         ilogbf(float);			proto-yes	manpage-ok
+int         ilogbl(long double);		no		no
+
+[XSI][Option Start]
+double      j0(double);				proto-yes	manpage-ok
+double      j1(double);				proto-yes	manpage-ok
+double      jn(int, double);			proto-yes	manpage-ok
+[Option End]
+
+double      ldexp(double, int);			proto-yes	manpage-ok
+float       ldexpf(float, int);			proto-yes	no
+long double ldexpl(long double, int);		no		no
+double      lgamma(double);			proto-yes	manpage-ok	XSI_VISIBLE > 0, why?
+float       lgammaf(float);			proto-yes	manpage-ok
+long double lgammal(long double);		no		no
+long long   llrint(double);			proto-yes	no
+long long   llrintf(float);			proto-yes	no
+long long   llrintl(long double);		no		no
+long long   llround(double);			proto-yes	no
+long long   llroundf(float);			proto-yes	no
+long long   llroundl(long double);		no		no
+double      log(double);			proto-yes	manpage-ok
+double      log10(double);			proto-yes	manpage-ok
+float       log10f(float);			proto-yes	manpage-ok
+long double log10l(long double);		no		no
+double      log1p(double);			proto-yes	manpage-ok	XSI_VISIBLE >= 500, why ?
+float       log1pf(float);			proto-yes	manpage-ok
+long double log1pl(long double);		no		no
+double      log2(double);			proto-yes	manpage-ok
+float       log2f(float);			proto-yes	manpage-ok
+long double log2l(long double);			no		no
+double      logb(double);			proto-yes	manpage-ok	XSI_VISIBLE >= 500, why ?
+float       logbf(float);			proto-yes	manpage-ok
+long double logbl(long double);			no		no
+float       logf(float);			proto-yes	manpage-ok
+long double logl(long double);			no		no
+long        lrint(double);			proto-yes	no
+long        lrintf(float);			proto-yes	no
+long        lrintl(long double);		no		no
+long        lround(double);			proto-yes	no
+long        lroundf(float);			proto-yes	no
+long        lroundl(long double);		no		no
+double      modf(double, double *);		proto-yes	manpage-ok
+float       modff(float, float *);		proto-yes	no
+long double modfl(long double, long double *);	no		no
+double      nan(const char *);			proto-yes	manpage-ok
+float       nanf(const char *);			proto-yes	manpage-ok
+long double nanl(const char *);			proto-yer	manpage-ok
+double      nearbyint(double);			no		no
+float       nearbyintf(float);			no		no
+long double nearbyintl(long double);		no		no
+double      nextafter(double, double);		proto-yes	manpage-ok	XSI_VISIBLE >= 500, why ?
+float       nextafterf(float, float);		proto-yes	manpage-ok
+long double nextafterl(long double, long double);no		no
+double      nexttoward(double, long double);	no		no
+float       nexttowardf(float, long double);	no		no
+long double nexttowardl(long double, long double);no		no
+double      pow(double, double);		proto-yes	manpage-ok
+float       powf(float, float);			proto-yes	manpage-ok
+long double powl(long double, long double);	no		no
+double      remainder(double, double);		proto-yes	manpage-ok	XSI_VISIBLE >= 500, why ?
+float       remainderf(float, float);		proto-yes	manpage-ok
+long double remainderl(long double, long double);no		no
+double      remquo(double, double, int *);	no		no
+float       remquof(float, float, int *);	no		no
+long double remquol(long double, long double, int *);no		no
+double      rint(double);			proto-yes	manpage-ok	XSI_VISIBLE >= 500, why ?
+float       rintf(float);			proto-yes	manpage-ok
+long double rintl(long double);			no		no
+double      round(double);			proto-yes	manpage-ok
+float       roundf(float);			proto-yes	manpage-ok
+long double roundl(long double);		no		no
+
+[XSI][Option Start]
+double      scalb(double, double);		proto-yes	manpage-ok
+[Option End]
+
+double      scalbln(double, long);		no		no
+float       scalblnf(float, long);		no		no
+long double scalblnl(long double, long);	no		no
+double      scalbn(double, int);		no		no
+float       scalbnf(float, int);		proto-yes	manpage-ok
+long double scalbnl(long double, int);		no		no
+double      sin(double);			proto-yes	manpage-ok
+float       sinf(float);			proto-yes	manpage-ok
+double      sinh(double);			proto-yes	manpage-ok
+float       sinhf(float);			proto-yes	manpage-ok
+long double sinhl(long double);			no		no
+long double sinl(long double);			no		no
+double      sqrt(double);			proto-yes	manpage-ok
+float       sqrtf(float);			proto-yes	manpage-ok
+long double sqrtl(long double);			no		no
+double      tan(double);			no		manpage-ok
+float       tanf(float);			proto-yes	manpage-ok
+double      tanh(double);			proto-yes	manpage-ok
+float       tanhf(float);			proto-yes	manpage-pl
+long double tanhl(long double);			no		no
+long double tanl(long double);			no		no
+double      tgamma(double);			no		no
+float       tgammaf(float);			no		no
+long double tgammal(long double);		no		no
+double      trunc(double);			proto-yes	manpage-ok
+float       truncf(float);			proto-yes	manpage-ok
+long double truncl(long double);		no		no
+
+[XSI][Option Start]
+double      y0(double);				proto-yes	manpage-ok
+double      y1(double);				proto-yes	manpage-ok
+double      yn(int, double);			proto-yes	manpage-ok
+[Option End]
+
+The following external variable shall be defined:
+
+[XSI][Option Start]
+extern int signgam;	defined-ok
+[Option End]
