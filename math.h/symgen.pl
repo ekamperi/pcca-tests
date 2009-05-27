@@ -23,6 +23,8 @@ print TOFILE "int main(void) {\n";
 
 # Parse file.
 my @ret;
+my $gcc_cmd = "gcc -Wall -W -ansi -pedantic -o r$ARGV[0] $ARGV[0].c ";
+
 while (my $line = <SPECFILE>) {
     # Ignore void lines.
     if ($line !~ /\S/) {
@@ -31,6 +33,7 @@ while (my $line = <SPECFILE>) {
 	@ret = split " ", $line;	# Split at whitespace.
 
 	print TOFILE "\t/* $ret[0] */\n";
+	$gcc_cmd = $gcc_cmd . "-D$ret[0]=$ret[1] ";
 
     } elsif ($line =~ m/\}$/) {	# Mark the closing brace.
 	print TOFILE "\t/* Done with $ret[0] */\n\n";
@@ -53,3 +56,5 @@ print TOFILE "\treturn (EXIT_SUCCESS);\n}\n";
 # Done -- close the files.
 close(SPECFILE);
 close(TOFILE);
+
+print "$gcc_cmd\n";
