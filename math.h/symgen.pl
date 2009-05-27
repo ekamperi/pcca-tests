@@ -46,7 +46,7 @@ while (my $line = <SPECFILE>) {
 	$line =~ s/^\s+|\s+$//g;
 
 	print TOFILE "\t#ifndef $line\n";
-	print TOFILE "\t\tprintf(\"Missing symbol: %s\\n\", \"$line\");\n";
+	print TOFILE "\t\tprintf(\"$ret[0]: Missing symbol: %s\\n\", \"$line\");\n";
 	print TOFILE "\t#endif\n\n";
     }
 }
