@@ -22,16 +22,18 @@ print TOFILE "#include <$include>\n\n";
 print TOFILE "int main(void) {\n";
 
 # Parse file.
+my @ret;
 while (my $line = <SPECFILE>) {
     # Ignore void lines.
     if ($line !~ /\S/) {
 	next;
     } elsif ($line =~ m/\{$/) {	# Mark the opening brace.
-	my @ret = split " ", $line;	# Split at whitespace.
+	@ret = split " ", $line;	# Split at whitespace.
 
-	print TOFILE "#ifdef $ret[0]\n";
+	print TOFILE "\t/* $ret[0] */\n";
+
     } elsif ($line =~ m/\}$/) {	# Mark the closing brace.
-	print TOFILE "#endif\n";
+	print TOFILE "\t/* Done with $ret[0] */\n\n";
     }
     else {
 	# Remove the trailing \n
