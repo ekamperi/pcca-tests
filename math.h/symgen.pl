@@ -4,10 +4,10 @@ use warnings;
 use strict;
 
 # Open file with specs for parsing.
-open(SPECFILE, "<", $ARGV[0]) or die "Can't open $ARGV[0]";
+open SPECFILE, "<", $ARGV[0] or die "Can't open $ARGV[0]";
 
 # Open target file for code generation.
-open(TOFILE, ">", "$ARGV[0].c");
+open TOFILE, ">", "$ARGV[0].c";
 
 # Include the necessary headers.
 print TOFILE "#include <stdio.h>\n";
@@ -15,7 +15,7 @@ print TOFILE "#include <stdlib.h>\n";
 
 # The first line of the spec file contains the header file we examine.
 my $include = <SPECFILE>;
-chomp($include);
+chomp $include;
 print TOFILE "#include <$include>\n\n";
 
 # Here comes the main()
@@ -54,7 +54,7 @@ while (my $line = <SPECFILE>) {
 print TOFILE "\treturn (EXIT_SUCCESS);\n}\n";
 
 # Done -- close the files.
-close(SPECFILE);
-close(TOFILE);
+close SPECFILE;
+close TOFILE;
 
 print "$gcc_cmd\n";
