@@ -37,7 +37,8 @@ use strict;
 open SPECFILE, "<", $ARGV[0] or die "Can't open $ARGV[0]";
 
 # Open target file for code generation.
-open TOFILE, ">", "$ARGV[0].c";
+my @inpfile = split /\./, $ARGV[0];
+open TOFILE, ">", "r$inpfile[0].c";
 
 # Include the necessary headers.
 print TOFILE "#include <stdio.h>\n";
@@ -53,7 +54,7 @@ print TOFILE "int main(void) {\n";
 
 # Parse file.
 my @ret;
-my $gcc_cmd = "gcc -Wall -W -ansi -pedantic -o r$ARGV[0] $ARGV[0].c ";
+my $gcc_cmd = "gcc -Wall -W -ansi -pedantic -o r$inpfile[0] r$inpfile[0].c ";
 
 while (my $line = <SPECFILE>) {
     # Ignore void lines.
