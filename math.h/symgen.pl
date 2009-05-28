@@ -60,13 +60,18 @@ if ($less && $more) {
 # Open file with specs for parsing.
 open SPECFILE, "<", $ARGV[0] or die "Can't open $ARGV[0]";
 
-# Open target file for code generation.
+# Open target file for code generation, but first ignore the .h.spec extension.
+# Also prepend `r' to the file, e.g. for math.h.spec the file rmath.c is created.
 my @inpfile = split(/\./, $ARGV[0]);
 open TOFILE, ">", "r$inpfile[0].c";
 
+# Construct a specially crafted gcc invocation, but don't run it. Just print it.
+# Warning flags, etc will be removed once we get the script right.
+my $gcc_cmd = "gcc -Wall -W -ansi -pedantic -o r$inpfile[0] r$inpfile[0].c ";
+
 # Include the necessary headers.
 print TOFILE "#include <stdio.h>\n";
-print TOFILE "#include <stdlib.h>\n";
+print TOFILE "#include <stdlib.h>\n";	# For EXIT_FAILURE.
 
 # The first line of the spec file contains the header file we examine.
 my $include = <SPECFILE>;
@@ -79,7 +84,6 @@ print TOFILE "int main(void) {\n";
 
 # Parse file.
 my @ret;
-my $gcc_cmd = "gcc -Wall -W -ansi -pedantic -o r$inpfile[0] r$inpfile[0].c ";
 
 while (my $line = <SPECFILE>) {
     # We ignore empty lines both in and out of blocks.
