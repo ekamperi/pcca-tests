@@ -57,23 +57,23 @@ my @ret;
 my $gcc_cmd = "gcc -Wall -W -ansi -pedantic -o r$inpfile[0] r$inpfile[0].c ";
 
 while (my $line = <SPECFILE>) {
-    # Ignore void lines.
+    # Ignore empty lines.
     if ($line !~ /\S/) {
 	next;
-    } elsif ($line =~ m/\{$/) {	# Mark the opening brace.
+    } elsif ($line =~ m/\{$/) {		# Opening brace encountered.
 	@ret = split " ", $line;	# Split at whitespace.
 
 	print TOFILE "\t/* $ret[0] */\n";
 	$gcc_cmd = $gcc_cmd . "-D$ret[0]=$ret[1] ";
 
-    } elsif ($line =~ m/\}$/) {	# Mark the closing brace.
+    } elsif ($line =~ m/\}$/) {		# Closing brace encountered.
 	print TOFILE "\t/* Done with $ret[0] */\n\n";
     }
     else {
-	# Remove the trailing \n
+	# Remove the trailing \n.
 	chomp($line);
 
-	# Remove whitespace
+	# Remove whitespace.
 	$line =~ s/^\s+|\s+$//g;
 
 	print TOFILE "\t#ifndef $line\n";
