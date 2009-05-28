@@ -1,5 +1,29 @@
 #! /usr/pkg/bin/perl
 
+# This script parses a specification file of the following form:
+#
+# FEATURE_TEST_MACRO1 VALUE {
+#	SYMBOL1
+#	SYMBOL2
+#	...
+# }
+#
+# FEATURE_TEST_MACRO2 VALUE {
+#	SYMBOL1
+#	SYMBOL2
+#	...
+# }
+#
+# And generates a compilable C file of the form:
+#
+# #ifndef SYMBOL1
+#	printf("FEATURE_TEST_MACRO1: Missing symbol: %s", "SYMBOL1");
+# #endif
+#	...
+#
+# It also constructs a gcc command of the form:
+# gcc -DFEAUTURE_TEST_MACRO1=VALUE -DFEAUTURE_TEST_MACRO=VALUE
+
 use warnings;
 use strict;
 
