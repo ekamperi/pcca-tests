@@ -61,7 +61,7 @@ if ($less && $more) {
 open SPECFILE, "<", $ARGV[0] or die "Can't open $ARGV[0]";
 
 # Open target file for code generation.
-my @inpfile = split /\./, $ARGV[0];
+my @inpfile = split(/\./, $ARGV[0]);
 open TOFILE, ">", "r$inpfile[0].c";
 
 # Include the necessary headers.
@@ -88,8 +88,11 @@ while (my $line = <SPECFILE>) {
 	@ret = split " ", $line;	# Split at whitespace.
 
 	print TOFILE "\t/* $ret[0] */\n";
-	$gcc_cmd = $gcc_cmd . "-D$ret[0]=$ret[1] ";
-
+	if ($less) {
+	    $gcc_cmd = $gcc_cmd . "-D$ret[0]=$ret[1] ";
+	} elsif ($more) {
+	    # Do nothing
+	}
     } elsif ($line =~ m/\}$/) {		# Closing brace encountered.
 	print TOFILE "\t/* Done with $ret[0] */\n\n";
     }
@@ -100,9 +103,15 @@ while (my $line = <SPECFILE>) {
 	# Remove whitespace.
 	$line =~ s/^\s+|\s+$//g;
 
-	print TOFILE "\t#ifndef $line\n";
-	print TOFILE "\t\tprintf(\"$ret[0]: Missing symbol: %s\\n\", \"$line\");\n";
-	print TOFILE "\t#endif\n\n";
+	if ($less) {
+	    print TOFILE "\t#ifndef $line\n";
+	    print TOFILE "\t\tprintf(\"$ret[0]: Missing symbol: %s\\n\", \"$line\");\n";
+	    print TOFILE "\t#endif\n\n";
+	} elsif ($more) {
+	    print TOFILE "\t#ifdef $line\n";
+	    print TOFILE "\t\tprintf(\"$ret[0]: Overexposing symbol: %s\\n\", \"$line\");\n";
+	    print TOFILE "\t#endif\n\n";
+	}
     }
 }
 
