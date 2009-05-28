@@ -16,10 +16,11 @@ int main(void)
 	int t_fp = 0;		/* Whether fp exception branch was executed. */
 
 #if defined(math_errhandling) && (math_errhandling & MATH_ERREXCEPT)
-	/* FE_ALL_EXCEPT expands to the bitwise OR of all exception flags.
+	/*
+	 * FE_ALL_EXCEPT expands to the bitwise OR of all exception flags.
 	 * Clear all of them now, so that we can deduce which ones were
 	 * raised later on.
-	*/
+	 */
 	feclearexcept(FE_ALL_EXCEPT);
 #endif
 
