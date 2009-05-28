@@ -91,10 +91,15 @@ while (my $line = <SPECFILE>) {
 	if ($less) {
 	    $gcc_cmd = $gcc_cmd . "-D$ret[0]=$ret[1] ";
 	} elsif ($more) {
-	    # Do nothing
+	    print TOFILE "#if ($ret[0] - 0) < $ret[1]\n";
 	}
     } elsif ($line =~ m/\}$/) {		# Closing brace encountered.
 	print TOFILE "\t/* Done with $ret[0] */\n\n";
+	if ($more) {
+	    print TOFILE "#else\n";
+	    print TOFILE "\tprintf(\"The test may be unreliable\");\n";
+	    print TOFILE "#endif\n";
+	}
     }
     else {
 	# Remove the trailing \n.
