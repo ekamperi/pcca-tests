@@ -58,9 +58,9 @@ int main(void)
 	printf("passed\t");
 	if (t_errno == 0 && t_fp == 0) {
 		printf("(both errno and fp checks were skipped)");
-	} else if (t_errno !=0 && t_fp == 0) {
+	} else if (t_errno != 0 && t_fp == 0) {
 		printf("(fp check was skipped)");
-	} else if (t_errno ==0 && t_fp != 0) {
+	} else if (t_errno == 0 && t_fp != 0) {
 		printf("(errno check was skipped)");
 	} else {
 		/* Nothing. */
