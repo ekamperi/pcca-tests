@@ -40,6 +40,7 @@ int main(void)
 	 * implementation update the errno variable isn't mandatory.
 	 */
 	assert(errno == EDOM);
+	t_errno = 1;
 #endif
 
 #if defined(math_errhandling) && defined(MATH_ERREXCEPT) && \
@@ -51,12 +52,20 @@ int main(void)
 	 * if math_errhandling & MATH_ERREXCEPT is zero.
 	 */
 	assert(fetestexcept(FE_INVALID) != 0);
-	printf("fp test passed\n");
+	t_fp = 1;
 #endif
 
-	printf("passed%s\n", (t_errno == 0 && t_fp == 0) ?
-	    "\t(both errno and fp checks were skipped)" :
-	    NULL);
+	printf("passed\t");
+	if (t_errno == 0 && t_fp == 0) {
+		printf("(both errno and fp checks were skipped)");
+	} else if (t_errno !=0 && t_fp == 0) {
+		printf("(fp check was skipped)");
+	} else if (t_errno ==0 && t_fp != 0) {
+		printf("(errno check was skipped)");
+	} else {
+		/* Nothing. */
+	}
+	printf("\n");
 
 	return (EXIT_SUCCESS);
 }
