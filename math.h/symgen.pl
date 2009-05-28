@@ -14,7 +14,13 @@
 #	...
 # }
 #
-# And generates a compilable C file of the form:
+# Possible values of feauture test macros are:
+# _POSIX_C_SOURCE 200112L - Exposes the base POSIX namespace of SUSv3.
+# _XOPEN_SOURCE 600       - Exposes the X/Open System Interface (XSI) extension
+#			    of SUSv3.
+#
+# Eventually a compilable C file is generated. The file contains the
+# following basic unit:
 #
 # #ifndef SYMBOL1
 #	printf("FEATURE_TEST_MACRO1: Missing symbol: %s", "SYMBOL1");
