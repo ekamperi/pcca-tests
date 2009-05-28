@@ -73,7 +73,8 @@ my $include = <SPECFILE>;
 chomp $include;
 print TOFILE "#include <$include>\n\n";
 
-# Here comes the main()
+# Here comes the main(), durururu, here comes the main()
+# ... and I say it's all right!
 print TOFILE "int main(void) {\n";
 
 # Parse file.
@@ -81,20 +82,28 @@ my @ret;
 my $gcc_cmd = "gcc -Wall -W -ansi -pedantic -o r$inpfile[0] r$inpfile[0].c ";
 
 while (my $line = <SPECFILE>) {
-    # Ignore empty lines.
+    # We ignore empty lines both in and out of blocks.
     if ($line !~ /\S/) {
 	next;
     } elsif ($line =~ m/\{$/) {		# Opening brace encountered.
 	@ret = split " ", $line;	# Split at whitespace.
 
+	# Print a comment to know where we are.
 	print TOFILE "\t/* $ret[0] */\n";
+
+	# In --less mode we need to add the appropriate -Dmacro=definition
+	# parts in the gcc command.
 	if ($less) {
 	    $gcc_cmd = $gcc_cmd . "-D$ret[0]=$ret[1] ";
 	} elsif ($more) {
+	    # Whereas in --more mode we add some sanity cheks,
+	    # just in case someone else defines our feature test macros.
 	    print TOFILE "#if ($ret[0] - 0) < $ret[1]\n";
 	}
     } elsif ($line =~ m/\}$/) {		# Closing brace encountered.
+	# Print a comment to know where we are.
 	print TOFILE "\t/* Done with $ret[0] */\n\n";
+
 	if ($more) {
 	    print TOFILE "#else\n";
 	    print TOFILE "\tprintf(\"The test may be unreliable\");\n";
