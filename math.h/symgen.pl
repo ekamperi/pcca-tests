@@ -33,6 +33,30 @@
 use warnings;
 use strict;
 
+use Getopt::Long;
+use Pod::Usage;
+
+# Command line options.
+my $less = '';		# Look for missing symbols.
+my $more = '';		# Look for overexposed symbols.
+my $help = '';		# Print usage.
+
+GetOptions('less'	=> \$less,
+	   'more'	=> \$more,
+	   'help|?'	=> \$help);
+
+# Make sure the user has supplied a specifications file.
+if (!$ARGV[0]) {
+    die "No spec file was given.\n";
+}
+
+# We can't allow both --more AND --less at the same time.
+if ($less && $more) {
+    die "Use either --less or --more. Not both.\n";
+} elsif (!$less && !$more) {
+    die "Use at least --less or --more.\n";
+}
+
 # Open file with specs for parsing.
 open SPECFILE, "<", $ARGV[0] or die "Can't open $ARGV[0]";
 
