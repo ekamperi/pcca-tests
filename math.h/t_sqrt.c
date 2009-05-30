@@ -49,22 +49,23 @@ int main(void)
 	/*
 	 * According to POSIX, the invalid floating point exception shall
 	 * be raised at this point. Just as before, this isn't required
-	 * if math_errhandling & MATH_ERREXCEPT is zero.
+	 * if math_errhandling & MATH_ERREXCEPT is zero. BUT, at least one
+	 * out of (math_errhandling & MATH_ERRNO) and (math_errhandling &
+	 * MATH_ERREXCEPT) but be non-zero according to the standard.
 	 */
 	assert(fetestexcept(FE_INVALID) != 0);
 	t_fp = 1;
 #endif
 
+	assert(t_errno != 0 || t_fp != 0);
+
 	printf("passed\t");
-	if (t_errno == 0 && t_fp == 0) {
-		printf("(both errno and fp checks were skipped)");
-	} else if (t_errno != 0 && t_fp == 0) {
+
+	if (t_errno != 0 && t_fp == 0)
 		printf("(fp check was skipped)");
-	} else if (t_errno == 0 && t_fp != 0) {
+	else if (t_errno == 0 && t_fp != 0)
 		printf("(errno check was skipped)");
-	} else {
-		/* Nothing. */
-	}
+
 	printf("\n");
 
 	return (EXIT_SUCCESS);
