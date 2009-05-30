@@ -13,30 +13,161 @@
 #include <fenv.h>
 #endif
 
+/* Floating point exception constant is missing. */
+#define FPE_IS_MISSING	(-112233)
+
+#ifdef	FE_INVALID
+	#define	MY_FE_INVALID	FE_INVALID
+#else
+	#define MY_FE_INVALID	FPE_IS_MISSING
+#endif
+
+
+#ifdef	FE_DIVBYZERO
+	#define	MY_FE_DIVBYZERO	FE_DIVBYZERO
+#else
+	#define MY_FE_DIVBYZERO	FPE_IS_MISSING
+#endif
+
+
+#ifdef	FE_OVERFLOW
+	#define MY_FE_OVERFLOW	FE_OVERFLOW
+#else
+	#define MY_FE_OVERFLOW	FPE_IS_MISSING
+#endif
+
+
+#ifdef	FE_UNDERFLOW
+	#define MY_FE_UNDERFLOW	FE_UNDERFLOW
+#else
+	#define MY_FE_UNDERFLOW	FPE_IS_MISSING
+#endif
+
 struct tentry {
 	const char *desc;
 	double (*pf)();
 	int nargs;
 	double x;
 	double y;
+	int errcode;	/* errno */
+	int fpe;	/* floating point exception */
 } ttable[] = {
-	{ "t_acos",  acos,   1,  -2,  /* ignored */ 0 },
-	{ "t_acos",  acos,   1,   2,  /* ignored */ 0 },
-	{ "t_asin",  asin,   1,  -2,  /* ignored */ 0 },
-	{ "t_atan2", atan2,  2,   0,  0               },
-	{ "t_acosh", acosh,  1,  -1,  /* ignored */ 0 },
-	{ "t_atanh", atanh,  1,   0,  /* ignored */ 0 },
-	{ "t_log",   log,    1,   0,  /* ignored */ 0 },
-	{ "t_log10", log10,  1,   0,  /* ignored */ 0 },
-	{ "t_log2",  log2,   1,   0,  /* ignored */ 0 },
-	{ "t_log1p", log1p,  1,  -1,  /* ignored */ 0 },
-	{ "t_ilogb", ilogb,  1,   0,  /* ignored */ 0 },
-	{ "t_logb",  logb,   1,   0,  /* ignored */ 0 },
-	{ "t_pow",   pow,    2,  -1,  2.34            },
-	{ "t_sqrt",  sqrt,   1,  -1,  /* ignored */ 0 },
-	{ "t_lgamma", lgamma, 2, 0,   /* ignored */ 9 },
-	{ "t_fmod",  fmod,   2,   1,  0 },
-	{ NULL,      NULL,  -1,  -1,  -1 }
+	{ "t_acos", acos,
+	  1, -2, /* ignored */ 0,
+	  EDOM, MY_FE_INVALID
+	},
+
+	{ "t_acos", acos,
+	  1, 2, /* ignored */ 0,
+	  EDOM, MY_FE_INVALID
+	},
+
+	{ "t_asin", asin,
+	  1, -2, /* ignored */ 0,
+	  EDOM, MY_FE_INVALID
+	},
+
+	{ "t_atan2", atan2,
+	  2, 0, 1,
+	  ERANGE, MY_FE_UNDERFLOW
+	},
+
+	{ "t_acosh", acosh,
+	  1, -1, /* ignored */ 0,
+	  EDOM, MY_FE_INVALID
+	},
+
+	{ "t_atanh", atanh,
+	  1, -2, /* ignored */ 0,
+	  EDOM,   MY_FE_INVALID
+	},
+
+	{ "t_atanh", atanh,
+	  1, -1, /* ignored */ 0,
+	  ERANGE, MY_FE_DIVBYZERO
+	},
+
+	{ "t_log", log,
+	  1, -1, /* ignored */ 0,
+	  EDOM,   MY_FE_INVALID
+	},
+
+	{ "t_log", log,
+	  1,   0,  /* ignored */ 0,
+	  ERANGE, MY_FE_DIVBYZERO
+	},
+
+        { "t_log10", log10,
+	  1, -1, /* ignored */ 0,
+          EDOM, MY_FE_INVALID
+	},
+
+        { "t_log10", log10,
+	  1, 0, /* ignored */ 0,
+          ERANGE, MY_FE_DIVBYZERO
+	},
+
+        { "t_log2", log2,
+	  1, -1, /* ignored */ 0,
+          EDOM, MY_FE_INVALID
+	},
+
+        { "t_log2", log2,
+	  1, 0, /* ignored */ 0,
+          ERANGE, MY_FE_DIVBYZERO
+	},
+
+        { "t_log1p", log1p,
+	  1, -2, /* ignored */ 0,
+          EDOM, MY_FE_INVALID
+	},
+
+        { "t_log1p", log1p,
+	  1, -1, /* ignored */ 0,
+          ERANGE, MY_FE_DIVBYZERO
+	},
+
+#if	(_XOPEN_SOURCE - 0) >= 600
+	{ "t_ilogb", ilogb,
+	  1, 0, /* ignored */ 0,
+	  EDOM, MY_FE_INVALID
+	},
+#endif
+
+	{ "t_logb", logb,
+	  1, 0, /* ignored */ 0,
+	  ERANGE, MY_FE_DIVBYZERO
+	},
+
+	{ "t_pow", pow,
+	  2, -1, 2.34,
+	  EDOM, MY_FE_INVALID
+	},
+
+	{ "t_pow", pow,
+	  2, 0, -1,
+	  ERANGE, MY_FE_DIVBYZERO
+	},
+
+	{ "t_sqrt", sqrt,
+	  1, -1, /* ignored */ 0,
+	  EDOM, MY_FE_INVALID
+	},
+
+	{ "t_lgamma", lgamma,
+	  2, -1, /* ignored */ 0,
+	  ERANGE, MY_FE_DIVBYZERO
+	},
+
+	{ "t_fmod", fmod,
+	  2, 1, 0,
+	  EDOM, MY_FE_INVALID
+	},
+
+	{ NULL, NULL,
+	  -1, -1, -1,
+	  -1, -1
+	}
 };
 
 /* Function prototypes. */
@@ -107,12 +238,13 @@ void runtest(const struct tentry *te)
         (math_errhandling & MATH_ERRNO)
 
         /*
-         * According to POSIX, errno must be set to EDOM at this point.
+         * According to POSIX, errno must be set to at this point.
          * A note to myself: if math_errhandling & MATH_ERRNO is zero
          * then the specs don't expect errno to be set. So having an
          * implementation update the errno variable isn't mandatory.
+	 * Read below for caveat.
          */
-        assert(errno == EDOM);
+        assert(errno == te->errcode);
         t_errno = 1;
 #endif
 
@@ -120,16 +252,21 @@ void runtest(const struct tentry *te)
         (math_errhandling & MATH_ERREXCEPT)
 
         /*
-         * According to POSIX, the invalid floating point exception shall
+         * According to POSIX, the floating point exception shall
          * be raised at this point. Just as before, this isn't required
-         * if math_errhandling & MATH_ERREXCEPT is zero. BUT, at least one
-         * out of (math_errhandling & MATH_ERRNO) and (math_errhandling &
-         * MATH_ERREXCEPT) but be non-zero according to the standard.
+         * if math_errhandling & MATH_ERREXCEPT is zero.
+	 * Read below for caveat.
          */
-        assert(fetestexcept(FE_INVALID) != 0);
-        t_fp = 1;
+	if (te->fpe != FPE_IS_MISSING) {
+		assert(fetestexcept(te->fpe) != 0);
+		t_fp = 1;
+	}
 #endif
 
+	/*
+	 * On error, there's must be AT LEAST one non-zero expression among
+	 * (math_errhandling & MATH_ERRNO), (math_errhandling & MATH_ERREXCEPT).
+	*/
         assert(t_errno != 0 || t_fp != 0);
 
         printf("passed\t");
