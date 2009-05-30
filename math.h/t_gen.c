@@ -25,6 +25,17 @@ struct tentry {
 	{ "t_asin",  asin,   1,  -2,  /* ignored */ 0 },
 	{ "t_atan2", atan2,  2,   0,  0               },
 	{ "t_acosh", acosh,  1,  -1,  /* ignored */ 0 },
+	{ "t_atanh", atanh,  1,   0,  /* ignored */ 0 },
+	{ "t_log",   log,    1,   0,  /* ignored */ 0 },
+	{ "t_log10", log10,  1,   0,  /* ignored */ 0 },
+	{ "t_log2",  log2,   1,   0,  /* ignored */ 0 },
+	{ "t_log1p", log1p,  1,  -1,  /* ignored */ 0 },
+	{ "t_ilogb", ilogb,  1,   0,  /* ignored */ 0 },
+	{ "t_logb",  logb,   1,   0,  /* ignored */ 0 },
+	{ "t_pow",   pow,    2,  -1,  2.34            },
+	{ "t_sqrt",  sqrt,   1,  -1,  /* ignored */ 0 },
+	{ "t_lgamma", lgamma, 2, 0,   /* ignored */ 9 },
+	{ "t_fmod",  fmod,   2,   1,  0 },
 	{ NULL,      NULL,  -1,  -1,  -1 }
 };
 
