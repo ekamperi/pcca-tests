@@ -191,7 +191,7 @@ int main(void)
 			printf("%s ", te->desc);
 			fflush(NULL);
 
-			/* Runt the actual test. */
+			/* Run the actual test. */
 			runtest(te);
 
 			/*
@@ -238,7 +238,7 @@ void runtest(const struct tentry *te)
         (math_errhandling & MATH_ERRNO)
 
         /*
-         * According to POSIX, errno must be set to at this point.
+         * According to POSIX, errno must be set at this point.
          * A note to myself: if math_errhandling & MATH_ERRNO is zero
          * then the specs don't expect errno to be set. So having an
          * implementation update the errno variable isn't mandatory.
@@ -264,7 +264,7 @@ void runtest(const struct tentry *te)
 #endif
 
 	/*
-	 * On error, there's must be AT LEAST one non-zero expression among
+	 * On error, there must be AT LEAST one non-zero expression among
 	 * (math_errhandling & MATH_ERRNO), (math_errhandling & MATH_ERREXCEPT).
 	*/
         assert(t_errno != 0 || t_fp != 0);
