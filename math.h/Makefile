@@ -29,7 +29,7 @@ t_fmin: t_fmin.c
 	$(CC) $(CCFLAGS) $(LIB) t_fmin.c -o t_fmin
 
 t_fminf: t_fminf.c
-	$(CC) $(CCFLAGS) $(LIB) t_fmin.c -o t_fmin
+	$(CC) $(CCFLAGS) $(LIB) t_fmin.c -o t_fminf
 
 t_fminl: t_fminl.c
 	$(CC) $(CCFLAGS) $(LIB) t_fminl.c -o t_fminl
