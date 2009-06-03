@@ -7,7 +7,11 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#if defined(_NETBSD_SOURCE)
+#include <util.h>
+#else
 #include <libutil.h>
+#endif
 #include <utmpx.h>
 
 #define NUSERS 10	/* Number of users to simulate. */
