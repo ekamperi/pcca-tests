@@ -1,4 +1,5 @@
-all:    t_isatty	\
+all:	t_access	\
+	t_isatty	\
 	t_ttyname	\
 	t_ttyname_r
 
@@ -9,6 +10,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 
+t_access: t_access.c
+	$(CC) $(CCFLAGS) $(LIB) t_access.c -o t_access
+
 t_isatty: t_isatty.c
 	$(CC) $(CCFLAGS) $(LIB) t_isatty.c -o t_isatty
 
@@ -16,6 +20,9 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_access: "
+	@-./t_access
+
 	@printf "t_isatty: "
 	@-./t_isatty
 
