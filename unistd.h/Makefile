@@ -1,7 +1,7 @@
 all:	t_access	\
 	t_isatty	\
 	t_ttyname	\
-	t_ttyname_r
+#	t_ttyname_r
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -35,5 +35,5 @@ run:
 	@printf "t_ttyname: "
 	@-./t_ttyname
 
-	@printf "t_ttyname_r: "
-	@-./t_ttyname_r
+#	@printf "t_ttyname_r: "
+#	@-./t_ttyname_r
