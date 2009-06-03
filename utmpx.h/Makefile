@@ -11,7 +11,7 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 t_utmpx_enum: t_utmpx_enum.c
 	$(CC) $(CCFLAGS) $(LIB) t_utmpx_enum.c -o t_utmpx_enum
 
-t_utmpx_enum: t_utmpx_pututxline.c
+t_utmpx_pututxline: t_utmpx_pututxline.c
 	$(CC) $(CCFLAGS) $(LIB) t_utmpx_pututxline.c -o t_utmpx_pututxline
 
 
