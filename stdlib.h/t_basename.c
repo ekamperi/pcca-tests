@@ -6,13 +6,13 @@
 
 int main(void)
 {
-	char *str[][2] = {{"/usr/lib", "lib"},
-			  {"/usr/", "usr"},
-			  {"/", "/"},
-			  {"///", "/"},
-			  {"//usr//lib//", "lib"},
-			  {"", "."},
-			  {NULL, "."}};
+	const char *str[][2] = {{ "/usr/lib", "lib"},
+				{ "/usr/", "usr"},
+				{ "/", "/"},
+				{ "///", "/"},
+				{ "//usr//lib//", "lib"},
+				{ "", "."},
+				{ NULL, "."}};
 
 	assert(strcmp(basename(str[0][0]), str[0][1]) == 0);
 	assert(strcmp(basename(str[1][0]), str[1][1]) == 0);
