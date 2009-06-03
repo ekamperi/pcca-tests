@@ -15,11 +15,13 @@ rundir()
     echo
 
     # Get all directories in the current level and recurse into them.
+    # Ignore .git/ (sub)directories.
     for dir in `find . -type d -depth 1 ! -name ".*" 2>&-`
     do
 	rundir "$dir"
     done
 
+    # Make sure we backtrack as well once we are done with a directory.
     cd ..
 }
 
