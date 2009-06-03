@@ -1,0 +1,26 @@
+all:    t_isatty	\
+	t_ttyname	\
+	t_ttyname_r
+
+CC=gcc
+CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
+	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
+	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
+	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
+	-Wswitch -Wbad-function-cast -g
+
+t_isatty: t_isatty.c
+	$(CC) $(CCFLAGS) $(LIB) t_isatty.c -o t_isatty
+
+clean:
+	git clean -f
+
+run:
+	@printf "t_isatty: "
+	@-./t_isatty
+
+	@printf "t_ttyname: "
+	@-./t_ttyname
+
+	@printf "t_ttyname_r: "
+	@-./t_ttyname_r
