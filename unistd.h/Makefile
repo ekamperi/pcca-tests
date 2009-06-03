@@ -16,6 +16,12 @@ t_access: t_access.c
 t_isatty: t_isatty.c
 	$(CC) $(CCFLAGS) $(LIB) t_isatty.c -o t_isatty
 
+t_ttyname: t_ttyname.c
+	$(CC) $(CCFLAGS) $(LIB) t_ttyname.c -o t_ttyname
+
+t_ttyname_r: t_ttyname_r.c
+	$(CC) $(CCFLAGS) $(LIB) t_ttyname_r.c -o t_ttyname_r
+
 clean:
 	git clean -f
 
@@ -29,5 +35,5 @@ run:
 	@printf "t_ttyname: "
 	@-./t_ttyname
 
-#	@printf "t_ttyname_r: "
-#	@-./t_ttyname_r
+	@printf "t_ttyname_r: "
+	@-./t_ttyname_r
