@@ -29,5 +29,5 @@ run:
 	@printf "t_ttyname: "
 	@-./t_ttyname
 
-	@printf "t_ttyname_r: "
-	@-./t_ttyname_r
+#	@printf "t_ttyname_r: "
+#	@-./t_ttyname_r
