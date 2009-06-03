@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	p = malloc(2 * PATH_MAX);
 	assert(p != NULL);
 	memset(p, 0xff, 2 * PATH_MAX);	/* Make sure we don't terminate early.*/
-	assert(opendir(p) == NULL & errno == ENAMETOOLONG);
+	assert(opendir(p) == NULL && errno == ENAMETOOLONG);
 	free(p);
 
 	/* Directory doesn't exist. */
