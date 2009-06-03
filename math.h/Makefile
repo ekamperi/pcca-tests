@@ -6,7 +6,8 @@ all:	t_fmax \
 	t_fminl	\
 	t_fdim	\
 	t_fdimf	\
-	t_fdiml
+	t_fdiml \
+	t_generr
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -42,6 +43,8 @@ t_fdimf: t_fdimf.c
 
 t_fdiml: t_fdiml.c
 	$(CC) $(CCFLAGS) $(LIB) t_fdiml.c -o t_fdiml
+t_generr: t_generr.c
+	$(CC) $(CCFLAGS) $(LIB) t_generr.c -o t_generr
 
 clean:
 	git clean -f
@@ -73,3 +76,6 @@ run:
 
 	@printf "t_fdiml.......: "
 	@-./t_fdiml
+
+	@printf "t_generr......: "
+	@-./t_generr
