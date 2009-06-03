@@ -16,7 +16,7 @@ rundir()
 
     # Get all directories in the current level and recurse into them.
     # Ignore .git/ (sub)directories.
-    for dir in `find . -type d -depth 1 ! -name ".*" 2>&-`
+    for dir in `find . -name .git -prune -o -type d -a ! -name . -print`
     do
 	rundir "$dir"
     done
