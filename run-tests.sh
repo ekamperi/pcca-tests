@@ -1,29 +1,17 @@
 #!/bin/sh
 
-rundir()
-{
-    echo "Changing directory to:" `basename $1`
-    cd "$1"
+for dir in `find . -name .git -prune -o -type d -a ! -name . -print`
+do
+    OLDPWD=`pwd`
 
-    # Run the tests in current directory, if there is a Makefile at all.
+    cd "$dir"
+
     if [ -e "Makefile" ]
     then
+	echo `basename $dir`
 	make run
-    else
-	echo "No tests for current directory."
     fi
     echo
 
-    # Get all directories in the current level and recurse into them.
-    # Ignore .git/ (sub)directories.
-    for dir in `find . -name .git -prune -o -type d -a ! -name . -print`
-    do
-	rundir "$dir"
-    done
-
-    # Make sure we backtrack as well once we are done with a directory.
-    cd ..
-}
-
-# Fire off!
-rundir "."
+    cd "$OLDPWD"
+done
