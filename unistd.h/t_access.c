@@ -18,8 +18,10 @@ int main(int argc, char *argv[])
 	assert(access("/this/really/shouln/t/exist", F_OK) == -1 &&
 	       errno == ENOENT);
 
+#if 0
 	/* This is optional. */
 	assert(access(argv[0], ~(R_OK | W_OK | X_OK | F_OK)) == -1 && errno == EINVAL);
+#endif
 
 	printf("passed\n");
 
