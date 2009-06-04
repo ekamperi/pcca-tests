@@ -8,14 +8,20 @@
 int main(int argc, char *argv[])
 {
 	char *p;
+	size_t sz = 4096;	/* Default value for PATH_MAX */
 
 	/* Mess with /root. */
 	assert(opendir("/root") == NULL && errno == EACCES);
 
-	/* Overflow PATH_MAX constant. */
-	p = malloc(2 * PATH_MAX);
+	/* Exceed maximum path length limit. */
+#ifdef	_PC_PATH_MAX
+	/* Determine maximum path length. */
+	sz = pathconf(".", "_PC_PATH_MAX");
+	assert(sz != -1);
+#endif
+	p = malloc(sz + 1);
 	assert(p != NULL);
-	memset(p, 0xff, 2 * PATH_MAX);	/* Make sure we don't terminate early.*/
+	memset(p, 0xff, sz + 1);	/* Make sure we don't terminate early.*/
 	assert(opendir(p) == NULL && errno == ENAMETOOLONG);
 	free(p);
 
