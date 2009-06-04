@@ -1,6 +1,7 @@
 all:	t_access	\
 	t_getcwd	\
 	t_isatty	\
+	t_readlink	\
 	t_ttyname	\
 #	t_ttyname_r
 
@@ -20,6 +21,9 @@ t_getcwd: t_getcwd.c
 t_isatty: t_isatty.c
 	$(CC) $(CCFLAGS) $(LIB) t_isatty.c -o t_isatty
 
+t_readlink: t_readlink.c
+	$(CC) $(CCFLAGS) $(LIB) t_readlink.c -o t_readlink
+
 t_ttyname: t_ttyname.c
 	$(CC) $(CCFLAGS) $(LIB) t_ttyname.c -o t_ttyname
 
@@ -38,6 +42,9 @@ run:
 
 	@printf "t_isatty: "
 	@-./t_isatty
+
+	@printf "t_readlink: "
+	@-./t_readlink
 
 	@printf "t_ttyname: "
 	@-./t_ttyname
