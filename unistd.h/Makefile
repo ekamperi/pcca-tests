@@ -1,4 +1,5 @@
 all:	t_access	\
+	t_getcwd	\
 	t_isatty	\
 	t_ttyname	\
 #	t_ttyname_r
@@ -12,6 +13,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 
 t_access: t_access.c
 	$(CC) $(CCFLAGS) $(LIB) t_access.c -o t_access
+
+t_getcwd: t_getcwd.c
+	$(CC) $(CCFLAGS) $(LIB) t_getcwd.c -o t_getcwd
 
 t_isatty: t_isatty.c
 	$(CC) $(CCFLAGS) $(LIB) t_isatty.c -o t_isatty
@@ -28,6 +32,9 @@ clean:
 run:
 	@printf "t_access: "
 	@-./t_access
+
+	@printf "t_getcwd: "
+	@-./t_getcwd
 
 	@printf "t_isatty: "
 	@-./t_isatty
