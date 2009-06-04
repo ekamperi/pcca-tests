@@ -8,7 +8,7 @@
 int main(void)
 {
 	char *buf;
-	size_t sz = 1024;
+	size_t sz = 4096;	/* Default value for PATH_MAX */
 
 #ifdef _PC_PATH_MAX
 	/* Determine maximum path length. */
@@ -23,7 +23,7 @@ int main(void)
 	/* The size argument is 0. */
 	assert(getcwd(buf, 0) == NULL && errno == EINVAL);
 
-	/* The size is too small to hold (but greated than zero) pathname +1. */
+	/* The size is too small (but greater than 0) to hold pathname + 1. */
 	assert(getcwd(buf, 1) == NULL && errno == ERANGE);
 
 	free(buf);
