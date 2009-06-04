@@ -10,7 +10,11 @@ static void myhandler(int );
 
 int main(void)
 {
-	DIR *dp;
+	DIR *dirp;
+
+	/* We expect this simple operation to succeed. */
+	assert((dirp = opendir(".")) != NULL);
+	assert(closedir(dirp) == 0);
 
 	/*
 	 * XXX: The following test must always be the last one to run.
