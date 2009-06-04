@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	char *p;
 	p = malloc(32768);
 	assert(p != NULL);
-	memset(p, 0xff, 32768);
+	memset(p, 0xff, 32768);	/* Make sure we don't terminate prematurely. */
 	assert(readlink(p, buf, sizeof(buf) - 1 == -1 && errno == ENAMETOOLONG));
 	free(p);
 
