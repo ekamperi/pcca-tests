@@ -7,6 +7,20 @@
 
 int main(void)
 {
+	pid_t pid;
+	int prio;
+
+	/* We expect this simple operation to succeed. */
+	pid = getpid();
+
+	assert(setpriority(PRIO_PROCESS, pid, 2) == 0);
+
+	/* getpriority() can return -1 on success, so zero out errno. */
+	errno = 0;
+	prio = getpriority(PRIO_PROCESS, pid);
+	assert(prio != -1 || errno == 0);
+	assert(prio == 2);
+
 	/* Invalid `which' value. */
 	assert(setpriority(-112233, 1, /* nice */ 0) == -1 && errno == EINVAL);
 	assert(setpriority( 112233, 1, /* nice */ 0) == -1 && errno == EINVAL);
@@ -22,8 +36,9 @@ int main(void)
 #if 0
 	/*
 	 * Be bad and try to lower our nice value, without having privilege.
-	 * POSIX suggests in this matter, so we can't expect one behaviour.
-	 * e.g, the OS may renice up to the minimum allowed nice value.
+	 * POSIX only suggests in this matter, so we can't expect one behaviour.
+	 * E.g, the OS may renice up to the minimum allowed nice value
+	 * (DragonFly does).
 	 */
 	pid_t pid;
 	pid = getpid();
