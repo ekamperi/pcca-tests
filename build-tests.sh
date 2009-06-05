@@ -8,6 +8,7 @@ do
 
     if [ -e "Makefile" ]
     then
+	make clean
 	make
     fi
 
