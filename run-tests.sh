@@ -8,10 +8,10 @@ do
 
     if [ -e "Makefile" ]
     then
-	echo `basename $dir`
-	make run
+	#echo `basename $dir`
+	make -s run
     fi
-    echo
+    #echo
 
     cd "$OLDPWD"
 done
