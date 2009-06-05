@@ -10,9 +10,6 @@ int main(int argc, char *argv[])
 	char *p;
 	size_t sz = 4096;	/* Default value for PATH_MAX */
 
-	/* Mess with /root. */
-	assert(opendir("/root") == NULL && errno == EACCES);
-
 	/* Exceed maximum path length limit. */
 #ifdef	_PC_PATH_MAX
 	/* Determine maximum path length. */
