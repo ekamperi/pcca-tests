@@ -23,11 +23,11 @@ clean:
 	git clean -f
 
 run:
-	@printf "t_basename......: "
+	@printf "t_basename: "
 	@-./t_basename
 
 	@printf "t_posix_memalign: "
 	@-./t_posix_memalign
 
-	@printf "t_putenv........: "
+	@printf "t_putenv: "
 	@-./t_putenv

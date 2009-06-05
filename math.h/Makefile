@@ -50,32 +50,32 @@ clean:
 	git clean -f
 
 run:
-	@printf "t_fmax........: "
+	@printf "t_fmax: "
 	@-./t_fmax
 
-	@printf "t_fmaxf.......: "
+	@printf "t_fmaxf: "
 	@-./t_fmaxf
 
-	@printf "t_fmaxl.......: "
+	@printf "t_fmaxl: "
 	@-./t_fmaxl
 
-	@printf "t_fmin........: "
+	@printf "t_fmin: "
 	@-./t_fmin
 
-	@printf "t_fminf.......: "
+	@printf "t_fminf: "
 	@-./t_fminf
 
-	@printf "t_fminl.......: "
+	@printf "t_fminl: "
 	@-./t_fminl
 
-	@printf "t_fdim........: "
+	@printf "t_fdim: "
 	@-./t_fdim
 
-	@printf "t_fdimf.......: "
+	@printf "t_fdimf: "
 	@-./t_fdimf
 
-	@printf "t_fdiml.......: "
+	@printf "t_fdiml: "
 	@-./t_fdiml
 
-	@printf "t_generr......: "
+	@printf "t_generr: "
 	@-./t_generr

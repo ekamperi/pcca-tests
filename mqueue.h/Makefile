@@ -47,29 +47,29 @@ clean:
 	git clean -f
 
 run:
-	@printf "t_mq_open..........: "
+	@printf "t_mq_open: "
 	@-./t_mq_open
 
-	@printf "t_mq_openclose.....: "
+	@printf "t_mq_openclose: "
 	@-./t_mq_openclose
 
-	@printf "t_mq_close.........: "
+	@printf "t_mq_close: "
 	@-./t_mq_close
 
-	@printf "t_mq_parent_child..: "
+	@printf "t_mq_parent_child: "
 	@-./t_mq_parent_child
 
 	@printf "t_mq_parent_multmsg: "
 	@-./t_mq_parent_multmsg
 
-	@printf "t_mq_select........: "
+	@printf "t_mq_select: "
 	@-./t_mq_select
 
-	@printf "t_mq_send..........: "
+	@printf "t_mq_send: "
 	@-./t_mq_send
 
-	@printf "t_mq_setattr.......: "
+	@printf "t_mq_setattr: "
 	@-./t_mq_setattr
 
-	@printf "t_mq_timedsend.....: "
+	@printf "t_mq_timedsend: "
 	@-./t_mq_timedsend
