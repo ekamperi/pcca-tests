@@ -1,0 +1,5 @@
+t_getpriority
+t_getrlimit
+t_getrusage
+t_setpriority
+t_setrlimit

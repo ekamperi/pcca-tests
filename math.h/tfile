@@ -1,0 +1,10 @@
+t_fdim
+t_fdimf
+t_fdiml
+t_fmax
+t_fmaxf
+t_fmaxl
+t_fmin
+t_fminf
+t_fminl
+t_generr

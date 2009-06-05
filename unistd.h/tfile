@@ -1,0 +1,5 @@
+t_access
+t_getcwd
+t_isatty
+t_readlink
+t_ttyname
