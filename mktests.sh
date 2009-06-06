@@ -14,7 +14,7 @@ usage()
 
 runtests()
 {
-    if [ ! -e "tlreader" ]
+    if [ ! -f "tlreader" ]
     then
 	cc tleader.c -o tlreader
     fi
@@ -30,7 +30,7 @@ buildtests()
 
 	cd "$dir"
 
-	if [ -e "Makefile" ]
+	if [ -f "Makefile" ]
 	then
 	    if [ ! -z "$clean" ]
 	    then
