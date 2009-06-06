@@ -1,3 +1,8 @@
+/* Solaris needs this for bringing in the standard readdir_r() prototype. */
+#ifdef __sun__
+#define	_POSIX_PTHREAD_SEMANTICS
+#endif
+
 #include <assert.h>
 #include <dirent.h>
 #include <errno.h>
