@@ -3,7 +3,7 @@
 usage()
 {
     printf "Usage: %s: [-c] [-b] [-r]\n" \
-        $(basename $0) >&2
+        `basename $0` >&2
     printf -- "-c\tClean stale files from previous builds.\n"
     printf -- "-b\tBuild tests from sources.\n"
     printf -- "-r\tRun tests.\n"
