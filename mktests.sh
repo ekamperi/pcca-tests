@@ -67,7 +67,7 @@ done
 shift `expr $OPTIND - 1`
 
 # At least one of -c, -b, -r options must be set.
-[ -z "$clean" ] && [ -z "$build"] && [ -z "$run" ] && usage
+[ -z "$clean" ] && [ -z "$build" ] && [ -z "$run" ] && usage
 
 # Fire!
 [ ! -z "$build" ] && buildtests
