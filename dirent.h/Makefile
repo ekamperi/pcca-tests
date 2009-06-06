@@ -1,6 +1,7 @@
 all:    t_closedir	\
 	t_opendir	\
-	t_readdir
+	t_readdir	\
+	t_readdir_r
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -18,6 +19,9 @@ t_opendir: t_opendir.c
 t_readdir: t_readdir.c
 	$(CC) $(CCFLAGS) $(LIB) t_readdir.c -o t_readdir
 
+t_readdir_r: t_readdir_r.c
+	$(CC) $(CCFLAGS) $(LIB) -lpthread t_readdir_r.c -o t_readdir_r
+
 clean:
 	git clean -f
 
@@ -30,3 +34,6 @@ run:
 
 	@printf "t_readdir: "
 	@-./t_readdir
+
+	@printf "t_readdir_r: "
+	@-./t_readdir_r

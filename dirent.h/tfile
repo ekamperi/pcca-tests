@@ -1,3 +1,4 @@
 t_closedir
 t_opendir
 t_readdir
+t_readdir_r
