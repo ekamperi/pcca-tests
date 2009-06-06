@@ -6,7 +6,9 @@
 #include <assert.h>
 #include <dirent.h>
 #include <errno.h>
+#include <limits.h>
 #include <pthread.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -55,28 +57,52 @@ int main(int argc, char *argv[])
 void *myscandir(void *arg)
 {
 	DIR *dirp;
-	struct dirent dentry;
+	struct dirent *dp;
 	struct dirent *res;
+	size_t sz = -1;
 
 	dirp = (DIR *)arg;
 
+	#ifdef NAME_MAX
+		sz = (NAME_MAX > 255) ? NAME_MAX : 255;
+	#else
+		/*
+		 * XXX: This is dangerous, as it is vulnerable to races. Issue 7
+		 * introduces dirfd() that returns a descriptor associated with
+		 * a directory stream. Then pathconf() is replaced by
+		 * fpathconf(dirfd(dir), _PC_NAME_MAX), which eliminates the
+		 * race condition.
+		 */
+		#ifdef	_PC_NAME_MAX
+			sz = pathconf(argv[1], _PC_NAME_MAX));
+			assert(sz != -1);
+		#else
+			/* We are unable to determine buffer size. Abort. */
+			assert(sz != -1);
+		#endif
+	#endif
+
+	dp = malloc(offsetof(struct dirent, d_name) + sz + 1);
+	assert(dp != NULL);
+
 	for (;;) {
-		assert(readdir_r(dirp, &dentry, &res) == 0);
+		assert(readdir_r(dirp, dp, &res) == 0);
 
 		/* Check if we have reached the end of the stream. */
 		if (res == NULL)
 			break;
 
-		if (dentry.d_type == DT_DIR) {
-			if (strcmp(dentry.d_name, ".") == 0 ||
-			    strcmp(dentry.d_name, "..") == 0) {
+		if (dp->d_type == DT_DIR) {
+			if (strcmp(dp->d_name, ".") == 0 ||
+			    strcmp(dp->d_name, "..") == 0) {
 				pthread_mutex_lock(&mtx_found);
 				found++;
 				pthread_mutex_unlock(&mtx_found);
 			}
 		}
-
         }
+
+	free(dp);
 
 	pthread_exit(NULL);
 }
