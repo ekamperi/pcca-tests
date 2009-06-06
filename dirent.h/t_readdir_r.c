@@ -1,6 +1,6 @@
 /* Solaris needs this for bringing in the standard readdir_r() prototype. */
-#ifdef __sun__
-#define	_POSIX_PTHREAD_SEMANTICS
+#if defined __sun__
+	#define	_POSIX_PTHREAD_SEMANTICS
 #endif
 
 #include <assert.h>
@@ -63,8 +63,10 @@ void *myscandir(void *arg)
 
 	dirp = (DIR *)arg;
 
-	#ifdef NAME_MAX
+	#if defined NAME_MAX
 		sz = (NAME_MAX > 255) ? NAME_MAX : 255;
+	#elif defined MAXNAMELEN	/* A common alias in *nix for NAME_MAX. */
+		sz = (MAXNAMELEN > 255) ? MAXNAMELEN : 255;
 	#else
 		/*
 		 * XXX: This is dangerous, as it is vulnerable to races. Issue 7
@@ -73,7 +75,7 @@ void *myscandir(void *arg)
 		 * fpathconf(dirfd(dir), _PC_NAME_MAX), which eliminates the
 		 * race condition.
 		 */
-		#ifdef	_PC_NAME_MAX
+		#if defined _PC_NAME_MAX
 			sz = pathconf(argv[1], _PC_NAME_MAX));
 			assert(sz != -1);
 		#else
