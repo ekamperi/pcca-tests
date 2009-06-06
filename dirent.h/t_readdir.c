@@ -19,9 +19,8 @@ int main(int argc, char *argv[])
 	found = 0;
 	while ((dp = readdir(dirp)) != NULL) {
 		if (dp->d_type == DT_DIR) {
-			if (strcmp(dp->d_name, ".") == 0)
-				found++;
-			if (strcmp(dp->d_name, "..") == 0)
+			if ((strcmp(dp->d_name, ".") == 0) ||
+			    (strcmp(dp->d_name, "..") == 0))
 				found++;
 		}
 	}
