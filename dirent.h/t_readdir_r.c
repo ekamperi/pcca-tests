@@ -92,15 +92,13 @@ void *myscandir(void *arg)
 		if (res == NULL)
 			break;
 
-		if (dp->d_type == DT_DIR) {
-			if (strcmp(dp->d_name, ".") == 0 ||
-			    strcmp(dp->d_name, "..") == 0) {
-				pthread_mutex_lock(&mtx_found);
-				found++;
+		if (strcmp(dp->d_name, ".") == 0 ||
+		    strcmp(dp->d_name, "..") == 0) {
+			pthread_mutex_lock(&mtx_found);
+			found++;
 				pthread_mutex_unlock(&mtx_found);
-			}
 		}
-        }
+	}
 
 	free(dp);
 
