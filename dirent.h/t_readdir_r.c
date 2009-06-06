@@ -98,7 +98,7 @@ void *myscandir(void *arg)
 		    strcmp(dp->d_name, "..") == 0) {
 			pthread_mutex_lock(&mtx_found);
 			found++;
-				pthread_mutex_unlock(&mtx_found);
+			pthread_mutex_unlock(&mtx_found);
 		}
 	}
 
