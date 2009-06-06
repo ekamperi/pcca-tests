@@ -18,10 +18,12 @@ int main(int argc, char *argv[])
 	/* Iterate through the stream and make sure that . and .. are found. */
 	found = 0;
 	while ((dp = readdir(dirp)) != NULL) {
-		if (strcmp(dp->d_name, ".") == 0)
-			found++;
-		if (strcmp(dp->d_name, "..") == 0)
-			found++;
+		if (dp->d_type == DT_DIR) {
+			if (strcmp(dp->d_name, ".") == 0)
+				found++;
+			if (strcmp(dp->d_name, "..") == 0)
+				found++;
+		}
 	}
 
 	assert(found == 2);

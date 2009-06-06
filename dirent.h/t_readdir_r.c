@@ -62,11 +62,13 @@ void *myscandir(void *arg)
 		if (res == NULL)
 			break;
 
-		if (strcmp(dentry.d_name, ".") == 0 ||
-		    strcmp(dentry.d_name, "..") == 0) {
-			pthread_mutex_lock(&mtx_found);
-			found++;
-			pthread_mutex_unlock(&mtx_found);
+		if (dentry.d_type == DT_DIR) {
+			if (strcmp(dentry.d_name, ".") == 0 ||
+			    strcmp(dentry.d_name, "..") == 0) {
+				pthread_mutex_lock(&mtx_found);
+				found++;
+				pthread_mutex_unlock(&mtx_found);
+			}
 		}
 
         }
