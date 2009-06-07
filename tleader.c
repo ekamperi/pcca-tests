@@ -36,7 +36,6 @@ int main(int argc, char *argv[])
 		if (errno == ENOENT)
 			exit(EXIT_FAILURE);
 
-		printf("WEASDASDAS");
 		diep("fopen");
 	}
 
@@ -78,11 +77,6 @@ int main(int argc, char *argv[])
 				wait(&status);
 			}
 		}
-	}
-
-	if (pid != 0) {
-		/* We are inside the parent -- cleanup. */
-		fclose(fp);
 	}
 
 	return (EXIT_SUCCESS);
