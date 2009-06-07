@@ -1,0 +1,8 @@
+fnmatch.h
+
+_POSIX_C_SOURCE 200112 {
+    FNM_NOMATCH
+    FNM_PATHNAME
+    FNM_PERIOD
+    FNM_NOESCAPE
+}
