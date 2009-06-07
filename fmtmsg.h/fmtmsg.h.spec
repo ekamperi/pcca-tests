@@ -1,0 +1,32 @@
+fmtmsg.h
+
+_XOPEN_SOURCE 600 {
+    MM_HARD
+    MM_SOFT
+    MM_FIRM
+    MM_APPL
+    MM_UTIL
+    MM_OPSYS
+    MM_RECOVER
+    MM_NRECOV
+    MM_HALT
+    MM_ERROR
+    MM_WARNING
+    MM_INFO
+    MM_NOSEV
+    MM_PRINT
+    MM_CONSOLE
+
+    MM_NULLSEV
+    MM_NULLMC
+    MM_NULLTXT
+    MM_NULLACT
+    MM_NULLTAG
+
+    MM_OK
+    MM_NOTOK
+    MM_NOMSG
+    MM_NOCON
+
+    DEFINITELY_NOT_DEFINED
+}
