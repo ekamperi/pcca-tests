@@ -32,13 +32,18 @@ buildtests()
 
 	cd "$dir"
 
+	# Tests must come with a Makefile.
 	if [ -f "Makefile" ]
 	then
 	    if [ ! -z "$clean" ]
 	    then
-		make clean
+		make clean 1<&-
 	    fi
-	    make
+
+	    if [ ! -z "$build" ]
+	    then
+		make
+	    fi
 	fi
 
 	cd "$OLDPWD"
@@ -72,5 +77,5 @@ shift `expr $OPTIND - 1`
 [ -z "$clean" ] && [ -z "$build" ] && [ -z "$run" ] && usage
 
 # Fire!
-[ ! -z "$build" ] && buildtests
+[ ! -z "$clean" ] || [ ! -z "$build" ] && buildtests
 [ ! -z "$run" ] && runtests
