@@ -27,7 +27,7 @@ runtests()
 
 buildtests()
 {
-    for dir in `find . -name .git -prune -o -type d -a ! -name . -print`
+    for dir in `find . -name .git -prune -o -type d -a ! -name .`
     do
 	OLDPWD=`pwd`
 
