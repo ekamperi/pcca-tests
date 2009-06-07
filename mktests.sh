@@ -2,13 +2,15 @@
 
 usage()
 {
-    printf "Usage: %s: [-c] [-b] [-r]\n" \
-        `basename $0` >&2
-    printf -- "-c\tClean stale files from previous builds.\n"
-    printf -- "-b\tBuild tests from sources.\n"
-    printf -- "-r\tRun tests.\n"
-    printf -- "-h\tPrint this help message.\n"
-    printf    "At least one of the above options must be specified.\n"
+    cat <<EOF
+Usage: `basename $0` [-c] [-b] [-r]
+-c    Clean stale files from previous builds.
+-b    Build tests from sources.
+-r    Run tests.
+-h    Print this help message.
+At least one of the above options must be specified.
+EOF
+
     exit 1
 }
 
