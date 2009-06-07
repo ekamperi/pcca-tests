@@ -38,7 +38,7 @@ buildtests()
 	then
 	    if [ ! -z "$clean" ]
 	    then
-		make clean 1<&-
+		make clean >/dev/null
 	    fi
 
 	    if [ ! -z "$build" ]
