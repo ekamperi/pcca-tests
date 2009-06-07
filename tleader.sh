@@ -11,14 +11,14 @@ do
 
     if ! [ -x "$task" ]
     then
-	echo "failed (test does not exist)"
+	printf "failed (test does not exist)\n"
 	continue
     fi
 
     ./"$task" &
     sleep 0.2
 
-    if jobs -s %+ >/dev/null 2>/dev/null
+    if jobs -l %+ >/dev/null 2>/dev/null
     then
         sleep 1
 	echo "failed (test exceeded run time limit)"
