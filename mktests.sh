@@ -19,7 +19,7 @@ runtests()
 	cc tleader.c -o tleader
     fi
 
-    find . -name .git -prune -o -type d -a ! -name . -exec ./tleader {} \;
+    find . -name .git -prune -o -type d -a ! -name . -exec ./tleader.sh {} \;
 }
 
 buildtests()
