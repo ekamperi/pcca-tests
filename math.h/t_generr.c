@@ -179,8 +179,7 @@ int main(void)
 	pid_t pid;
 
 	for (te = ttable; te != NULL; te++) {
-		if (te->desc == NULL && te->pf == NULL && te-> nargs == -1 &&
-		    te->x == -1 && te->y == -1)
+		if (te->desc == NULL && te->pf == NULL && te-> nargs == -1)
 			break;
 
 		pid = fork();
