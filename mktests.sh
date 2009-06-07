@@ -16,11 +16,6 @@ EOF
 
 runtests()
 {
-    if [ ! -f "tlreader" ]
-    then
-	cc tleader.c -o tleader
-    fi
-
     find . -name .git -prune -o -type d -a ! -name . -exec ./tleader.sh {} \;
 }
 
