@@ -3,7 +3,7 @@
 usage()
 {
     cat <<EOF
-Usage: `basename $0` [-c] [-b] [-r]
+Usage: `basename $0` -cbr
 -c    Clean stale files from previous builds.
 -b    Build tests from sources.
 -r    Run tests.
