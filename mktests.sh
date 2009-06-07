@@ -16,7 +16,13 @@ EOF
 
 runtests()
 {
-    find . -name .git -prune -o -type d -a ! -name . -exec ./tleader.sh {} \;
+    for dir in `find . -name .git -prune -o -type d -a ! -name .`
+    do
+	if [ -f "$dir/tfile" ]
+	then
+	    ./tleader.sh "$dir"
+	fi
+    done
 }
 
 buildtests()
