@@ -9,10 +9,10 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 LIB=
 
-t_fmaxf: t_posix_memalign.c
+t_posix_memalign: t_posix_memalign.c
 	$(CC) $(CCFLAGS) $(LIB) t_posix_memalign.c -o t_posix_memalign
 
-t_fmaxl: t_putenv.c
+t_putenv: t_putenv.c
 	$(CC) $(CCFLAGS) $(LIB) t_putenv.c -o t_putenv
 
 clean:
