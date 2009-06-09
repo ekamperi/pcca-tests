@@ -25,6 +25,7 @@ int main(void)
 	char *pks= key_space;
 	struct payload *pps = payload_space;
 	ENTRY item, *pfound;
+	char target[KEYSIZE];
 	size_t i;
 
 	/* Initialize random number generator. */
@@ -44,7 +45,7 @@ int main(void)
 		pps->y = rand() % INT_MAX;
 		pps->z = pps->x ^ pps->y;
 
-		snprintf(pks, KEYSIZE, "%d%d%d", pps->x, pps->y, pps->z);
+		snprintf(pks, KEYSIZE, "%d%d%d", i, i+1, i+2);
 
 		item.key = pks;
 		item.data = pps;
@@ -60,6 +61,18 @@ int main(void)
 		 * `NITEMS'.
 		 */
 		assert(hsearch(item, ENTER) != NULL);
+	}
+
+	/* ... */
+	for (i = 0; i < NITEMS; i++) {
+		snprintf(target, KEYSIZE, "%d%d%d", i, i+1, i+2);
+
+		item.key = target;
+
+		assert((pfound = hsearch(item, FIND)) != NULL);
+		assert(((struct payload *)pfound->data)->x ^
+		       ((struct payload *)pfound->data)->y ==
+		       ((struct payload *)pfound->data)->z);
 	}
 
 	/* Destroy hash table. */
