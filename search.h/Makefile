@@ -1,4 +1,5 @@
-all:    t_htable	\
+all:	t_lfind	\
+	t_htable	\
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -7,6 +8,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 
+t_lfind: t_lfind.c
+	$(CC) $(CCFLAGS) $(LIB) t_lfind.c -o t_lfind
+
 t_htable: t_htable.c
 	$(CC) $(CCFLAGS) $(LIB) t_htable.c -o t_htable
 
@@ -14,5 +18,8 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_lfind: "
+	@-./t_lfind
+
 	@printf "t_htable: "
 	@-./t_htable
