@@ -1,4 +1,5 @@
 all:	t_lfind	\
+	t_lsearch	\
 	t_htable	\
 
 CC=gcc
@@ -11,6 +12,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 t_lfind: t_lfind.c
 	$(CC) $(CCFLAGS) $(LIB) t_lfind.c -o t_lfind
 
+t_lsearch: t_lsearch.c
+	$(CC) $(CCFLAGS) $(LIB) t_lsearch.c -o t_lsearch
+
 t_htable: t_htable.c
 	$(CC) $(CCFLAGS) $(LIB) t_htable.c -o t_htable
 
@@ -20,6 +24,9 @@ clean:
 run:
 	@printf "t_lfind: "
 	@-./t_lfind
+
+	@printf "t_lsearch: "
+	@-./t_lsearch
 
 	@printf "t_htable: "
 	@-./t_htable
