@@ -41,10 +41,12 @@ int main(void)
 	/* Populate hash table with items. */
 	for (i = 0; i < NITEMS; i++) {
 
+		/* Yes, I'm aware that this doesn't give always good results. */
 		pps->x = rand() % INT_MAX;
 		pps->y = rand() % INT_MAX;
 		pps->z = pps->x ^ pps->y;
 
+		/* Construct a key. */
 		snprintf(pks, KEYSIZE, "%d%d%d", i, i+1, i+2);
 
 		item.key = pks;
@@ -63,7 +65,7 @@ int main(void)
 		assert(hsearch(item, ENTER) != NULL);
 	}
 
-	/* ... */
+	/* Verify inserted items. */
 	for (i = 0; i < NITEMS; i++) {
 		snprintf(target, KEYSIZE, "%d%d%d", i, i+1, i+2);
 
