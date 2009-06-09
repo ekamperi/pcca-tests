@@ -10,11 +10,12 @@ int mystrcmp(const void *s1, const void *s2);
 int main(void)
 {
 	const char *array[] = { "this", "is", "an", "array", "with", "words" };
-	size_t i, n;
+	size_t i, n, n_orig;
 	const char *key;
 
 	/* Number of elements in array. */
 	n = sizeof(array) / sizeof(*array);
+	n_orig = n;
 
 	for (i = 0; i < n; i++) {
 		/* What key to search for. */
@@ -27,6 +28,12 @@ int main(void)
 	/* Key doesn't exist in array. */
 	key = "nonexistentkey";
 	assert(lfind(&key, array, &n, sizeof(char *), mystrcmp) == NULL);
+
+	/*
+	 * Just a sanity check that lfind doesn't alter the number of elements.
+	 * (lsearch which does, increments the integer passed to it)
+	 */
+	assert(n == n_orig);
 
 	printf("passed\n");
 
