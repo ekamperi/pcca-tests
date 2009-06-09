@@ -7,7 +7,7 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 
-t_table: t_htable.c
+t_htable: t_htable.c
 	$(CC) $(CCFLAGS) $(LIB) t_htable.c -o t_htable
 
 clean:
