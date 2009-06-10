@@ -58,6 +58,11 @@ int main(void)
 	/* Traverse tree. */
 	twalk(rootp, visitnode);
 
+	/* Test some corner cases. */
+	assert(tsearch(intp, NULL, mycmp) == NULL);
+	assert(tfind(intp, NULL, mycmp) == NULL);
+	assert(tdelete(intp, NULL, mycmp) == NULL);
+
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
