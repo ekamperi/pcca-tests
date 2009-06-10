@@ -31,7 +31,7 @@ int *p_array_leaf      = array_leaf;
 
 int main(void)
 {
-	size_t found, i, n;
+	size_t i, n;
 	int *intp = intpool;
 
 	/* Number of items that shall be inserted. */
