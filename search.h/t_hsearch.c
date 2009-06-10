@@ -59,8 +59,10 @@ int main(void)
 		/*
 		 * Insert item into table.
 		 * hsearch(, ENTER) shall return NULL only if the table is full,
-		 * which clearly isn' the case here since we insert exactly
+		 * which clearly isn't the case here since we insert exactly
 		 * `NITEMS'.
+		 * Caveat: the specs allow the implementation to adjust upward
+		 * the size of the table.
 		 */
 		assert(hsearch(item, ENTER) != NULL);
 	}
@@ -72,9 +74,9 @@ int main(void)
 		item.key = target;
 
 		assert((pfound = hsearch(item, FIND)) != NULL);
-		assert(((struct payload *)pfound->data)->x ^
-		       ((struct payload *)pfound->data)->y ==
-		       ((struct payload *)pfound->data)->z);
+		assert((((struct payload *)pfound->data)->x ^
+			((struct payload *)pfound->data)->y) ==
+		    ((struct payload *)pfound->data)->z);
 	}
 
 	/* Destroy hash table. */
