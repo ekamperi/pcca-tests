@@ -66,8 +66,8 @@ int main(void)
 static int
 mycmp(const void *px, const void *py)
 {
-	int x = *(int *)px;
-	int y = *(int *)py;
+	int x = *(const int *)px;
+	int y = *(const int *)py;
 
 	/*
 	 * POSIX expects an integer number less than, equal to, or greater
