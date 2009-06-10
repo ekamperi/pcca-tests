@@ -19,10 +19,10 @@ void *rootp = NULL;	/* The root node of the tree. */
  * `array_leaf'      holds the leafs of the tree.
  */
 int array[]           = { -2, 7, 11, 0, 26, 4, 5, 1, 12, -9, -6, 20, 101, -33 };
-int array_preorder[]  = { 7, 0, -6, -9, 4, 12, 26 };
-int array_postorder[] = { -9, -6, 0, 4, 7, 12, 26 };
-int array_endorder[]  = { -9, -6, 4, 0, 26, 12, 7 };
-int array_leaf[]      = { -33, -2, 1, 5, 11, 20, 101 };
+int array_preorder[]  = { -2, -9, 7, 0, 4, 11, 26, 12 };
+int array_postorder[] = { -9, -2, 0, 4, 7, 11, 12, 26 };
+int array_endorder[]  = { -9, 4, 0, 12, 26, 11, 7, -2 };
+int array_leaf[]      = { -33, -6, 1, 5, 20, 101 };
 
 int *p_array_preorder  = array_preorder;
 int *p_array_postorder = array_postorder;
