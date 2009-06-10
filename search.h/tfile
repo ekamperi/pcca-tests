@@ -1,3 +1,4 @@
 t_lfind
 t_lsearch
 t_htable
+t_tsearch
