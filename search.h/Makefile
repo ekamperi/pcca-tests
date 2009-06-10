@@ -1,6 +1,6 @@
 all:	t_lfind	\
 	t_lsearch	\
-	t_htable	\
+	t_hsearch	\
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -15,8 +15,8 @@ t_lfind: t_lfind.c
 t_lsearch: t_lsearch.c
 	$(CC) $(CCFLAGS) $(LIB) t_lsearch.c -o t_lsearch
 
-t_htable: t_htable.c
-	$(CC) $(CCFLAGS) $(LIB) t_htable.c -o t_htable
+t_hsearch: t_hsearch.c
+	$(CC) $(CCFLAGS) $(LIB) t_hsearch.c -o t_hsearch
 
 clean:
 	git clean -f
@@ -28,5 +28,5 @@ run:
 	@printf "t_lsearch: "
 	@-./t_lsearch
 
-	@printf "t_htable: "
-	@-./t_htable
+	@printf "t_hsearch: "
+	@-./t_hsearch
