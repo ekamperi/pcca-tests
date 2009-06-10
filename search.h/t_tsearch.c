@@ -84,22 +84,22 @@ visitnode(const void *nodep, VISIT order, int level)
 
 	switch(order) {
 	case preorder:
-		/* depth-first */
+		/* Depth-first. */
 		assert(*p == *p_array_preorder);
 		p_array_preorder++;
 		break;
 	case postorder:
-		/* left-to-right traversal */
+		/* Left-to-right traversal. */
 		assert(*p == *p_array_postorder);
 		p_array_postorder++;
 		break;
 	case endorder:
-		/* node traversed 3rd time. */
+		/* Node traversed 3rd time. */
 		assert(*p == *p_array_endorder);
 		p_array_endorder++;
 		break;
 	case leaf:
-		/* node is a leaf */
+		/* Node is a leaf. */
 		assert(*p == *p_array_leaf);
 		p_array_leaf++;
 		break;
