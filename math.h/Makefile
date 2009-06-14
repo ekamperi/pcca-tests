@@ -43,6 +43,7 @@ t_fdimf: t_fdimf.c
 
 t_fdiml: t_fdiml.c
 	$(CC) $(CCFLAGS) $(LIB) t_fdiml.c -o t_fdiml
+
 t_generr: t_generr.c
 	$(CC) $(CCFLAGS) $(LIB) t_generr.c -o t_generr
 
