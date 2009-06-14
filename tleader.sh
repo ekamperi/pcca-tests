@@ -20,7 +20,7 @@ do
 
     if jobs -l %+ >/dev/null 2>/dev/null
     then
-        sleep 1
+        sleep 5
 	echo "failed (test exceeded run time limit)"
 	kill -9 $(jobid %+ 2>/dev/null) >/dev/null 2>/dev/null
     fi
