@@ -15,7 +15,12 @@ int main(void)
 	size_t oldsize = sizeof(oldval);
 	size_t i;
 
-	/* For every sysctl variable, read its value. */
+	/*
+	 * For every sysctl variable, read its value.
+	 *
+	 * In order to just read (ie, not set) the value of a sysctl variable,
+	 * we pass NULL, 0 for newp, newlen as described in sysctl(3).5H
+	 **/
 	for (i = 0; i < sizeof(sysctlnames) / sizeof(char *); i++) {
 		assert(sysctlbyname(sysctlnames[i], &oldval, &oldsize, NULL, 0)
 		    != -1);
