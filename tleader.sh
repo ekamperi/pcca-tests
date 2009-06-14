@@ -21,7 +21,9 @@ do
     if jobs -l %+ >/dev/null 2>/dev/null
     then
         sleep 5
-	echo "failed (test exceeded run time limit)"
-	kill -9 $(jobid %+ 2>/dev/null) >/dev/null 2>/dev/null
+	if kill -9 $(jobid %+ 2>/dev/null) >/dev/null 2>/dev/null
+	then
+	     echo "failed (test exceeded run time limit)"
+	fi
     fi
 done < tfile
