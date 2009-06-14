@@ -15,7 +15,7 @@ int main(void)
 	size_t oldsize = sizeof(oldval);
 	size_t i;
 
-	/* */
+	/* For every sysctl variable, read its value. */
 	for (i = 0; i < sizeof(sysctlnames) / sizeof(char *); i++) {
 		assert(sysctlbyname(sysctlnames[i], &oldval, &oldsize, NULL, 0)
 		    != -1);
