@@ -10,6 +10,12 @@ cd "$1"
 # are supposed to be run.
 while read task
 do
+    # Skip tfile entries that start with a #.
+    if echo "$task" | grep "^#" >/dev/null
+    then
+        continue
+    fi
+
     path=$(echo "$1" | sed 's/.//')
     printf "%s" "$path/$task: "
 
