@@ -187,7 +187,7 @@ int main(void)
 
 		if (pid == 0) {
 			/* We are inside the child. */
-			printf("%s: ", te->desc);
+			printf("t_generr: %s: ", te->desc);
 			fflush(NULL);
 
 			/* Run the actual test. */
