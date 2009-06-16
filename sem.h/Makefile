@@ -1,4 +1,5 @@
 all:	t_sem_destroy	\
+	t_sem_getvalue	\
 	t_sem_init	\
 
 CC=gcc
@@ -12,6 +13,9 @@ LIB=-lthread_xu
 t_sem_destroy: t_sem_destroy.c
 	$(CC) $(CCFLAGS) $(LIB) t_sem_destroy.c -o t_sem_destroy
 
+t_sem_getvalue: t_sem_getvalue.c
+	$(CC) $(CCFLAGS) $(LIB) t_sem_getvalue.c -o t_sem_getvalue
+
 t_sem_init: t_sem_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_sem_init.c -o t_sem_init
 
@@ -21,6 +25,9 @@ clean:
 run:
 	@printf "t_sem_destroy: "
 	@-./t_sem_destroy
+
+	@printf "t_sem_getvalue: "
+	@-./t_sem_getvalue
 
 	@printf "t_sem_init: "
 	@-./t_sem_init
