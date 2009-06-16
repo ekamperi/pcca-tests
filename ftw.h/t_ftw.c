@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 static int
 mycallback(const char *path, const struct stat *pstat, int flag)
 {
-	printf("%s\n", path);
+	/* printf("%s\n", path); */
 
 	return 0;
 }
