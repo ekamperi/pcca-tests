@@ -43,7 +43,9 @@ buildtests()
 
 	    if [ ! -z "$build" ]
 	    then
-		make
+		# Continue processing after errors (only for targets that
+		# aren't affected).
+		make -k
 	    fi
 	fi
 
