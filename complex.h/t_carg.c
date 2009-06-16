@@ -18,7 +18,6 @@ int main(void)
 		assert(carg(z2) <= M_PI && carg(z2) >= -M_PI);
 	}
 
-
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
