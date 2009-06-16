@@ -17,7 +17,7 @@ t_carg: t_carg.c
 t_cimag: t_cimag.c
 	$(CC) $(CCFLAGS) $(LIB) t_cimag.c -o t_cimag
 
-t_cong: t_conj.c
+t_conj: t_conj.c
 	$(CC) $(CCFLAGS) $(LIB) t_conj.c -o t_conj
 
 t_creal: t_creal.c
