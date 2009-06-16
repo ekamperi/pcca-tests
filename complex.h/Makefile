@@ -1,7 +1,9 @@
 all:	t_carg	\
+	t_ccos	\
 	t_cimag \
 	t_conj	\
 	t_creal	\
+	t_csin
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -14,6 +16,9 @@ LIB=-lm
 t_carg: t_carg.c
 	$(CC) $(CCFLAGS) $(LIB) t_carg.c -o t_carg
 
+t_ccos:	t_ccos.c
+	$(CC) $(CCFLAGS) $(LIB) t_ccos.c -o t_ccos
+
 t_cimag: t_cimag.c
 	$(CC) $(CCFLAGS) $(LIB) t_cimag.c -o t_cimag
 
@@ -23,12 +28,18 @@ t_conj: t_conj.c
 t_creal: t_creal.c
 	$(CC) $(CCFLAGS) $(LIB) t_creal.c -o t_creal
 
+t_csin: t_csin.c
+	$(CC) $(CCFLAGS) $(LIB) t_csin.c -o t_csin
+
 clean:
 	git clean -f
 
 run:
 	@printf "t_carg: "
 	@-./t_carg
+
+	@printf "t_ccos: "
+	@-./t_ccos
 
 	@printf "t_cimag: "
 	@-./t_cimag
@@ -38,3 +49,6 @@ run:
 
 	@printf "t_creal: "
 	@-./t_creal
+
+	@printf "t_csin: "
+	@-./t_csin
