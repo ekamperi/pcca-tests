@@ -1,6 +1,7 @@
 all:	t_sem_destroy	\
 	t_sem_getvalue	\
 	t_sem_init	\
+	t_sem_trywait
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -19,6 +20,9 @@ t_sem_getvalue: t_sem_getvalue.c
 t_sem_init: t_sem_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_sem_init.c -o t_sem_init
 
+t_sem_trywait: t_sem_trywait.c
+	$(CC) $(CCFLAGS) $(LIB) t_sem_trywait.c -o t_sem_trywait
+
 clean:
 #	git clean -f
 
@@ -31,3 +35,6 @@ run:
 
 	@printf "t_sem_init: "
 	@-./t_sem_init
+
+	@printf "t_sem_trywait: "
+	@-./t_sem_trywait
