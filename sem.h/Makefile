@@ -1,4 +1,5 @@
-all:	t_sem_destroy	\
+all:	t_sem_circbuf	\
+	t_sem_destroy	\
 	t_sem_getvalue	\
 	t_sem_init	\
 	t_sem_trywait
@@ -10,6 +11,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 LIB=-lthread_xu
+
+t_sem_circbuf: t_sem_circbuf.c
+	$(CC) $(CCFLAGS) $(LIB) -lpthread t_sem_circbuf.c -o t_sem_circbuf
 
 t_sem_destroy: t_sem_destroy.c
 	$(CC) $(CCFLAGS) $(LIB) t_sem_destroy.c -o t_sem_destroy
@@ -27,6 +31,9 @@ clean:
 #	git clean -f
 
 run:
+	@printf "t_sem_circbuf: "
+	@-./t_sem_circbuf
+
 	@printf "t_sem_destroy: "
 	@-./t_sem_destroy
 

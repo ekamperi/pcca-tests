@@ -1,3 +1,4 @@
+t_sem_circbuf
 t_sem_destroy
 t_sem_getvalue
 t_sem_init
