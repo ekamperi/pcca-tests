@@ -28,6 +28,20 @@ int main(void)
 		    < 0.001);
 	}
 
+	/*
+	 * The result is in the [-ipi, +ipi] interval,
+	 * along the imaginary axis.
+	 */
+	double rl, im;
+	double complex z;
+	for (rl = -10.0; rl < 10.0; rl += 0.04) {
+		for (im = -10.0; im < 10.0; im += 0.03) {
+			z =  clog(rl + im*I);
+			assert(cabs(cimag(z)) <=  M_PI);
+			assert(cabs(cimag(z)) >= -M_PI);
+		}
+	}
+
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
