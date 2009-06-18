@@ -263,7 +263,7 @@ void runtest(const struct tentry *te)
 #endif
 
 	/*
-	 * On error, there must be AT LEAST one non-zero expression among
+	 * Caveat:On error, there must be AT LEAST one non-zero expression among
 	 * (math_errhandling & MATH_ERRNO), (math_errhandling & MATH_ERREXCEPT).
 	*/
         assert(t_errno != 0 || t_fp != 0);
