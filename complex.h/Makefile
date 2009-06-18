@@ -3,7 +3,8 @@ all:	t_carg	\
 	t_cimag \
 	t_conj	\
 	t_creal	\
-	t_csin
+	t_csin	\
+	t_ctan
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -31,6 +32,9 @@ t_creal: t_creal.c
 t_csin: t_csin.c
 	$(CC) $(CCFLAGS) $(LIB) t_csin.c -o t_csin
 
+t_ctan: t_ctan.c
+	$(CC) $(CCFLAGS) $(LIB) t_ctan.c -o t_ctan
+
 clean:
 	git clean -f
 
@@ -52,3 +56,6 @@ run:
 
 	@printf "t_csin: "
 	@-./t_csin
+
+	@printf "t_ctan: "
+	@-./t_ctan
