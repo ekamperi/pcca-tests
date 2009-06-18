@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NTHREADS	100
-#define NITER		100
+#define NTHREADS	20
+#define NITER		20
 
 /* Function prototypes. */
 void *parent(void *arg);
@@ -40,7 +40,7 @@ void *parent(void *arg)
 	/* Initialize semaphore. */
         assert(sem_init(&mysem,
                    0 /* not shared between processes */,
-                   NTHREADS-2 /* semaphore value */) == 0);
+                   NTHREADS/2 /* semaphore value */) == 0);
 
         /* Create children threads. */
         for (i = 0; i < NTHREADS; i++)
