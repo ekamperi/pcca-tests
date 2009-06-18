@@ -1,9 +1,11 @@
 #!/bin/sh
 
+STARTDIR="."	# top level directory to start from when running tests
+
 usage()
 {
     cat <<EOF
-Usage: `basename $0` -cbr
+Usage: `basename $0` -cbr [directory]
 -c    Clean stale files from previous builds.
 -b    Build tests from sources.
 -r    Run tests.
@@ -16,7 +18,7 @@ EOF
 
 runtests()
 {
-    for dir in `find . -name .git -prune -o -type d -a ! -name .`
+    for dir in `find "$1" -name .git -prune -o -type d -a ! -name .`
     do
 	if [ -f "$dir/tfile" ]
 	then
@@ -27,7 +29,7 @@ runtests()
 
 buildtests()
 {
-    for dir in `find . -name .git -prune -o -type d -a ! -name .`
+    for dir in `find "$1" -name .git -prune -o -type d -a ! -name .`
     do
 	OLDPWD=`pwd`
 
@@ -76,9 +78,14 @@ do
 done
 shift `expr $OPTIND - 1`
 
+if [ ! -z $1 ]
+then
+    STARTDIR=$1
+fi
+
 # At least one of -c, -b, -r options must be set.
 [ -z "$clean" ] && [ -z "$build" ] && [ -z "$run" ] && usage
 
 # Fire!
-[ ! -z "$clean" ] || [ ! -z "$build" ] && buildtests
-[ ! -z "$run" ] && runtests
+[ ! -z "$clean" ] || [ ! -z "$build" ] && buildtests "$STARTDIR"
+[ ! -z "$run" ] && runtests "$STARTDIR"
