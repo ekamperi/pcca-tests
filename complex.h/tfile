@@ -3,6 +3,7 @@ t_ccos
 t_cimag
 t_clog
 t_conj
+t_cpow
 t_creal
 t_csin
 t_csqrt

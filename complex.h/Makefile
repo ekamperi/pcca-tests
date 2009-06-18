@@ -3,6 +3,7 @@ all:	t_carg	\
 	t_cimag \
 	t_clog	\
 	t_conj	\
+	t_cpow	\
 	t_creal	\
 	t_csin	\
 	t_csqrt	\
@@ -30,6 +31,9 @@ t_clog: t_clog.c
 
 t_conj: t_conj.c
 	$(CC) $(CCFLAGS) $(LIB) t_conj.c -o t_conj
+
+t_cpow: t_cpow.c
+	$(CC) $(CCFLAGS) $(LIB) t_cpow.c -o t_cpow
 
 t_creal: t_creal.c
 	$(CC) $(CCFLAGS) $(LIB) t_creal.c -o t_creal
@@ -61,6 +65,9 @@ run:
 
 	@printf "t_conj: "
 	@-./t_conj
+
+	@printf "t_cpow: "
+	@-./t_cpow
 
 	@printf "t_creal: "
 	@-./t_creal
