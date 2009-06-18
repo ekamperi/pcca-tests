@@ -1,6 +1,7 @@
 all:	t_carg	\
 	t_ccos	\
 	t_cimag \
+	t_clog	\
 	t_conj	\
 	t_creal	\
 	t_csin	\
@@ -23,6 +24,9 @@ t_ccos:	t_ccos.c
 
 t_cimag: t_cimag.c
 	$(CC) $(CCFLAGS) $(LIB) t_cimag.c -o t_cimag
+
+t_clog: t_clog.c
+	$(CC) $(CCFLAGS) $(LIB) t_clog.c -o t_clog
 
 t_conj: t_conj.c
 	$(CC) $(CCFLAGS) $(LIB) t_conj.c -o t_conj
@@ -51,6 +55,9 @@ run:
 
 	@printf "t_cimag: "
 	@-./t_cimag
+
+	@printf "t_clog: "
+	@-./t_clog
 
 	@printf "t_conj: "
 	@-./t_conj
