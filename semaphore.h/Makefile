@@ -2,6 +2,7 @@ all:	t_sem_circbuf	\
 	t_sem_destroy	\
 	t_sem_getvalue	\
 	t_sem_init	\
+	t_sem_thr	\
 	t_sem_trywait
 
 CC=gcc
@@ -24,6 +25,9 @@ t_sem_getvalue: t_sem_getvalue.c
 t_sem_init: t_sem_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_sem_init.c -o t_sem_init
 
+t_sem_thr: t_sem_thr.c
+	$(CC) $(CCFLAGS) $(LIB) -lpthread t_sem_thr.c -o t_sem_thr
+
 t_sem_trywait: t_sem_trywait.c
 	$(CC) $(CCFLAGS) $(LIB) t_sem_trywait.c -o t_sem_trywait
 
@@ -42,6 +46,9 @@ run:
 
 	@printf "t_sem_init: "
 	@-./t_sem_init
+
+	@printf "t_sem_thr: "
+	@-./t_sem_thr
 
 	@printf "t_sem_trywait: "
 	@-./t_sem_trywait
