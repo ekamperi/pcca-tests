@@ -4,6 +4,7 @@ all:	t_carg	\
 	t_conj	\
 	t_creal	\
 	t_csin	\
+	t_csqrt	\
 	t_ctan
 
 CC=gcc
@@ -32,6 +33,9 @@ t_creal: t_creal.c
 t_csin: t_csin.c
 	$(CC) $(CCFLAGS) $(LIB) t_csin.c -o t_csin
 
+t_csqrt: t_csqrt.c
+	$(CC) $(CCFLAGS) $(LIB) t_csqrt.c -o t_csqrt
+
 t_ctan: t_ctan.c
 	$(CC) $(CCFLAGS) $(LIB) t_ctan.c -o t_ctan
 
@@ -56,6 +60,9 @@ run:
 
 	@printf "t_csin: "
 	@-./t_csin
+
+	@printf "t_csqrt: "
+	@-./t_csqrt
 
 	@printf "t_ctan: "
 	@-./t_ctan
