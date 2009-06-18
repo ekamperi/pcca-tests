@@ -6,7 +6,7 @@
 
 struct tentry {
 	double complex x;	/* Input */
-	double complex y;	/* Cos output */
+	double complex y;	/* Tan output */
 } ttable[] = {
 	{ 7.123 + 1.456*I,  0.109056 + 1.005952*I },
 	{-3.505 + 0.021*I, -0.380106 + 0.024032*I },
