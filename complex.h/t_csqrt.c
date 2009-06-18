@@ -28,6 +28,21 @@ int main(void)
 		    < 0.001);
 	}
 
+
+	/*
+	 * The result is in the range of the right half-plane,
+	 * including the imaginary axis.
+	 */
+	double rl, im;
+	double complex z;
+
+	for (rl = -10.0; rl < 10.0; rl += 0.04) {
+		for (im = -10.0; im < 10.0; im += 0.03) {
+			z =  csqrt(rl + im*I);
+			assert(creal(z) >= 0.0);
+		}
+	}
+
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
