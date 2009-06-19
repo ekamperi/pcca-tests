@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <fcntl.h>
 #include <mqueue.h>
+#include <signal.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -12,7 +13,7 @@
 mqd_t md;
 
 /* Function prototypes. */
-static void diep(const char *s);
+static void myhandler(int sig);
 
 int main(void)
 {
@@ -22,40 +23,35 @@ int main(void)
 	int rv;
 	pid_t pid;
 
+	signal(SIGABRT, myhandler);
+
 	/* Create a message queue for write only with default parameters. */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
-	if (md == -1)
-		diep("mq_open");
+	assert (md != -1);
 
 	/* Send messages, low first, then high. */
 	rv = mq_send(md, lowmsg, sizeof(lowmsg), /* priority */ 0);
-	if (rv == -1)
-		diep("mq_send");
+	assert(rv != -1);
 
 	rv = mq_send(md, highmsg, sizeof(highmsg), /* priority */ 1);
-	if (rv == -1)
-		diep("mq_send");
+	assert(rv != -1);
 
 	/* Disassociate with message queue. */
 	rv = mq_close(md);
-	if (rv == -1)
-		diep("mq_close");
+	assert(rv != -1);
 
 	/* Fork and have child read the message from parent. */
 	pid = fork();
-	if (pid == -1) {
-		diep("fork");
-	} else if (pid == 0) {
+	assert(pid != -1);
+
+	if (pid == 0) {
 		/* We are inside the child. */
 		md = mq_open(MQNAME, O_RDONLY);
-		if (md == -1)
-			diep("child: mq_open");
+		assert(md != -1);
 
 		char msg_recvd[8192];	/* Implementation defined. */
 		rv = mq_receive(md, msg_recvd, sizeof(msg_recvd), &prio);
-		if (rv == -1)
-			diep("child: mq_receive");
-
+		assert(rv != -1);
 		/*
 		 * Make sure that the message with higher priority,
 		 * is delivered first of all.
@@ -63,20 +59,16 @@ int main(void)
 		assert(strcmp(msg_recvd, highmsg) == 0 && prio == 1);
 
 		rv = mq_receive(md, msg_recvd, sizeof(msg_recvd), &prio);
-                if (rv == -1)
-                        diep("child: mq_receive");
-
+		assert(rv != -1);
 		assert(strcmp(msg_recvd, lowmsg) == 0 && prio == 0);
 
 		/* Disassociate with message queue. */
 		rv = mq_close(md);
-		if (rv == -1)
-			diep("child: mq_close");
+		assert(rv != -1);
 
 		/* Remove the message queue from the system. */
 		rv = mq_unlink(MQNAME);
-		if (rv == -1)
-			diep("mq_unlink");
+		assert(rv != -1);
 
 		printf("passed\n");
 	} else {
@@ -88,10 +80,9 @@ int main(void)
 	return EXIT_SUCCESS;
 }
 
-void diep(const char *s)
+static void
+myhandler(int sig)
 {
-	perror(s);
-
 	/*
 	 * Message queues' name & resources are persistent, i.e., they live
 	 * even after the process dies. That's why, disassociate and destroy
@@ -102,5 +93,5 @@ void diep(const char *s)
 	mq_close(md);
 	mq_unlink(MQNAME);
 
-	exit(EXIT_FAILURE);
+	/* After this, the program will abort. */
 }
