@@ -1,6 +1,7 @@
 all:    t_mq_open		\
 	t_mq_openclose		\
 	t_mq_close		\
+	t_mq_parallel		\
 	t_mq_parent_child	\
 	t_mq_parent_child_multmsg	\
 	t_mq_prio		\
@@ -26,6 +27,9 @@ t_mq_openclose: t_mq_openclose.c
 
 t_mq_close: t_mq_close.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_close.c -o t_mq_close
+
+t_mq_parallel: t_mq_parallel.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_parallel.c -o t_mq_parallel
 
 t_mq_parent_child: t_mq_parent_child.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_parent_child.c -o t_mq_parent_child
@@ -63,6 +67,9 @@ run:
 
 	@printf "t_mq_close: "
 	@-./t_mq_close
+
+        @printf "t_mq_parallel: "
+	@-./t_mq_parallel
 
 	@printf "t_mq_parent_child: "
 	@-./t_mq_parent_child
