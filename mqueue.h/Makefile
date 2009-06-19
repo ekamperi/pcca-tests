@@ -3,6 +3,7 @@ all:    t_mq_open		\
 	t_mq_close		\
 	t_mq_parent_child	\
 	t_mq_parent_multmsg	\
+	t_mq_prio		\
 	t_mq_select		\
 	t_mq_send		\
 	t_mq_setattr		\
@@ -31,6 +32,9 @@ t_mq_parent_child: t_mq_parent_child.c
 
 t_mq_parent_multmsg: t_mq_parent_multmsg.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_parent_multmsg.c -o t_mq_parent_multmsg
+
+t_mq_prio: t_mq_prio.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_prio.c -o t_mq_prio
 
 t_mq_select: t_mq_select.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_select.c -o t_mq_select
@@ -65,6 +69,9 @@ run:
 
 	@printf "t_mq_parent_multmsg: "
 	@-./t_mq_parent_multmsg
+
+	@printf "t_mq_prio: "
+	@-./t_mq_prio
 
 	@printf "t_mq_select: "
 	@-./t_mq_select
