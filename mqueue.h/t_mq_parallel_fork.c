@@ -12,8 +12,8 @@
 
 #define LOGFILE		"logfile"
 #define	MQNAME		"/tmqpcmp1"
-#define NMESSAGES	10000
-#define MAXPRIO		32
+#define NMESSAGES	20000
+#define MAXPRIO		100
 
 mqd_t md;
 
@@ -109,7 +109,8 @@ int main(void)
 	} else {
 		/* We are inside the child. */
 		char msg_recvd[8192];   /* Implementation defined. */
-		unsigned int oldprio = UINT_MAX, prio, priostr;
+		unsigned int oldprio = UINT_MAX, prio, priomsg;
+		char *p;
 
 		for (i = 0; i < NMESSAGES; i++) {
 			INITLOCK(lck);
@@ -130,6 +131,14 @@ int main(void)
 			write(fd, buf, strlen(buf));
 
 			assert(fcntl(fd, F_SETLKW, &lck) != -1);
+
+			p = msg_recvd;
+			while(!isdigit(*p))
+				p++;
+
+			priomsg = strtoul(p, NULL, 10);
+			/* Assert that priority matches the one mentioned in message. */
+			assert(priomsg == prio);
 		}
 
 	}
