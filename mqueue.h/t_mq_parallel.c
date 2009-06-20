@@ -10,11 +10,11 @@
 #include <sys/wait.h>
 
 #define LOGFILE		"logfile"
-#define	MQNAME		"/tmqpcmp"
-#define NMESSAGES	1000
+#define	MQNAME		"/tmqpcmp1"
+#define NMESSAGES	10000
 #define MAXPRIO		32
 
-mqd_t md, md2;
+mqd_t md;
 
 /* Function prototypes. */
 static void myhandler(int sig);
@@ -37,18 +37,21 @@ int main(void)
 	/* Install signal handler. */
 	signal(SIGABRT, myhandler);
 
+	/* Create a message queue for write only with default parameters. */
+	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_RDWR, 0700, NULL);
+	assert (md != -1);
+
 	/* Fork and let the game begin. */
 	pid = fork();
 	assert(pid != -1);
 
 	if (pid != 0) {
 		/* We are inside the parent. */
+	  printf("parent = %d\n", getpid());
 
-		/* Create a message queue for write only with default parameters. */
-		md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
-		assert (md != -1);
 
 		for (i = 0; i < NMESSAGES; i++) {
+
 			snprintf(buf, sizeof(buf), "%d", i % MAXPRIO);
 
                         /* Send messages with increasing priority. */
@@ -77,24 +80,19 @@ int main(void)
 		wait(&status);
 
                 /* Remove the message queue from the system. */
-                rv = mq_unlink(MQNAME);
-                assert(rv != -1);
+                /*rv = mq_unlink(MQNAME);
+		perror("mq_unlink");
+                assert(rv != -1);*/
 
                 printf("passed\n");
 	} else {
+	  printf("child = %d\n", getpid());
 		/* We are inside the child. */
 		char msg_recvd[8192];   /* Implementation defined. */
 		unsigned int oldprio = UINT_MAX, prio, priostr;
 
-		/* Give parent some time to open the queue. */
-		usleep(100000);
-
-		/* We are inside the child. */
-		md2 = mq_open(MQNAME, O_RDONLY);
-		assert(md2 != -1);
-
 		for (i = 0; i < NMESSAGES; i++) {
-			rv = mq_receive(md2, msg_recvd, sizeof(msg_recvd),
+			rv = mq_receive(md, msg_recvd, sizeof(msg_recvd),
 			    &prio);
 			assert(rv != -1);
 
@@ -118,9 +116,6 @@ int main(void)
 			//prio, priostr, oldprio);
 		}
 
-		/* Disassociate with message queue. */
-		rv = mq_close(md2);
-		assert(rv != -1);
 	}
 
 	return EXIT_SUCCESS;
@@ -137,7 +132,6 @@ myhandler(int sig)
 	 * Also, we don't care about the return value of the following calls.
 	 */
 	mq_close(md);
-	mq_close(md2);
 	mq_unlink(MQNAME);
 
 	/* After this, the program will abort. */
