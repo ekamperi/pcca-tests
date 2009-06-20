@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
@@ -47,8 +48,8 @@ int main(void)
         assert (md != -1);
 
 	/* Create threads. */
-	assert(pthread_create(&th1, NULL, thread1, (void *)&md) == 0);
-	assert(pthread_create(&th2, NULL, thread2, (void *)&md) == 0);
+	assert(pthread_create(&th1, NULL, thread1, (void *)NULL) == 0);
+	assert(pthread_create(&th2, NULL, thread2, (void *)NULL) == 0);
 
 	/* Wait for threads to complete. */
 	assert(pthread_join(th1, NULL) == 0);
@@ -75,12 +76,15 @@ thread1(void *arg)
 
 	/* Send messages with increasing priority. */
 	for (i = 0; i < NMESSAGES; i++) {
+		/*
+		 * We imprint the priority in the message itself, as
+		 * an additional sanity check.
+		 */
 		snprintf(buf, sizeof(buf), "parent: %d\n", i % MAXPRIO);
 
 		pthread_mutex_lock(&mtx_aq);
 
-		rv = mq_send(md, buf, sizeof(buf),
-		    /* priority */ i % MAXPRIO);
+		rv = mq_send(md, buf, sizeof(buf), i % MAXPRIO);
 		if (rv == -1 && errno == EAGAIN) {
 			pthread_mutex_unlock(&mtx_aq);
 			usleep(10);
@@ -102,15 +106,14 @@ thread2(void *arg)
 {
 	char msg_recvd[8192];   /* Implementation defined. */
 	char buf[100];
-	unsigned int prio;
+	unsigned int prio, priomsg;
 	int i, rv;
 	char *p;
 
 	for (i = 0; i < NMESSAGES; i++) {
 		pthread_mutex_lock(&mtx_aq);
 
-		rv = mq_receive(md, msg_recvd, sizeof(msg_recvd),
-		    &prio);
+		rv = mq_receive(md, msg_recvd, sizeof(msg_recvd), &prio);
 		if (rv == -1 && errno == EAGAIN) {
 			pthread_mutex_unlock(&mtx_aq);
 			usleep(10);
@@ -123,6 +126,16 @@ thread2(void *arg)
 		write(fd, buf, strlen(buf));
 
 		pthread_mutex_unlock(&mtx_aq);
+
+		/* Find priority number. */
+		p = msg_recvd;
+		while(!isdigit(*p))
+			p++;
+
+		priomsg = strtoul(p, NULL, 10);
+
+		/* Assert that priority matches the one mentioned in message. */
+		assert(priomsg == prio);
 	}
 
 	pthread_exit(NULL);
