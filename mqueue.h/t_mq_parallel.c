@@ -9,8 +9,10 @@
 #include <unistd.h>	/* fork() */
 #include <sys/wait.h>
 
-#define	MQNAME	"/tmqpcmp"
-#define NMESSAGES 200
+#define LOGFILE		"logfile"
+#define	MQNAME		"/tmqpcmp"
+#define NMESSAGES	1000
+#define MAXPRIO		32
 
 mqd_t md, md2;
 
@@ -19,10 +21,20 @@ static void myhandler(int sig);
 
 int main(void)
 {
+	char buf[100];
 	size_t i;
-	int rv;
+	int fd, rv;
 	pid_t pid;
 
+	/*
+	 * Create log file.
+	 * The file must be created in O_WRONLY or O_RDWR mode,
+	 * or else lockf(3) will be very very unhappy.
+	 */
+	fd = open(LOGFILE, O_CREAT | O_TRUNC | O_WRONLY, 0777);
+	assert(fd != -1);
+
+	/* Install signal handler. */
 	signal(SIGABRT, myhandler);
 
 	/* Fork and let the game begin. */
@@ -31,20 +43,30 @@ int main(void)
 
 	if (pid != 0) {
 		/* We are inside the parent. */
-		char buf[100];
 
 		/* Create a message queue for write only with default parameters. */
 		md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
 		assert (md != -1);
 
 		for (i = 0; i < NMESSAGES; i++) {
-			snprintf(buf, sizeof(buf), "%d\n", i);
+			snprintf(buf, sizeof(buf), "%d", i % MAXPRIO);
 
-			/* Send messages with increasing priority. */
-			rv = mq_send(md, buf, sizeof(buf),
-			    /* priority */ i);
-			assert(rv != -1);
+                        /* Send messages with increasing priority. */
+                        rv = mq_send(md, buf, sizeof(buf),
+                            /* priority */ i % MAXPRIO);
+                        assert(rv != -1);
+
+			snprintf(buf, sizeof(buf), "p: %d\n", i % MAXPRIO);
+			//assert(lockf(fd, F_LOCK, 0) != -1);
+			if (lockf(fd, F_LOCK, (off_t)0) == -1) {
+				perror("lockf parent: ");
+				assert(0);
+			}
+			write(fd, buf, strlen(buf));
+			assert(lockf(fd, F_ULOCK, (off_t)0) != -1);
 		}
+
+		assert(close(fd) != -1);
 
 		/* Disassociate with message queue. */
 		rv = mq_close(md);
@@ -65,7 +87,7 @@ int main(void)
 		unsigned int oldprio = UINT_MAX, prio, priostr;
 
 		/* Give parent some time to open the queue. */
-		usleep(10000);
+		usleep(100000);
 
 		/* We are inside the child. */
 		md2 = mq_open(MQNAME, O_RDONLY);
@@ -76,15 +98,20 @@ int main(void)
 			    &prio);
 			assert(rv != -1);
 
-			printf("%s\n", msg_recvd);
-			fflush(NULL);
+			snprintf(buf, sizeof(buf), "c: %s\n", msg_recvd);
+			assert(lockf(fd, F_LOCK, (off_t)0) != -1);
+			write(fd, buf, strlen(buf));
+			assert(lockf(fd, F_ULOCK, (off_t)0) != -1);
+
+			//printf("msg = %s\n", msg_recvd);
+			//fflush(NULL);
 
 			priostr = atoi(msg_recvd);
-			printf("%d\n", priostr);
+			//printf("%d\n", priostr);
 			assert(priostr == prio);
 
 			//printf("prio = %d\toldprio = %d\n", prio, oldprio);
-			assert(prio < oldprio);
+			//assert(prio < oldprio);
 			oldprio = prio;
 
 			//printf("prio = %d\tpriostr = %d\toldprio = %d\n",
