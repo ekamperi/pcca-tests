@@ -4,6 +4,7 @@
 #include <limits.h>
 #include <mqueue.h>
 #include <pthread.h>
+#include <signal.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -11,7 +12,7 @@
 #include <sys/wait.h>
 
 #define LOGFILE		"logfile"
-#define	MQNAME		"/abcde"
+#define	MQNAME		"/abcdef"
 #define NMESSAGES	20000
 #define MAXPRIO		100
 
@@ -23,12 +24,15 @@ pthread_mutex_t mtx_aq;
 /* Function prototypes. */
 static void *thread1(void *arg);
 static void *thread2(void *arg);
+static void myhandler(int sig);
 
 int main(void)
 {
 	pthread_t th1;
 	pthread_t th2;
-	mqd_t md;
+
+	/* Install signal handler. */
+	signal(SIGABRT, myhandler);
 
 	/* Initialize mutex. */
 	assert(pthread_mutex_init(&mtx_aq, NULL) == 0);
@@ -63,16 +67,11 @@ int main(void)
 
 	return (EXIT_SUCCESS);
 }
-
 static void *
 thread1(void *arg)
 {
 	char buf[100];
-	mqd_t md;
 	int i, rv;
-
-	/* Retrieve argument. */
-	md = *(mqd_t *)arg;
 
 	/* Send messages with increasing priority. */
 	for (i = 0; i < NMESSAGES; i++) {
@@ -104,11 +103,8 @@ thread2(void *arg)
 	char msg_recvd[8192];   /* Implementation defined. */
 	char buf[100];
 	unsigned int prio;
-        mqd_t md;
 	int i, rv;
-
-        /* Retrieve argument. */
-        md = *(mqd_t *)arg;
+	char *p;
 
 	for (i = 0; i < NMESSAGES; i++) {
 		pthread_mutex_lock(&mtx_aq);
@@ -130,4 +126,11 @@ thread2(void *arg)
 	}
 
 	pthread_exit(NULL);
+}
+
+static void
+myhandler(int sig)
+{
+	mq_close(md);
+	mq_unlink(MQNAME);
 }

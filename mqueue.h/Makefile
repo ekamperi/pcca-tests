@@ -29,7 +29,7 @@ t_mq_close: t_mq_close.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_close.c -o t_mq_close
 
 t_mq_parallel: t_mq_parallel.c
-	$(CC) $(CCFLAGS) $(LIB) t_mq_parallel.c -o t_mq_parallel
+	$(CC) $(CCFLAGS) $(LIB) -lpthread t_mq_parallel.c -o t_mq_parallel
 
 t_mq_parent_child: t_mq_parent_child.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_parent_child.c -o t_mq_parent_child
