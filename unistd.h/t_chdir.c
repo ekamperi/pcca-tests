@@ -32,6 +32,9 @@ int main(int argc, char *argv[])
 	/* We expect this simple call to succeed. */
 	assert(chdir(".") == 0);
 
+	/* This must be the last condition to be checked. */
+	assert(chdir("..") == 0);
+
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
