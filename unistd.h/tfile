@@ -1,6 +1,7 @@
 t_access
 t_alarm
 t_chdir
+t_fchdir
 t_getcwd
 t_isatty
 t_lockf
