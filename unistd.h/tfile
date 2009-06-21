@@ -7,6 +7,7 @@ t_gethostname
 t_isatty
 t_lockf
 t_nice
+t_nice_thr
 t_pause
 t_readlink
 t_ttyname

@@ -7,6 +7,7 @@ all:	t_access	\
 	t_isatty	\
 	t_lockf		\
 	t_nice		\
+	t_nice_thr	\
 	t_pause		\
 	t_readlink	\
 	t_ttyname	\
@@ -45,6 +46,9 @@ t_lockf: t_lockf.c
 
 t_nice: t_nice.c
 	$(CC) $(CCFLAGS) $(LIB) t_nice.c -o t_nice
+
+t_nice_thr: t_nice_thr.c
+	$(CC) $(CCFLAGS) $(LIB) -lpthread t_nice_thr.c -o t_nice_thr
 
 t_pause: t_pause.c
 	$(CC) $(CCFLAGS) $(LIB) t_pause.c -o t_pause
@@ -88,6 +92,9 @@ run:
 
 	@printf "t_nice: "
 	@-./t_nice
+
+	@printf "t_nice_thr: "
+	@-./t_nice_thr
 
 	@printf "t_pause: "
 	@-./t_pause
