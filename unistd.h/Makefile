@@ -3,6 +3,7 @@ all:	t_access	\
 	t_chdir		\
 	t_fchdir	\
 	t_getcwd	\
+	t_gethostname	\
 	t_isatty	\
 	t_lockf		\
 	t_readlink	\
@@ -30,6 +31,9 @@ t_fchdir: t_fchdir.c
 
 t_getcwd: t_getcwd.c
 	$(CC) $(CCFLAGS) $(LIB) t_getcwd.c -o t_getcwd
+
+t_gethostname: t_gethostname.c
+	$(CC) $(CCFLAGS) $(LIB) t_gethostname.c -o t_gethostname
 
 t_isatty: t_isatty.c
 	$(CC) $(CCFLAGS) $(LIB) t_isatty.c -o t_isatty
@@ -64,6 +68,9 @@ run:
 
 	@printf "t_getcwd: "
 	@-./t_getcwd
+
+	@printf "t_gethostname: "
+	@-./t_gethostname
 
 	@printf "t_isatty: "
 	@-./t_isatty
