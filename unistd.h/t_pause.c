@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <errno.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +24,7 @@ int main(void)
 	 * will be almost immediately evaluated. The alarm(3) won't have
 	 * delivered the signal and `generated' will still equal 0.
 	 */
-	pause();
+	assert(pause() == -1 && errno == EINTR);
 	assert(generated == 1);
 
 	printf("passed\n");
