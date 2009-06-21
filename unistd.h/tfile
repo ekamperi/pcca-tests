@@ -6,5 +6,6 @@ t_getcwd
 t_gethostname
 t_isatty
 t_lockf
+t_nice
 t_readlink
 t_ttyname

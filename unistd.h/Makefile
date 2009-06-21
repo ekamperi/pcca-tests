@@ -6,6 +6,7 @@ all:	t_access	\
 	t_gethostname	\
 	t_isatty	\
 	t_lockf		\
+	t_nice		\
 	t_readlink	\
 	t_ttyname	\
 #	t_ttyname_r
@@ -40,6 +41,9 @@ t_isatty: t_isatty.c
 
 t_lockf: t_lockf.c
 	$(CC) $(CCFLAGS) $(LIB) t_lockf.c -o t_lockf
+
+t_nice: t_nice.c
+	$(CC) $(CCFLAGS) $(LIB) t_nice.c -o t_nice
 
 t_readlink: t_readlink.c
 	$(CC) $(CCFLAGS) $(LIB) t_readlink.c -o t_readlink
@@ -77,6 +81,9 @@ run:
 
 	@printf "t_lockf: "
 	@-./t_lockf
+
+	@printf "t_nice: "
+	@-./t_nice
 
 	@printf "t_readlink: "
 	@-./t_readlink
