@@ -1,5 +1,6 @@
 all:	t_access	\
 	t_alarm		\
+	t_chdir		\
 	t_getcwd	\
 	t_isatty	\
 	t_lockf		\
@@ -19,6 +20,9 @@ t_access: t_access.c
 
 t_alarm: t_alarm.c
 	$(CC) $(CCFLAGS) $(LIB) t_alarm.c -o t_alarm
+
+t_chdir: t_chdir.c
+	$(CC) $(CCFLAGS) $(LIB) t_chdir.c -o t_chdir	
 
 t_getcwd: t_getcwd.c
 	$(CC) $(CCFLAGS) $(LIB) t_getcwd.c -o t_getcwd
@@ -47,6 +51,9 @@ run:
 
 	@printf "t_alarm: "
 	@-./t_alarm
+
+	@printf "t_chdir: "
+	@-./t_chdir
 
 	@printf "t_getcwd: "
 	@-./t_getcwd
