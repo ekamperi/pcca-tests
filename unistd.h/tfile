@@ -9,5 +9,6 @@ t_lockf
 t_nice
 t_nice_thr
 t_pause
+t_pipe
 t_readlink
 t_ttyname
