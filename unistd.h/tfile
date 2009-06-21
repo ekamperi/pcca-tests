@@ -1,4 +1,5 @@
 t_access
+t_alarm
 t_getcwd
 t_isatty
 t_lockf
