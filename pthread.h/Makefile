@@ -1,4 +1,5 @@
-all:    t_pthread_barrier_init
+all:    t_pthread_barrier_init	\
+	t_pthread_barrier_wait
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -11,9 +12,15 @@ LIB=-lthread_xu
 t_pthread_barrier_init: t_pthread_barrier_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_barrier_init.c -o t_pthread_barrier_init
 
+t_pthread_barrier_wait: t_pthread_barrier_wait.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_barrier_wait.c -o t_pthread_barrier_wait
+
 clean:
 	git clean -f
 
 run:
 	@printf "t_pthread_barrier_init: "
 	@-./t_pthread_barrier_init
+
+	@printf "t_pthread_barrier_wait: "
+	@-./t_pthread_barrier_wait
