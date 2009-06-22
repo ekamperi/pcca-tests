@@ -23,8 +23,8 @@ int main(void)
 	assert(pthread_create(&th2, NULL, thread, (void *)&pb) == 0);
 
 	/* Wait for threads to complete. */
-	pthread_join(th1, NULL);
-	pthread_join(th2, NULL);
+	assert(pthread_join(th1, NULL) == 0);
+	assert(pthread_join(th2, NULL) == 0);
 
 	/* Destroy barrier. */
 	assert(pthread_barrier_destroy(&pb) == 0);
