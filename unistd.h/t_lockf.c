@@ -9,7 +9,7 @@
 
 int main(void)
 {
-	int fd, function, rv;
+	int fd, function;
 
 	/* Invalid file descriptor. */
 	assert(lockf(-1, F_TLOCK, 0) == -1 && errno == EBADF);
