@@ -18,7 +18,7 @@ int main(void)
 	/* Initialize barrier. */
 	assert(pthread_barrier_init(&pb, NULL, 2) == 0);
 
-	/* Create the threads. */
+	/* Create threads. */
 	assert(pthread_create(&th1, NULL, thread, (void *)&pb) == 0);
 	assert(pthread_create(&th2, NULL, thread, (void *)&pb) == 0);
 
@@ -29,6 +29,10 @@ int main(void)
 	/* Destroy barrier. */
 	assert(pthread_barrier_destroy(&pb) == 0);
 
+	/*
+	 * PTHREAD_BARRIER_SERIAL_THREAD should be returned to one thread and
+	 * zero to the other (but we don't know which gets what).
+	 */
 	assert(rv_pbst == 1 && rv_zero == 1);
 
 	printf("passed\n");
