@@ -31,7 +31,7 @@ int main(void)
 
 	/*
 	 * PTHREAD_BARRIER_SERIAL_THREAD should be returned to one thread and
-	 * zero to the other (but we don't know which gets what).
+	 * zero to the other (but we don't know which one gets what).
 	 */
 	assert(rv_pbst == 1 && rv_zero == 1);
 
