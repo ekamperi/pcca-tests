@@ -21,7 +21,7 @@ t_pthread_barrierattr_getpshared: t_pthread_barrierattr_getpshared.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_barrierattr_getpshared.c -o t_pthread_barrierattr_getpshared
 
 t_pthread_barrierattr_init: t_pthread_barrierattr_init.c
-	$(CC) $(CCFLAGS) $(LIB) t_pthread_barrierattr_init.c -o t_pthread_barrier_attr
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_barrierattr_init.c -o t_pthread_barrierattr_init
 
 clean:
 	git clean -f
@@ -36,5 +36,5 @@ run:
 	@printf "t_pthread_barrierattr_getpshared: "
 	@-./t_pthread_barrierattr_getpshared
 
-`	@printf "t_pthread_barrierattr_init: "
+	@printf "t_pthread_barrierattr_init: "
 	@-./t_pthread_barrierattr_init
