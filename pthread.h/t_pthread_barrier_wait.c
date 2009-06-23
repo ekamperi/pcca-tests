@@ -1,3 +1,4 @@
+
 #include <assert.h>
 #include <errno.h>
 #include <pthread.h>
@@ -43,14 +44,20 @@ int main(void)
 static void *
 thread(void *arg)
 {
-	pthread_barrier_t pb;
+	pthread_barrier_t *pb;
 	int rv;
 
-	/* Retrieve barrier. */
-	pb = *(pthread_barrier_t *)arg;
+	/*
+	 * Retrieve reference to the original barrier.
+	 *
+	 * Don't be tempted to dereference `arg' and get a copy of the barrier.
+	 * The result of calling pthread_barrier_wait() on the copy will be
+	 * undefined.
+	 */
+	pb = (pthread_barrier_t *)arg;
 
 	/* This will block us. */
-	rv = pthread_barrier_wait(&pb);
+	rv = pthread_barrier_wait(pb);
 	if (rv == PTHREAD_BARRIER_SERIAL_THREAD)
 		rv_pbst = 1;
 	else if (rv == 0)
