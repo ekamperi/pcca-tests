@@ -1,3 +1,4 @@
 t_pthread_barrier_init
 t_pthread_barrier_wait
+t_pthread_barrierattr_getpshared
 t_pthread_barrierattr_init
