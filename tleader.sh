@@ -16,8 +16,13 @@ do
         continue
     fi
 
-    path=$(echo "$1" | sed 's/.//')
-    printf "%s" "$path/$task: "
+    # If there is another shell script we are running, let it handle the output
+    # on its own.
+    if ! echo "$task" | grep ".sh$" >/dev/null
+    then
+	path=$(echo "$1" | sed 's/.//')
+	printf "%s" "$path/$task: "
+    fi
 
     # If we can't find the binary, most likely it failed to build during
     # compilation. We treat this as a failed test case.
@@ -28,11 +33,11 @@ do
     fi
 
     ./"$task" &
-    sleep 0.2
+    sleep 0.5
 
     if jobs -l %+ >/dev/null 2>/dev/null
     then
-        sleep 5
+        sleep 10
 	if kill -9 $(jobid %+ 2>/dev/null) >/dev/null 2>/dev/null
 	then
 	     echo "failed (test exceeded run time limit)"
