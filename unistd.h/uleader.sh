@@ -19,7 +19,7 @@ do
   gcc "$c_file" #>/dev/null 2>/dev/null
   rm "$c_file"
 
-  printf "t$c_file: "
+  printf "/unistd.h/t$c_file: "
   ./a.out
   rm a.out
 done < ffile
