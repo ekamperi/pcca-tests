@@ -1,4 +1,5 @@
 all:	t_carg	\
+	t_casin	\
 	t_ccos	\
 	t_cimag \
 	t_clog	\
@@ -19,6 +20,9 @@ LIB=-lm
 
 t_carg: t_carg.c
 	$(CC) $(CCFLAGS) $(LIB) t_carg.c -o t_carg
+
+t_casin: t_casin.c
+	$(CC) $(CCFLAGS) $(LIB) t_casin.c -o t_casin
 
 t_ccos:	t_ccos.c
 	$(CC) $(CCFLAGS) $(LIB) t_ccos.c -o t_ccos
@@ -53,6 +57,9 @@ clean:
 run:
 	@printf "t_carg: "
 	@-./t_carg
+
+	@printf "t_casin: "
+	@-./t_casin
 
 	@printf "t_ccos: "
 	@-./t_ccos
