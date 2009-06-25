@@ -3,7 +3,8 @@ all:    t_pthread_barrier_init			\
 	t_pthread_barrierattr_getpshared	\
 	t_pthread_barrierattr_init		\
 	t_pthread_setcancelstate		\
-	t_pthread_setcanceltype
+	t_pthread_setcanceltype			\
+	t_pthread_testcancel
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -30,6 +31,9 @@ t_pthread_setcancelstate: t_pthread_setcancelstate.c
 
 t_pthread_setcanceltype: t_pthread_setcanceltype.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_setcanceltype.c -o t_pthread_setcanceltype
+
+t_pthread_testcancel: t_pthread_testcancel.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_testcancel.c -o t_pthread_testcancel
 
 clean:
 	git clean -f
