@@ -132,7 +132,12 @@ slthread(void *arg)
 	pthread_mutex_t mtx;
 	struct slelm *se;
 
-	/* Retrieve our argument. */
+	/*
+	 * Retrieve our argument, but don't be tempted to dereference it,
+	 * as this will result in pthread_{t, cond_t} objects being copied.
+	 * The action of pthread*() functions on copies of initialized pthread*
+	 * objects is undefined.
+	 */
 	se = (struct slelm *)arg;
 
 	/* Initialize mutex. */
@@ -167,7 +172,12 @@ awthread(void *arg)
 	struct timespec ts;
 	int i, j;
 
-	/* Retrieve our argument. */
+	/*
+	 * Retrieve our argument, but don't be tempted to dereference it,
+	 * as this will result in pthread_{t, cond_t} objects being copied.
+	 * The action of pthread*() functions on copies of initialized pthread*
+	 * objects is undefined.
+	 */
 	ae = (struct awelm *)arg;
 
 	/* Sleep. */
