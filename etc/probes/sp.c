@@ -113,6 +113,11 @@ int main(int argc, char *argv[])
 		}
 		assert(pthread_cond_destroy(&slpool[i].sl_cond) == 0);
 	}
+
+	/* Wait for threads to complete. */
+	for (i = 0; i < sleeping; i++)
+		pthread_join(slpool[i].sl_tid, NULL);
+
 	free(slpool);
 	free(awpool);
 
