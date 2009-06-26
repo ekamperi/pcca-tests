@@ -3,15 +3,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>	/* memset() */
+#include <time.h>
 #include <unistd.h>
+#include <getopt.h>
 
 int sleeping = 0; /* Number of sleeping (S) threads. */
 int awake = 0;    /* Number of awake (A) threads. */
 int p = 0;        /* Period (msec) after which A awakes S. */
 int t = 0;        /* Number of threads, A awakes upon one single fire. */
 
-int spurious;	/* Number of spurious wakeups. */
-int valid;	/* Number of non spurious wakeups. */
+int spurious = 0; /* Number of spurious wakeups. */
+int valid = 0;	  /* Number of non spurious wakeups. */
+
+pthread_mutex_t mtx_spurious = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mtx_valid = PTHREAD_MUTEX_INITIALIZER;
 
 struct slelm {
 	pthread_t sl_tid;
@@ -101,10 +106,17 @@ int main(int argc, char *argv[])
 		assert(pthread_join(awpool[i].aw_tid, NULL) == 0);
 
 	/* Free up resources. */
-	for (i = 0; i < sleeping; i++)
+	for (i = 0; i < sleeping; i++) {
+		if (slpool[i].sl_pred == 0) {
+			slpool[i].sl_pred = 1;
+			assert(pthread_cond_signal(&slpool[i].sl_cond) == 0);
+		}
 		assert(pthread_cond_destroy(&slpool[i].sl_cond) == 0);
+	}
 	free(slpool);
 	free(awpool);
+
+	printf("spurious = %d\tvalid = %d\n", spurious, valid);
 
 	return (EXIT_SUCCESS);
 }
@@ -122,7 +134,20 @@ slthread(void *arg)
 	assert(pthread_mutex_init(&mtx, NULL) == 0);
 
 	/* This will block us. */
-	printf("%s\n", strerror(pthread_cond_wait(&slpool[se->sl_id].sl_cond, &mtx)));
+	for(;;) {
+		assert(pthread_mutex_lock(&mtx) == 0);
+		assert(pthread_cond_wait(&slpool[se->sl_id].sl_cond, &mtx) == 0);
+		assert(pthread_mutex_unlock(&mtx) == 0);
+		if (slpool[se->sl_id].sl_pred == 1) {
+			assert(pthread_mutex_lock(&mtx_valid) == 0);
+			valid++;
+			assert(pthread_mutex_unlock(&mtx_valid) == 0);
+			break;
+		}
+		assert(pthread_mutex_lock(&mtx_spurious) == 0);
+		spurious++;
+		assert(pthread_mutex_lock(&mtx_spurious) == 0);
+	}
 
 	/* Destroy mutex. */
 	assert(pthread_mutex_destroy(&mtx) == 0);
@@ -148,7 +173,7 @@ awthread(void *arg)
 	/* We awake `t' random threads. */
 	for (i = 0; i < t; i++) {
 		j = ae->aw_id * (sleeping/awake) + rand() % (sleeping/awake);
-		slpool[j].sl_id = 1;
+		slpool[j].sl_pred = 1;
 		assert(pthread_cond_signal(&slpool[j].sl_cond) == 0);
 	}
 
