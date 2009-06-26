@@ -105,18 +105,19 @@ int main(int argc, char *argv[])
 	for (i = 0; i < awake; i++)
 		assert(pthread_join(awpool[i].aw_tid, NULL) == 0);
 
-	/* Free up resources. */
+	/* Wake up still sleeping threads. */
 	for (i = 0; i < sleeping; i++) {
 		if (slpool[i].sl_pred == 0) {
 			slpool[i].sl_pred = 1;
 			assert(pthread_cond_signal(&slpool[i].sl_cond) == 0);
 		}
-		assert(pthread_cond_destroy(&slpool[i].sl_cond) == 0);
 	}
 
 	/* Wait for threads to complete. */
-	for (i = 0; i < sleeping; i++)
+	for (i = 0; i < sleeping; i++) {
 		pthread_join(slpool[i].sl_tid, NULL);
+		assert(pthread_cond_destroy(&slpool[i].sl_cond) == 0);
+	}
 
 	free(slpool);
 	free(awpool);
