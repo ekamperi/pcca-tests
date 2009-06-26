@@ -141,9 +141,9 @@ slthread(void *arg)
 	/* This will block us. */
 	for(;;) {
 		assert(pthread_mutex_lock(&mtx) == 0);
-		assert(pthread_cond_wait(&slpool[se->sl_id].sl_cond, &mtx) == 0);
+		assert(pthread_cond_wait(&se->sl_cond, &mtx) == 0);
 		assert(pthread_mutex_unlock(&mtx) == 0);
-		if (slpool[se->sl_id].sl_pred == 1) {
+		if (se->sl_pred == 1) {
 			assert(pthread_mutex_lock(&mtx_valid) == 0);
 			valid++;
 			assert(pthread_mutex_unlock(&mtx_valid) == 0);
