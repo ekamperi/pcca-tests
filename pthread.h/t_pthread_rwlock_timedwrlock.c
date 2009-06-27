@@ -9,7 +9,7 @@
 int main(void)
 {
 	pthread_rwlock_t rwl;
-	struct timespec abs;
+	struct timespec abstime;
 	struct timeval now;
 
 	/* Create read-write lock with default parameters. */
@@ -21,14 +21,14 @@ int main(void)
 	assert(pthread_rwlock_rdlock(&rwl) == 0);
 
 	/* Try to acquire a write lock. */
-	abs.tv_sec = 0;
-	abs.tv_nsec = 0;
-	assert(pthread_rwlock_timedwrlock(&rwl, &abs) == ETIMEDOUT);
+	abstime.tv_sec = 0;
+	abstime.tv_nsec = 0;
+	assert(pthread_rwlock_timedwrlock(&rwl, &abstime) == ETIMEDOUT);
 
 	assert(gettimeofday(&now, NULL) == 0);
-	abs.tv_sec = now.tv_sec + 2;
-	abs.tv_nsec = 1000 * now.tv_usec;
-	assert(pthread_rwlock_timedwrlock(&rwl, &abs) == ETIMEDOUT);
+	abstime.tv_sec = now.tv_sec + 2;
+	abstime.tv_nsec = 1000 * now.tv_usec;
+	assert(pthread_rwlock_timedwrlock(&rwl, &abstime) == ETIMEDOUT);
 
 	assert(pthread_rwlock_unlock(&rwl) == 0);
 	assert(pthread_rwlock_unlock(&rwl) == 0);
