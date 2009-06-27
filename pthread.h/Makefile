@@ -6,6 +6,7 @@ all:    t_pthread_barrier_init			\
 	t_pthread_cond_wait			\
 	t_pthread_rwlock			\
 	t_pthread_rwlock_init			\
+	t_pthread_rwlock_deadlock		\
 	t_pthread_rwlock_timedrdlock		\
 	t_pthread_rwlock_timedwrlock		\
 	t_pthread_setcancelstate		\
@@ -43,6 +44,9 @@ t_pthread_rwlock: t_pthread_rwlock.c
 
 t_pthread_rwlock_init: t_pthread_rwlock_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_rwlock_init.c -o t_pthread_rwlock_init
+
+t_pthread_rwlock_deadlock: t_pthread_rwlock_deadlock.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_rwlock_deadlock.c -o t_pthread_rwlock_deadlock
 
 t_pthread_rwlock_timedrdlock: t_pthread_rwlock_timedrdlock.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_rwlock_timedrdlock.c -o t_pthread_rwlock_timedrdlock
@@ -86,6 +90,9 @@ run:
 
 	@printf "t_pthread_rwlock_init: "
 	@-./t_pthread_rwlock_init
+
+	@printf "t_pthread_rwlock_deadlock: "
+	@-./t_pthread_rwlock_deadlock
 
 	@printf "t_pthread_rwlock_timedrdlock: "
 	@-./t_pthread_rwlock_timedrdlock
