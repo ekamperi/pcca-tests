@@ -8,5 +8,6 @@ t_pthread_rwlock_init
 t_pthread_rwlock_deadlock
 t_pthread_rwlock_timedrdlock
 t_pthread_rwlock_timedwrlock
+t_pthread_rwlock_trywrlock
 t_pthread_setcancelstate
 t_pthread_testcancel

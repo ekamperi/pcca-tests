@@ -9,6 +9,7 @@ all:    t_pthread_barrier_init			\
 	t_pthread_rwlock_deadlock		\
 	t_pthread_rwlock_timedrdlock		\
 	t_pthread_rwlock_timedwrlock		\
+	t_pthread_rwlock_trywrlock		\
 	t_pthread_setcancelstate		\
 	t_pthread_setcanceltype			\
 	t_pthread_testcancel
@@ -53,6 +54,9 @@ t_pthread_rwlock_timedrdlock: t_pthread_rwlock_timedrdlock.c
 
 t_pthread_rwlock_timedwrlock: t_pthread_rwlock_timedwrlock.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_rwlock_timedwrlock.c -o t_pthread_rwlock_timedwrlock
+
+t_pthread_rwlock_trywrlock: t_pthread_rwlock_trywrlock.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_rwlock_trywrlock.c -o t_pthread_rwlock_trywrlock
 
 t_pthread_setcancelstate: t_pthread_setcancelstate.c
 	$(CC) $(CCFLAGS) $(LIB)  t_pthread_setcancelstate.c -o t_pthread_setcancelstate
@@ -99,6 +103,9 @@ run:
 
 	@printf "t_pthread_rwlock_timedwrlock: "
 	@-./t_pthread_rwlock_timedwrlock
+
+	@printf "t_pthread_rwlock_trywrlock: "
+	@-./t_pthread_rwlock_trywrlock
 
 	@printf "t_pthread_setcancelstate: "
 	@./t_pthread_setcancelstate
