@@ -75,7 +75,7 @@ wrthread(void *arg)
 	int i, j;
 
 	for (i = 0; i < 2; i++) {
-		for (j = 0; j < N; i++) {
+		for (j = 0; j < N; j++) {
 			assert(pthread_rwlock_wrlock(&rwl) == 0);
 			table[j].init = 1;
 			table[j].code = j;
