@@ -6,17 +6,43 @@
 #include <time.h>
 #include <sys/time.h>
 
+pthread_rwlock_t rwl;
+
+/* Function prototypes. */
+static void *thread(void *);
+
 int main(void)
 {
-	pthread_rwlock_t rwl;
-	struct timespec abstime;
-	struct timeval now;
+	pthread_t tid;
 
 	/* Create read-write lock with default parameters. */
 	assert(pthread_rwlock_init(&rwl, NULL) == 0);
 
 	/* Acquire write lock. */
 	assert(pthread_rwlock_wrlock(&rwl) == 0);
+
+	/* Create thread. */
+	assert(pthread_create(&tid, NULL, thread, (void *)NULL) == 0);
+
+	/* Wait for thread to complete. */
+	assert(pthread_join(tid, NULL) == 0);
+
+	/* Release write lock. */
+	assert(pthread_rwlock_unlock(&rwl) == 0);
+
+	/* Destroy read-write lock. */
+	assert(pthread_rwlock_destroy(&rwl) == 0);
+
+	printf("passed\n");
+
+	return (EXIT_SUCCESS);
+}
+
+static void *
+thread(void *arg)
+{
+	struct timespec abstime;
+	struct timeval now;
 
 	/* Try to acquire a read lock. */
 	abstime.tv_sec = 0;
@@ -28,12 +54,5 @@ int main(void)
 	abstime.tv_nsec = 1000 * now.tv_usec;
 	assert(pthread_rwlock_timedrdlock(&rwl, &abstime) == ETIMEDOUT);
 
-	assert(pthread_rwlock_unlock(&rwl) == 0);
-
-	/* Destroy read-write lock. */
-	assert(pthread_rwlock_destroy(&rwl) == 0);
-
-	printf("passed\n");
-
-	return (EXIT_SUCCESS);
+	pthread_exit(NULL);
 }
