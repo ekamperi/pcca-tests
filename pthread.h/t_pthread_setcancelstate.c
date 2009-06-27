@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <errno.h>
+#include <limits.h>	/* INT_MAX */
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
