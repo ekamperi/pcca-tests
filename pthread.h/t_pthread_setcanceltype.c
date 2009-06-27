@@ -29,7 +29,6 @@ int main(void)
 
 	/* XXX: This is optional. */
 	assert(pthread_setcanceltype(-INT_MAX, &oldtype) == EINVAL);
-	assert(oldtype == PTHREAD_CANCEL_ASYNCHRONOUS);
 
 	printf("passed\n");
 

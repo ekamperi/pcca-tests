@@ -28,7 +28,6 @@ int main(void)
 
 	/* XXX: This is optional. */
 	assert(pthread_setcancelstate(-INT_MAX, &oldstate) == EINVAL);
-	assert(oldstate == PTHREAD_CANCEL_DISABLE);
 
 	printf("passed\n");
 
