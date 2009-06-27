@@ -5,5 +5,6 @@ t_pthread_barrierattr_init
 t_pthread_cond_init
 t_pthread_rwlock
 t_pthread_rwlock_init
+t_pthread_rwlock_timedwrlock
 t_pthread_setcancelstate
 t_pthread_testcancel
