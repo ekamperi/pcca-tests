@@ -1,4 +1,5 @@
 all:	t_pthread_attr_getguardsize		\
+	t_pthread_attr_getschedparam		\
 	t_pthread_attr_getschedpolicy		\
 	t_pthread_attr_getscope			\
 	t_pthread_attr_getstack			\
@@ -29,6 +30,9 @@ LIB=-lthread_xu
 
 t_pthread_attr_getguardsize: t_pthread_attr_getguardsize.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_getguardsize.c -o t_pthread_attr_getguardsize
+
+t_pthread_attr_getschedparam: t_pthread_attr_getschedparam.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_getschedparam.c -o t_pthread_attr_getschedparam
 
 t_pthread_attr_getschedpolicy: t_pthread_attr_getschedpolicy.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_getschedpolicy.c -o t_pthread_attr_getschedpolicy
@@ -93,6 +97,9 @@ clean:
 run:
 	@printf "t_pthread_attr_getguardsize: "
 	@-./t_pthread_attr_getguardsize
+
+	@printf "t_pthread_attr_getschedparam: "
+	@-./t_pthread_attr_getschedparam
 
 	@printf "t_pthread_attr_getschedpolicy: "
 	@-./t_pthread_attr_getschedpolicy
