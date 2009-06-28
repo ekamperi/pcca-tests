@@ -1,4 +1,5 @@
 all:	t_pthread_attr_getguardsize		\
+	t_pthread_attr_getscope			\
 	t_pthread_attr_getstack			\
 	t_pthread_attr_getstacksize		\
 	t_pthread_barrier_init			\
@@ -27,6 +28,9 @@ LIB=-lthread_xu
 
 t_pthread_attr_getguardsize: t_pthread_attr_getguardsize.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_getguardsize.c -o t_pthread_attr_getguardsize
+
+t_pthread_attr_getscope: t_pthread_attr_getscope.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_getscope.c -o t_pthread_attr_getscope
 
 t_pthread_attr_getstack:  t_pthread_attr_getstack.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_getstack.c -o  t_pthread_attr_getstack
@@ -85,6 +89,9 @@ clean:
 run:
 	@printf "t_pthread_attr_getguardsize: "
 	@-./t_pthread_attr_getguardsize
+
+	@printf "t_pthread_attr_getscope: "
+	@-./t_pthread_attr_getscope
 
 	@printf "t_pthread_attr_getstack: "
 	@-./t_pthread_attr_getstack

@@ -1,4 +1,5 @@
 t_pthread_attr_getguardsize
+t_pthread_attr_getscope
 t_pthread_attr_getstack
 t_pthread_attr_getstacksize
 t_pthread_barrier_init
