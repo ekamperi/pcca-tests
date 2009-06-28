@@ -13,6 +13,7 @@ t_pthread_cond_wait
 t_pthread_condattr_init
 t_pthread_condattr_getclock
 t_pthread_condattr_getpshared
+t_pthread_getcpuclockid
 t_pthread_rwlock
 t_pthread_rwlock_init
 t_pthread_rwlock_deadlock

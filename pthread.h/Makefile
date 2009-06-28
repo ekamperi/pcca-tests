@@ -13,6 +13,7 @@ all:	t_pthread_attr_getguardsize		\
 	t_pthread_condattr_getclock		\
 	t_pthread_condattr_getpshared		\
 	t_pthread_condattr_init			\
+	t_pthread_getcpuclockid			\
 	t_pthread_rwlock			\
 	t_pthread_rwlock_init			\
 	t_pthread_rwlock_deadlock		\
@@ -78,6 +79,9 @@ t_pthread_condattr_getpshared: t_pthread_condattr_getpshared.c
 
 t_pthread_condattr_init: t_pthread_condattr_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_condattr_init.c -o t_pthread_condattr_init
+
+t_pthread_getcpuclockid:  t_pthread_getcpuclockid.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_getcpuclockid.c -o t_pthread_getcpuclockid
 
 t_pthread_rwlock: t_pthread_rwlock.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_rwlock.c -o t_pthread_rwlock
@@ -163,6 +167,9 @@ run:
 
 	@printf "t_pthread_condattr_init: "
 	@-./t_pthread_condattr_init
+
+	@printf "t_pthread_getcpuclockid: "
+	@-./t_pthread_getcpuclockid
 
 	@printf "t_pthread_rwlock: "
 	@-./t_pthread_rwlock
