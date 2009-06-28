@@ -9,6 +9,7 @@ t_pthread_barrier_wait
 t_pthread_barrierattr_getpshared
 t_pthread_barrierattr_init
 t_pthread_cond_init
+t_pthread_cond_wait
 t_pthread_rwlock
 t_pthread_rwlock_init
 t_pthread_rwlock_deadlock
@@ -16,6 +17,7 @@ t_pthread_rwlock_timedrdlock
 t_pthread_rwlock_timedwrlock
 t_pthread_rwlock_trywrlock
 t_pthread_setcancelstate
+t_pthread_setcanceltype
 t_pthread_spin_init
 t_pthread_spin_lock
 t_pthread_spin_lock2
