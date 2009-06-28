@@ -20,7 +20,7 @@ int main(void)
 
 	/* Set size of guard page. */
 	guardsize = 8000;
-	assert(pthread_attr_setguardsize(&attr, &guardsize) == 0);
+	assert(pthread_attr_setguardsize(&attr, guardsize) == 0);
 	assert(pthread_attr_getguardsize(&attr, &guardsize) == 0);
 	/*
 	 * We take into consideration the fact that the implementation
