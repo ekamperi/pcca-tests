@@ -168,3 +168,6 @@ run:
 
 	@printf "t_pthread_spin_lock: "
 	@./t_pthread_spin_lock
+
+	@printf "t_pthread_testcancel: "
+	@./t_pthread_testcancel
