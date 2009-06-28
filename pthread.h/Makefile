@@ -10,6 +10,7 @@ all:	t_pthread_attr_getguardsize		\
 	t_pthread_barrierattr_init		\
 	t_pthread_cond_init			\
 	t_pthread_cond_wait			\
+	t_pthread_condattr_getpshared		\
 	t_pthread_condattr_init			\
 	t_pthread_rwlock			\
 	t_pthread_rwlock_init			\
@@ -67,6 +68,9 @@ t_pthread_cond_init: t_pthread_cond_init.c
 
 t_pthread_cond_wait: t_pthread_cond_wait.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_cond_wait.c -o t_pthread_cond_wait
+
+t_pthread_condattr_getpshared: t_pthread_condattr_getpshared.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_condattr_getpshared.c -o t_pthread_condattr_getpshared
 
 t_pthread_condattr_init: t_pthread_condattr_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_condattr_init.c -o t_pthread_condattr_init
@@ -146,6 +150,9 @@ run:
 
 	@printf "t_pthread_cond_wait: "
 	@-./t_pthread_cond_wait
+
+	printf "t_pthread_condattr_getpshared: "
+	@-./t_pthread_condattr_getpshared
 
 	@printf "t_pthread_condattr_init: "
 	@-./t_pthread_condattr_init
