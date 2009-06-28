@@ -26,7 +26,7 @@ int main(void)
 	/* Try to acquire lock while thread() still holds it. */
 	assert(pthread_spin_trylock(&lock) == EBUSY);
 
-	/* Acquire spinlock. */
+	/* Acquire spinlock -- this will spin. */
 	assert(pthread_spin_lock(&lock) == 0);
 
 	/* Release spinlock. */
