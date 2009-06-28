@@ -1,4 +1,5 @@
-all:    t_pthread_barrier_init			\
+all:	t_pthread_attr_getguardsize		\
+	t_pthread_barrier_init			\
 	t_pthread_barrier_wait			\
 	t_pthread_barrierattr_getpshared	\
 	t_pthread_barrierattr_init		\
@@ -21,6 +22,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 LIB=-lthread_xu
+
+t_pthread_attr_getguardsize: t_pthread_attr_getguardsize.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_getguardsize.c -o t_pthread_attr_getguardsize
 
 t_pthread_barrier_init: t_pthread_barrier_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_barrier_init.c -o t_pthread_barrier_init
@@ -71,6 +75,9 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_pthread_attr_getguardsize: "
+	@-./t_pthread_attr_getguardsize
+
 	@printf "t_pthread_barrier_init: "
 	@-./t_pthread_barrier_init
 
