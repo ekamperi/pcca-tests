@@ -17,4 +17,5 @@ t_pthread_rwlock_timedwrlock
 t_pthread_rwlock_trywrlock
 t_pthread_setcancelstate
 t_pthread_spin_init
+t_pthread_spin_lock
 t_pthread_testcancel

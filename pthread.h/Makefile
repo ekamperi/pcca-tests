@@ -19,6 +19,7 @@ all:	t_pthread_attr_getguardsize		\
 	t_pthread_setcancelstate		\
 	t_pthread_setcanceltype			\
 	t_pthread_spin_init			\
+	t_pthread_spin_lock			\
 	t_pthread_testcancel
 
 CC=gcc
@@ -92,6 +93,9 @@ t_pthread_setcanceltype: t_pthread_setcanceltype.c
 t_pthread_spin_init: t_pthread_spin_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_spin_init.c -o t_pthread_spin_init
 
+t_pthread_spin_lock: t_pthread_spin_lock.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_spin_lock.c -o t_pthread_spin_lock
+
 t_pthread_testcancel: t_pthread_testcancel.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_testcancel.c -o t_pthread_testcancel
 
@@ -161,3 +165,6 @@ run:
 
 	@printf "t_pthread_spin_init: "
 	@./t_pthread_spin_init
+
+	@printf "t_pthread_spin_lock: "
+	@./t_pthread_spin_lock
