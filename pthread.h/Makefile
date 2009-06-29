@@ -27,7 +27,9 @@ all:	t_pthread_attr_getdetachstate		\
 	t_pthread_spin_init			\
 	t_pthread_spin_lock			\
 	t_pthread_spin_lock2			\
-	t_pthread_testcancel
+	t_pthread_testcancel			\
+	t_pthread_tsdata
+
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -127,6 +129,9 @@ t_pthread_spin_lock2: t_pthread_spin_lock2.c
 t_pthread_testcancel: t_pthread_testcancel.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_testcancel.c -o t_pthread_testcancel
 
+t_pthread_tsdata: t_pthread_tsdata.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_tsdata.c -o t_pthread_tsdata
+
 clean:
 	git clean -f
 
@@ -220,3 +225,6 @@ run:
 
 	@printf "t_pthread_testcancel: "
 	@./t_pthread_testcancel
+
+	@printf "t_pthread_tsdata: "
+	@./t_pthread_tsdata

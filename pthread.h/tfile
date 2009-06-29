@@ -28,3 +28,4 @@ t_pthread_spin_init
 t_pthread_spin_lock
 t_pthread_spin_lock2
 t_pthread_testcancel
+t_pthread_tsdata
