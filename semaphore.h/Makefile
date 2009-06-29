@@ -2,6 +2,7 @@ all:	t_sem_circbuf	\
 	t_sem_destroy	\
 	t_sem_getvalue	\
 	t_sem_init	\
+	t_sem_init_pshared \
 	t_sem_thr	\
 	t_sem_trywait
 
@@ -11,7 +12,7 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
-LIB=-lthread_xu
+LIB=-lpthread
 
 t_sem_circbuf: t_sem_circbuf.c
 	$(CC) $(CCFLAGS) $(LIB) -lpthread t_sem_circbuf.c -o t_sem_circbuf
@@ -24,6 +25,9 @@ t_sem_getvalue: t_sem_getvalue.c
 
 t_sem_init: t_sem_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_sem_init.c -o t_sem_init
+
+t_sem_init_pshared: t_sem_init_pshared.c
+	$(CC) $(CCFLAGS) $(LIB) t_sem_init_pshared.c -o t_sem_init_pshared
 
 t_sem_thr: t_sem_thr.c
 	$(CC) $(CCFLAGS) $(LIB) -lpthread t_sem_thr.c -o t_sem_thr
@@ -46,6 +50,9 @@ run:
 
 	@printf "t_sem_init: "
 	@-./t_sem_init
+
+	@printf "t_sem_init_pshared: "
+	@-./t_sem_init_pshared
 
 	@printf "t_sem_thr: "
 	@-./t_sem_thr
