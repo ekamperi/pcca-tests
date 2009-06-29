@@ -4,4 +4,5 @@ t_sem_getvalue
 t_sem_init
 t_sem_open
 t_sem_pshared
+t_sem_thr
 t_sem_trywait
