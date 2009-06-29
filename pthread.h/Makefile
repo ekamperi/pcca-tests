@@ -1,4 +1,5 @@
-all:	t_pthread_attr_getguardsize		\
+all:	t_pthread_attr_getdetachstate		\
+	t_pthread_attr_getguardsize		\
 	t_pthread_attr_getschedparam		\
 	t_pthread_attr_getschedpolicy		\
 	t_pthread_attr_getscope			\
@@ -35,6 +36,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 LIB=-lpthread
+
+t_pthread_attr_getdetachstate: t_pthread_attr_getdetachstate.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_getdetachstate.c -o t_pthread_attr_getdetachstate
 
 t_pthread_attr_getguardsize: t_pthread_attr_getguardsize.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_getguardsize.c -o t_pthread_attr_getguardsize
@@ -127,6 +131,9 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_pthread_attr_getdetachstate: "
+	@-./t_pthread_attr_getdetachstate
+
 	@printf "t_pthread_attr_getguardsize: "
 	@-./t_pthread_attr_getguardsize
 
