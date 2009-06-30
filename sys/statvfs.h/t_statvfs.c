@@ -8,13 +8,10 @@ int main(int argc, char *argv[])
 	struct statvfs buf;
 	int rv;
 
-	rv = statvfs(argv[0], &buf);
-	assert(rv == 0);
-
 	/*
 	 * The following members are mandated by POSIX.
 	 * If there is one missing, we will fail at compile time.
-	 **/
+	 */
 	(void)buf.f_bsize;	/* File system block size. */
 	(void)buf.f_frsize;	/* File system block size. */
 	(void)buf.f_blocks;	/* Total number of blocks on file system. */
@@ -28,6 +25,10 @@ int main(int argc, char *argv[])
 	(void)buf.f_fsid;	/* File system ID. */
 	(void)buf.f_flag;	/* Bit mask of f_flag values. */
 	(void)buf.f_namemax;	/* Maximum filename length. */
+
+	/* Obtain file system information. */
+	rv = statvfs(argv[0], &buf);
+        assert(rv == 0);
 
 	printf("passed\n");
 
