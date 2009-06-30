@@ -28,7 +28,7 @@ int main(void)
 	assert(mysem2 != SEM_FAILED);
 	assert(mysem2 == mysem);
 
-	/* XXX: How do we check against EACCESS ? */
+	/* XXX: How do we check against EACCES ? */
 
 	/* O_CREAT and O_EXCL are set and the named semaphore already exists. */
 	assert(sem_open(SEMNAME, O_CREAT | O_EXCL) == SEM_FAILED
