@@ -3,6 +3,7 @@ all:	t_sem_circbuf	\
 	t_sem_getvalue	\
 	t_sem_init	\
 	t_sem_init_pshared \
+	t_sem_open	\
 	t_sem_thr	\
 	t_sem_trywait
 
@@ -28,6 +29,9 @@ t_sem_init: t_sem_init.c
 
 t_sem_init_pshared: t_sem_init_pshared.c
 	$(CC) $(CCFLAGS) $(LIB) t_sem_init_pshared.c -o t_sem_init_pshared
+
+t_sem_open: t_sem_open.c
+	$(CC) $(CCFLAGS) $(LIB) t_sem_open.c -o t_sem_open
 
 t_sem_thr: t_sem_thr.c
 	$(CC) $(CCFLAGS) $(LIB) -lpthread t_sem_thr.c -o t_sem_thr
@@ -56,6 +60,9 @@ run:
 
 	@printf "t_sem_thr: "
 	@-./t_sem_thr
+
+	@printf "t_sem_open: "
+	@-./t_sem_open
 
 	@printf "t_sem_trywait: "
 	@-./t_sem_trywait
