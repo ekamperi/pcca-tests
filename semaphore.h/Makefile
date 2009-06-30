@@ -40,7 +40,7 @@ t_sem_trywait: t_sem_trywait.c
 	$(CC) $(CCFLAGS) $(LIB) t_sem_trywait.c -o t_sem_trywait
 
 clean:
-#	git clean -f
+	git clean -f
 
 run:
 	@printf "t_sem_circbuf: "
