@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/statvfs.h>
@@ -29,6 +30,28 @@ int main(int argc, char *argv[])
 	/* Obtain file system information. */
 	rv = statvfs(argv[0], &buf);
         assert(rv == 0);
+
+	/*
+	 * POSIX says that statvfs-ability doesn't have anything to do with
+	 * read, write or execute permissions of the named file.
+	 */
+	rv = statvfs("sandbox/zeroperm", &buf);
+	assert(rv == 0);
+
+	/* No such file or empty string. */
+	rv = statvfs("", &buf);
+	assert(rv == -1 && errno == ENOENT);
+
+	rv = statvfs("sandbox/thisdefinitelydoesntexist", &buf);
+	assert(rv == -1 && errno == ENOENT);
+
+	/* Component of path is not a directory. */
+	rv = statvfs("sandbox/notadir/whatever", &buf);
+	assert(rv == -1 && errno == ENOTDIR);
+
+	/* Loop exists in symbolic link resolution. */
+	rv = statvfs("sandbox/loop", &buf);
+	assert(rv == -1 && errno == ELOOP);
 
 	printf("passed\n");
 

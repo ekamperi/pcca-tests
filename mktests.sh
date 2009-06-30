@@ -24,8 +24,12 @@ populatesandbox()
     ln -s "loop" "$1/loop2"
 
     # Create file with zero permissions
-    touch "$1/inaccessible"
-    chmod 0000 "$1/inaccessible"
+    touch "$1/zeroperm"
+    chmod 0000 "$1/zeroperm"
+
+    # Create file that it's not a directory
+    touch "$1/notadir"
+    chmod 777 "$1/notadir"
 }
 
 buildsandboxes()
