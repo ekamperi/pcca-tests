@@ -5,15 +5,45 @@ STARTDIR="."	# top level directory to start from when running tests
 usage()
 {
     cat <<EOF
-Usage: `basename $0` -cbr [directory]
+Usage: `basename $0` -cbrs [directory]
 -c    Clean stale files from previous builds.
 -b    Build tests from sources.
 -r    Run tests.
+-s    Construct sandboxes.
 -h    Print this help message.
 At least one of the above options must be specified.
 EOF
 
     exit 1
+}
+
+populatesandbox()
+{
+    # Create unresolvable symbolic links
+    ln -s "loop2" "$1/loop"
+    ln -s "loop" "$1/loop2"
+
+    # Create file with zero permissions
+    touch "$1/inaccessible"
+    chmod 0000 "$1/inaccessible"
+}
+
+buildsandboxes()
+{
+    for dir in `find "$1" -type d -name "*.h"`
+      do
+      if [ -f "$dir/need-sandbox" ]
+	  then
+          # Remove old sandbox
+	  rm -rf "$dir/sandbox"
+
+	  # Create sandbox directory
+	  mkdir "$dir/sandbox"
+
+	  # Populate sandbox directory with stuff
+	  populatesandbox "$dir/sandbox"
+      fi
+    done
 }
 
 runtests()
@@ -56,7 +86,7 @@ buildtests()
 }
 
 # Parse user supplied arguments
-while getopts "cbrh" f
+while getopts "cbrsh" f
 do
     case $f in
         c)
@@ -67,6 +97,9 @@ do
 	    ;;
 	r)
 	    run=$f
+	    ;;
+	s)
+	    sandbox=$f
 	    ;;
         h)
             usage
@@ -83,9 +116,11 @@ then
     STARTDIR=$1
 fi
 
-# At least one of -c, -b, -r options must be set.
-[ -z "$clean" ] && [ -z "$build" ] && [ -z "$run" ] && usage
+# At least one of -c, -b, -r, -s options must be set.
+[ -z "$clean" ] && [ -z "$build"   ] &&
+[ -z "$run"   ] && [ -z "$sandbox" ] && usage
 
 # Fire!
-[ ! -z "$clean" ] || [ ! -z "$build" ] && buildtests "$STARTDIR"
-[ ! -z "$run" ] && runtests "$STARTDIR"
+[ ! -z "sandbox" ] && buildsandboxes "$STARTDIR"
+[ ! -z "$clean"  ] || [ ! -z "$build" ] && buildtests "$STARTDIR"
+[ ! -z "$run"    ] && runtests "$STARTDIR"
