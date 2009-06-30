@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <limits.h>	/* for SEM_VALUE_MAX */
 #include <semaphore.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,6 +36,18 @@ int main(void)
 
 	/* Invalid name. */
 	assert(sem_open("", O_CREAT | O_EXCL) == SEM_FAILED && errno == EINVAL);
+
+#ifdef SEM_VALUE_MAX
+        /*
+         * Try to exceed maximum allowed value for semaphore, but first make
+         * sure we don't overflow. Otherwise, the value will most likely truncate
+         * to 0 and spurious results will be produced.
+         */
+        if (SEM_VALUE_MAX + 1 > SEM_VALUE_MAX) {
+		assert(sem_open(SEMNAME, O_CREAT) == SEM_FAILED
+		    && errno == EINVAL);
+	}
+#endif
 
 	/* O_CREAT is not set and the named semaphore does not exist. */
 	assert(sem_open("/thisdefinitelydoesntexist", ~O_CREAT) == SEM_FAILED
