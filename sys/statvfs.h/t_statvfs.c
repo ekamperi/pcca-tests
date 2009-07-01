@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 
 	/* Obtain file system information. */
 	rv = statvfs(argv[0], &buf);
-        assert(rv == 0);
+	assert(rv == 0);
 
 	/*
 	 * POSIX says that statvfs-ability doesn't have anything to do with
@@ -37,6 +37,14 @@ int main(int argc, char *argv[])
 	 */
 	rv = statvfs("sandbox/zeroperm", &buf);
 	assert(rv == 0);
+
+	/* Search permission is denied on a component of the path prefix. */
+	rv = statvfs("sandbox/zeropermdir/whatever", &buf);
+	assert(rv == -1 && errno == EACCES);
+
+	/* Loop exists in symbolic link resolution. */
+	rv = statvfs("sandbox/loop", &buf);
+	assert(rv == -1 && errno == ELOOP);
 
 	/* No such file or empty string. */
 	rv = statvfs("", &buf);
@@ -48,14 +56,6 @@ int main(int argc, char *argv[])
 	/* Component of path is not a directory. */
 	rv = statvfs("sandbox/notadir/whatever", &buf);
 	assert(rv == -1 && errno == ENOTDIR);
-
-	/* Search permission is denied on a component of the path prefix. */
-	rv = statvfs("sandbox/zeropermdir/whatever", &buf);
-	assert(rv == -1 && errno == EACCES);
-
-	/* Loop exists in symbolic link resolution. */
-	rv = statvfs("sandbox/loop", &buf);
-	assert(rv == -1 && errno == ELOOP);
 
 	printf("passed\n");
 
