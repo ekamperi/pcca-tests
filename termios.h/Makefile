@@ -1,4 +1,5 @@
 all:	t_tcgetattr	\
+	t_tcgetsid	\
 	t_termios	\
 
 CC=gcc
@@ -11,6 +12,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 t_tcgetattr: t_tcgetattr.c
 	$(CC) $(CCFLAGS) $(LIB) t_tcgetattr.c -o t_tcgetattr
 
+t_tcgetsid: t_tcgetsid.c
+	$(CC) $(CCFLAGS) $(LIB) t_tcgetsid.c -o t_tcgetsid
+
 t_termios: t_termios.c
 	$(CC) $(CCFLAGS) $(LIB) t_termios.c -o t_termios
 
@@ -20,6 +24,9 @@ clean:
 run:
 	@printf "t_tcgetattr: "
 	@-./t_tcgetattr
+
+	@printf "t_tcgetsid: "
+	@-./t_tcgetsid
 
 	@printf "t_termios: "
 	@-./t_termios
