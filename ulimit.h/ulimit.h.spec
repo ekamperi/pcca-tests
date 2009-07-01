@@ -1,0 +1,6 @@
+ulimit.h
+
+_XOPEN_SOURCE 600 {
+    UL_GETFSIZE
+    UL_SETFISE
+}
