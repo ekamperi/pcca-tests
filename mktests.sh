@@ -30,6 +30,10 @@ populatesandbox()
     # Create file that it's not a directory
     touch "$1/notadir"
     chmod 777 "$1/notadir"
+
+    # Create file that it's not a tty
+    touch "$1/notatty"
+    chmod 777 "$1/notatty"
 }
 
 buildsandboxes()
