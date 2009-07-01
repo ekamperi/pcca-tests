@@ -49,6 +49,10 @@ int main(int argc, char *argv[])
 	rv = statvfs("sandbox/notadir/whatever", &buf);
 	assert(rv == -1 && errno == ENOTDIR);
 
+	/* Search permission is denied on a component of the path prefix. */
+	rv = statvfs("sandbox/zeropermdir/whatever", &buf);
+	assert(rv == -1 && errno == EACCES);
+
 	/* Loop exists in symbolic link resolution. */
 	rv = statvfs("sandbox/loop", &buf);
 	assert(rv == -1 && errno == ELOOP);
