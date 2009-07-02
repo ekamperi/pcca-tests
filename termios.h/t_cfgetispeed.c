@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 /*
- * Missing baud rates symbol will be caught by symget.pl,
+ * Missing baud rates symbols will be caught by symgen.pl,
  * so be a bit lenient here.
  */
 speed_t speeds[] = {
