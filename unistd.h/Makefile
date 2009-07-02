@@ -12,6 +12,7 @@ all:	t_access	\
 	t_pipe		\
 	t_readlink	\
 	t_ttyname	\
+	t_tcsetpgrp
 #	t_ttyname_r
 
 CC=gcc
@@ -59,6 +60,9 @@ t_pipe: t_pipe.c
 
 t_readlink: t_readlink.c
 	$(CC) $(CCFLAGS) $(LIB) t_readlink.c -o t_readlink
+
+tcsetpgrp: t_tcsetpgrp.c
+	$(CC) $(CCFLAGS) $(LIB) t_tcsetpgrp.c -o t_tcsetpgrp
 
 t_ttyname: t_ttyname.c
 	$(CC) $(CCFLAGS) $(LIB) t_ttyname.c -o t_ttyname
@@ -108,6 +112,9 @@ run:
 
 	@printf "t_readlink: "
 	@-./t_readlink
+
+	@printf "t_tcsetpgrp: "
+	@-./t_tcsetpgrp
 
 	@printf "t_ttyname: "
 	@-./t_ttyname

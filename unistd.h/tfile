@@ -12,4 +12,5 @@ t_nice_thr
 t_pause
 t_pipe
 t_readlink
+t_tcsetpgrp
 t_ttyname
