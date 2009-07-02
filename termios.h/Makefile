@@ -1,4 +1,5 @@
-all:	t_tcdrain	\
+all:	t_cfgetispeed	\
+	t_tcdrain	\
 	t_tcgetattr	\
 	t_tcgetsid	\
 	t_termios	\
@@ -9,6 +10,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
+
+t_cfgetispeed: t_cfgetispeed.c
+	$(CC) $(CCFLAGS) $(LIB) t_cfgetispeed.c -o t_cfgetispeed
 
 t_tcdrain: t_tcdrain.c
 	$(CC) $(CCFLAGS) $(LIB) t_tcdrain.c -o t_tcdrain
@@ -26,6 +30,9 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_cfgetispeed: "
+	@-./t_cfgetispeed
+
 	@printf "t_tcdrain: "
 	@-./t_tcdrain
 

@@ -1,3 +1,4 @@
+t_cfgetispeed
 t_tcdrain
 t_tcgetattr
 t_tcgetsid
