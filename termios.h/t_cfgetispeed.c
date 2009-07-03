@@ -64,7 +64,7 @@ int main(void)
 {
 	struct termios t;
 	speed_t s;
-	size_t i, speedfound = 0;
+	size_t i, speedfound;
 
 	/* Make sure we are associated with a tty. */
 	assert(isatty(STDIN_FILENO) != 0);
