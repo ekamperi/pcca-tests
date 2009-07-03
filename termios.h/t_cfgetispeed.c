@@ -73,7 +73,7 @@ int main(void)
 	assert(tcgetattr(STDIN_FILENO, &t) != -1);
 
 	/*
-	 * Extract speed.
+	 * Extract input speed.
 	 * XXX: Can conformant implementations provide a speed beyond B38400 ?
 	 */
 	s = cfgetispeed(&t);
@@ -89,7 +89,7 @@ int main(void)
 	assert(speedfound == 1);
 
 	/*
-	 * Set new speed.
+	 * Set new input speed.
 	 * But first make sure that we don't set the speed to the old value.
 	 */
 	ns = s;
@@ -107,7 +107,7 @@ int main(void)
 	assert(ns != s);
 	cfsetispeed(&t, ns);
 
-	/* Make sure the new speed was actually set. */
+	/* Make sure the new input speed was actually set. */
 	s = cfgetispeed(&t);
 	assert(s == ns);
 
