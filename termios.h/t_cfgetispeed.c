@@ -63,7 +63,7 @@ speed_t speeds[] = {
 int main(void)
 {
 	struct termios t;
-	speed_t s;
+	speed_t ns, s;
 	size_t i, speedfound;
 
 	/* Make sure we are associated with a tty. */
@@ -87,6 +87,29 @@ int main(void)
 	}
 
 	assert(speedfound == 1);
+
+	/*
+	 * Set new speed.
+	 * But first make sure that we don't set the speed to the old value.
+	 */
+	ns = s;
+	for (i = 0; i < sizeof(speeds) / sizeof(speeds[0]); i++) {
+		if (speeds[i] != s) {
+			ns = speeds[i];
+			break;
+		}
+	}
+
+	/*
+	 * A bit paranoid, since this assertion would fail only if there was
+	 * just one baud rate available.
+	 */
+	assert(ns != s);
+	cfsetispeed(&t, ns);
+
+	/* Make sure the new speed was actually set. */
+	s = cfgetispeed(&t);
+	assert(s == ns);
 
 	printf("passed\n");
 
