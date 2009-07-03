@@ -18,11 +18,7 @@ int main(void)
 	pid_t pgid, pid;
 	int fd;
 
-	/*
-	 * Had we wanted to be more robust, we wouldn't rely on our program
-	 * being invoked by a terminal. We would instead allocate a pty with
-	 * open + ptsname + grantpt + unlockpt.
-	 */
+        /* Make sure we are associated with a tty. */
 	assert(isatty(STDIN_FILENO) != 0);
 
 	/* Fork! */

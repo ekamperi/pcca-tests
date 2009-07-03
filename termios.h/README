@@ -1,0 +1,8 @@
+Currently we are relying on our program being invoked by a terminal.
+Had we wanted to be more robust, we would instead allocate a pseudo
+terminal with open + ptsname + grantpt + unlockpt.
+
+We don't because the code complexity would increase significantly.
+Moreover,  it is said that ptsname + granpt + unlockpt have inherent
+design flaws that make them insecure. So, for instance, OpenBSD doesn't
+implement them at all.
