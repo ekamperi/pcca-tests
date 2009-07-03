@@ -16,6 +16,7 @@ static void myhandler(int sig);
 int main(void)
 {
 	pid_t pgid, pid;
+	int fd;
 
 	/*
 	 * Had we wanted to be more robust, we wouldn't rely on our program
@@ -37,6 +38,15 @@ int main(void)
 		/* Wait for child to complete. */
 		int status;
 		assert(wait(&status) == pid);
+
+		/* Bad file descriptor. */
+		assert(tcgetsid(-1) == (pid_t)-1 && errno == EBADF);
+
+		/* File descriptor is not associated with a terminal. */
+		fd = open("sandbox/notatty", O_RDONLY);
+		assert(fd != -1);
+		assert(tcgetsid(fd) == (pid_t)-1 && errno == ENOTTY);
+		assert(close(fd) != -1);
 
 		printf("passed\n");
 	} else {
