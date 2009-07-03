@@ -68,7 +68,7 @@ run:
 	@printf "t_mq_close: "
 	@-./t_mq_close
 
-        @printf "t_mq_parallel: "
+	@printf "t_mq_parallel: "
 	@-./t_mq_parallel
 
 	@printf "t_mq_parent_child: "
