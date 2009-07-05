@@ -15,7 +15,7 @@ int main(void)
 
 	/* O_CREAT is not set and the named mqueue doesn't exist. */
 	md = mq_open("nonexistentmqueuename", O_WRONLY, 0700, NULL);
-	assert (md == -1 && errno == ENOENT);
+	assert (md == (mqd_t)-1 && errno == ENOENT);
 
 	/* Pathname is too long. */
 	char *pathname = malloc(2 * PATH_MAX);
@@ -24,40 +24,40 @@ int main(void)
 						   prematurely. */
 
 	md = mq_open(pathname, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
-	assert(md == -1 && errno == ENAMETOOLONG);
+	assert(md == (mqd_t)-1 && errno == ENAMETOOLONG);
 	free(pathname);
 
 	/* Name already exists and O_CREAT, O_EXCL are both set. */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
-	assert(md != -1);
+	assert(md != (mqd_t)-1);
 
-	assert(mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL) == -1
-	       && errno == EEXIST);
+	assert(mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL)
+	       == (mqd_t)-1 && errno == EEXIST);
 	mq_close(md);
 	mq_unlink(MQNAME);
 
 	/* Try to open a read only message queue for write. */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL, 0400, NULL);
-	assert(md != -1);
+	assert(md != (mqd_t)-1);
 
 	md2 = mq_open(MQNAME, O_RDWR);
-	assert(md2 == -1 && errno == EACCES);
+	assert(md2 == (mqd_t)-1 && errno == EACCES);
 
 	md2 = mq_open(MQNAME, O_WRONLY);
-	assert(md2 == -1 && errno == EACCES);
+	assert(md2 == (mqd_t)-1 && errno == EACCES);
 
 	mq_close(md);
 	mq_unlink(MQNAME);
 
 	/* Try to open a write only message queue for read. */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL, 0200, NULL);
-	assert(md != -1);
+	assert(md != (mqd_t)-1);
 
 	md2 = mq_open(MQNAME, O_RDWR);
-	assert(md2 == -1 && errno == EACCES);
+	assert(md2 == (mqd_t)-1 && errno == EACCES);
 
 	md2 = mq_open(MQNAME, O_RDONLY);
-	assert(md2 == -1 && errno == EACCES);
+	assert(md2 == (mqd_t)-1 && errno == EACCES);
 
 	mq_close(md);
 	mq_unlink(MQNAME);
