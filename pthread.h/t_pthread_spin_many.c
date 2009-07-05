@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>	/* for sleep(3) */
 
-#define NTHREADS	10
+#define NTHREADS	100
 
 pthread_spinlock_t lock;
 int cnt1 = 0;
