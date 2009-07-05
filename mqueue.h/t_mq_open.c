@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>	/* memset() */
 
-#define	MQNAME	"/t_mq_open40121"
+#define	MQNAME	"/t_mq_open40121a"
 #define	PATH_MAX 1024	/* XXX */
 
 int main(void)
@@ -40,7 +40,7 @@ int main(void)
 	md = mq_open(MQNAME, O_CREAT | O_EXCL, 0400, NULL);
 	assert(md != -1);
 
-	md2 = mq_open(MQNAME, O_CREAT | O_RDWR);
+	md2 = mq_open(MQNAME, O_RDWR);
 	assert(md2 == -1 && errno == EACCES);
 
 	mq_close(md);
@@ -50,7 +50,7 @@ int main(void)
 	md = mq_open(MQNAME, O_CREAT | O_EXCL, 0200, NULL);
 	assert(md != -1);
 
-	md2 = mq_open(MQNAME, O_CREAT | O_RDWR);
+	md2 = mq_open(MQNAME, O_RDWR);
 	assert(md2 == -1 && errno == EACCES);
 
 	mq_close(md);
