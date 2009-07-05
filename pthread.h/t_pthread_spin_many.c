@@ -8,7 +8,8 @@
 #define NTHREADS	10
 
 pthread_spinlock_t lock;
-int cnt = 0;
+int cnt1 = 0;
+int cnt2 = 0;
 
 /* Function prototypes. */
 static void *thread(void *);
@@ -47,7 +48,8 @@ int main(void)
 	assert(pthread_spin_destroy(&lock) == 0);
 
 	/* Make sure that NTHREADS were ran. */
-	assert(cnt == NTHREADS);
+	assert(cnt1 == NTHREADS);
+	assert(cnt2 == 0);
 
 	printf("passed\n");
 
@@ -60,7 +62,14 @@ thread(void *arg)
 	/* Acquire spinlock. */
 	assert(pthread_spin_lock(&lock) == 0);
 
-	cnt++;
+	/* Increase monotonically. */
+	cnt1++;
+
+	/* Counter must always be 0. */
+	assert(cnt2 == 0);
+
+	cnt2++;
+	cnt2--;
 
 	/* ... and immediately release it. */
 	assert(pthread_spin_unlock(&lock) == 0);
