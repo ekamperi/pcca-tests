@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>	/* for sleep(3) */
 
-#define NTHREADS	2
+#define NTHREADS	10
 
 pthread_spinlock_t lock1;	/* level-1 lock */
 pthread_spinlock_t lock2;	/* level-2 lock */
