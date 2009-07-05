@@ -43,6 +43,9 @@ int main(void)
 	md2 = mq_open(MQNAME, O_RDWR);
 	assert(md2 == -1 && errno == EACCES);
 
+	md2 = mq_open(MQNAME, O_WRONLY);
+	assert(md2 == -1 && errno == EACCES);
+
 	mq_close(md);
 	mq_unlink(MQNAME);
 
@@ -51,6 +54,9 @@ int main(void)
 	assert(md != -1);
 
 	md2 = mq_open(MQNAME, O_RDWR);
+	assert(md2 == -1 && errno == EACCES);
+
+	md2 = mq_open(MQNAME, O_RDONLY);
 	assert(md2 == -1 && errno == EACCES);
 
 	mq_close(md);
