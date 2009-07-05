@@ -27,6 +27,9 @@ all:	t_pthread_attr_getdetachstate		\
 	t_pthread_spin_init			\
 	t_pthread_spin_lock			\
 	t_pthread_spin_lock2			\
+	t_pthread_spin_many			\
+	t_pthread_spin_mutex			\
+	t_pthread_spin_nested			\
 	t_pthread_testcancel			\
 	t_pthread_tsdata
 
@@ -126,6 +129,15 @@ t_pthread_spin_lock: t_pthread_spin_lock.c
 t_pthread_spin_lock2: t_pthread_spin_lock2.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_spin_lock2.c -o t_pthread_spin_lock2
 
+t_pthread_spin_many: t_pthread_spin_many.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_spin_many.c -o t_pthread_spin_many
+
+t_pthread_spin_mutex: t_pthread_spin_mutex.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_spin_mutex.c -o t_pthread_spin_mutex
+
+t_pthread_spin_nested: t_pthread_spin_nested.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_spin_nested.c -o t_pthread_spin_nested
+
 t_pthread_testcancel: t_pthread_testcancel.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_testcancel.c -o t_pthread_testcancel
 
@@ -222,6 +234,15 @@ run:
 
 	@printf "t_pthread_spin_lock2: "
 	@./t_pthread_spin_lock2
+
+	@printf "t_pthread_spin_many: "
+	@./t_pthread_spin_many
+
+	@printf "t_pthread_spin_mutex: "
+	@./t_pthread_spin_mutex
+
+	@printf "t_pthread_spin_nested: "
+	@./t_pthread_spin_nested
 
 	@printf "t_pthread_testcancel: "
 	@./t_pthread_testcancel
