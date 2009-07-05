@@ -71,6 +71,8 @@ thread(void *arg)
 	cnt2++;
 	cnt2--;
 
+	assert(cnt2 == 0);
+
 	/* ... and immediately release it. */
 	assert(pthread_spin_unlock(&lock) == 0);
 
