@@ -20,7 +20,8 @@ int main(void)
 	/* Pathname is too long. */
 	char *pathname = malloc(2 * PATH_MAX);
 	assert(pathname != NULL);
-	memset(pathname, 0xff, 2 * PATH_MAX);	/* Make sure we don't terminate prematurely. */
+	memset(pathname, 0xff, 2 * PATH_MAX);	/* Make sure we don't terminate
+						   prematurely. */
 
 	md = mq_open(pathname, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
 	assert(md == -1 && errno == ENAMETOOLONG);
@@ -30,7 +31,8 @@ int main(void)
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
 	assert(md != -1);
 
-	assert(mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL) == -1 && errno == EEXIST);
+	assert(mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL) == -1
+	       && errno == EEXIST);
 	mq_close(md);
 	mq_unlink(MQNAME);
 
