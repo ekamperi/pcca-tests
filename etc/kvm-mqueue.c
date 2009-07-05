@@ -23,6 +23,9 @@ static struct nlist symbols[] = {
 	{ NULL }
 };
 
+/* Function prototypes. */
+static char *mode2str(mode_t mode);
+
 int main(void)
 {
 	char *execfile = NULL;	/* kernel executable image */
@@ -64,7 +67,7 @@ int main(void)
 	struct mqueue *mq;
 
 	printf("Global list of the message queues:\n");
-	printf("%20s %10s %8s %8s %3s %4s %4s %4s\n",
+	printf("%20s %10s %10s %8s %3s %4s %4s %4s\n",
 	    "Name", "Ptr", "Mode", "Flags",  "Ref",
 	    "MaxMsg", "MsgSze", "CurMsg");
 
@@ -74,8 +77,8 @@ int main(void)
 	while (mq != NULL) {
 		if (kvm_read(kd, (unsigned long)mq,
 			&mq_data, sizeof(mq_data)) == sizeof(mq_data)) {
-			printf("%20s %10p %8x %8x %3u %6lu %6lu %6lu\n",
-			    mq_data.mq_name, mq, mq_data.mq_mode,
+			printf("%20s %10p %10s %8x %3u %6lu %6lu %6lu\n",
+			    mq_data.mq_name, mq, mode2str(mq_data.mq_mode),
 			    mq_data.mq_attrib.mq_flags, mq_data.mq_refcnt,
 			    mq_data.mq_attrib.mq_maxmsg, mq_data.mq_attrib.mq_msgsize,
 			    mq_data.mq_attrib.mq_curmsgs);
@@ -97,4 +100,29 @@ int main(void)
 	}
 
 	return (EXIT_SUCCESS);
+}
+
+static char *mode2str(mode_t mode)
+{
+	static char str[10];
+
+	/* owner */
+	str[0] = (mode & S_IRUSR) ? 'r' : '-';
+	str[1] = (mode & S_IWUSR) ? 'w' : '-';
+	str[2] = (mode & S_IXUSR) ? 'x' : '-';
+
+	/* group */
+	str[3] = (mode & S_IRGRP) ? 'r' : '-';
+	str[4] = (mode & S_IWGRP) ? 'w' : '-';
+	str[5] = (mode & S_IXGRP) ? 'x' : '-';
+
+	/* others */
+	str[6] = (mode & S_IROTH) ? 'r' : '-';
+	str[7] = (mode & S_IWOTH) ? 'w' : '-';
+	str[8] = (mode & S_IXOTH) ? 'x' : '-';
+
+	/* terminate string */
+	str[9] = '\0';
+
+	return (str);
 }
