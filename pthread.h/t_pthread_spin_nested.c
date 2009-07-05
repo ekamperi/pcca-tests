@@ -14,8 +14,10 @@ pthread_spinlock_t lock2;	/* level-2 lock */
 static void *thread1(void *);
 static void *thread2(void *);
 
-int cnt1 = 0;
-int cnt2 = 0;
+int cnt11 = 0;	/* level-1, counter 1 -- increases monotonically */
+int cnt12 = 0;	/* level-1, counter 2 */
+int cnt21 = 0;	/* level-2, counter 1 -- incrases monotonically */
+int cnt22 = 0;	/* level-2, counter 2 */
 
 int main(void)
 {
@@ -51,7 +53,8 @@ int main(void)
 	assert(pthread_spin_destroy(&lock1) == 0);
 
 	/* Make sure that `NTHREADS' level-1 threads ran. */
-	assert(cnt1 == NTHREADS);
+	assert(cnt11 == NTHREADS);
+	assert(cnt12 == 0);
 
 	printf("passed\n");
 
@@ -67,8 +70,19 @@ thread1(void *arg)
         /* Acquire level-1 spinlock. */
         assert(pthread_spin_lock(&lock1) == 0);
 
-	cnt1++;
-	cnt2 = 0;
+	/* Increase monotonically. */
+	cnt11++;
+
+	/* Counter must be 0. */
+	assert(cnt12 == 0);
+
+	cnt12++;
+	cnt12--;
+
+	assert(cnt12 == 0);
+
+	/* Initialize counter. */
+	cnt21 = 0;
 
 	/* Initialize level-2 spinlock. */
 	assert(pthread_spin_init(&lock2, PTHREAD_PROCESS_PRIVATE) == 0);
@@ -96,7 +110,8 @@ thread1(void *arg)
 	assert(pthread_spin_unlock(&lock1) == 0);
 
         /* Make sure that `NTHREADS' level-2 threads ran. */
-        assert(cnt2 == NTHREADS);
+        assert(cnt21 == NTHREADS);
+	assert(cnt22 == 0);
 
 	pthread_exit(NULL);
 }
@@ -108,7 +123,16 @@ thread2(void *arg)
 	/* Acquire level-2 spinlock. */
 	assert(pthread_spin_lock(&lock2) == 0);
 
-	cnt2++;
+	/* Increase monotonically. */
+	cnt21++;
+
+	/* Counter must always be 0. */
+	assert(cnt22 == 0);
+
+	cnt22++;
+	cnt22--;
+
+	assert(cnt22 == 0);
 
 	/* Release level-2 spinlock. */
 	assert(pthread_spin_unlock(&lock2) == 0);
