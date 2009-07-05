@@ -11,7 +11,7 @@
 
 int main(void)
 {
-	mqd_t md, md2;
+	mqd_t md;
 
 	/* Empty message queue name. */
 	assert(mq_open("", O_CREAT | O_EXCL, 0700, NULL) == (mqd_t)-1
