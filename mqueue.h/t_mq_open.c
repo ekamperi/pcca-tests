@@ -13,6 +13,10 @@ int main(void)
 {
 	mqd_t md, md2;
 
+	/* Empty message queue name. */
+	assert(mq_open("", O_CREAT | O_EXCL, 0700, NULL) == (mqd_t)-1
+	    && errno == EINVAL);
+
 	/* O_CREAT is not set and the named mqueue doesn't exist. */
 	md = mq_open("nonexistentmqueuename", O_WRONLY, 0700, NULL);
 	assert (md == (mqd_t)-1 && errno == ENOENT);
