@@ -46,6 +46,16 @@ int main(void)
 	mq_close(md);
 	mq_unlink(MQNAME);
 
+	/* Try to open a write only message queue for read. */
+	md = mq_open(MQNAME, O_CREAT | O_EXCL, 0200, NULL);
+	assert(md != -1);
+
+	md2 = mq_open(MQNAME, O_CREAT | O_RDWR);
+	assert(md2 == -1 && errno == EACCES);
+
+	mq_close(md);
+	mq_unlink(MQNAME);
+
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
