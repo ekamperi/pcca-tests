@@ -7,7 +7,6 @@ all:    t_mq_open		\
 	t_mq_select		\
 	t_mq_send		\
 	t_mq_setattr		\
-	t_mq_sysctl		\
 	t_mq_timedsend
 
 CC=gcc
@@ -45,9 +44,6 @@ t_mq_send: t_mq_send.c
 t_mq_setattr: t_mq_setattr.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_setattr.c -o t_mq_setattr
 
-t_mq_sysctl: t_mq_sysctl.c
-	$(CC) $(CCFLAGS) t_mq_sysctl.c -o t_mq_sysctl
-
 t_mq_timedsend: t_mq_timedsend.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_timedsend.c -o t_mq_timedsend
 
@@ -81,9 +77,6 @@ run:
 
 	@printf "t_mq_setattr: "
 	@-./t_mq_setattr
-
-	@printf "t_mq_sysctl: "
-	@-./t_mq_sysctl
 
 	@printf "t_mq_timedsend: "
 	@-./t_mq_timedsend
