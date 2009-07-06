@@ -1,4 +1,5 @@
-all:    t_mq_open		\
+all:	t_mq_ambig		\
+	t_mq_open		\
 	t_mq_openclose		\
 	t_mq_close		\
 	t_mq_parent_child	\
@@ -16,6 +17,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 LIB=-lrt
+
+t_mq_ambig: t_mq_ambig.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_ambig.c -o t_mq_ambig
 
 t_mq_open: t_mq_open.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_open.c -o t_mq_open
@@ -51,6 +55,9 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_mq_ambig: "
+	@-./t_mq_ambig
+
 	@printf "t_mq_open: "
 	@-./t_mq_open
 
