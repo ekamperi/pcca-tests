@@ -1,5 +1,6 @@
 all:	t_mq_parallel		\
 	t_mq_parallel_fork	\
+	t_mq_sysctl
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -15,5 +16,8 @@ t_mq_parallel: t_mq_parallel.c
 t_mq_parallel_fork: t_mq_parallel_fork.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_parallel_fork.c -o t_mq_parallel_fork
 
+t_mq_sysctl: t_mq_sysctl.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_sysctl.c -o t_mq_sysctl
+
 clean:
-#	git clean -f
+	git clean -f
