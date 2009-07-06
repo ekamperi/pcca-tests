@@ -1,4 +1,4 @@
-all:	t_mq_parallel		\
+all:	t_mq_parallel_threads	\
 	t_mq_parallel_fork	\
 	t_mq_sysctl
 
@@ -10,8 +10,8 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 LIB=-lrt
 
-t_mq_parallel: t_mq_parallel.c
-	$(CC) $(CCFLAGS) $(LIB) t_mq_parallel.c -o t_mq_parallel
+t_mq_parallel_threads: t_mq_parallel_threads.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_parallel_threads.c -o t_mq_parallel_threads
 
 t_mq_parallel_fork: t_mq_parallel_fork.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_parallel_fork.c -o t_mq_parallel_fork
