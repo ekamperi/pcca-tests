@@ -74,7 +74,7 @@ int main(void)
 	} else {
 		/* We are inside the parent. */
 		int status;
-		wait(&status);
+		assert(wait(&status) == pid);
 	}
 
 	return EXIT_SUCCESS;
