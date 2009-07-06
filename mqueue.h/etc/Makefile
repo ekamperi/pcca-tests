@@ -11,10 +11,10 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 LIB=-lrt
 
 t_mq_parallel_threads: t_mq_parallel_threads.c
-	$(CC) $(CCFLAGS) $(LIB) t_mq_parallel_threads.c -o t_mq_parallel_threads
+	$(CC) $(CCFLAGS) $(LIB) -lpthread t_mq_parallel_threads.c -o t_mq_parallel_threads
 
 t_mq_parallel_fork: t_mq_parallel_fork.c
-	$(CC) $(CCFLAGS) $(LIB) t_mq_parallel_fork.c -o t_mq_parallel_fork
+	$(CC) $(CCFLAGS) $(LIB) -lpthread t_mq_parallel_fork.c -o t_mq_parallel_fork
 
 t_mq_sysctl: t_mq_sysctl.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_sysctl.c -o t_mq_sysctl
