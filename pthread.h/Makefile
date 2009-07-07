@@ -7,6 +7,7 @@ all:	t_pthread_attr_getdetachstate		\
 	t_pthread_attr_getstacksize		\
 	t_pthread_barrier_init			\
 	t_pthread_barrier_wait			\
+	t_pthread_barrier_wait_nested		\
 	t_pthread_barrierattr_getpshared	\
 	t_pthread_barrierattr_init		\
 	t_pthread_cond_init			\
@@ -68,6 +69,9 @@ t_pthread_barrier_init: t_pthread_barrier_init.c
 
 t_pthread_barrier_wait: t_pthread_barrier_wait.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_barrier_wait.c -o t_pthread_barrier_wait
+
+t_pthread_barrier_wait_nested: t_pthread_barrier_wait_nested.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_barrier_wait_nested.c -o t_pthread_barrier_wait_nested
 
 t_pthread_condattr_getclock: t_pthread_condattr_getclock.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_condattr_getclock.c -o t_pthread_condattr_getclock
@@ -174,6 +178,9 @@ run:
 
 	@printf "t_pthread_barrier_wait: "
 	@-./t_pthread_barrier_wait
+
+	@printf "t_pthread_barrier_wait_nested: "
+	@-./t_pthread_barrier_wait_nested
 
 	@printf "t_pthread_barrierattr_getpshared: "
 	@-./t_pthread_barrierattr_getpshared
