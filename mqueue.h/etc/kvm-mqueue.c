@@ -26,6 +26,7 @@ static struct nlist symbols[] = {
 
 /* Function prototypes. */
 static char *mode2str(mode_t mode);
+static char *attr2str(struct mq_attr attr);
 
 int main(void)
 {
@@ -68,7 +69,7 @@ int main(void)
 	struct mqueue *mq;
 
 	printf("Global list of the message queues:\n");
-	printf("%20s %10s %10s %8s %3s %4s %4s %4s\n",
+	printf("%20s %10s %10s %10s %3s %4s %4s %4s\n",
 	    "Name", "Ptr", "Mode", "Flags",  "Ref",
 	    "MaxMsg", "MsgSze", "CurMsg");
 
@@ -78,9 +79,9 @@ int main(void)
 	while (mq != NULL) {
 		if (kvm_read(kd, (unsigned long)mq,
 			&mq_data, sizeof(mq_data)) == sizeof(mq_data)) {
-			printf("%20s %10p %10s %8x %3u %6lu %6lu %6lu\n",
+			printf("%20s %10p %10s %10s %3u %6lu %6lu %6lu\n",
 			    mq_data.mq_name, mq, mode2str(mq_data.mq_mode),
-			    mq_data.mq_attrib.mq_flags, mq_data.mq_refcnt,
+			    attr2str(mq_data.mq_attrib), mq_data.mq_refcnt,
 			    mq_data.mq_attrib.mq_maxmsg, mq_data.mq_attrib.mq_msgsize,
 			    mq_data.mq_attrib.mq_curmsgs);
 		} else {
@@ -124,6 +125,33 @@ static char *mode2str(mode_t mode)
 
 	/* terminate string */
 	str[9] = '\0';
+
+	return (str);
+}
+
+static char *attr2str(struct mq_attr attr)
+{
+	static char str[5];
+
+        if (attr.mq_flags & O_RDWR) {
+		str[0] = 'R';
+		str[1] = 'W';
+        } else if (attr.mq_flags & O_RDONLY) {
+		str[0] = 'R';
+		str[1] = '-';
+	} else if (attr.mq_flags & O_WRONLY) {
+		str[0] = '-';
+		str[1] = 'W';
+	} else {
+		str[0] = '?';
+		str[1] = '?';
+	}
+
+	str[2] = (attr.mq_flags & O_NONBLOCK) ? '-' : 'B';
+	str[3] = (attr.mq_flags & MQ_UNLINK ) ? 'U' : '-';
+
+	/* terminate string */
+	str[4] = '\0';
 
 	return (str);
 }
