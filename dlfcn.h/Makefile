@@ -1,4 +1,5 @@
-all:	t_dlopen
+all:	t_dlopen	\
+	t_dlsym
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -10,9 +11,15 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 t_dlopen: t_dlopen.c
 	$(CC) $(CCFLAGS) $(LIB) t_dlopen.c -o t_dlopen
 
+t_dlsym: t_dlsym.c
+	$(CC) $(CCFLAGS) $(LIB) t_dlsym.c -o t_dlsym
+
 clean:
 	git clean -f
 
 run:
 	@printf "t_dlopen: "
 	@-./t_dlopen
+
+	@printf "t_dlsym: "
+	@-./t_dlsym
