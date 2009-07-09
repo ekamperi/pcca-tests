@@ -21,6 +21,11 @@ int main(void)
 	assert((*pstrcmp)("a", "b") < 0);
 	assert((*pstrcmp)("b", "a") > 0);
 
+	/* Try to get the address of a non existent symbol. */
+	dlsym(handle, "ifthisexistsinlibcillmemorizeissue7alongwithallthe"
+	      "technicalcorrigendumsissuedbyopengroupsincetheverybeginning");
+	assert(dlerror() != NULL);
+
 	/* Close shared object. */
 	assert(dlclose(handle) == 0);
 
