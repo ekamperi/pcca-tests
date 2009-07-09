@@ -9,8 +9,8 @@
 #	...
 # }
 #
-#	# Comments may reside outside of a { },
-#	# but not prior to an opening brace!
+#	# Comments may reside outside of a { } block,
+#	# but not in the same line and prior to an opening brace!
 #
 # FEATURE_TEST_MACRO2 VALUE {
 #	SYMBOL1
