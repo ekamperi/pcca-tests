@@ -12,7 +12,8 @@ all:	t_access	\
 	t_pipe		\
 	t_readlink	\
 	t_ttyname	\
-	t_tcsetpgrp
+	t_tcsetpgrp	\
+	t_unistd
 #	t_ttyname_r
 
 CC=gcc
@@ -70,6 +71,9 @@ t_ttyname: t_ttyname.c
 t_ttyname_r: t_ttyname_r.c
 	$(CC) $(CCFLAGS) $(LIB) t_ttyname_r.c -o t_ttyname_r
 
+t_unistd: t_unistd.c
+	$(CC) $(CCFLAGS) $(LIB) t_unistd.c -o t_unistd
+
 clean:
 	git clean -f
 
@@ -121,3 +125,6 @@ run:
 
 #	@printf "t_ttyname_r: "
 #	@-./t_ttyname_r
+
+	@printf "t_unistd: "
+	@-./t_unistd
