@@ -26,6 +26,13 @@ int main(void)
 	      "technicalcorrigendumsissuedbyopengroupsincetheverybeginning");
 	assert(dlerror() != NULL);
 
+	/*
+	 * Since we are here let's test dlerror() as well.
+	 * If no dynamic linking errors have occurred since the last invocation
+	 * of dlerror(), dlerror() will return NULL.
+	 */
+	assert(dlerror() == NULL);
+
 	/* Close shared object. */
 	assert(dlclose(handle) == 0);
 
