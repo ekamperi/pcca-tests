@@ -2,6 +2,7 @@
 #include <cpio.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct entry {
 	int symbol;
@@ -83,6 +84,11 @@ int main(void)
 
 	for (i = 0; i < len; i++)
 	  assert(table[i].symbol == table[i].value);
+
+	/* This doesn't fit to the above table. */
+#ifdef MAGIC
+	assert(strcmp(MAGIC, "070707") == 0);
+#endif
 
 	printf("passed\n");
 
