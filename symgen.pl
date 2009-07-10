@@ -39,7 +39,6 @@ use warnings;
 use strict;
 
 use Getopt::Long;
-use Pod::Usage;
 
 # Command line options.
 my $less = '';		# Look for missing symbols.
@@ -50,17 +49,17 @@ GetOptions('less'	=> \$less,
 	   'more'	=> \$more,
 	   'help|?'	=> \$help);
 
+# Print usage.
+exitusage() if ($help);
+
 # Make sure the user has supplied a specifications file.
-if (!$ARGV[0]) {
-    die "No spec file was given.\n";
-}
+exitusage() if (!$ARGV[0]);
 
 # We can't allow both --more AND --less at the same time.
-if ($less && $more) {
-    die "Use either --less or --more. Not both.\n";
-} elsif (!$less && !$more) {
-    die "Use at least --less or --more.\n";
-}
+exitusage() if ($less && $more);
+
+# ... on the other hand at least of them must be given.
+exitusage() if (!$less && !$more);
 
 # Open file with specs for parsing.
 open SPECFILE, "<", $ARGV[0] or die "Can't open $ARGV[0]";
@@ -148,3 +147,16 @@ close SPECFILE;
 close TOFILE;
 
 print "$gcc_cmd\n";
+
+# Print a message (optional), then usage and then exit.
+sub exitusage
+{
+    print $_[0] if ($_[0]);
+
+    print "Usage: symgen.pl [--less | --more] specfile\n";
+    print "\t--less: check for missing symbols\n";
+    print "\t--more: check for overexposed symbols\n";
+    print "Exactly one out of --less, --more must be specified.\n";
+
+    exit;
+}
