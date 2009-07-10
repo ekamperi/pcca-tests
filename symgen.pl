@@ -134,13 +134,17 @@ while (my $line = <$specfile>) {
 	# Remove whitespace.
 	$line =~ s/^\s+|\s+$//g;
 
+	# Align output.
+	my $aret = $ret[0];
+	$aret = $aret . '  ' if ($aret eq '_XOPEN_SOURCE');
+
 	if ($less) {
 	    print $tofile "\t#ifndef $line\n";
-	    print $tofile "\t\tprintf(\"$ret[0]: Missing symbol: %s\\n\", \"$line\");\n";
+	    print $tofile "\t\tprintf(\"$aret: Missing symbol: %s\\n\", \"$line\");\n";
 	    print $tofile "\t#endif\n\n";
 	} elsif ($more) {
 	    print $tofile "\t#ifdef $line\n";
-	    print $tofile "\t\tprintf(\"$ret[0]: Overexposing symbol: %s\\n\", \"$line\");\n";
+	    print $tofile "\t\tprintf(\"$aret: Overexposing symbol: %s\\n\", \"$line\");\n";
 	    print $tofile "\t#endif\n\n";
 	}
     }
@@ -152,7 +156,10 @@ print $tofile "\treturn (EXIT_SUCCESS);\n}\n";
 close $specfile;
 close $tofile;
 
-print "$gcc_cmd\n";
+#print "$gcc_cmd\n";
+system($gcc_cmd);
+system("./r$inpfile[0]");
+system("rm ./r$inpfile[0]*");
 
 # Print a message (optional), then usage and then exit.
 sub exitusage
