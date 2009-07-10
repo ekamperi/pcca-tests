@@ -38,6 +38,7 @@
 use warnings;
 use strict;
 
+use File::Basename;
 use Getopt::Long;
 
 # Command line options.
@@ -64,9 +65,13 @@ exitusage() if (!$less && !$more);
 # Open file with specs for parsing.
 open SPECFILE, "<", $ARGV[0] or die "Can't open $ARGV[0]";
 
-# Open target file for code generation, but first ignore the .h.spec extension.
-# Also prepend `r' to the file, e.g. for math.h.spec the file rmath.c is created.
-my @inpfile = split(/\./, $ARGV[0]);
+# Get the basename of the specfile.
+# For instance ./math.h/math.h.spec file becomes math.h.spec.
+my $basefile = basename($ARGV[0]);
+
+# Ignore the .h.spec extension. Also prepend `r' to the file,
+# e.g. for math.h.spec the file rmath.c is created.
+my @inpfile = split(/\./, $basefile);
 open TOFILE, ">", "r$inpfile[0].c";
 
 # Construct a specially crafted gcc invocation, but don't run it. Just print it.
