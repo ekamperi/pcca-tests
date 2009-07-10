@@ -2,6 +2,7 @@ uleader.sh
 t_access
 t_alarm
 t_chdir
+t_confstr
 t_fchdir
 t_getcwd
 t_gethostname

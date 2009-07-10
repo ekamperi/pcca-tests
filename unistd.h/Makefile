@@ -1,6 +1,7 @@
 all:	t_access	\
 	t_alarm		\
 	t_chdir		\
+	t_confstr	\
 	t_fchdir	\
 	t_getcwd	\
 	t_gethostname	\
@@ -31,6 +32,9 @@ t_alarm: t_alarm.c
 
 t_chdir: t_chdir.c
 	$(CC) $(CCFLAGS) $(LIB) t_chdir.c -o t_chdir	
+
+t_confstr: t_confstr.c
+	$(CC) $(CCFLAGS) $(LIB) t_confstr.c -o t_confstr
 
 t_fchdir: t_fchdir.c
 	$(CC) $(CCFLAGS) $(LIB) t_fchdir.c -o t_fchdir
@@ -86,6 +90,9 @@ run:
 
 	@printf "t_chdir: "
 	@-./t_chdir
+
+	@printf "t_confstr: "
+	@-./t_confstr
 
 	@printf "t_fchdir: "
 	@-./t_fchdir
