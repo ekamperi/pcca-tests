@@ -63,7 +63,7 @@ exitusage() if ($less && $more);
 exitusage() if (!$less && !$more);
 
 # Open file with specs for parsing.
-open SPECFILE, "<", $ARGV[0] or die "Can't open $ARGV[0]";
+open my $specfile, "<", $ARGV[0] or die "Can't open $ARGV[0]";
 
 # Get the basename of the specfile.
 # For instance ./math.h/math.h.spec file becomes math.h.spec.
@@ -72,29 +72,29 @@ my $basefile = basename($ARGV[0]);
 # Ignore the .h.spec extension. Also prepend `r' to the file,
 # e.g. for math.h.spec the file rmath.c is created.
 my @inpfile = split(/\./, $basefile);
-open TOFILE, ">", "r$inpfile[0].c";
+open my $tofile, ">", "r$inpfile[0].c";
 
 # Construct a specially crafted gcc invocation, but don't run it. Just print it.
 # Warning flags, etc will be removed once we get the script right.
 my $gcc_cmd = "gcc -Wall -W -ansi -pedantic -o r$inpfile[0] r$inpfile[0].c ";
 
 # Include the necessary headers.
-print TOFILE "#include <stdio.h>\n";
-print TOFILE "#include <stdlib.h>\n";	# For EXIT_FAILURE.
+print $tofile "#include <stdio.h>\n";
+print $tofile "#include <stdlib.h>\n";	# For EXIT_FAILURE.
 
 # The first line of the spec file contains the header file we examine.
-my $include = <SPECFILE>;
+my $include = <$specfile>;
 chomp $include;
-print TOFILE "#include <$include>\n\n";
+print $tofile "#include <$include>\n\n";
 
 # Here comes the main(), durururu, here comes the main()
 # ... and I say it's all right!
-print TOFILE "int main(void) {\n";
+print $tofile "int main(void) {\n";
 
 # Parse file.
 my @ret;
 
-while (my $line = <SPECFILE>) {
+while (my $line = <$specfile>) {
     # Before we start processing the current line, we ignore any comments.
     $line =~ s/#.*//;
 
@@ -105,7 +105,7 @@ while (my $line = <SPECFILE>) {
 	@ret = split " ", $line;	# Split at whitespace.
 
 	# Print a comment to know where we are.
-	print TOFILE "\t/* $ret[0] */\n";
+	print $tofile "\t/* $ret[0] */\n";
 
 	# In --less mode we need to add the appropriate -Dmacro=definition
 	# parts in the gcc command.
@@ -113,17 +113,18 @@ while (my $line = <SPECFILE>) {
 	    $gcc_cmd = $gcc_cmd . "-D$ret[0]=$ret[1] ";
 	} elsif ($more) {
 	    # Whereas in --more mode we add some sanity cheks,
-	    # just in case someone else defines our feature test macros.
-	    print TOFILE "#if ($ret[0] - 0) < $ret[1]\n";
+	    # just in case someone else defines a feature test macro,
+	    # that shouldn't be defined.
+	    print $tofile "#if ($ret[0] - 0) < $ret[1]\n";
 	}
     } elsif ($line =~ m/\}$/) {		# Closing brace encountered.
 	# Print a comment to know where we are.
-	print TOFILE "\t/* Done with $ret[0] */\n\n";
+	print $tofile "\t/* Done with $ret[0] */\n\n";
 
 	if ($more) {
-	    print TOFILE "#else\n";
-	    print TOFILE "\tprintf(\"The test may be unreliable\");\n";
-	    print TOFILE "#endif\n";
+	    print $tofile "#else\n";
+	    print $tofile "\tprintf(\"The test may be unreliable\");\n";
+	    print $tofile "#endif\n";
 	}
     }
     else {
@@ -134,22 +135,22 @@ while (my $line = <SPECFILE>) {
 	$line =~ s/^\s+|\s+$//g;
 
 	if ($less) {
-	    print TOFILE "\t#ifndef $line\n";
-	    print TOFILE "\t\tprintf(\"$ret[0]: Missing symbol: %s\\n\", \"$line\");\n";
-	    print TOFILE "\t#endif\n\n";
+	    print $tofile "\t#ifndef $line\n";
+	    print $tofile "\t\tprintf(\"$ret[0]: Missing symbol: %s\\n\", \"$line\");\n";
+	    print $tofile "\t#endif\n\n";
 	} elsif ($more) {
-	    print TOFILE "\t#ifdef $line\n";
-	    print TOFILE "\t\tprintf(\"$ret[0]: Overexposing symbol: %s\\n\", \"$line\");\n";
-	    print TOFILE "\t#endif\n\n";
+	    print $tofile "\t#ifdef $line\n";
+	    print $tofile "\t\tprintf(\"$ret[0]: Overexposing symbol: %s\\n\", \"$line\");\n";
+	    print $tofile "\t#endif\n\n";
 	}
     }
 }
 
-print TOFILE "\treturn (EXIT_SUCCESS);\n}\n";
+print $tofile "\treturn (EXIT_SUCCESS);\n}\n";
 
 # Done -- close the files.
-close SPECFILE;
-close TOFILE;
+close $specfile;
+close $tofile;
 
 print "$gcc_cmd\n";
 
