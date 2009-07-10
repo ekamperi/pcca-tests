@@ -1,12 +1,16 @@
 #! /usr/pkg/bin/perl
-
+#
 # This script parses a specification file of the following form:
 #
 # FEATURE_TEST_MACRO1 VALUE {
-#	SYMBOL1
+#	SYMBOL1		# This is a comment
+#	# This is also a comment
 #	SYMBOL2
 #	...
 # }
+#
+#	# Comments may reside outside of a { } block,
+#	# but not in the same line and prior to an opening brace!
 #
 # FEATURE_TEST_MACRO2 VALUE {
 #	SYMBOL1
@@ -29,6 +33,7 @@
 #
 # It also constructs a gcc command of the form:
 # gcc -DFEAUTURE_TEST_MACRO1=VALUE -DFEAUTURE_TEST_MACRO=VALUE
+#
 
 use warnings;
 use strict;
@@ -86,6 +91,9 @@ print TOFILE "int main(void) {\n";
 my @ret;
 
 while (my $line = <SPECFILE>) {
+    # Before we start processing the current line, we ignore any comments.
+    $line =~ s/#.*//;
+
     # We ignore empty lines both in and out of blocks.
     if ($line !~ /\S/) {
 	next;

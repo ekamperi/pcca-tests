@@ -1,6 +1,7 @@
 all:	t_access	\
 	t_alarm		\
 	t_chdir		\
+	t_confstr	\
 	t_fchdir	\
 	t_getcwd	\
 	t_gethostname	\
@@ -12,7 +13,8 @@ all:	t_access	\
 	t_pipe		\
 	t_readlink	\
 	t_ttyname	\
-	t_tcsetpgrp
+	t_tcsetpgrp	\
+	t_unistd
 #	t_ttyname_r
 
 CC=gcc
@@ -30,6 +32,9 @@ t_alarm: t_alarm.c
 
 t_chdir: t_chdir.c
 	$(CC) $(CCFLAGS) $(LIB) t_chdir.c -o t_chdir	
+
+t_confstr: t_confstr.c
+	$(CC) $(CCFLAGS) $(LIB) t_confstr.c -o t_confstr
 
 t_fchdir: t_fchdir.c
 	$(CC) $(CCFLAGS) $(LIB) t_fchdir.c -o t_fchdir
@@ -70,6 +75,9 @@ t_ttyname: t_ttyname.c
 t_ttyname_r: t_ttyname_r.c
 	$(CC) $(CCFLAGS) $(LIB) t_ttyname_r.c -o t_ttyname_r
 
+t_unistd: t_unistd.c
+	$(CC) $(CCFLAGS) $(LIB) t_unistd.c -o t_unistd
+
 clean:
 	git clean -f
 
@@ -82,6 +90,9 @@ run:
 
 	@printf "t_chdir: "
 	@-./t_chdir
+
+	@printf "t_confstr: "
+	@-./t_confstr
 
 	@printf "t_fchdir: "
 	@-./t_fchdir
@@ -121,3 +132,6 @@ run:
 
 #	@printf "t_ttyname_r: "
 #	@-./t_ttyname_r
+
+	@printf "t_unistd: "
+	@-./t_unistd
