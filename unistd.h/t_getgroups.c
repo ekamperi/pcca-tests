@@ -31,6 +31,8 @@ int main(void)
 		 */
 		if (ngroups > 1)
 			assert(getgroups(1, pgroups) == -1 && errno == EINVAL);
+
+		free(pgroups);
 	}
 
 	printf("passed\n");
