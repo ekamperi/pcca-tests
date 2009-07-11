@@ -25,8 +25,8 @@ populatesandbox()
     ln -s "loop" "$1/loop2"
 
     # Create file with zero permissions
-    touch "$1/zeroperm"
-    chmod 0000 "$1/zeroperm"
+    touch "$1/zeropermfile"
+    chmod 0000 "$1/zeropermfile"
 
     # Create directory with zero permissions
     mkdir "$1/zeropermdir"

@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 	 * POSIX says that statvfs-ability doesn't have anything to do with
 	 * read, write or execute permissions of the named file.
 	 */
-	rv = statvfs("sandbox/zeroperm", &buf);
+	rv = statvfs("sandbox/zeropermfile", &buf);
 	assert(rv == 0);
 
 	/* Search permission is denied on a component of the path prefix. */
