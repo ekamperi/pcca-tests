@@ -10,6 +10,7 @@ Usage: `basename $0` -cbrs [directory]
 -b    Build tests from sources.
 -r    Run tests.
 -s    Construct sandboxes.
+-y    Run symbols' tests.
 -h    Print this help message.
 At least one of the above options must be specified.
 EOF
@@ -58,6 +59,11 @@ buildsandboxes()
     done
 }
 
+runsymbols()
+{
+    find . -type f -name "*.h.spec" -exec ./symgen.pl --less {} \; 2>/dev/null
+}
+
 runtests()
 {
     for dir in `find "$1" -name .git -prune -o -type d -a ! -name .`
@@ -98,7 +104,7 @@ buildtests()
 }
 
 # Parse user supplied arguments
-while getopts "cbrsh" f
+while getopts "cbrsyh" f
 do
     case $f in
         c)
@@ -112,6 +118,9 @@ do
 	    ;;
 	s)
 	    sandbox=$f
+	    ;;
+	y)
+	    symbols=$f
 	    ;;
         h)
             usage
@@ -128,9 +137,13 @@ then
     STARTDIR=$1
 fi
 
-# At least one of -c, -b, -r, -s options must be set.
-[ -z "$clean" ] && [ -z "$build"   ] &&
-[ -z "$run"   ] && [ -z "$sandbox" ] && usage
+# At least one of -c, -b, -r, -s, -y options must be set.
+[ -z "$clean"   ] && [ -z "$build"   ] &&
+[ -z "$run"     ] && [ -z "$sandbox" ] &&
+[ -z "$symbols" ] && usage
+
+# Symbols' tests
+[ ! -z "$symbols" ] && runsymbols
 
 # Fire!
 [ ! -z "sandbox" ] && buildsandboxes "$STARTDIR"
