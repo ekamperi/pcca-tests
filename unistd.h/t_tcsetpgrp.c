@@ -31,6 +31,8 @@ int main(void)
 	if (pid != 0) {
 		/* We are inside the parent. */
 		assert(wait(&status) == pid);
+
+		printf("passed\n");
 	} else {
 		/* We are inside the child. */
 
