@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
 	char *buf;
-	size_t sz = 32768;	/* Default value for PATH_MAX */
+	long sz = 32768;	/* Default value for PATH_MAX */
 
 #ifdef _PC_PATH_MAX
 	/* Determine maximum path length. */
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	assert(chdir("") == -1 && errno == ENOENT);
 
 	/* A path's component is not a directory. */
-	assert(chdir(argv[0]) == -1 && errno == ENOTDIR);
+	assert(chdir("sandbox/notadir") == -1 && errno == ENOTDIR);
 
 	/* We expect this simple call to succeed. */
 	assert(chdir(".") == 0);
