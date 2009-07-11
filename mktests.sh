@@ -61,7 +61,7 @@ buildsandboxes()
 
 runsymbols()
 {
-    find . -type f -name "*.h.spec" -exec ./symgen.pl --less {} \; 2>/dev/null
+    find "$1" -type f -name "*.h.spec" -exec ./symgen.pl --less {} \; 2>/dev/null
 }
 
 runtests()
@@ -143,9 +143,9 @@ fi
 [ -z "$symbols" ] && usage
 
 # Symbols' tests
-[ ! -z "$symbols" ] && runsymbols
+[ ! -z "$symbols" ] && runsymbols "$STARTDIR"
 
 # Fire!
-[ ! -z "sandbox" ] && buildsandboxes "$STARTDIR"
+[ ! -z "$sandbox" ] && buildsandboxes "$STARTDIR"
 [ ! -z "$clean"  ] || [ ! -z "$build" ] && buildtests "$STARTDIR"
 [ ! -z "$run"    ] && runtests "$STARTDIR"
