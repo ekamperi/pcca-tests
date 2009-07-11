@@ -5,6 +5,7 @@ t_chdir
 t_confstr
 t_fchdir
 t_getcwd
+t_getgroups
 t_gethostname
 t_isatty
 t_lockf
