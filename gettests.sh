@@ -8,6 +8,7 @@ if [ -z "$1" ]
 then
     echo "Usage: $0 <header>"
     echo "To get a list of available headers, please run gettheaders.sh"
+    exit 1
 fi
 
 find . -name "$1" -exec cat {}/tfile \; 2>/dev/null
