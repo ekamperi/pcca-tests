@@ -24,6 +24,15 @@ int main(int argc, char *argv[])
 
 	free(buf);
 
+	/* Search permission is denied for any component of the pathname. */
+	assert(chdir("sandbox/zeropermdir/whatever") == -1 && errno == EACCES);
+
+	/*
+	 * A loop exists in symbolic links encountered during resolution of the
+	 * path argument.
+	 */
+	assert(chdir("sandbox/loop") == -1 && errno == ELOOP);
+
 	/* Path doesn't name an existing directory or is an empty string. */
 	assert(chdir("/thisdefinitelydoesntexist") == -1 && errno == ENOENT);
 	assert(chdir("") == -1 && errno == ENOENT);
@@ -34,7 +43,7 @@ int main(int argc, char *argv[])
 	/* We expect this simple call to succeed. */
 	assert(chdir(".") == 0);
 
-	/* This must be the last condition to be checked. */
+	/* XXX: This must be the last condition to be checked. */
 	assert(chdir("..") == 0);
 
 	printf("passed\n");
