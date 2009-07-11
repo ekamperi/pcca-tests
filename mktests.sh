@@ -24,9 +24,17 @@ populatesandbox()
     ln -s "loop2" "$1/loop"
     ln -s "loop" "$1/loop2"
 
+    # Create file with full permissions
+    touch "$1/file777"
+    chmod 0777 "$1/file777"
+
     # Create file with zero permissions
     touch "$1/file000"
     chmod 0000 "$1/file000"
+
+    # Create directory with full permissions
+    mkdir "$1/dir777"
+    chmod 0777 "$1/dir777"
 
     # Create directory with zero permissions
     mkdir "$1/dir000"
