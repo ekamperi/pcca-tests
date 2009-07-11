@@ -13,6 +13,8 @@ int main(int argc, char *argv[])
 #ifdef _PC_PATH_MAX
 	/* Determine maximum path length. */
 	sz = pathconf(".", _PC_PATH_MAX);
+	assert(sz != -1);	/* We surely don't allow infinite size
+				   path names. */
 #endif
 	buf = malloc(sz);
 	assert(buf != NULL);
