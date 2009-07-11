@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	free(buf);
 
 	/* Search permission is denied for any component of the pathname. */
-	assert(chdir("sandbox/zeropermdir/whatever") == -1 && errno == EACCES);
+	assert(chdir("sandbox/dir666/whatever") == -1 && errno == EACCES);
 
 	/*
 	 * A loop exists in symbolic links encountered during resolution of the

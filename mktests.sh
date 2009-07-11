@@ -32,6 +32,10 @@ populatesandbox()
     mkdir "$1/zeropermdir"
     chmod 0000 "$1/zeropermdir"
 
+    # Create directory without execute/search permission
+    mkdir "$1/dir666"
+    chmod 0666 "$1/dir666"
+
     # Create file that it's not a directory
     touch "$1/notadir"
     chmod 777 "$1/notadir"
