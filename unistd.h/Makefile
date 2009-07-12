@@ -5,6 +5,7 @@ all:	t_access	\
 	t_fchdir	\
 	t_getcwd	\
 	t_getgroups	\
+	t_gethostid	\
 	t_gethostname	\
 	t_isatty	\
 	t_lockf		\
@@ -45,6 +46,9 @@ t_getcwd: t_getcwd.c
 
 t_getgroups: t_getgroups.c
 	$(CC) $(CCFLAGS) $(LIB) t_getgroups.c -o t_getgroups
+
+t_gethostid: t_gethostid.c
+	$(CC) $(CCFLAGS) $(LIB) t_gethostid.c -o t_gethostid
 
 t_gethostname: t_gethostname.c
 	$(CC) $(CCFLAGS) $(LIB) t_gethostname.c -o t_gethostname
@@ -106,6 +110,9 @@ run:
 
 	@printf "t_getgroups: "
 	@-./t_getgroups
+
+	@printf "t_gethostid: "
+	@-./t_gethostid
 
 	@printf "t_gethostname: "
 	@-./t_gethostname
