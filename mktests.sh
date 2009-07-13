@@ -44,6 +44,10 @@ populatesandbox()
     mkdir "$1/dir666"
     chmod 0666 "$1/dir666"
 
+    # Create directory without write permission
+    mkdir "$1/dir555"
+    chmod 0555 "$1/dir555"
+
     # Create file that it's not a directory
     touch "$1/notadir"
     chmod 777 "$1/notadir"
