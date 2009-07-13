@@ -28,8 +28,8 @@ populatesandbox()
     touch "$1/file777"
     chmod 0777 "$1/file777"
 
-    # Create regular loop
-    ln -s "file777" "$1/loop"
+    # Create regular loop to file
+    ln -s "file777" "$1/fileloop"
 
     # Create file with zero permissions
     touch "$1/file000"
@@ -38,6 +38,9 @@ populatesandbox()
     # Create directory with full permissions
     mkdir "$1/dir777"
     chmod 0777 "$1/dir777"
+
+    # Create regular loop to directory
+    ln -s "dir777" "$1/dirloop"
 
     # Create directory with zero permissions
     mkdir "$1/dir000"
