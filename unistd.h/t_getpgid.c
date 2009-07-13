@@ -31,8 +31,14 @@ int main(void)
 		sleep(1);
 
 		/*
-		 * Try to get the process group ID from a process belonging to
-		 * another session. This may optionally fail with EPERM.
+		 * Try to retrieve the process group ID from child which now
+		 * belongs to another session. This may optionally fail with
+		 * EPERM.
+		 * By the time I write this, only OpenBSD "succeeds to fail".
+		 * {Free, Net, DragonFly}, Linux and Solaris 10 all let you
+		 * get away with it.
+		 *
+		 * openbsd/sys/kern/kern_prot.c#101
 		 */
 		if (getpgid(pid) == (pid_t)-1) {
 			assert(errno == EPERM);
