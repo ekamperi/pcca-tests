@@ -27,7 +27,19 @@ int main(void)
 		/* Allow the child to create a new session. */
 		sleep(1);
 
-		/* Probe child to report it session leader. */
+		/*
+		 * Probe child to report it session leader.
+		 *
+		 * Let me quote Issue 6 on this one. "The getsid() function
+		 * shall fail with EPERM if the process specified by pid is not
+		 * in the same session as the calling process, and the imple-
+		 * mentation does not allow access to the process group ID of
+		 * the session leader of that process from the calling process."
+		 *
+		 * If my interpretation is right, POSIX doesn't mandate for an
+		 * implementation to deny this type of access. But IF it does,
+		 * then it _should_ fail with EPERM.
+		 */
 		if (getsid(pid) == (pid_t)-1) {
 			assert(errno == EPERM);
 			printf("passed\n");
