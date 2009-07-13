@@ -8,6 +8,7 @@ t_getcwd
 t_getgroups
 t_gethostid
 t_gethostname
+t_getlogin
 t_isatty
 t_lockf
 t_nice

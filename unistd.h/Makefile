@@ -7,6 +7,7 @@ all:	t_access	\
 	t_getgroups	\
 	t_gethostid	\
 	t_gethostname	\
+	t_getlogin	\
 	t_isatty	\
 	t_lockf		\
 	t_nice		\
@@ -52,6 +53,9 @@ t_gethostid: t_gethostid.c
 
 t_gethostname: t_gethostname.c
 	$(CC) $(CCFLAGS) $(LIB) t_gethostname.c -o t_gethostname
+
+t_getlogin: t_getlogin.c
+	$(CC) $(CCFLAGS) $(LIB) t_getlogin.c -o t_getlogin
 
 t_isatty: t_isatty.c
 	$(CC) $(CCFLAGS) $(LIB) t_isatty.c -o t_isatty
@@ -116,6 +120,9 @@ run:
 
 	@printf "t_gethostname: "
 	@-./t_gethostname
+
+	@printf "t_getlogin: "
+	@-./t_getlogin
 
 	@printf "t_isatty: "
 	@-./t_isatty
