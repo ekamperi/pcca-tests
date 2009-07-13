@@ -10,6 +10,7 @@ all:	t_access	\
 	t_getlogin	\
 	t_getlogin_r	\
 	t_getpgid	\
+	t_getpgrp	\
 	t_isatty	\
 	t_lockf		\
 	t_nice		\
@@ -64,6 +65,9 @@ t_getlogin_r: t_getlogin_r.c
 
 t_getpgid: t_getpgid.c
 	$(CC) $(CCFLAGS) $(LIB) t_getpgid.c -o t_getpgid
+
+t_getpgrp: t_getpgrp.c
+	$(CC) $(CCFLAGS) $(LIB) t_getpgrp.c -o t_getpgrp
 
 t_isatty: t_isatty.c
 	$(CC) $(CCFLAGS) $(LIB) t_isatty.c -o t_isatty
