@@ -20,9 +20,6 @@ int main(void)
 	assert(getpgid(-INT_MAX) == (pid_t)-1
 	    && (errno == ESRCH || errno == EINVAL));
 
-	printf("passed");
-	fflush(NULL);
-
 	/* Fork and let child create a new session. */
 	pid = fork();
 	assert(pid != -1);
@@ -37,10 +34,12 @@ int main(void)
 		 * Try to get the process group ID from a process belonging to
 		 * another session. This may optionally fail with EPERM.
 		 */
-		if (getpgid(pid) == (pid_t)-1)
+		if (getpgid(pid) == (pid_t)-1) {
 			assert(errno == EPERM);
+			printf("passed\n");
+		}
 		else
-			printf(" (EPERM check skipped)\n");
+			printf("passed (EPERM check skipped)\n");
 
 		/* Wait for child to complete. */
 		int status;
