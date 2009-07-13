@@ -1,4 +1,9 @@
 #!/bin/sh
+#
+# Given that the following tests excercise heavily the various code paths,
+# there is a high chance that we catch a resource leak by hitting a system-wide
+# limit.
+#
 cnt=0
 while [ $cnt -lt 20000 ];
 do
