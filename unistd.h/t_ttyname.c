@@ -16,10 +16,10 @@ int main(int argc, char *argv[])
 	close(fd);
 
 	/* invalild tty */
-	fd = open(argv[0], O_RDONLY);
-	assert(fd >= 0);
+	fd = open("sandbox/notatty", O_RDONLY);
+	assert(fd != -1);
 	assert(ttyname(fd) == NULL && errno == ENOTTY);
-	close(fd);
+	assert(close(fd) != -1);
 
 	/* invalid fd */
 	fd = -1;
