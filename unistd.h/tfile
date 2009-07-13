@@ -12,6 +12,8 @@ t_getlogin
 t_getlogin_r
 t_getpgid
 t_getpgrp
+t_getpid
+t_getppid
 t_isatty
 t_lockf
 t_nice

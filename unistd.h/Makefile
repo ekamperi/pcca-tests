@@ -11,6 +11,8 @@ all:	t_access	\
 	t_getlogin_r	\
 	t_getpgid	\
 	t_getpgrp	\
+	t_getpid	\
+	t_getppid	\
 	t_isatty	\
 	t_lockf		\
 	t_nice		\
@@ -68,6 +70,12 @@ t_getpgid: t_getpgid.c
 
 t_getpgrp: t_getpgrp.c
 	$(CC) $(CCFLAGS) $(LIB) t_getpgrp.c -o t_getpgrp
+
+t_getpid: t_getpid.c
+	$(CC) $(CCFLAGS) $(LIB) t_getpid.c -o t_getpid
+
+t_getppid: t_getppid.c
+	$(CC) $(CCFLAGS) $(LIB) t_getppid.c -o t_getppid
 
 t_isatty: t_isatty.c
 	$(CC) $(CCFLAGS) $(LIB) t_isatty.c -o t_isatty
@@ -141,6 +149,12 @@ run:
 
 	@printf "t_getpgid: "
 	@-./t_getpgid
+
+	@printf "t_getpid: "
+	@-./t_getpid
+
+	@printf "t_getppid: "
+	@-./t_getppid
 
 	@printf "t_isatty: "
 	@-./t_isatty
