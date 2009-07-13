@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	 * A loop exists in symbolic links encountered during resolution of the
 	 * path argument.
 	 */
-	assert(chdir("sandbox/loop") == -1 && errno == ELOOP);
+	assert(chdir("sandbox/infloop") == -1 && errno == ELOOP);
 
 	/* Path doesn't name an existing directory or is an empty string. */
 	assert(chdir("/thisdefinitelydoesntexist") == -1 && errno == ENOENT);

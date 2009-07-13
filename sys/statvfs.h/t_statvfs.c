@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 	assert(rv == -1 && errno == EACCES);
 
 	/* Loop exists in symbolic link resolution. */
-	rv = statvfs("sandbox/loop", &buf);
+	rv = statvfs("sandbox/infloop", &buf);
 	assert(rv == -1 && errno == ELOOP);
 
 	/* No such file or empty string. */
