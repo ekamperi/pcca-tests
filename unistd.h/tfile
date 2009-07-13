@@ -15,6 +15,7 @@ t_getpgrp
 t_getpid
 t_getppid
 t_getsid
+t_getuid
 t_isatty
 t_lockf
 t_nice

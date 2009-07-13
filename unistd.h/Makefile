@@ -14,6 +14,7 @@ all:	t_access	\
 	t_getpid	\
 	t_getppid	\
 	t_getsid	\
+	t_getuid	\
 	t_isatty	\
 	t_lockf		\
 	t_nice		\
@@ -77,6 +78,9 @@ t_getpid: t_getpid.c
 
 t_getppid: t_getppid.c
 	$(CC) $(CCFLAGS) $(LIB) t_getppid.c -o t_getppid
+
+t_getuid: t_getuid.c
+	$(CC) $(CCFLAGS) $(LIB) t_getuid.c -o t_getuid
 
 t_isatty: t_isatty.c
 	$(CC) $(CCFLAGS) $(LIB) t_isatty.c -o t_isatty
@@ -162,6 +166,9 @@ run:
 
 	@printf "t_getsid: "
 	@-./t_getsid
+
+	@printf "t_getuid: "
+	@-./t_getuid
 
 	@printf "t_isatty: "
 	@-./t_isatty
