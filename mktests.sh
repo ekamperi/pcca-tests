@@ -21,8 +21,8 @@ EOF
 populatesandbox()
 {
     # Create unresolvable symbolic links
-    ln -s "loop2" "$1/loop"
-    ln -s "loop" "$1/loop2"
+    ln -s "infloop2" "$1/infloop"
+    ln -s "infloop" "$1/infloop2"
 
     # Create file with full permissions
     touch "$1/file777"
