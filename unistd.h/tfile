@@ -10,6 +10,7 @@ t_gethostid
 t_gethostname
 t_getlogin
 t_getlogin_r
+t_getpgid
 t_isatty
 t_lockf
 t_nice
