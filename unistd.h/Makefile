@@ -13,6 +13,7 @@ all:	t_access	\
 	t_getpgrp	\
 	t_getpid	\
 	t_getppid	\
+	t_getsid	\
 	t_isatty	\
 	t_lockf		\
 	t_nice		\
@@ -101,6 +102,9 @@ t_readlink: t_readlink.c
 tcsetpgrp: t_tcsetpgrp.c
 	$(CC) $(CCFLAGS) $(LIB) t_tcsetpgrp.c -o t_tcsetpgrp
 
+t_getsid: t_getsid.c
+	$(CC) $(CCFLAGS) $(LIB) t_getsid.c -o t_getsid
+
 t_ttyname: t_ttyname.c
 	$(CC) $(CCFLAGS) $(LIB) t_ttyname.c -o t_ttyname
 
@@ -155,6 +159,9 @@ run:
 
 	@printf "t_getppid: "
 	@-./t_getppid
+
+	@printf "t_getsid: "
+	@-./t_getsid
 
 	@printf "t_isatty: "
 	@-./t_isatty
