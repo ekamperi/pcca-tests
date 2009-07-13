@@ -9,19 +9,20 @@ int main(int argc, char *argv[])
 {
 	int fd;
 
-	/* valid tty */
-	fd = open("/dev/ttyp0", O_RDONLY);
-	assert(fd >= 0);
+	/* Valid tty. */
+	/* XXX: Should we allocate a pty or can we safely rely on /dev/tty ? */
+	fd = open("/dev/tty", O_RDONLY);
+	assert(fd != -1);
 	assert(ttyname(fd) != NULL);
 	close(fd);
 
-	/* invalild tty */
+	/* Invalild tty. */
 	fd = open("sandbox/notatty", O_RDONLY);
 	assert(fd != -1);
 	assert(ttyname(fd) == NULL && errno == ENOTTY);
 	assert(close(fd) != -1);
 
-	/* invalid fd */
+	/* Invalid fd. */
 	fd = -1;
 	assert(ttyname(fd) == NULL && errno == EBADF);
 
