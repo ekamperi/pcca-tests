@@ -35,8 +35,8 @@ int main(void)
 		 * belongs to another session. This may optionally fail with
 		 * EPERM.
 		 * By the time I write this, only OpenBSD "succeeds to fail".
-		 * {Free, Net, DragonFly}, Linux and Solaris 10 all let you
-		 * get away with it.
+		 * {Free, Net, DragonFly}BSD, Linux and Solaris 10 all let you
+		 * get away with it. Which, I repeat, is ok by POSIX.
 		 *
 		 * openbsd/sys/kern/kern_prot.c#101
 		 */
