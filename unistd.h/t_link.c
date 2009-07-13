@@ -25,7 +25,7 @@ int main(void)
 	assert(rv == -1 && errno == EEXIST);
 
 	/* The `path2' argument' refers to a symbolic link. */
-	rv = link("sandbox/file777", "sandbox/loop");
+	rv = link("sandbox/file777", "sandbox/fileloop");
 
 	printf("passed\n");
 
