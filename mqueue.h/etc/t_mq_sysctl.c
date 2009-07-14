@@ -19,8 +19,8 @@ int main(void)
 	 * For every sysctl variable, read its value.
 	 *
 	 * In order to just read (ie, not set) the value of a sysctl variable,
-	 * we pass NULL, 0 for newp, newlen as described in sysctl(3).5H
-	 **/
+	 * we pass NULL, 0 for newp, newlen as described in sysctl(3).
+	 */
 	for (i = 0; i < sizeof(sysctlnames) / sizeof(char *); i++) {
 		assert(sysctlbyname(sysctlnames[i], &oldval, &oldsize, NULL, 0)
 		    != -1);
