@@ -17,6 +17,7 @@ t_getppid
 t_getsid
 t_getuid
 t_isatty
+t_link
 t_lockf
 t_nice
 t_nice_thr
