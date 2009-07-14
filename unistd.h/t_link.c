@@ -26,6 +26,28 @@ int main(void)
 
 	/* The `path2' argument' refers to a symbolic link. */
 	rv = link("sandbox/file777", "sandbox/fileloop");
+	assert(rv == -1 && errno == EEXIST);
+
+#ifdef NOTYET
+	/*
+	 * A loop exists in symbolic links encountered during resolution
+	 * of the path1 or path2 argument.
+	 */
+	rv = link("sandbox/infloop", "sandbox/whatever");
+	assert(rv == -1 && errno == ELOOP);
+
+	rv = link("sandbox/file777", "sandbox/infloop");
+	assert(rv == -1 && errno == ELOOP);
+#endif
+
+	/* XXX: Add test for ENAMETOOLONG. */
+
+	/* A component of either path prefix is not a directory. */
+	rv = link("sandbox/notadir/whatever", "sandbox/whatever");
+	assert(rv == -1 && errno == ENOTDIR);
+
+	rv = link("sandbox/file777", "sandbox/notadir/whatever");
+	assert(rv == -1 && errno == ENOTDIR);
 
 	printf("passed\n");
 
