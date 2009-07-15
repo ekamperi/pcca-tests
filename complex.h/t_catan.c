@@ -63,7 +63,7 @@ int main(void)
 
 	for (rl = -10.0; rl < 10.0; rl += 0.04) {
 		for (im = -10.0; im < 10.0; im += 0.03) {
-			z =  catan(rl + im*I);
+			z = catan(rl + im*I);
 			assert(creal(z) >= -M_PI_2);
 			assert(creal(z) <=  M_PI_2);
 		}
