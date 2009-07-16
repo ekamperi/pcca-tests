@@ -29,7 +29,7 @@ int main(void)
 	}
 
 	/*
-	 * Add an extra check based on the identify:
+	 * Add an extra check based on the identity:
 	 * cexp(I * z) = ccos(z) + I * csin(z)
 	 */
 	double rl, im;
