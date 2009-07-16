@@ -46,7 +46,7 @@ int main(void)
 	 * NOTES: The glibc implementation is broken and does something entirely
 	 * different.
 	 *
-	 * It seems that it returns 2x/sqrt(x^2+y^2+1) + I 2y/sqrt(x^2+y^2+1),
+	 * It seems that it returns 2x/(x^2+y^2+1) + I 2y/(x^2+y^2+1),
 	 * but the code doesn't have any comment on why it does that.
 	 * http://sources.redhat.com/cgi-bin/cvsweb.cgi/libc/math/s_cproj.c
 	 * ?cvsroot=glibc
