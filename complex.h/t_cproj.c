@@ -53,7 +53,7 @@ int main(void)
 	 */
 	for (rl = -10.0; rl < 10.0; rl += 0.04) {
 		for (im = -10.0; im < 10.0; im += 0.03) {
-			z = clog(rl + im*I);
+			z = rl + im*I;
 			assert(fabs(creal(cproj(z)) - creal(z)) < 0.001);
 			assert(fabs(cimag(cproj(z)) - cimag(z)) < 0.001);
 		}
