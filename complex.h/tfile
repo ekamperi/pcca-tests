@@ -3,6 +3,7 @@ t_cacos
 t_casin
 t_catan
 t_ccos
+t_cexp
 t_cimag
 t_clog
 t_conj
