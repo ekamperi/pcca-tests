@@ -46,10 +46,10 @@ int main(void)
 	 * NOTES: The glibc implementation is broken and does something entirely
 	 * different.
 	 *
-	 * It seems that it returns 2x/(x^2+y^2+1) + I 2y/(x^2+y^2+1),
-	 * but the code doesn't have any comment on why it does that.
-	 * http://sources.redhat.com/cgi-bin/cvsweb.cgi/libc/math/s_cproj.c
-	 * ?cvsroot=glibc
+	 * But neither the man page nor any comments in code say what it actually
+	 * does. Anyway, after some digging I found that it does a stereographic
+	 * projection from the complex plane to a unitary sphere in R^3. The new
+	 * complex number is 2x/(x^2+y^2+1) + I2y/(x^2+y^2+1).
 	 */
 	for (rl = -10.0; rl < 10.0; rl += 0.04) {
 		for (im = -10.0; im < 10.0; im += 0.03) {
