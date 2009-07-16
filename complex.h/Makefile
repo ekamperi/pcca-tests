@@ -11,7 +11,8 @@ all:	t_carg	\
 	t_creal	\
 	t_csin	\
 	t_csqrt	\
-	t_ctan
+	t_ctan	\
+	t_imgconstant
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -63,6 +64,9 @@ t_csqrt: t_csqrt.c
 t_ctan: t_ctan.c
 	$(CC) $(CCFLAGS) $(LIB) t_ctan.c -o t_ctan
 
+t_imgconstant: t_imgconstant.c
+	$(CC) $(CCFLAGS) $(LIB) t_imgconstant.c -o t_imgconstant
+
 clean:
 	git clean -f
 
@@ -108,3 +112,6 @@ run:
 
 	@printf "t_ctan: "
 	@-./t_ctan
+
+	@printf "t_imgconstant: "
+	@-./t_imgconstant
