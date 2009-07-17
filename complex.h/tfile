@@ -6,6 +6,7 @@ t_ccos
 t_cexp
 t_cimag
 t_clog
+t_complex
 t_conj
 t_cpow
 t_creal
