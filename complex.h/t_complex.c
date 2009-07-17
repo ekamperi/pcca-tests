@@ -29,8 +29,8 @@ int main(void)
 		.z = w
 	};
 
-	assert(fabs(REAL(z) - 1.23 < 0.001));
-	assert(fabs(IMAG(z) - 4.26 < 0.001));
+	assert(fabs(REAL(z) - 1.23) < 0.01);
+	assert(fabs(IMAG(z) - 4.56) < 0.01);
 
 	printf("passed\n");
 
