@@ -9,6 +9,7 @@ all:	t_carg	\
 	t_conj	\
 	t_complex	\
 	t_cpow	\
+	t_cproj	\
 	t_creal	\
 	t_csin	\
 	t_csqrt	\
@@ -55,6 +56,9 @@ t_conj: t_conj.c
 
 t_cpow: t_cpow.c
 	$(CC) $(CCFLAGS) $(LIB) t_cpow.c -o t_cpow
+
+t_cproj: t_cproj.c
+	$(CC) $(CCFLAGS) $(LIB) t_cproj.c -o t_cproj
 
 t_creal: t_creal.c
 	$(CC) $(CCFLAGS) $(LIB) t_creal.c -o t_creal
@@ -107,6 +111,9 @@ run:
 
 	@printf "t_cpow: "
 	@-./t_cpow
+
+	@printf "t_cproj: "
+	@-./t_cproj
 
 	@printf "t_creal: "
 	@-./t_creal

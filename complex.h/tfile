@@ -9,6 +9,7 @@ t_clog
 t_complex
 t_conj
 t_cpow
+t_cproj
 t_creal
 t_csin
 t_csqrt
