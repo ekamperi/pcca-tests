@@ -14,7 +14,8 @@ all:	t_carg	\
 	t_csin	\
 	t_csqrt	\
 	t_ctan	\
-	t_imgconstant
+	t_imgconstant	\
+	t_signbit
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -75,6 +76,9 @@ t_ctan: t_ctan.c
 t_imgconstant: t_imgconstant.c
 	$(CC) $(CCFLAGS) $(LIB) t_imgconstant.c -o t_imgconstant
 
+t_signbit: t_signbit.c
+	$(CC) $(CCFLAGS) $(LIB) t_signbit.c -o t_signbit
+
 clean:
 	git clean -f
 
@@ -129,3 +133,6 @@ run:
 
 	@printf "t_imgconstant: "
 	@-./t_imgconstant
+
+	@printf "t_signbit: "
+	@-./t_signbit
