@@ -24,15 +24,15 @@ typedef union {
 
 int main(void)
 {
+	double complex w = 1.23 + 4.56 * I;
 	double_complex z = {
-		.a[0] = 1.23,
-		.a[1] = 4.56
+		.z = w
 	};
 
-	double complex w = z.z;
-
 	assert(fabs(REAL(z) - 1.23 < 0.001));
-	assert(fabs(REAL(z) - 4.26 < 0.001));
+	assert(fabs(IMAG(z) - 4.26 < 0.001));
+
+	printf("passed\n");
 
 	return (EXIT_SUCCESS);
 }
