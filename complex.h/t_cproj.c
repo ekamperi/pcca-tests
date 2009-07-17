@@ -59,6 +59,22 @@ int main(void)
 		}
 	}
 
+	/* (inf, bounded) */
+	z = INFINITY + I;
+	assert(isinf(creal(cproj(z))));
+	assert(fabs(cimag(cproj(z)) - copysign(0.0, cimag(z))) < 0.001);
+
+	/* (bounded, inf) */
+	z = 1.0 + INFINITY * I;
+	assert(isinf(creal(cproj(z))));
+	assert(fabs(cimag(cproj(z)) - copysign(0.0, cimag(z))) < 0.001);
+
+	/* XXX: (nan, bounded) */
+	/* XXX: (bounded, nan) */
+
+	/* XXX: (nan, inf) */
+	/* XXX: (inf, nan) */
+
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
