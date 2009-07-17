@@ -7,6 +7,7 @@ all:	t_carg	\
 	t_cimag \
 	t_clog	\
 	t_conj	\
+	t_complex	\
 	t_cpow	\
 	t_creal	\
 	t_csin	\
@@ -19,7 +20,7 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
-	-Wswitch -Wbad-function-cast -g
+	-Wswitch -Wbad-function-cast -g -std=c99
 LIB=-lm
 
 t_carg: t_carg.c
@@ -45,6 +46,9 @@ t_cimag: t_cimag.c
 
 t_clog: t_clog.c
 	$(CC) $(CCFLAGS) $(LIB) t_clog.c -o t_clog
+
+t_complex: t_complex.c
+	$(CC) $(CCFLAGS) $(LIB) t_complex.c -o t_complex
 
 t_conj: t_conj.c
 	$(CC) $(CCFLAGS) $(LIB) t_conj.c -o t_conj
@@ -94,6 +98,9 @@ run:
 
 	@printf "t_clog: "
 	@-./t_clog
+
+	@printf "t_complex: "
+	@-./t_complex
 
 	@printf "t_conj: "
 	@-./t_conj
