@@ -11,4 +11,4 @@ then
     exit 1
 fi
 
-find . -name "$1" -exec cat {}/tfile \; 2>/dev/null
+find . -name "$1" -exec cat {}/tfile \; 2>/dev/null | sort
