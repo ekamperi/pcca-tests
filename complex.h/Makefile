@@ -1,4 +1,5 @@
-all:	t_carg	\
+all:	t_cabs	\
+	t_carg	\
 	t_cacos	\
 	t_casin	\
 	t_catan	\
@@ -24,6 +25,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g -std=c99
 LIB=-lm
+
+t_cabs: t_cabs.c
+	$(CC) $(CCFLAGS) $(LIB) t_cabs.c -o t_cabs
 
 t_carg: t_carg.c
 	$(CC) $(CCFLAGS) $(LIB) t_carg.c -o t_carg
@@ -83,6 +87,9 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_cabs: "
+	@-./t_cabs
+
 	@printf "t_carg: "
 	@-./t_carg
 
