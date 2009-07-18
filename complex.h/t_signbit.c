@@ -46,7 +46,7 @@ int main(void)
 	xf = NAN;	(void)signbit(xf);
 	xd = NAN;	(void)signbit(xd);
 	xld = NAN;	(void)signbit(xld);
-#endif	/* ! NAN */
+#endif	/* NAN */
 
 	/* If zero is unsigned, it is treated as positive. */
 	xf = 0.0;	assert(signbit(xf) == 0);
@@ -62,7 +62,7 @@ int main(void)
 	xf = INFINITY;	assert(signbit(xf) == 0);
 	xd = INFINITY;	assert(signbit(xd) == 0);
 	xld = INFINITY;	assert(signbit(xld) == 0);
-#endif	/* ! INFINITY */
+#endif	/* INFINITY */
 
 	/*
 	 * 7.1.2.3
@@ -71,17 +71,17 @@ int main(void)
 #ifdef	HUGE_VAL
 	xd = HUGE_VAL;
 	assert(signbit(xld) == 0);
-#endif	/* ! HUGE_VAL */
+#endif	/* HUGE_VAL */
 
 #ifdef	HUGE_VALF
 	xf = HUGE_VALF;
 	assert(signbit(xf) == 0);
-#endif	/* ! HUGE_VALF */
+#endif	/* HUGE_VALF */
 
 #ifdef	HUGE_VALL
 	xld = HUGE_VALL;
 	assert(signbit(xld) == 0);
-#endif	/* ! HUVE_VALL */
+#endif	/* HUVE_VALL */
 
 	printf("passed\n");
 
