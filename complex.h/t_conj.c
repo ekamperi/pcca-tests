@@ -33,11 +33,15 @@
 
 int main(void)
 {
-	double complex z1 = 3.513 + 4.596 * I;
-	double complex z2 = 3.513 - 4.596 * I;
+        double rl, im;
+        double complex z;
 
-	assert(fabs(cimag(conj(z1)) + 4.596) < 0.001);
-	assert(fabs(cimag(conj(z2)) - 4.596) < 0.001);
+        for (rl = -10.0; rl < 10.0; rl += 0.04) {
+		for (im = -10.0; im < 10.0; im += 0.03) {
+			z = rl + im*I;
+			assert(fabs(cimag(conj(z)) + cimag(z)) < 0.00001);
+		}
+        }
 
 	printf("passed\n");
 
