@@ -61,7 +61,8 @@ int main(void)
 	}
 
 	/*
-	 * The result across the imaginary axis is in the range [-ipi, +ipi].
+	 * The result is in the range of non-negative values along the real
+	 * axis and in the interval [-ipi, +ipi] along the imaginary axis.
 	 */
 	double rl, im;
 	double complex z;
@@ -69,6 +70,7 @@ int main(void)
 	for (rl = -10.0; rl < 10.0; rl += 0.04) {
 		for (im = -10.0; im < 10.0; im += 0.03) {
 			z = cacosh(rl + im*I);
+			assert(creal(z) >= 0.0);
 			assert(fabs(cimag(z)) - M_PI < 0.00001);
 		}
 	}
