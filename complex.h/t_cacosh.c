@@ -70,7 +70,7 @@ int main(void)
 	for (rl = -10.0; rl < 10.0; rl += 0.04) {
 		for (im = -10.0; im < 10.0; im += 0.03) {
 			z = cacosh(rl + im*I);
-			assert(creal(z) >= 0.0);
+			assert(creal(z) >= 0.0 || fabs(creal(z)) < 0.00001);
 			assert(fabs(cimag(z)) - M_PI < 0.00001);
 		}
 	}
