@@ -5,6 +5,7 @@ t_cacosh
 t_casin
 t_casinh
 t_catan
+t_catanh
 t_ccos
 t_cexp
 t_cimag
