@@ -2,6 +2,7 @@ t_cabs
 t_carg
 t_cacos
 t_casin
+t_casinh
 t_catan
 t_ccos
 t_cexp
