@@ -1,6 +1,7 @@
 all:	t_cabs	\
 	t_carg	\
 	t_cacos	\
+	t_cacosh	\
 	t_casin	\
 	t_casinh	\
 	t_catan	\
@@ -35,6 +36,9 @@ t_carg: t_carg.c
 
 t_cacos: t_cacos.c
 	$(CC) $(CCFLAGS) $(LIB) t_cacos.c -o t_cacos
+
+t_cacosh: t_cacosh.c
+	$(CC) $(CCFLAGS) $(LIB) t_cacosh.c -o t_cacosh
 
 t_casin: t_casin.c
 	$(CC) $(CCFLAGS) $(LIB) t_casin.c -o t_casin
@@ -99,6 +103,9 @@ run:
 
 	@printf "t_cacos: "
 	@-./t_cacos
+
+	@printf "t_cacosh: "
+	@-./t_cacosh
 
 	@printf "t_casin: "
 	@-./t_casin
