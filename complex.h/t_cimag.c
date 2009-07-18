@@ -33,9 +33,17 @@
 
 int main(void)
 {
-	double complex z = 3.513 + 4.596 * I;
+	double rl, im;
+	double complex z;
 
-	assert(fabs(cimag(z) - 4.596) < 0.001);
+	for (rl = -10.0; rl < 10.0; rl += 0.04) {
+		for (im = -10.0; im < 10.0; im += 0.03) {
+			z = rl + im*I;
+			assert(fabs(cimag(z) - im) < 0.00001);
+		}
+	}
+
+
 
 	printf("passed\n");
 
