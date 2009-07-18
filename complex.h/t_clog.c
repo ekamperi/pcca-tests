@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Don't be too harsh with symbols. */
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif /* !M_PI */
+
 struct tentry {
 	double complex x;	/* Input */
 	double complex y;	/* Log output */
