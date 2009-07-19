@@ -65,7 +65,7 @@ populatesandbox()
 
 buildsandboxes()
 {
-    for dir in `find "$1" -type d -name "*.h"`
+    for dir in `find "$1" -type d -name "*.h" 2>/dev/null`
       do
       if [ -f "$dir/need-sandbox" ]
 	  then
