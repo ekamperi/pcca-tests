@@ -5,7 +5,7 @@ STARTDIR="."	# top level directory to start from when running tests
 usage()
 {
     cat <<EOF
-Usage: `basename $0` -cbrs [directory]
+Usage: `basename $0` -cbrsy [directory]
 -c    Clean stale files from previous builds.
 -b    Build tests from sources.
 -r    Run tests.
