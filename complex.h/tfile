@@ -18,5 +18,6 @@ t_creal
 t_csin
 t_csqrt
 t_ctan
+t_ident
 t_imgconstant
 t_signbit
