@@ -101,11 +101,11 @@ runtests()
 
 buildtests()
 {
-    for dir in `find "$1" -name .git -prune -o -type d -a ! -name .`
+    for dir in `find "$1" -name .git -prune -o -type d -a ! -name . 2>/dev/null`
     do
 	OLDPWD=`pwd`
 
-	cd "$dir"
+	cd "$dir" 2>/dev/null
 
 	# Tests must come with a Makefile.
 	if [ -f "Makefile" ]
