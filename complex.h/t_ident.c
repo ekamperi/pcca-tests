@@ -31,11 +31,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Don't be too harsh with symbols. */
-#ifndef M_PI_2
-#define M_PI_2 1.57079632679489661923
-#endif
-
 int main(void)
 {
 	double rl, im;
@@ -43,7 +38,7 @@ int main(void)
 	int n;
 
 	/*
-	 * Solaris 10 libm's survives for even larger values of n.
+	 * Solaris 10 libm's survives even larger values of n.
 	 * Whereas {Net, DragonFly}BSD and glibc not.
 	 */
 	for (rl = -5.0; rl < 5.0; rl += 0.04) {
