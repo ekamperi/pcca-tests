@@ -35,7 +35,7 @@ do
     ./"$task" &
     sleep 0.5
 
-    if jobs -l %+ >/dev/null 2>/dev/null
+    if jobs -l %+ 2>/dev/null | grep -v -i done >/dev/null
     then
         sleep 10
 	if kill -9 $(jobid %+ 2>/dev/null) >/dev/null 2>/dev/null
