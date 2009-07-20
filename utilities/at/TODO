@@ -1,0 +1,4 @@
+* print job dates upon job submission
+* default queue is 'c', alhtough it should be 'a'
+
+http://bugs.dragonflybsd.org/issue1432
