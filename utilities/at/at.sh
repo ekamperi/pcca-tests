@@ -50,12 +50,14 @@ USER=`who am i | awk '{ print $1 }'`
 # username is contained in both files.
 PRIV=0
 
-if [ -f "$ATPATH/at.allow" ]; then
+# We use -r operand because the file may exist, but we may not be able to read it.
+# Eg, in NetBSD /var/at/at.* have 600 permissions.
+if [ -r "$ATPATH/at.allow" ]; then
     if grep $USER "$ATPATH/at.allow" >/dev/null; then
 	PRIV=1
     fi
 else
-    if [ -f "$ATPATH/at.deny" ]; then
+    if [ -r "$ATPATH/at.deny" ]; then
 	if ! grep $USER "$ATPATH/at.deny" >/dev/null; then
 	    PRIV=1
 	fi
