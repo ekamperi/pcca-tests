@@ -73,7 +73,7 @@ assert "[ $PRIV -eq 1 ]" $LINENO
 # form "job %s at %s\n", at_job_id, <date>". That's why we redirect stderr to
 # stdout before pipe-ing grep(1).
 OUTPUT=`at -f "$ATJOBS" 00:00 2>&1`
-echo "$OUTPUT" | !grep "00:00:00" >/dev/null && exit 1
+echo "$OUTPUT" | ! grep "00:00:00" >/dev/null && exit 1
 
 # Try to remove previous job, but for this we need the at job id.
 ATJOBID=`echo "$OUTPUT" | awk '/[Jj]ob*[a-z0-9.]/{ print $2 }' | head -n1`
