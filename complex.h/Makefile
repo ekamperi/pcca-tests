@@ -16,6 +16,7 @@ all:	t_cabs	\
 	t_cproj	\
 	t_creal	\
 	t_csin	\
+	t_csinh	\
 	t_csqrt	\
 	t_ctan	\
 	t_ident	\
@@ -83,6 +84,9 @@ t_creal: t_creal.c
 
 t_csin: t_csin.c
 	$(CC) $(CCFLAGS) $(LIB) t_csin.c -o t_csin
+
+t_csinh: t_csinh.c
+	$(CC) $(CCFLAGS) $(LIB) t_csinh.c -o t_csinh
 
 t_csqrt: t_csqrt.c
 	$(CC) $(CCFLAGS) $(LIB) t_csqrt.c -o t_csqrt
@@ -156,6 +160,9 @@ run:
 
 	@printf "t_csin: "
 	@-./t_csin
+
+	@printf "t_csinh: "
+	@-./t_csinh
 
 	@printf "t_csqrt: "
 	@-./t_csqrt

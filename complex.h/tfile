@@ -16,6 +16,7 @@ t_cpow
 t_cproj
 t_creal
 t_csin
+t_csinh
 t_csqrt
 t_ctan
 t_ident
