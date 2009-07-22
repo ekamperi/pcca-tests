@@ -7,6 +7,7 @@ t_casinh
 t_catan
 t_catanh
 t_ccos
+t_ccosh
 t_cexp
 t_cimag
 t_clog
