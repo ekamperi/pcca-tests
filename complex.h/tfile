@@ -20,6 +20,7 @@ t_csin
 t_csinh
 t_csqrt
 t_ctan
+t_ctanh
 t_ident
 t_imgconstant
 t_signbit

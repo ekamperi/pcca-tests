@@ -20,6 +20,7 @@ all:	t_cabs	\
 	t_csinh	\
 	t_csqrt	\
 	t_ctan	\
+	t_ctanh	\
 	t_ident	\
 	t_imgconstant	\
 	t_signbit
@@ -97,6 +98,9 @@ t_csqrt: t_csqrt.c
 
 t_ctan: t_ctan.c
 	$(CC) $(CCFLAGS) $(LIB) t_ctan.c -o t_ctan
+
+t_ctanh: t_ctanh.c
+	$(CC) $(CCFLAGS) $(LIB) t_ctanh.c -o t_ctanh
 
 t_ident: t_ident.c
 	$(CC) $(CCFLAGS) $(LIB) t_ident.c -o t_ident
@@ -176,6 +180,9 @@ run:
 
 	@printf "t_ctan: "
 	@-./t_ctan
+
+	@printf "t_ctanh: "
+	@-./t_ctanh
 
 	@printf "t_ident: "
 	@-./t_ident
