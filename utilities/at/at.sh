@@ -25,12 +25,17 @@
 # OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-assert()
+# This is the default exit status. Zero (0) signifies 'pass'.
+FAIL=0
+
+echof()
 {
-    if ! $1; then
-	echo "Assertion failed: $1, line $2."
-	exit 1
-    fi
+    echo $1
+
+    # By default, variables referenced from within a function,
+    # refer to the global namespace, unless the 'local' keyword
+    # is prepended to them.
+    FAIL=1
 }
 
 # Issue 7 of the POSIX standard states that the directory where at.{allow, deny}
@@ -68,19 +73,35 @@ fi
 [ "$USER" = "root" ] && PRIV=1
 
 # Make sure we are privileged enough.
-assert "[ $PRIV -eq 1 ]" $LINENO
+if  [ ! $PRIV -eq 1 ]; then
+    echo "at: We are not (or we couldn't determine if we are) privileged enough."
+    exit 1
+fi
 
 # Try to register a job.
 # After the submission of a job, at(1) must print to _stderr_ a string of the
-# form "job %s at %s\n", at_job_id, <date>". That's why we redirect stderr to
+# form "job %s at %s\n", at_job_id, <date>". That said, we redirect stderr to
 # stdout before pipe-ing grep(1).
 OUTPUT=`at -f "$ATJOBS" 00:00 2>&1`
-echo "$OUTPUT" | ! grep "00:00:00" >/dev/null && exit 1
+echo "$OUTPUT" | grep -q "00:00:00"
+if [ ! $? -eq 0 ]; then
+    echof "at: Job datetime isn't printed in stderr upon job submission."
+fi
 
-# Try to remove previous job, but for this we need the at job id.
+# Extract the at-job id as we will need it later.
 ATJOBID=`echo "$OUTPUT" | awk '/[Jj]ob*[a-z0-9.]/{ print $2 }' | head -n1`
-assert "[ ! -z $ATJOBID ]" $LINENO
-at -r "$ATJOBID"
+
+# By default at-jobs are scheduled in `a' queue.
+if ! at -l -q a | grep -q "$ATJOBID"; then
+    echof "at: Job $ATJOBID wasn't put in 'a' queue."
+fi
+
+# Try to remove previous job.
+if [ ! -z $ATJOBID ]; then
+    at -r "$ATJOBID"
+else
+    echof "at: Job id isn't printed in stderr upon job submission."
+fi
 
 # Done
-echo "passed"
+[ $FAIL -eq 0 ] && echo "passed"
