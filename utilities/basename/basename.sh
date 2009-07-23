@@ -73,7 +73,7 @@ if [ ! "$(basename /foo/bar/lala la)" = 'la' ]; then
 fi
 
 # Not finding suffix, shouldn't be considered an error.
-if [ ! $(basename /foo/bar lala) ]; then
+if ! basename /foo/bar lala >/dev/null; then
     echof 'Not finding suffix, should not be considered an error.'
 fi
 
