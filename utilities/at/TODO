@@ -1,7 +1,7 @@
 * Print job dates upon job submission.
-* Default queue is 'c', alhtough it should be 'a'.
+  http://bugs.dragonflybsd.org/issue1432
+* Default queue is 'c', although it should be 'a'. Solaris gets it right.
 * Every job should either be submitted for today or tomorrow, if no date is
   given. So "at: trying to travel back in time" should never be printed.
   Solaris gets it right.
-
-http://bugs.dragonflybsd.org/issue1432
+  http://www.netbsd.org/cgi-bin/query-pr-single.pl?number=41762
