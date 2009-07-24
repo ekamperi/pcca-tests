@@ -30,7 +30,7 @@ FAIL=0
 
 echof()
 {
-    echo $1
+    echo "$0: $1"
 
     # By default, variables referenced from within a function,
     # refer to the global namespace, unless the 'local' keyword
@@ -74,7 +74,7 @@ fi
 
 # Make sure we are privileged enough.
 if  [ ! $PRIV -eq 1 ]; then
-    echo "at: We are not (or we couldn't determine if we are) privileged enough."
+    echo "$0: We are not (or we couldn't determine if we are) privileged enough."
     exit 1
 fi
 
@@ -85,7 +85,7 @@ fi
 OUTPUT=`at -f "$ATJOBS" 00:00 2>&1`
 echo "$OUTPUT" | grep -q "00:00:00"
 if [ ! $? -eq 0 ]; then
-    echof "at: Job datetime isn't printed in stderr upon job submission."
+    echof 'Job datetime is not printed in stderr upon job submission.'
 fi
 
 # Extract the at-job id as we will need it later.
@@ -93,14 +93,14 @@ ATJOBID=`echo "$OUTPUT" | awk '/[Jj]ob*[a-z0-9.]/{ print $2 }' | head -n1`
 
 # By default at-jobs are scheduled in `a' queue.
 if ! at -l -q a | grep -q "$ATJOBID"; then
-    echof "at: Job $ATJOBID wasn't put in 'a' queue."
+    echof "Job $ATJOBID wasn't put in 'a' queue."
 fi
 
 # Try to remove previous job.
 if [ ! -z $ATJOBID ]; then
     at -r "$ATJOBID"
 else
-    echof "at: Job id isn't printed in stderr upon job submission."
+    echof 'Job id is not printed in stderr upon job submission.'
 fi
 
 # Done
