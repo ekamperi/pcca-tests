@@ -44,6 +44,15 @@ if [ ! "$(dirname /)" = '/' ] || [ ! "$(dirname //)" = '/' ]; then
     echof 'Single slash character should be returned.'
 fi
 
+# If string is // it is implementation defined whether the following apply:
+# - If there are any trailing <slash> characters in string, they shall be
+#   removed.
+# - If the remaining string is empty, string shall be set to a single <slash>
+#   character.
+if [ ! "$(dirname //)" = '/' ] && [ ! "$(dirname //)" = '//' ]; then
+    echof 'dirname on // should yield either / or //'.
+fi
+
 # If there are any trailing <slash> characters in string, they shall be
 # removed.
 if [ ! "$(dirname /foo/bar/)" = "$(dirname /foo/bar)" ]; then
@@ -54,6 +63,19 @@ fi
 # single <period> character.
 if [ ! "$(dirname foo)" = '.' ]; then
     echof 'Period should be returned for empty string.'
+fi
+
+# A few other examples taken from Issue 7.
+if [ ! "$(dirname /foo)" = '/' ]; then
+    echof 'dirname on /foo should yield /.'
+fi
+
+if [ ! "$(dirname /foo/bar)" = '/foo' ]; then
+    echof 'dirname on /foo/bar should yield /foo.';
+fi
+
+if [ ! "$(dirname foo/bar)" = 'foo' ]; then
+    echof 'dirname on foo/bar should yield foo.';
 fi
 
 # Done
