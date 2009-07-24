@@ -30,7 +30,7 @@ FAIL=0
 
 echof()
 {
-    echo $1
+    echo "$0: $1"
 
     # By default, variables referenced from within a function,
     # refer to the global namespace, unless the 'local' keyword
@@ -39,9 +39,9 @@ echof()
 }
 
 if [ $LINENO -ne 41 ]; then
-    echof "$0: LINENO built-in var is either not implemented or "
-    echo  "$0: is affected by comments and/or newlines."
-    echo  "$0: Subsequent output may give false negative results."
+    echof 'LINENO built-in var is either not implemented or '
+    echof 'is affected by comments and/or newlines.'
+    echof 'Subsequent output may give false negative results.'
 fi
 
 # We now check for any side effect of continuation lines.
@@ -54,7 +54,7 @@ echo 'This is the beginning' \
      'of a continuation line.' >/dev/null
 
 if [ $LINENO -ne 56 ]; then
-    echof "$0: LINENO built-in var is affected by continuation lines."
+    echof 'LINENO built-in var is affected by continuation lines.'
 fi
 
 # Done
