@@ -30,7 +30,7 @@ FAIL=0
 
 echof()
 {
-    echo $1
+    echo "$0: $1"
 
     # By default, variables referenced from within a function,
     # refer to the global namespace, unless the 'local' keyword
