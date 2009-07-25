@@ -1,0 +1,2 @@
+* Add a test case for id(1).
+* Document that our -p -P options are extensions to the standard.
