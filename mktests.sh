@@ -118,7 +118,8 @@ buildtests()
 	    if [ ! -z "$build" ]
 	    then
 		# Continue processing after errors (only for targets that
-		# aren't affected).
+		# aren't affected). This is actually an option mandated
+		# by POSIX, so we can use it safely.
 		make -k
 	    fi
 	fi
