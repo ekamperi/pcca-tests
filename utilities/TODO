@@ -2,3 +2,4 @@
   GNU project for it: http://www.gnu.org/software/cflow .
 * We miss [XSI] cxref utility. Solaris 10 has it.
 * We miss [XSI] delta utility. Solaris 10 has it.
+* We miss [XSI] fuser utility.
