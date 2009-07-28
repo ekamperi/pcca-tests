@@ -1,0 +1,9 @@
+dirent.h
+
+closedir
+opendir
+readdir
+readdir_r
+rewinddir
+seekdir
+telldir
