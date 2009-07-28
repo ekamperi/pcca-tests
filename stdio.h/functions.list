@@ -1,3 +1,5 @@
+stdio.h
+
 clearerr
 ctermid
 fclose
