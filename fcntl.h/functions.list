@@ -1,0 +1,7 @@
+fcntl.h
+
+creat
+fcntl
+open
+posix_fadvise
+posix_fallocate
