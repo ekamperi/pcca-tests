@@ -5,11 +5,12 @@ STARTDIR="."	# top level directory to start from when running tests
 usage()
 {
     cat <<EOF
-Usage: `basename $0` -cbrsy [directory]
+Usage: `basename $0` -cbrsmy [directory]
 -c    Clean stale files from previous builds.
 -b    Build tests from sources.
 -r    Run tests.
 -s    Construct sandboxes.
+-m    Run man pages' tests.
 -y    Run symbols' tests.
 -h    Print this help message.
 At least one of the above options must be specified.
@@ -81,6 +82,14 @@ buildsandboxes()
     done
 }
 
+runmanpages()
+{
+    echo 'A missing man page may be due to a missing MLINK' \
+         'or an unimplemented function.'
+    echo
+    find "$1" -type f -name "functions.list" -exec ./chkmanpages.sh {} \; 2>/dev/null
+}
+
 runsymbols()
 {
     # For every spec file in tree, pass it to symgen.pl script.
@@ -129,7 +138,7 @@ buildtests()
 }
 
 # Parse user supplied arguments
-while getopts "cbrsyh" f
+while getopts "cbrsmyh" f
 do
     case $f in
         c)
@@ -143,6 +152,9 @@ do
 	    ;;
 	s)
 	    sandbox=$f
+	    ;;
+	m)
+	    manpages=$
 	    ;;
 	y)
 	    symbols=$f
@@ -162,10 +174,13 @@ then
     STARTDIR=$1
 fi
 
-# At least one of -c, -b, -r, -s, -y options must be set.
-[ -z "$clean"   ] && [ -z "$build"   ] &&
-[ -z "$run"     ] && [ -z "$sandbox" ] &&
-[ -z "$symbols" ] && usage
+# At least one of -c, -b, -r, -s, -m, -y options must be set.
+[ -z "$clean"    ] && [ -z "$build"   ] &&
+[ -z "$run"      ] && [ -z "$sandbox" ] &&
+[ -z "$manpages" ] && [ -z "$symbols" ] && usage
+
+# Man pages' tests
+[ ! -z "manpages" ] && runmanpages "$STARTDIR"
 
 # Symbols' tests
 [ ! -z "$symbols" ] && runsymbols "$STARTDIR"
