@@ -87,9 +87,9 @@ runmanpages()
     echo 'A missing man page may be due to a missing MLINK' \
          'or an unimplemented function.'
     echo
-    # XXX: If we sort, the output is delayed until all headers are examined.
-    find "$1" -type f -name "functions.list" -exec ./chkmanpages.sh {} \; 2>/dev/null \
-	| sort
+    for f in $(find "$1" -type f -name "functions.list" 2>/dev/null | sort); do
+	./chkmanpages.sh "$f"
+    done
 }
 
 runsymbols()
