@@ -6,12 +6,16 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-# First line is header, second is whitespace.
+# First line is header.
 {
     read header
-    read foobar
 
     while read func; do
+	# Skip empty lines
+	if [ -z "$func" ]; then
+	    continue
+	fi
+
 	if ! man $func >/dev/null 2>/dev/null; then
 	    echo "Possibly missing man page for: $header/$func"
 	fi
