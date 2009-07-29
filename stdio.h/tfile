@@ -1,3 +1,4 @@
 t_clearerr
 t_ctermid
 t_fileno
+t_stdio

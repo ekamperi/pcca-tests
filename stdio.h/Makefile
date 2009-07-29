@@ -1,6 +1,7 @@
 all:	t_clearerr	\
 	t_ctermid	\
-	t_fileno
+	t_fileno	\
+	t_stdio
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -18,6 +19,9 @@ t_ctermid: t_ctermid.c
 t_fileno: t_fileno.c
 	$(CC) $(CCFLAGS) $(LIB) t_fileno.c -o t_fileno
 
+t_stdio: t_stdio.c
+	$(CC) $(CCFLAGS) $(LIB) t_stdio.c -o t_stdio
+
 clean:
 	git clean -f
 
@@ -30,3 +34,6 @@ run:
 
 	@printf "t_fileno: "
 	@-./t_fileno
+
+	@printf "t_stdio: "
+	@-./t_stdio
