@@ -47,23 +47,30 @@ int main(void)
 #else
 	size_t N = 25;		/* Lowest possible value for TMP_MAX. */
 #endif
-	const char *dir = "/tmp";
-	const char *pfx = "file";
 	char **files;
 	size_t i, j;
 
 	/*
-	 * Allocate memory for file names.
+	 * Allocate memory for file paths.
 	 * We could use a variable-sized array, but let's stick for now
 	 * to the C89.
 	 */
 	files = malloc(N * sizeof(char *));
 	assert(files != NULL);
 
-	/* Generate the file names. */
+	/* Generate the file paths. */
 	for (i = 0; i < N; i++) {
-		files[i] = tempnam(dir, pfx);
+		files[i] = tempnam("/tmp", "file");
 		assert(files[i] != NULL);
+	}
+
+	/*
+	 * Make sure that all generated paths start with our directory,
+	 * and contain our prefix.
+	 */
+	for (i = 0; i < N; i++) {
+		assert(strncmp(files[i], "/tmp/", 5) == 0);
+		assert(strncmp(files[i] + 5, "file", 4) == 0);
 	}
 
 	/*
