@@ -2,7 +2,7 @@ all:	t_clearerr	\
 	t_ctermid	\
 	t_fileno	\
 	t_stdio		\
-	t_tmpnam
+	t_tempnam
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -23,8 +23,8 @@ t_fileno: t_fileno.c
 t_stdio: t_stdio.c
 	$(CC) $(CCFLAGS) $(LIB) t_stdio.c -o t_stdio
 
-t_tmpnam: t_tmpnam.c
-	$(CC) $(CCFLAGS) $(LIB) t_tmpnam.c -o t_tmpnam
+t_tempnam: t_tempnam.c
+	$(CC) $(CCFLAGS) $(LIB) t_tempnam.c -o t_tempnam
 
 clean:
 	git clean -f
@@ -42,5 +42,5 @@ run:
 	@printf "t_stdio: "
 	@-./t_stdio
 
-	@printf "t_tmpnam: "
-	@-./t_tmpnam
+	@printf "t_tempnam: "
+	@-./t_tempnam
