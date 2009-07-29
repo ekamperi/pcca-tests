@@ -1,0 +1,6 @@
+syslog.h
+
+closelog
+openlog
+setlogmask
+syslog
