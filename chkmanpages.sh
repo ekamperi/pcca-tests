@@ -16,7 +16,7 @@ fi
 	    continue
 	fi
 
-	if ! man $func >/dev/null 2>/dev/null; then
+	if ! man "$func" >/dev/null 2>/dev/null; then
 	    echo "Possibly missing man page for: $header/$func"
 	fi
     done
