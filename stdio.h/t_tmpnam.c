@@ -67,8 +67,12 @@ int main(void)
 	}
 
 	/*
-	 * Even if the implementation uses tmpnam() internally, we are
-	 * guaranteed at least {TMP_MAX} unique filenames.
+	 * If the implementation uses tmpnam() internally, we are still
+	 * guaranteed at least {TMP_MAX} unique filenames. But, to be
+	 * honest, there's no explicit statement in the case where,
+	 * tempnam() doesn't use tmpnam(). Anyway, tmpfile() shares the
+	 * same limit, as tmpnam(), so it's reasonable to assume that
+	 * tempnam() does the same as well.
 	 */
 	for (i = 0; i < N-1; i++)
 		for (j = i+1; j < N; j++)
