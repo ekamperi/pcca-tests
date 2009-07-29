@@ -1,4 +1,5 @@
-all:	t_ctermid \
+all:	t_clearerr	\
+	t_ctermid	\
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -7,6 +8,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 
+t_clearerr: t_clearerr.c
+	$(CC) $(CCFLAGS) $(LIB) t_clearerr.c -o t_clearerr
+
 t_ctermid: t_ctermid.c
 	$(CC) $(CCFLAGS) $(LIB) t_ctermid.c -o t_ctermid
 
@@ -14,5 +18,8 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_clearerr: "
+	@-./t_clearerr
+
 	@printf "t_ctermid: "
 	@-./t_ctermid
