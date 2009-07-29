@@ -182,7 +182,7 @@ fi
 [ -z "$manpages" ] && [ -z "$symbols" ] && usage
 
 # Man pages' tests
-[ ! -z "manpages" ] && runmanpages "$STARTDIR"
+[ ! -z "$manpages" ] && runmanpages "$STARTDIR"
 
 # Symbols' tests
 [ ! -z "$symbols" ] && runsymbols "$STARTDIR"
