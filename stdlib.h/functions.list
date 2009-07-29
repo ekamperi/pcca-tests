@@ -30,7 +30,7 @@ lcong48
 ldiv
 llabs
 lldiv
-lrand48xa
+lrand48
 malloc
 mblen
 mbstowcs
