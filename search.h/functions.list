@@ -1,0 +1,13 @@
+search.h
+
+hcreate
+hdestroy
+hsearch
+insque
+lfind
+lsearch
+remque
+tdelete
+tfind
+tsearch
+twalk
