@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define	FILENAME	"DONTDELETETHIS"
-
 int main(void)
 {
 	int fd, function;
@@ -18,7 +16,7 @@ int main(void)
 	 * Valid file descriptor, but F_LOCK or F_TLOCK is supplied,
 	 * and fd is not open for writing.
 	 */
-	fd = open(FILENAME, O_RDONLY);
+	fd = open("sandbox/file777", O_RDONLY);
 	assert(fd != -1);
 
 	assert(lockf(fd, F_LOCK, 0) == -1 && errno == EBADF);
@@ -41,7 +39,7 @@ int main(void)
 	function += F_ULOCK;
 #endif
 
-	fd = open(FILENAME, O_RDWR);
+	fd = open("sandbox/file777", O_RDWR);
 	assert(fd != -1);
 	assert(lockf(fd, function, 0) == -1 && errno == EINVAL);
 

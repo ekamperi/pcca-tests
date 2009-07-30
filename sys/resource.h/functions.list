@@ -1,0 +1,7 @@
+sys/resource.h
+
+getpriority
+getrlimit
+getrusage
+setpriority
+setrlimit
