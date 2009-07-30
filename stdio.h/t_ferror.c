@@ -31,6 +31,8 @@
 
 int main(void)
 {
+	FILE *fp;
+
 	/*
 	 * XXX: What is supposed to happen when ferror() is called
 	 * on a closed stream? We do care because someone may use
