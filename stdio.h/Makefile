@@ -2,7 +2,8 @@ all:	t_clearerr	\
 	t_ctermid	\
 	t_fileno	\
 	t_stdio		\
-	t_tempnam
+	t_tempnam	\
+	t_tmpfile
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -26,6 +27,9 @@ t_stdio: t_stdio.c
 t_tempnam: t_tempnam.c
 	$(CC) $(CCFLAGS) $(LIB) t_tempnam.c -o t_tempnam
 
+t_tmpfile: t_tmpfile.c
+	$(CC) $(CCFLAGS) $(LIB) t_tmpfile.c -o t_tmpfile
+
 clean:
 	git clean -f
 
@@ -44,3 +48,6 @@ run:
 
 	@printf "t_tempnam: "
 	@-./t_tempnam
+
+	@printf "t_tmpfile: "
+	@-./t_tmpfile

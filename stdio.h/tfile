@@ -2,4 +2,5 @@ t_clearerr
 t_ctermid
 t_fileno
 t_stdio
+t_tmpfile
 t_tmpnam
