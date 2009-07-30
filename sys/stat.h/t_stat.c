@@ -1,3 +1,5 @@
+#define _XOPEN_SOURCE   600	/* for st_rdev, st_blksize, st_blocks */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
