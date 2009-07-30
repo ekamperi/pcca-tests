@@ -66,7 +66,7 @@ int main(void)
 	 * one or more processes have the file open when the last link is
 	 * removed, the removal of the file contents is delayed up until all
 	 * refs to the file are closed. This is a clear distincition between
-	 * link cound and reference count.
+	 * link count and reference count.
 	 *
 	 * For an implementation to be consistent with this, the link count
 	 * of the file must be 0 when tmpfile() returns. The temporary file
