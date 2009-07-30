@@ -1,0 +1,11 @@
+sys/stat.h
+
+chmod
+fchmod
+fstat
+lstat
+mkdir
+mkfifo
+mknod
+stat
+umask
