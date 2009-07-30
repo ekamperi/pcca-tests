@@ -1,5 +1,6 @@
 all:	t_clearerr	\
 	t_ctermid	\
+	t_ferror	\
 	t_fileno	\
 	t_stdio		\
 	t_tempnam	\
@@ -17,6 +18,9 @@ t_clearerr: t_clearerr.c
 
 t_ctermid: t_ctermid.c
 	$(CC) $(CCFLAGS) $(LIB) t_ctermid.c -o t_ctermid
+
+t_ferror: t_ferror.c
+	$(CC) $(CCFLAGS) $(LIB) t_ferror.c -o t_ferror
 
 t_fileno: t_fileno.c
 	$(CC) $(CCFLAGS) $(LIB) t_fileno.c -o t_fileno
@@ -39,6 +43,9 @@ run:
 
 	@printf "t_ctermid: "
 	@-./t_ctermid
+
+	@printf "t_ferror: "
+	@-./t_ferror
 
 	@printf "t_fileno: "
 	@-./t_fileno
