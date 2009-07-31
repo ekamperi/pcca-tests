@@ -15,6 +15,9 @@ t_posix_memalign: t_posix_memalign.c
 t_putenv: t_putenv.c
 	$(CC) $(CCFLAGS) $(LIB) t_putenv.c -o t_putenv
 
+t_stdlib: t_stdlib.c
+	$(CC) $(CCFLAGS) $(LIB) t_stdlib.c -o t_stdlib
+
 clean:
 	git clean -f
 
@@ -24,3 +27,6 @@ run:
 
 	@printf "t_putenv: "
 	@-./t_putenv
+
+	@printf "t_stdlib: "
+	@-./t_stdlib
