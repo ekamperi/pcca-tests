@@ -35,7 +35,6 @@
 int main(void)
 {
 	struct stat st;
-	FILE *fp;
 
 	(void)st.st_dev;	/* Device ID of device containing file. */
 	(void)st.st_ino;	/* File serial number. */
