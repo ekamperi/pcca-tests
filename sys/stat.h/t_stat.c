@@ -101,8 +101,10 @@ int main(void)
 #endif
 
 	/* Test for FIFO special file. */
+#ifdef S_ISFIFO
 	assert(stat("sandbox/fifo", &st) != -1);
 	assert(S_ISFIFO(st.st_mode) != 0);
+#endif
 
 	/*
 	 * XXX: Test for block special file, character special file and socket.
