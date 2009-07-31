@@ -105,6 +105,8 @@ int main(void)
 	 * XXX: Test for block special file, character special file, pipe or
 	 * FIFO special file and socket.
 	 */
+	assert(stat("sandbox/fifo", &st) != -1);
+	assert(S_ISFIFO(st.st_mode) != 0);
 
 	printf("passed\n");
 
