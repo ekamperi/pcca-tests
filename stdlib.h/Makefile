@@ -1,5 +1,6 @@
 all:	t_posix_memalign	\
 	t_putenv		\
+	t_stdlib
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
