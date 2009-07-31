@@ -1,4 +1,5 @@
 all:	t_posix_memalign	\
+	t_posix_openpt		\
 	t_putenv		\
 	t_stdlib
 
@@ -13,6 +14,9 @@ LIB=
 t_posix_memalign: t_posix_memalign.c
 	$(CC) $(CCFLAGS) $(LIB) t_posix_memalign.c -o t_posix_memalign
 
+t_posix_openpt: t_posix_openpt.c
+	$(CC) $(CCFLAGS) $(LIB) t_posix_openpt.c -o t_posix_openpt
+
 t_putenv: t_putenv.c
 	$(CC) $(CCFLAGS) $(LIB) t_putenv.c -o t_putenv
 
@@ -25,6 +29,9 @@ clean:
 run:
 	@printf "t_posix_memalign: "
 	@-./t_posix_memalign
+
+	@printf "t_posix_openpt: "
+	@-./t_posix_openpt
 
 	@printf "t_putenv: "
 	@-./t_putenv
