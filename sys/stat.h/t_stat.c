@@ -100,12 +100,13 @@ int main(void)
 	assert(S_ISLNK(st.st_mode) != 0);
 #endif
 
-	/*
-	 * XXX: Test for block special file, character special file, pipe or
-	 * FIFO special file and socket.
-	 */
+	/* Test for FIFO special file. */
 	assert(stat("sandbox/fifo", &st) != -1);
 	assert(S_ISFIFO(st.st_mode) != 0);
+
+	/*
+	 * XXX: Test for block special file, character special file and socket.
+	 */
 
 	printf("passed\n");
 
