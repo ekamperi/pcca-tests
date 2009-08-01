@@ -1,5 +1,9 @@
 arpa/inet.h
 
+htonl
+htons
+ntohl
+ntohs
 inet_addr
 inet_ntoa
 inet_ntop
