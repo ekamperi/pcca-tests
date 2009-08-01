@@ -1,0 +1,9 @@
+grp.h
+
+getgrgid
+getgrnam
+getgrgid_r
+getgrnam_r
+getgrent
+endgrent
+setgrent
