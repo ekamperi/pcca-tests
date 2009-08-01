@@ -46,7 +46,7 @@ int main(void)
 
 	/* Iterate over all members of our group. */
 	while(*gr->gr_mem) {
-		printf("-> %s\n", *gr->gr_mem);
+		/*printf("-> %s\n", *gr->gr_mem);*/
 		gr->gr_mem++;
 	}
 
