@@ -1,7 +1,5 @@
 * Make mqueues a kernel module.
 * Make insertion to message queue O(1) by using bitmap and array,
   as per NetBSD.
-* mq_send/mq_receive: Return EBADF if sending to read-only queue,
-  or receiving from write-only queue.
 * Implement S_TYPEISMQ() macro to test against message queue (sys/stath.h).
 * Teach kdump message queues, so that it performs ad-hoc translation.
