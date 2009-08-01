@@ -5,6 +5,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/wait.h>
@@ -44,7 +45,7 @@ int main(void)
 
 		/* This will perhaps block us. */
 		char buf[100];
-		size_t rv;
+		ssize_t rv;
 
 		rv = read(masterfd, buf, sizeof(buf));
 		assert(rv != -1);
@@ -54,6 +55,10 @@ int main(void)
 		/* Wait for child to complete. */
 		int status;
 		assert(wait(&status) == pid);
+
+		/* Close file descriptors. */
+		assert(close(slavefd) != -1);
+		assert(close(masterfd) != -1);
 
 		printf("passed\n");
 	} else {
