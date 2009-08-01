@@ -1,4 +1,5 @@
-all:	t_getgrgid	\
+all:	t_getgrent	\
+	t_getgrgid	\
 	t_grp
 
 CC=gcc
@@ -7,6 +8,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
+
+t_getgrent: t_getgrent.c
+	$(CC) $(CCFLAGS) $(LIB) t_getgrent.c -o t_getgrent
 
 t_getgrgid: t_getgrgid.c
 	$(CC) $(CCFLAGS) $(LIB) t_getgrgid.c -o t_getgrgid
@@ -18,6 +22,9 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_getgrent: "
+	@-./t_getgrent
+
 	@printf "t_getgrgid: "
 	@-./t_getgrgid
 

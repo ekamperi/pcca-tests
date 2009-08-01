@@ -1,2 +1,3 @@
-t_getgrid
+t_getgrent
+t_getgrgid
 t_grp
