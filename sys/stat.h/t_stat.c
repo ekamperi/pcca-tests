@@ -35,7 +35,6 @@
 int main(void)
 {
 	struct stat st;
-	FILE *fp;
 
 	(void)st.st_dev;	/* Device ID of device containing file. */
 	(void)st.st_ino;	/* File serial number. */
@@ -101,9 +100,14 @@ int main(void)
 	assert(S_ISLNK(st.st_mode) != 0);
 #endif
 
+	/* Test for FIFO special file. */
+#ifdef S_ISFIFO
+	assert(stat("sandbox/fifo", &st) != -1);
+	assert(S_ISFIFO(st.st_mode) != 0);
+#endif
+
 	/*
-	 * XXX: Test for block special file, character special file, pipe or
-	 * FIFO special file and socket.
+	 * XXX: Test for block special file, character special file and socket.
 	 */
 
 	printf("passed\n");

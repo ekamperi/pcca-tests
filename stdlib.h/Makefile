@@ -1,5 +1,7 @@
 all:	t_posix_memalign	\
+	t_posix_openpt		\
 	t_putenv		\
+	t_stdlib
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -12,8 +14,14 @@ LIB=
 t_posix_memalign: t_posix_memalign.c
 	$(CC) $(CCFLAGS) $(LIB) t_posix_memalign.c -o t_posix_memalign
 
+t_posix_openpt: t_posix_openpt.c
+	$(CC) $(CCFLAGS) $(LIB) t_posix_openpt.c -o t_posix_openpt
+
 t_putenv: t_putenv.c
 	$(CC) $(CCFLAGS) $(LIB) t_putenv.c -o t_putenv
+
+t_stdlib: t_stdlib.c
+	$(CC) $(CCFLAGS) $(LIB) t_stdlib.c -o t_stdlib
 
 clean:
 	git clean -f
@@ -22,5 +30,11 @@ run:
 	@printf "t_posix_memalign: "
 	@-./t_posix_memalign
 
+	@printf "t_posix_openpt: "
+	@-./t_posix_openpt
+
 	@printf "t_putenv: "
 	@-./t_putenv
+
+	@printf "t_stdlib: "
+	@-./t_stdlib

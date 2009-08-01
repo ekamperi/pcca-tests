@@ -62,6 +62,10 @@ populatesandbox()
     # Create file that it's not a tty
     touch "$1/notatty"
     chmod 777 "$1/notatty"
+
+    # Create FIFO special file
+    mkfifo "$1/fifo"
+    chmod 777 "$1/fifo"
 }
 
 buildsandboxes()
