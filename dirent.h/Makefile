@@ -1,4 +1,5 @@
 all:    t_closedir	\
+	t_dirent	\
 	t_opendir	\
 	t_readdir	\
 	t_readdir_r
@@ -12,6 +13,9 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 
 t_closedir: t_closedir.c
 	$(CC) $(CCFLAGS) $(LIB) t_closedir.c -o t_closedir
+
+t_dirent: t_dirent.c
+	$(CC) $(CCFLAGS) $(LIB) t_dirent.c -o t_dirent
 
 t_opendir: t_opendir.c
 	$(CC) $(CCFLAGS) $(LIB) t_opendir.c -o t_opendir
@@ -28,6 +32,9 @@ clean:
 run:
 	@printf "t_closedir: "
 	@-./t_closedir
+
+	@printf "t_dirent: "
+	@-./t_dirent
 
 	@printf "t_opendir: "
 	@-./t_opendir
