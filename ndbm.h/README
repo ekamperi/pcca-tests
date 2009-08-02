@@ -1,0 +1,2 @@
+To build t_ndbm.c in a glibc environment, one must use the following:
+gcc t_ndbm.c -o t_ndbm -lgdbm -lgdbm_compat
