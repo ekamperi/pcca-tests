@@ -28,9 +28,8 @@ int main(void)
 	 */
 	long rv = 65536;
 #ifdef _SC_GETGR_R_SIZE_MAX
-
 	rv = sysconf(_SC_GETGR_R_SIZE_MAX);
-	assert(rv != -1);	/* We don't allow for infinite values,
+	assert(rv != -1);	/* We don't allow for indefinite values,
 				   rv == -1 && errno == unchanged. */
 #endif
 	char *buf = malloc(rv);
