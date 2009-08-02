@@ -1,0 +1,6 @@
+ndbm.h
+
+_XOPEN_SOURCE 600 {
+	DBM_INSERT
+	DBM_REPLACE
+}
