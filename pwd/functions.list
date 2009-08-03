@@ -1,0 +1,9 @@
+pwd.h
+
+getpwnam
+getpwuid
+getpwnam_r
+getpwuid_r
+endpwent
+getpwent
+setpwent
