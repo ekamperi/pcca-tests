@@ -1,0 +1,13 @@
+signal.h
+
+_POSIX_C_SOURCE 200112L {
+	SIG_DFL
+	SIG_ERR
+	SIG_HOLD
+	SIG_IGN
+
+	# Values of sigev_notify.
+	SIGEV_NONE
+	SIGEV_SIGNAL
+	SIGEV_THREAD
+}
