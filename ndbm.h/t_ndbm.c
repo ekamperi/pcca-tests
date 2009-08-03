@@ -106,7 +106,35 @@ int main(void)
 	/* Make sure that the numbers sum up. */
 	assert(cnt + ignored == NRECS);
 
-	/* XXX: Verify the integrity of the (key, data) pairs. */
+	/* Verify the integrity of the (key, data) pairs. */
+	for (key = dbm_firstkey(pdb); key.dptr != NULL;
+	     key = dbm_nextkey(pdb)) {
+		data = dbm_fetch(pdb, key);
+
+		/*
+		 * Key and data are always identical to each other
+		 * in our example.
+		 */
+		assert(strcmp(key.dptr, data.dptr) == 0);
+
+		/*
+		 * For every extracted string from the database, we search if
+		 * there is a corresponding match in our pool with the generated
+		 * strings. If we found one, we nul terminate it in its first
+		 * character. (This is sub-optimal, but we don't care.)
+		 */
+		for (i = 0; i < NRECS; i++) {
+			if (strcmp(buf[i], data.dptr) == 0)
+				buf[i][0] = '\0';
+		}
+	}
+
+	/*
+	 * Make sure that all extracted strings from the database were
+	 * matched.
+	 */
+	for (i = 0; i < NRECS; i++)
+		assert(buf[i][0] == '\0');
 
 	/* Close the database. */
 	dbm_close(pdb);
