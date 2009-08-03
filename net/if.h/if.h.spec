@@ -1,0 +1,5 @@
+net/if.h
+
+_POSIX_C_SOURCE 200112L {
+	IF_NAMESIZE
+}
