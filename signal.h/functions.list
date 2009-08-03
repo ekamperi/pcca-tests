@@ -6,23 +6,23 @@ killpg
 pthread_kill
 pthread_sigmask
 raise
-sigaction(int, const struct sigaction *,
-struct sigaction *);
-sigaddset(sigset_t *, int);
-sigaltstack(const stack_t *, stack_t *);
-sigdelset(sigset_t *, int);
-sigemptyset(sigset_t *);
-sigfillset(sigset_t *);
-sighold;
-sigignore;
-siginterrupt(int, int);
-sigismember(const sigset_t *, int);
+sigaction
+sigaction
+sigaddset
+sigaltstack
+sigdelset
+sigemptyset
+sigfillset
+sighold
+sigignore
+siginterrupt
+sigismember
 signal
-sigpause;
-sigpending(sigset_t *);
-sigprocmask(int, const sigset_t *, sigset_t *);
-sigqueue(pid_t, int, const union sigval);
-sigrelse;
+sigpause
+sigpending
+sigprocmask
+sigqueue
+sigrelse
 sigset
 sigsuspend
 sigtimedwait
