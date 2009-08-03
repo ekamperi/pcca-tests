@@ -1,0 +1,10 @@
+stropts.h
+
+isastream
+getmsg
+getpmsg
+ioctl
+putmsg
+putpmsg
+fattach
+fdetach
