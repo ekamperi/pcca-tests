@@ -1,0 +1,6 @@
+regex.h
+
+regcomp
+regerror
+regexec
+regfree
