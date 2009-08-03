@@ -1,0 +1,9 @@
+sched.h
+
+_POSIX_C_SOURCE 200112L {
+	# Scheduling policies
+	SCHED_FIFO
+	SCHED_RR
+	SCHED_SPORADIC
+	SCHED_OTHER
+}
