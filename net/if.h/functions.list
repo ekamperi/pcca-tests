@@ -1,0 +1,6 @@
+net/if.h
+
+if_nametoindex
+if_indextoname
+if_nameindex
+if_freenameindex
