@@ -34,6 +34,7 @@ int main(void)
 	 * the following members.
 	 */
 	siginfo_t si;
+
 	(void)si.si_signo;	/* Signal number. */
 	(void)si.si_code;	/* Signal code. */
 
