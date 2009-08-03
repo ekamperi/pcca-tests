@@ -1,6 +1,15 @@
 netdb.h
 
 _POSIX_C_SOURCE 200112L {
+	# Highest reserved Internet port number.
+	IPPORT_RESERVED
+
+	# Error values for gethostbyaddr() and gethostbyname()
+	HOST_NOT_FOUND
+	NO_DATA
+	NO_RECOVERY
+	TRY_AGAIN
+
 	# Integer constants for use in the flags field of the addrinfo
 	# structure.
 	AI_PASSIVE
