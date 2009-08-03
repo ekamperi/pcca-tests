@@ -1,0 +1,83 @@
+stropts.h
+
+_XOPEN_SOURCE 600 {
+	# For use as the request argument to ioctl().
+	I_PUSH
+	I_POP
+	I_LOOK
+	I_FLUSH
+	I_FLUSHBAND
+	I_SETSIG
+	I_GETSIG
+	I_FIND
+	I_PEEK
+	I_SRDOPT
+	I_GRDOPT
+	I_NREAD
+	I_FDINSERT
+	I_STR
+	I_SWROPT
+	I_GWROPT
+	I_SENDFD
+	I_RECVFD
+	I_LIST
+	I_ATMARK
+	I_CKBAND
+	I_GETBAND
+	I_CANPUT
+	I_SETCLTIME
+	I_GETCLTIME
+	I_LINK
+	I_UNLINK
+	I_PLINK
+	I_PUNLINK
+
+	# For use with I_LOOK.
+	FMNAMESZ
+
+	# For use with I_FLUSH.
+	FLUSHR
+	FLUSHW
+	FLUSHRW
+
+	# For use with I_SETSIG.
+	S_RDNORM
+	S_RDBAND
+	S_INPUT
+	S_HIPRI
+	S_OUTPUT
+	S_WRNORM
+	S_WRBAND
+	S_MSG
+	S_ERROR
+	S_HANGUP
+	S_BANDURG
+
+	# For use with I_PEEK.
+	RS_HIPRI
+
+	# For use with I_SRDOPT.
+	RNORM
+	RMSGD
+	RMSGN
+	RPROTNORM
+	RPROTDAT
+	RPROTDIS
+
+	# For use with I_SWOPT.
+	SNDZERO
+
+	# For use with I_ATMARK.
+	ANYMARK
+	LASTMARK
+
+	# For use with I_UNLINK.
+	MUXID_ALL
+
+	# For getmsg(), getpmsg(), putmsg(), and putpmsg().
+	MSG_ANY
+	MSG_BAND
+	MSG_HIPRI
+	MORECTL
+	MOREDATA
+}
