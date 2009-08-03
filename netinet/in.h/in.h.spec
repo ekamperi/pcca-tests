@@ -40,4 +40,8 @@ _POSIX_C_SOURCE 200112L {
 	IN6_IS_ADDR_MC_SITELOCAL
 	IN6_IS_ADDR_MC_ORGLOCAL
 	IN6_IS_ADDR_MC_GLOBAL
+
+	# Used to initialize a variable of type struct in6_addr
+	# to the IPv6 wildcard address.
+	IN6ADDR_ANY_INIT
 }
