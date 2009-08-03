@@ -39,7 +39,7 @@ int main(void)
 
 	(void)si.si_errno;	/* If non-zero, an errno value associated with
 				   this signal, as defined in <errno.h>. */
-	(void)si.si_pidl;	/* Sending process ID. */
+	(void)si.si_pid;	/* Sending process ID. */
 	(void)si.si_uid;	/* Real user ID of sending process. */
 	(void)si.si_addr;	/* Address of faulting instruction. */
 	(void)si.si_status;	/* Exit value or signal. */
