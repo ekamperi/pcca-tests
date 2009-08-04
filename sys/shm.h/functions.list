@@ -1,0 +1,6 @@
+sys/shm.c
+
+shmat
+shmctl
+shmdt
+shmget
