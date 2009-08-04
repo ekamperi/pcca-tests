@@ -7,7 +7,7 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 
-t_shm: t_shm
+t_shm: t_shm.c
 	$(CC) $(CCFLAGS) $(LIB) t_shm.c -o t_shm
 
 clean:
