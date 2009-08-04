@@ -25,7 +25,7 @@ posix_trace_clear
 posix_trace_close
 posix_trace_create
 posix_trace_create_withlog
-void posix_trace_event
+posix_trace_event
 posix_trace_eventid_equal
 posix_trace_eventid_get_name
 posix_trace_eventid_open
