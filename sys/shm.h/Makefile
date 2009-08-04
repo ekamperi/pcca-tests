@@ -1,4 +1,4 @@
-all:	t_shmid_ds
+all:	t_shm
 
 CC=gcc
 CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -7,12 +7,12 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 
-t_shmid_ds: t_shmid_ds.c
-	$(CC) $(CCFLAGS) $(LIB) t_shmid_ds.c -o t_shmid_ds
+t_shm: t_shm
+	$(CC) $(CCFLAGS) $(LIB) t_shm.c -o t_shm
 
 clean:
 	git clean -f
 
 run:
-	@printf "t_shmid_ds: "
-	@-./t_shmid_ds
+	@printf "t_shm: "
+	@-./t_shm
