@@ -1,0 +1,6 @@
+sys/msg.h
+
+msgctl
+msgget
+msgrcv
+msgsnd
