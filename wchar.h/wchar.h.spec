@@ -1,0 +1,8 @@
+wchar.h
+
+_POSIX_C_SOURCE 200112L {
+	WCHAR_MAX
+	WCHAR_MIN
+	WEOF
+	NULL
+}
