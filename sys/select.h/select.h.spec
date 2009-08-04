@@ -1,0 +1,5 @@
+select.h.spec
+
+_POSIX_C_SOURCE 200112L {
+	FD_SETSIZE
+}
