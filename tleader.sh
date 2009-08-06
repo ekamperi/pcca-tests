@@ -7,17 +7,18 @@ set -e
 cd "$1"
 
 # Every directory with test cases contains a `tfile' listing  which test cases
-# are supposed to be run.
+# are supposed to be run. The entries of this file are basically the names
+# of the executables.
 while read task
 do
-    # Skip tfile entries that start with a #.
+    # Skip `tfile' entries that start with a #.
     if echo "$task" | grep "^#" >/dev/null
     then
         continue
     fi
 
     # If there is another shell script we are running, let it handle the output
-    # on its own.
+    # on its own. For example unistd.h/uleader.sh.
     if ! echo "$task" | grep ".sh$" >/dev/null
     then
 	path=$(echo "$1" | sed 's/.//')
@@ -26,7 +27,7 @@ do
 
     # If we can't find the binary, most likely it failed to build during
     # compilation. We treat this as a failed test case.
-    if ! [ -x "$task" ]
+    if [ ! -x "$task" ]
     then
 	printf "failed (test does not exist)\n"
 	continue
