@@ -98,10 +98,17 @@ runmanpages()
 
 runsymbols()
 {
-    # For every spec file in tree, pass it to symgen.pl script.
-    # For now we only check for missing symbols.
-    find "$1" -type f -name "*.h.spec" -exec ./symgen.pl --less {} \; \
-	2>/dev/null
+    # For every spec file in tree, we call symgen.pl script. At the moment,
+    # we only check for missing symbols (i.e., not checking against leaking
+    # symbols).
+    #
+    # Since the generated C file from symgen.pl may fail to compile
+    # (due to a missing header of the host, for instance), we redirect
+    # the stderr to /dev/null. We don't care for those errors.
+
+    for f in $(find "$1" -type f -name "*.h.spec" 2>/dev/null | sort); do
+	./symgen.pl --less "$f" 2>/dev/null
+    done
 }
 
 runtests()
