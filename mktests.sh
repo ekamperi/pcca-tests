@@ -105,7 +105,8 @@ runsymbols()
 
 runtests()
 {
-    for dir in `find "$1" -name .git -prune -o -type d -a ! -name . 2>/dev/null`
+    for dir in $(find "$1" -name .git -prune -o -type d -a ! -name . \
+	2>/dev/null | sort)
     do
 	if [ -f "$dir/tfile" ]
 	then
