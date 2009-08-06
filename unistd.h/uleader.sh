@@ -24,7 +24,7 @@ do
   c_file=$(echo "$posix_symbol.c" | tr '[:upper:]' '[:lower:]')
 
   # Inject the right symbols into the C source file.
-  sed "s/_POSIX_MYSYMBOL/$posix_symbol/g" test.c > "tmp$c_file"
+  sed "s/_POSIX_MYSYMBOL/$posix_symbol/g" template.c > "tmp$c_file"
   sed "s/_SC_MYSYMBOL/$sc_symbol/g" "tmp$c_file" > "$c_file"
   rm -f "tmp$c_file"
 
