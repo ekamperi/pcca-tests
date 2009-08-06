@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
 	/* Inexistent path. */
 	assert(ftw("", mycallback, 1) == -1 && errno == ENOENT);
-	assert(ftw("/thisdefinitelydoesntexist", mycallback, 1) == -1 &&
+	assert(ftw("/sandbox/thisdefinitelydoesntexist", mycallback, 1) == -1 &&
 	       errno == ENOENT);
 
 	printf("passed\n");
