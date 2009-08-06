@@ -1,6 +1,6 @@
 #!/bin/sh
 
-STARTDIR="."	# top level directory to start from when running tests
+STARTDIR="."	# Default top level directory to start from when running tests.
 
 usage()
 {
@@ -9,9 +9,9 @@ Usage: `basename $0` -cbrsmy [directory]
 -c    Clean stale files from previous builds.
 -b    Build tests from sources.
 -r    Run tests.
--s    Construct sandboxes.
--m    Run man pages' tests.
--y    Run symbols' tests.
+-s    Construct sandbox/ directories.
+-m    Run man pages tests.
+-y    Run symbol tests.
 -h    Print this help message.
 At least one of the above options must be specified.
 EOF
@@ -21,49 +21,49 @@ EOF
 
 populatesandbox()
 {
-    # Create unresolvable symbolic links
+    # Create unresolvable symbolic links.
     ln -s "infloop2" "$1/infloop"
     ln -s "infloop" "$1/infloop2"
 
-    # Create file with full permissions
+    # Create file with full permissions.
     touch "$1/file777"
     chmod 0777 "$1/file777"
 
-    # Create regular loop to file
+    # Create regular loop to file.
     ln -s "file777" "$1/fileloop"
 
-    # Create file with zero permissions
+    # Create file with zero permissions.
     touch "$1/file000"
     chmod 0000 "$1/file000"
 
-    # Create directory with full permissions
+    # Create directory with full permissions.
     mkdir "$1/dir777"
     chmod 0777 "$1/dir777"
 
-    # Create regular loop to directory
+    # Create regular loop to directory.
     ln -s "dir777" "$1/dirloop"
 
-    # Create directory with zero permissions
+    # Create directory with zero permissions.
     mkdir "$1/dir000"
     chmod 0000 "$1/dir000"
 
-    # Create directory without execute/search permission
+    # Create directory without execute/search permission.
     mkdir "$1/dir666"
     chmod 0666 "$1/dir666"
 
-    # Create directory without write permission
+    # Create directory without write permission.
     mkdir "$1/dir555"
     chmod 0555 "$1/dir555"
 
-    # Create file that it's not a directory
+    # Create file that it's not a directory.
     touch "$1/notadir"
     chmod 777 "$1/notadir"
 
-    # Create file that it's not a tty
+    # Create file that it's not a tty.
     touch "$1/notatty"
     chmod 777 "$1/notatty"
 
-    # Create FIFO special file
+    # Create FIFO special file.
     mkfifo "$1/fifo"
     chmod 777 "$1/fifo"
 }
@@ -74,13 +74,13 @@ buildsandboxes()
       do
       if [ -f "$dir/need-sandbox" ]
 	  then
-          # Remove old sandbox
+          # Remove old sandbox.
 	  rm -rf "$dir/sandbox"
 
-	  # Create sandbox directory
+	  # Create sandbox directory.
 	  mkdir "$dir/sandbox"
 
-	  # Populate sandbox directory with stuff
+	  # Populate sandbox directory with stuff.
 	  populatesandbox "$dir/sandbox"
       fi
     done
@@ -166,38 +166,47 @@ buildtests()
     done
 }
 
-# Parse user supplied arguments
+# Parse user supplied arguments.
 while getopts "cbrsmyh" f
 do
     case $f in
         c)
+	    # Clean stale files.
             clean=$f
             ;;
 	b)
+	    # Build tests.
 	    build=$f
 	    ;;
 	r)
+	    # Run tests.
 	    run=$f
 	    ;;
 	s)
+	    # Construct sandobox/ directories.
 	    sandbox=$f
 	    ;;
 	m)
+	    # Run man page tests.
 	    manpages=$
 	    ;;
 	y)
+	    # Run symbol tests.
 	    symbols=$f
 	    ;;
         h)
+	    # Print a help message.
             usage
             ;;
         \?)
+	    # Same as before.
             usage
             ;;
     esac
 done
 shift `expr $OPTIND - 1`
 
+# We treat the last (non-option) argument (if any), to be the starting path.
 if [ ! -z $1 ]
 then
     STARTDIR=$1
@@ -208,10 +217,10 @@ fi
 [ -z "$run"      ] && [ -z "$sandbox" ] &&
 [ -z "$manpages" ] && [ -z "$symbols" ] && usage
 
-# Man pages' tests
+# Man page tests.
 [ ! -z "$manpages" ] && runmanpages "$STARTDIR"
 
-# Symbols' tests
+# Symbol tests.
 [ ! -z "$symbols" ] && runsymbols "$STARTDIR"
 
 # Fire!
