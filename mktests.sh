@@ -122,6 +122,7 @@ runtests()
     do
 	if [ -f "$dir/tfile" ]
 	then
+	    # We pass control to the test leader script.
 	    ./tleader.sh "$dir"
 	fi
     done
