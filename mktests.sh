@@ -149,14 +149,19 @@ buildtests()
 
 	    if [ ! -z "$build" ]
 	    then
-		# Continue processing after errors (only for targets that
-		# aren't affected). This is actually an option mandated
-		# by POSIX, so we can use it safely.
+		# Continue processing after errors (only for targets that aren't
+		# affected). There's nothing to worry about tests that fail to
+		# compile. This normally means that the host misses some stuff.
+		# So we treat an uncompilable test case, as a failed test case.
+		#
+		# Mind that -k is actually an option mandated by POSIX, so we
+		# can use it safely (as in blame others, if they don't support
+		# it).
 		make -k
 	    fi
 	fi
 
-	# Restore to where we were.
+	# Go back to where we were.
 	cd "$OLDPWD"
     done
 }
