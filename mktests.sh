@@ -132,8 +132,11 @@ buildtests()
     for dir in $(find "$1" -name .git -prune -o -type d -a ! -name . \
 	2>/dev/null | sort)
     do
+	# We save the current directory, so we can step into the target,
+	# run 'make' and then return to were we are. We must always cd
+	# from the directory where we ran find(1), otherwise the paths
+	# returned by it won't be valid.
 	OLDPWD=`pwd`
-
 	cd "$dir" 2>/dev/null
 
 	# Tests must come with a Makefile.
