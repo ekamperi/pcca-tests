@@ -156,6 +156,7 @@ buildtests()
 	    fi
 	fi
 
+	# Restore to where we were.
 	cd "$OLDPWD"
     done
 }
