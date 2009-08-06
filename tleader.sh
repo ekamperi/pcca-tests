@@ -19,7 +19,7 @@ do
 
     # If there is another shell script we are running, let it handle the output
     # on its own. For example unistd.h/uleader.sh.
-    if ! echo "$task" | grep ".sh$" >/dev/null
+    if ! echo "$task" | grep "\.sh$" >/dev/null
     then
 	path=$(echo "$1" | sed 's/.//')
 	printf "%s" "$path/$task: "
@@ -34,9 +34,9 @@ do
     fi
 
     ./"$task" &
-    sleep 0.5
+    sleep 0.8
 
-    if jobs -l %+ 2>/dev/null | grep -v -i done >/dev/null
+    if jobs -l %+ >/dev/null 2>/dev/null
     then
         sleep 10
 	if kill -9 $(jobid %+ 2>/dev/null) >/dev/null 2>/dev/null
