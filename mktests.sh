@@ -100,7 +100,8 @@ runsymbols()
 {
     # For every spec file in tree, pass it to symgen.pl script.
     # For now we only check for missing symbols.
-    find "$1" -type f -name "*.h.spec" -exec ./symgen.pl --less {} \; 2>/dev/null
+    find "$1" -type f -name "*.h.spec" -exec ./symgen.pl --less {} \; \
+	2>/dev/null
 }
 
 runtests()
