@@ -33,19 +33,23 @@ do
 	continue
     fi
 
-    ./"$task" &
+    "./$task" &
+    pid=$!	# The process ID of the most recent background command
+                # executed from the current shell. We need it in case
+                # the test goes wild and need must kill it.
     sleep 0.2
 
     cnt=0
     while jobs -l %+ >/dev/null 2>/dev/null
     do
-        sleep 0.2
+        sleep 0.5
 	cnt=$((cnt+1))
-	echo $cnt
-	if [ $cnt -ge 100 ]; then
-	    if kill -9 $(jobid %+ 2>/dev/null) >/dev/null 2>/dev/null
+
+	if [ $cnt -ge 20 ]; then
+	    if kill -9 "$pid" 2>/dev/null
 	    then
 		echo "failed (test exceeded run time limit)"
+		break	# Don't trust job control, just break now, here.
 	    fi
 	fi
     done
