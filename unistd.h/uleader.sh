@@ -32,7 +32,7 @@ do
   gcc "$c_file" #>/dev/null 2>/dev/null
   rm "$c_file"
 
-  printf "/unistd.h/t$c_file: "
+  printf "$(echo "/unistd.h/t$c_file: " | sed 's/.c//g')"
   ./a.out
   rm a.out
 done < ffile
