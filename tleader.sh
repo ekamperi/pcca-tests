@@ -34,14 +34,19 @@ do
     fi
 
     ./"$task" &
-    sleep 0.8
+    sleep 0.2
 
-    if jobs -l %+ >/dev/null 2>/dev/null
-    then
-        sleep 10
-	if kill -9 $(jobid %+ 2>/dev/null) >/dev/null 2>/dev/null
-	then
-	     echo "failed (test exceeded run time limit)"
+    cnt=0
+    while jobs -l %+ >/dev/null 2>/dev/null
+    do
+        sleep 0.2
+	cnt=$((cnt+1))
+	echo $cnt
+	if [ $cnt -ge 100 ]; then
+	    if kill -9 $(jobid %+ 2>/dev/null) >/dev/null 2>/dev/null
+	    then
+		echo "failed (test exceeded run time limit)"
+	    fi
 	fi
-    fi
+    done
 done < tfile
