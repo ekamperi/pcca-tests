@@ -1,4 +1,5 @@
 all:	t_mq_ambig		\
+	t_mq_notify_simple	\
 	t_mq_open		\
 	t_mq_openclose		\
 	t_mq_close		\
@@ -20,6 +21,9 @@ LIB=-lrt
 
 t_mq_ambig: t_mq_ambig.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_ambig.c -o t_mq_ambig
+
+t_mq_notify_simple: t_mq_notify_simple.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_notify_simple.c -o t_mq_notify_simple
 
 t_mq_open: t_mq_open.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_open.c -o t_mq_open
@@ -57,6 +61,9 @@ clean:
 run:
 	@printf "t_mq_ambig: "
 	@-./t_mq_ambig
+
+	@printf "t_mq_notify_simple: "
+	@-./t_mq_notify_simple
 
 	@printf "t_mq_open: "
 	@-./t_mq_open
