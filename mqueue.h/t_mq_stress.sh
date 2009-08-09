@@ -11,7 +11,7 @@ do
     ./t_mq_open
     ./t_mq_openclose
     ./t_mq_parent_child
-    ./t_mq_parent_multmsg
+    ./t_mq_parent_child_multmsg
     ./t_mq_send
     ./t_mq_setattr
     ((cnt=$cnt+1))
