@@ -14,5 +14,5 @@ do
     ./t_mq_parent_child_multmsg
     ./t_mq_send
     ./t_mq_setattr
-    ((cnt=$cnt+1))
+    cnt=$((cnt+1))
 done
