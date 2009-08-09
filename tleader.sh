@@ -9,6 +9,8 @@ cd "$1"
 # Every directory with test cases contains a `tfile' listing  which test cases
 # are supposed to be run. The entries of this file are basically the names
 # of the executables.
+PASSED=0
+FAILED=0
 while read task
 do
     # Skip `tfile' entries that start with a #.
@@ -29,6 +31,7 @@ do
     # compilation. We treat this as a failed test case.
     if [ ! -x "$task" ]
     then
+	FAILED=$((FAILED+1))
 	printf "failed (test does not exist)\n"
 	continue
     fi
@@ -53,4 +56,13 @@ do
 	    fi
 	fi
     done
+
+    if wait $pid; then
+	PASSED=$((PASSED+1))
+    else
+	FAILED=$((FAILED+1))
+    fi
 done < tfile
+
+echo "PASSED: $PASSED"
+echo "FAILED: $FAILED"
