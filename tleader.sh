@@ -57,7 +57,14 @@ do
 	    if kill -9 "$pid" 2>/dev/null
 	    then
 		echo "failed (test exceeded run time limit)"
-		echo "$task" >> "$LOGFAILED"
+
+		# "If a process is terminated by a signal, its exit status
+		# indicates the signal that killed it, but the exact values
+		# are not specified."
+		# I guess we can safely assume that the exit status of a
+		# killed process won't be 0 (success) then, so the wait
+		# call will catch it later on.
+
 		break	# Don't trust job control, just break now, here.
 	    fi
 	fi
