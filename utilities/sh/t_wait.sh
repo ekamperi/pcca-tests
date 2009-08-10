@@ -38,6 +38,10 @@ echof()
     FAIL=1
 }
 
+# At the time I write this, NetBSD's /bin/sh implementation (and perhaps others),
+# fails to pass this test.
+# http://www.netbsd.org/cgi-bin/query-pr-single.pl?number=41864
+
 true&
 pid=$!
 sleep 1		# Any command would do.
