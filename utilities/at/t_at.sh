@@ -77,7 +77,7 @@ fi
 
 # Make sure we are privileged enough.
 if  [ ! $PRIV -eq 1 ]; then
-    echo "$0: We are not (or we couldn't determine if we are) privileged enough."
+    echof "We are not (or we couldn't determine if we are) privileged enough."
     exit 1
 fi
 
