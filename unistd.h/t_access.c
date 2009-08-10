@@ -58,11 +58,6 @@ int main(void)
 	assert(access("sandbox/file000", W_OK) == -1 && errno == EACCES);
 	assert(access("sandbox/file000", X_OK) == -1 && errno == EACCES);
 
-#if 0
-	/* This is optional. */
-	assert(access("sandbox/file777", ~(R_OK | W_OK | X_OK | F_OK)) == -1 &&
-	    errno == EINVAL);
-#endif
 
 	/*
 	 * A loop exists in symbolic links encountered during resolution of the
@@ -77,7 +72,19 @@ int main(void)
 	assert(access("/sandbox/thisshouldntexist", F_OK) == -1 &&
 	    errno == ENOENT);
 
-	printf("passed\n");
+        /* This is optional. */
+	int rv = 0;
+
+        rv = access("sandbox/file777", ~(R_OK | W_OK | X_OK | F_OK));
+	if (rv == -1) {
+		/* If it failed, we demand it to be EINVAL. */
+		assert(errno == EINVAL);
+	}
+
+	if (rv == -1)
+		printf("passed\n");
+	else
+		printf("passed (EINVAL check skipped)\n");
 
 	return (EXIT_SUCCESS);
 }
