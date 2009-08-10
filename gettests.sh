@@ -6,8 +6,8 @@ set -e
 # If no argument is given, print usage.
 if [ -z "$1" ]
 then
-    echo "Usage: $0 <header>"
-    echo "To get a list of available headers, please run gettheaders.sh"
+    echo "usage: $0 <header>"
+    echo "To get a list of available headers, please run getheaders.sh"
     exit 1
 fi
 
