@@ -71,7 +71,8 @@ populatesandbox()
 buildsandboxes()
 {
     # We skip .git/objects/* subdirectories.
-    for dir in $(find "$1" -name .git -prune -o -type d -name "*.h" 2>/dev/null)
+    for dir in $(find "$1" -name .git -prune -o -type d -name "*.h" \
+	2>/dev/null | sort)
     do
 	if [ -f "$dir/need-sandbox" ]; then
 	    # XXX: Fix permissions or else we won't be able to delete it.
