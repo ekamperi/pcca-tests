@@ -58,16 +58,24 @@ int main(void)
 	assert(access("sandbox/file000", W_OK) == -1 && errno == EACCES);
 	assert(access("sandbox/file000", X_OK) == -1 && errno == EACCES);
 
-	/* Probe non existent paths. */
-	assert(access("", F_OK) == -1 && errno == ENOENT);
-	assert(access("/sandbox/thisshouldntexist", F_OK) == -1 &&
-	    errno == ENOENT);
-
 #if 0
 	/* This is optional. */
 	assert(access(argv[0], ~(R_OK | W_OK | X_OK | F_OK)) == -1 &&
 	    errno == EINVAL);
 #endif
+
+	/*
+	 * A loop exists in symbolic links encountered during resolution of the
+	 * path argument.
+	 */
+	assert(access("sandbox/infloop", F_OK) == -1 && errno == ELOOP);
+
+	/* XXX: ENAMETOOLONG */
+
+	/* Probe non existent paths or empty string. */
+	assert(access("", F_OK) == -1 && errno == ENOENT);
+	assert(access("/sandbox/thisshouldntexist", F_OK) == -1 &&
+	    errno == ENOENT);
 
 	printf("passed\n");
 
