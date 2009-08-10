@@ -70,19 +70,24 @@ populatesandbox()
 
 buildsandboxes()
 {
-    for dir in `find "$1" -type d -name "*.h" 2>/dev/null`
-      do
-      if [ -f "$dir/need-sandbox" ]
-	  then
-          # Remove old sandbox.
-	  rm -rf "$dir/sandbox"
+    # We skip .git/objects/* subdirectories.
+    for dir in $(find "$1" -name .git -prune -o -type d -name "*.h" 2>/dev/null);
+    do
+	if [ -f "$dir/need-sandbox" ]; then
+	    # XXX: Fix permissions or else we won't be able to delete it.
+	    chmod 777 "$dir/sandbox/dir000"
 
-	  # Create sandbox directory.
-	  mkdir "$dir/sandbox"
+	    # Remove old sandbox.
+	    rm -rf "$dir/sandbox"
 
-	  # Populate sandbox directory with stuff.
-	  populatesandbox "$dir/sandbox"
-      fi
+	    # Create new sandbox directory.
+	    mkdir "$dir/sandbox"
+
+	    # Populate new sandbox directory with stuff.
+	    populatesandbox "$dir/sandbox"
+
+	    echo "Created $dir/sandbox directory"
+	fi
     done
 }
 
