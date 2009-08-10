@@ -29,6 +29,14 @@ populatesandbox()
     touch "$1/file777"
     chmod 0777 "$1/file777"
 
+    # Create file without execute permissions.
+    touch "$1/file666"
+    chmod 0666 "$1/file666"
+
+    # Create file without write permissions.
+    touch "$1/file555"
+    chmod 0555 "$1/file555"
+
     # Create regular loop to file.
     ln -s "file777" "$1/fileloop"
 
