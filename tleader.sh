@@ -36,7 +36,7 @@ do
     # compilation. We treat this as a failed test case.
     if [ ! -x "$task" ]
     then
-	printf "failed (test does not exist)\n"
+	echo "failed (test does not exist)"
 	echo "$task" >> "$LOGFAILED"
 	continue
     fi
