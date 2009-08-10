@@ -96,8 +96,14 @@ runmanpages()
     echo 'A missing man page may be due to a missing MLINK' \
          'or an unimplemented function.'
     echo
-    for f in $(find "$1" -type f -name "functions.list" 2>/dev/null | sort); do
-	./chkmanpages.sh "$f"
+
+    # We skip .git/objects/* subdirectories.
+    for dir in $(find "$1" -name .git -prune -o -type d -name "*.h" 2>/dev/null \
+	| sort)
+    do
+	if [ -f "$dir/functions.list" ]; then
+	    ./chkmanpages.sh "$dir/functions.list"
+	fi
     done
 }
 
