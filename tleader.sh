@@ -54,7 +54,7 @@ do
 	cnt=$((cnt+1))
 
 	if [ $cnt -ge 20 ]; then
-	    if kill -9 "$pid" 2>/dev/null
+	    if kill -s KILL "$pid" 2>/dev/null
 	    then
 		echo "failed (test exceeded run time limit)"
 
