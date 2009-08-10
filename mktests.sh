@@ -76,7 +76,8 @@ buildsandboxes()
     do
 	if [ -f "$dir/need-sandbox" ]; then
 	    # XXX: Fix permissions or else we won't be able to delete it.
-	    chmod 777 "$dir/sandbox/dir000"
+	    chmod 777 "$dir/sandbox/dir000" 2>/dev/null
+	    chmod 777 "$dir/sandbox/zeropermdir" 2>/dev/null
 
 	    # Remove old sandbox.
 	    rm -rf "$dir/sandbox"
