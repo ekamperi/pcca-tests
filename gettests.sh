@@ -11,4 +11,5 @@ then
     exit 1
 fi
 
-find . -name "$1" -exec cat {}/tfile \; 2>/dev/null | sort
+find . -name .git -prune -o \( -name "$1" -type d -exec cat {}/tfile \; \) \
+    2>/dev/null | sort
