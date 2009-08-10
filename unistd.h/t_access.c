@@ -1,26 +1,65 @@
+/*
+ * Copyright (c) 2009, Stathis Kamperis
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE
+ * COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-int main(int argc, char *argv[])
+int main(void)
 {
-	/* We expect our binary to exist, while we are running. */
-	assert(access(argv[0], F_OK) == 0);
+	/* We expect the following calls to succeed. */
+	assert(access("sandbox/file777", F_OK) != -1);
+	assert(access("sandbox/file777", R_OK) != -1);
+	assert(access("sandbox/file777", W_OK) != -1);
+	assert(access("sandbox/file777", X_OK) != -1);
 
-	/* Spy /root */
-	assert(access("/root", R_OK | W_OK | X_OK | F_OK) == -1 &&
-	       errno == EACCES);
+	assert(access("sandbox/file666", F_OK) != -1);
+	assert(access("sandbox/file666", R_OK) != -1);
+	assert(access("sandbox/file666", W_OK) != -1);
+
+	assert(access("sandbox/file555", F_OK) != -1);
+	assert(access("sandbox/file555", R_OK) != -1);
+	assert(access("sandbox/file555", X_OK) != -1);
+
+	/* ... and these to fail. */
+	assert(access("sandbox/file666", X_OK) == -1 && errno == EACCES);
+	assert(access("sandbox/file555", W_OK) == -1 && errno == EACCES);
 
 	/* Probe non existent paths. */
 	assert(access("", F_OK) == -1 && errno == ENOENT);
-	assert(access("/this/really/shouln/t/exist", F_OK) == -1 &&
-	       errno == ENOENT);
+	assert(access("/sandbox/thisshouldntexist", F_OK) == -1 &&
+	    errno == ENOENT);
 
 #if 0
 	/* This is optional. */
-	assert(access(argv[0], ~(R_OK | W_OK | X_OK | F_OK)) == -1 && errno == EINVAL);
+	assert(access(argv[0], ~(R_OK | W_OK | X_OK | F_OK)) == -1 &&
+	    errno == EINVAL);
 #endif
 
 	printf("passed\n");
