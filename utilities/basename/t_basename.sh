@@ -25,12 +25,15 @@
 # OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
+# The name of the script (i know, but it should work ok for our use).
+SCRIPTNAME=$(basename "$0")
+
 # This is the default exit status. Zero (0) signifies 'pass'.
 FAIL=0
 
 echof()
 {
-    echo "$0: $1"
+    echo "$SCRIPTNAME: $1"
 
     # By default, variables referenced from within a function,
     # refer to the global namespace, unless the 'local' keyword
@@ -78,4 +81,4 @@ if ! basename /foo/bar lala >/dev/null; then
 fi
 
 # Done
-[ $FAIL -eq 0 ] && echo 'passed'
+[ $FAIL -eq 0 ] && echo "$SCRIPTNAME: passed"
