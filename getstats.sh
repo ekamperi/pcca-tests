@@ -1,12 +1,12 @@
 #!/bin/sh
 
-NHEADERS=$(find . -type d -name "*.h" 2>/dev/null | wc -l)
-NTESTS=$(find . -type f -name "tfile" 2>/dev/null | xargs cat | wc -l)
+NHEADERS=$(find . -name .git -prune -o -type d -name "*.h" 2>/dev/null | wc -l)
+NTESTS=$(find . -name .git -prune -o -type f -name "tfile" 2>/dev/null | xargs cat | wc -l)
 
-CLOC=$(find . -name "*.c" 2>/dev/null | xargs cat | wc -l)
-MAKELOC=$(find . -name "Makefile" 2>/dev/null | xargs cat | wc -l)
-SHLOC=$(find . -name "*.sh" 2>/dev/null | xargs cat | wc -l)
-PERLLOC=$(find . -name "*.pl" 2>/dev/null | xargs cat | wc -l)
+CLOC=$(find . -name .git -prune -o -name "*.c" 2>/dev/null | xargs cat | wc -l)
+MAKELOC=$(find . -name .git -prune -o -name "Makefile" 2>/dev/null | xargs cat | wc -l)
+SHLOC=$(find . -name .git -prune -o -name "*.sh" 2>/dev/null | xargs cat | wc -l)
+PERLLOC=$(find . -name .git -prune -o -name "*.pl" 2>/dev/null | xargs cat | wc -l)
 
 echo ">>> Headers"
 printf "\tAudited: $NHEADERS\n"
