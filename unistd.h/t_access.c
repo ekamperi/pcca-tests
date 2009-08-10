@@ -47,9 +47,16 @@ int main(void)
 	assert(access("sandbox/file555", R_OK) != -1);
 	assert(access("sandbox/file555", X_OK) != -1);
 
+	assert(access("sandbox/file000", F_OK) != -1);
+
 	/* ... and these to fail. */
 	assert(access("sandbox/file666", X_OK) == -1 && errno == EACCES);
+
 	assert(access("sandbox/file555", W_OK) == -1 && errno == EACCES);
+
+	assert(access("sandbox/file000", R_OK) == -1 && errno == EACCES);
+	assert(access("sandbox/file000", W_OK) == -1 && errno == EACCES);
+	assert(access("sandbox/file000", X_OK) == -1 && errno == EACCES);
 
 	/* Probe non existent paths. */
 	assert(access("", F_OK) == -1 && errno == ENOENT);
