@@ -60,7 +60,7 @@ int main(void)
 
 #if 0
 	/* This is optional. */
-	assert(access(argv[0], ~(R_OK | W_OK | X_OK | F_OK)) == -1 &&
+	assert(access("sandbox/file777", ~(R_OK | W_OK | X_OK | F_OK)) == -1 &&
 	    errno == EINVAL);
 #endif
 
