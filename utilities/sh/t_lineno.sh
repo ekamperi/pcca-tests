@@ -38,10 +38,15 @@ echof()
     FAIL=1
 }
 
-if [ $LINENO -ne 41 ]; then
-    echof 'LINENO built-in var is either not implemented or '
-    echof 'is affected by comments and/or newlines.'
-    echof 'Subsequent output may give false negative results.'
+if [ -n "$LINENO" ]; then
+    if [ $LINENO -ne 42 ]; then
+	echof 'LINENO is affected by comments and/or newlines.'
+	echof 'Subsequent output may give false negative results.'
+    fi
+else
+    # This is fatal, as in there is no point in continuing.
+    echo 'LINENO built-in var is not implemented.'
+    exit 1
 fi
 
 # We now check for any side effect of continuation lines.
@@ -53,7 +58,7 @@ fi
 echo 'This is the beginning' \
      'of a continuation line.' >/dev/null
 
-if [ $LINENO -ne 56 ]; then
+if [ $LINENO -ne 61 ]; then
     echof 'LINENO built-in var is affected by continuation lines.'
 fi
 
