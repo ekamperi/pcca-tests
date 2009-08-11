@@ -44,6 +44,11 @@ populatesandbox()
     touch "$1/file000"
     chmod 0000 "$1/file000"
 
+    # Creat file {read,write}able only by root.
+    touch "$1/rootfile600"
+    sudo chown root "$1/rootfile600"
+    sudo chmod 600 "$1/rootfile600"
+
     # Create directory with full permissions.
     mkdir "$1/dir777"
     chmod 0777 "$1/dir777"
