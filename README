@@ -1,16 +1,36 @@
-CAVEATS
+POSSIBLE PLACES OF CONFUSION
 
-* The user that runs the test must not be root. This is a good practice anyway,
-but furthermore some tests require that they run as non-privileged users,
-eg. unistd.h/t_access2.
-
-On the other hand, the user must belong to the sudoers, because in some places,
+* The user that runs the test must NOT be root. This is a good practice anyway,
+but it's not just that. Some tests require that they are executed in a non-
+privileged context, eg. unistd.h/t_access2.
+On the other hand, the user MUST belong to the sudoers, because in some places,
 we need to set-user_ID bit or change the owner of a file, eg. unistd.t_access2.
-
 XXX: What about Solaris 10 and later?
 
 
 * In Linux particularly, but in other systems as well, make sure that you don't
-mount the medium where the tests reside as 'nosuid' (or similar). 
+mount the medium where the tests reside as 'nosuid' (or similar). Again, this is
+because some tests have the set-user-ID bit set, eg. unistd.h/t_access2. Running
+them in a context where the uid can't be escalated, it will result in a false
+failed test.
+If you want to get the list of suid binaries in the repository, after you have
+built the tests, type:
 
-Some test cases have the set-user-ID bit set, eg. unistd.h/t_access2.
+~/git-repos/pcca-tests% find . -type f \( -perm -4000 -o -perm -2000 \) -exec \
+> ls -lh {} \; 2>/dev/null
+-rwsr-xr-x  1 root  beket   6.9K Aug 12 00:09 ./unistd.h/t_access2
+~/git-repos/pcca-tests%
+
+
+* If you try to grep(1) recursively inside a $header.h directory that contains
+a sandbox/ directory, grep may block indefinitely in 'fifoor' state or similar.
+This is due to presence of a fifo special file inside the sandbox/ directory,
+which will block grep upon opening it. This is perfectly legitimate behavior and
+not some bug of grep. It can be circumvented by passing -O option to grep, to
+skip special files. -O though is non-standard so it may not be readily available
+to all systems systems. In such case, just delete the sandboxes/ with:
+
+~/git-repos/pcca-tests% ./mktests.sh -c
+~/git-repos/pcca-tests%
+
+and then grep.
