@@ -1,4 +1,5 @@
 all:	t_access	\
+	t_access2	\
 	t_alarm		\
 	t_chdir		\
 	t_confstr	\
@@ -133,6 +134,9 @@ clean:
 run:
 	@printf "t_access: "
 	@-./t_access
+
+	@printf "t_access2: "
+	@./t_access2
 
 	@printf "t_alarm: "
 	@-./t_alarm
