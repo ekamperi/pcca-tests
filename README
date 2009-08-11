@@ -34,3 +34,18 @@ to all systems systems. In such case, just delete the sandboxes/ with:
 ~/git-repos/pcca-tests%
 
 and then grep.
+
+
+* If you try to find(1) inside a repository that has the sandbox/ directories in
+it, errors will be printed to your console:
+
+~/git-repos/pcca-tests% find . -name foo
+find: ./unistd.h/sandbox/dir000: Permission denied
+...
+~/git-repos/pcca-tests%
+
+These are harmless but annoying nonetheless. You can try deleting the sandboxes
+with mktests.sh -c and the call find. You may also use one of the specialized
+scripts in the repository (getheaders.sh, getheaders.sh, getspecs.sh, etc).
+The latter not only silences the error messages, but also skips the .git/
+directory, which may save you a little bit of execution time.
