@@ -37,7 +37,18 @@ int main(void)
 {
 	int rv;
 
-	/* XXX: Make sure we don't run the test as root. */
+	/*
+	 * Make sure we don't run the test as root. This is a prerequisite.
+	 * XXX: Should we print a more user friendly message ?
+	 */
+	assert(getuid() != 0);
+
+	/*
+	 * Make sure that the setuid bit is set and the owner of the binary
+	 * is root. This is a prerequisite.
+	 * XXX: Should we print a more user friendly message ?
+	 */
+	assert(geteuid() == 0);
 
 	/*
 	 * According to POSIX access() is supposed to use the real user ID in
