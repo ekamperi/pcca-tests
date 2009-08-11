@@ -28,7 +28,7 @@ This is due to the presence of fifo special file inside the sandbox/ directory,
 which will block grep upon opening it. This is a perfectly legitimate behavior
 and not some bug of grep. It can be circumvented by passing -O option to grep,
 instructing it to skip special files. -O though is non-standard so it may not
-be readily available to all systems. In such case, just delete the sandboxes/
+be readily available to all systems. In such case, just delete the sandbox/'es
 with mktests.sh -c and then grep.
 
 
