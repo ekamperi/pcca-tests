@@ -54,8 +54,10 @@ int main(void)
 	p = malloc(sz + 1);
 	assert(p != NULL);
 
-	/* Get login name, but if we guessed account for a potential error. */
-	/* XXX: Allow the rest of the optional errors ? */
+	/*
+	 * Get login name, but if we guessed account for a potential error.
+	 * XXX: Allow the rest of the optional errors ?
+	 */
 	rv = getlogin_r(p, sz);
 	assert(rv == 0
 	    || errno == ENXIO
