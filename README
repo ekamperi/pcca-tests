@@ -24,16 +24,12 @@ built the tests, type:
 
 * If you try to grep(1) recursively inside a $header.h directory that contains
 a sandbox/ directory, grep may block indefinitely in 'fifoor' state or similar.
-This is due to presence of a fifo special file inside the sandbox/ directory,
-which will block grep upon opening it. This is perfectly legitimate behavior and
-not some bug of grep. It can be circumvented by passing -O option to grep, to
-skip special files. -O though is non-standard so it may not be readily available
-to all systems systems. In such case, just delete the sandboxes/ with:
-
-~/git-repos/pcca-tests% ./mktests.sh -c
-~/git-repos/pcca-tests%
-
-and then grep.
+This is due to the presence of fifo special file inside the sandbox/ directory,
+which will block grep upon opening it. This is a perfectly legitimate behavior
+and not some bug of grep. It can be circumvented by passing -O option to grep,
+instructing it to skip special files. -O though is non-standard so it may not
+be readily available to all systems. In such case, just delete the sandboxes/
+with mktests.sh -c and then grep.
 
 
 * If you try to find(1) inside a repository that has the sandbox/ directories in
