@@ -1,0 +1,6 @@
+
+In Linux particularly, but in other systems as well, make sure that you don't
+mount the medium where the tests reside as 'nosuid' (or similar). 
+
+Some test cases have the set-user-ID bit set, eg. unistd.h/t_access2.
+
