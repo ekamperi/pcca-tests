@@ -1,6 +1,16 @@
+CAVEATS
 
-In Linux particularly, but in other systems as well, make sure that you don't
+* The user that runs the test must not be root. This is a good practice anyway,
+but furthermore some tests require that they run as non-privileged users,
+eg. unistd.h/t_access2.
+
+On the other hand, the user must belong to the sudoers, because in some places,
+we need to set-user_ID bit or change the owner of a file, eg. unistd.t_access2.
+
+XXX: What about Solaris 10 and later?
+
+
+* In Linux particularly, but in other systems as well, make sure that you don't
 mount the medium where the tests reside as 'nosuid' (or similar). 
 
 Some test cases have the set-user-ID bit set, eg. unistd.h/t_access2.
-
