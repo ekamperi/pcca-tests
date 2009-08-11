@@ -38,5 +38,7 @@ int main(void)
 	p = getlogin();
 	assert(p != NULL);
 
+	printf("passed\n");
+
 	return (EXIT_SUCCESS);
 }
