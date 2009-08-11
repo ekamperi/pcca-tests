@@ -61,7 +61,8 @@ int main(int argc, char *argv[])
 	assert(chdir("sandbox/infloop") == -1 && errno == ELOOP);
 
 	/* Path doesn't name an existing directory or is an empty string. */
-	assert(chdir("/thisdefinitelydoesntexist") == -1 && errno == ENOENT);
+	assert(chdir("/sandbox/thisdefinitelydoesntexist") == -1
+	       && errno == ENOENT);
 	assert(chdir("") == -1 && errno == ENOENT);
 
 	/* A path's component is not a directory. */
