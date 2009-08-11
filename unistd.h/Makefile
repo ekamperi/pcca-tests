@@ -38,6 +38,11 @@ CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 t_access: t_access.c
 	$(CC) $(CCFLAGS) $(LIB) t_access.c -o t_access
 
+t_access2: t_access2.c
+	$(CC) $(CCFLAGS) $(LIB) t_access2.c -o t_access2
+	sudo chown root ./t_access2
+	sudo chmod u+s ./t_access2   # set setuid bit
+
 t_alarm: t_alarm.c
 	$(CC) $(CCFLAGS) $(LIB) t_alarm.c -o t_alarm
 
