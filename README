@@ -1,3 +1,96 @@
+RUNNING THE TESTS
+
+You may run the tests in two ways, either automatically via mktests.sh by
+supplying a top level directory to start from and letting it traverse the
+whole directory hierarchy underneath it, or manually on a per directory
+basis.
+
+The are a few unique characteristics embedded in mktests.sh that render it
+the preferred way to run the tests. First, mktests.sh can recursively run tests,
+eg. run all tests associated with sys/* headers. Second, it supports job control,
+which means that if a test exceeds a specified amount of execution time, it gets
+killed and the rest of the tests run normally. Finally, while running the tests,
+log statistics are generated for every $header.h/ directory, which can later be
+retrieved by the getstats.sh script. Here is a usual workflow:
+
+~/pcca-tests% ./mktests.sh -c	     # Clean files from previous build/run
+~/pcca-tests% ./mktests.sh -s	     # Construct sandbox/ directories
+...	      		   	     # Messages from the construction
+~/pcca-tests% ./mktests.sh -b	     # Build test cases
+...	      		   	     # Messages from gcc compilation
+~/pcca-tests% ./mktests.sh -r	     # Run tests (if none given, . is assumed
+                                     # as the top level directory to start from)
+~/pcca-tests% ./mktests.sh -r
+/aio.h/t_aio: Assertion failed: (aio_read(&iocb) != -1), function main, file
+t_aio.c, line 56.
+/complex.h/t_cabs: passed
+/complex.h/t_carg: passed
+/complex.h/t_cacos: passed
+...
+~/pcca-tests%
+
+In manual mode, one cd's into the directory of interest, types 'make' to
+build the tests and 'make run' to run them.
+
+~/pcca-tests% cd stdio.h
+~/pcca-tests/stdio.h% make
+...       # Messages from gcc compilation
+~/pcca-tests/stdio.h% make run
+t_clearerr: passed
+t_ctermid: passed
+...
+t_tmpfile: passed
+~/pcca-tests/stdio.h%
+
+GETTING STATISTICS
+
+After a bulk run has been completed (or even interrupted, since logs are
+generated incrementally) the log statistics can be retrieved via the getstats.sh
+script.
+
+~/pcca-tests% ./getstats.sh	# If no argument is given, "." is assumed
+>>> Headers
+        Audited:       77
+
+>>> Test files
+        tfiles :      195
+
+>>> Lines of code
+        C      :    15955
+        make   :     1877
+        sh     :      959
+        Perl   :      175
+
+>>> Results from last run
+        Passed :      164
+        Failed :       31
+
+It is also possible to explicitly set the top level directory. Suppose we need
+to know about the complex arithmetic support of the host environment:
+
+~/pcca-tests% ./getstats.sh ./complex.h
+>>> Headers
+        Audited:        1
+
+>>> Test files
+        tfiles :       26
+
+>>> Lines of code
+        C      :     1744
+        make   :      194
+        sh     :        0
+        Perl   :        0
+
+>>> Results from last run
+        Passed :       26
+        Failed :        0
+~/git-repos/pcca-tests%
+
+There is no magic involved in here (or nowhere else). The whole test repository
+layout is dead simple. In each $header.h/ directory you can find two files:
+log{passed,failed} containing the names of the test binaries that passed or
+failed respectively.
+
 POSSIBLE PLACES OF CONFUSION
 
 * The user that runs the test must NOT be root. This is a good practice anyway,
