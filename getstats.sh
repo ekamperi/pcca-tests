@@ -1,27 +1,33 @@
 #!/bin/sh
 
+if [ ! -z "$1" ]; then
+    DIR="$1"
+else
+    DIR="."    # Default top level directory to start from.
+fi
+
 # Number of audited headers
-NHEADERS=$(find . -name .git -prune -o \( -type d -name "*.h" -print \) \
+NHEADERS=$(find "$DIR" -name .git -prune -o \( -type d -name "*.h" -print \) \
     2>/dev/null | wc -l)
 
 # Number of test cases (as found in tfiles)
-NTESTS=$(find . -name .git -prune -o \( -type f -name "tfile" -print \) \
+NTESTS=$(find "$DIR" -name .git -prune -o \( -type f -name "tfile" -print \) \
     2>/dev/null | xargs cat | wc -l)
 
 # Number of lines of code in .c files
-CLOC=$(find . -name .git -prune -o \( -name "*.c" -print \) 2>/dev/null \
+CLOC=$(find "$DIR" -name .git -prune -o \( -name "*.c" -print \) 2>/dev/null \
     | xargs cat | wc -l)
 
 # Number of lines of code in Makefiles
-MAKELOC=$(find . -name .git -prune -o \( -name "Makefile" -print \) \
+MAKELOC=$(find "$DIR" -name .git -prune -o \( -name "Makefile" -print \) \
     2>/dev/null | xargs cat | wc -l)
 
 # Number of lines of code in shell scripts
-SHLOC=$(find . -name .git -prune -o \( -name "*.sh" -print \) 2>/dev/null \
+SHLOC=$(find "$DIR" -name .git -prune -o \( -name "*.sh" -print \) 2>/dev/null \
     | xargs cat | wc -l)
 
 # Number of lines of code in Perl scripts
-PERLLOC=$(find . -name .git -prune -o \( -name "*.pl" -print \) 2>/dev/null \
+PERLLOC=$(find "$DIR" -name .git -prune -o \( -name "*.pl" -print \) 2>/dev/null \
     | xargs cat | wc -l)
 
 echo ">>> Headers"
@@ -39,11 +45,11 @@ printf "\tsh     : $SHLOC\n"
 printf "\tPerl   : $PERLLOC\n"
 
 # Number of tests that passed
-NPASSED=$(find . -name .git -prune -o \( -name "log.passed" -print \) \
+NPASSED=$(find "$DIR" -name .git -prune -o \( -name "log.passed" -print \) \
     2>/dev/null | xargs cat | wc -l)
 
 # Number of tests that failed
-NFAILED=$(find . -name .git -prune -o \( -name "log.failed" -print \) \
+NFAILED=$(find "$DIR" -name .git -prune -o \( -name "log.failed" -print \) \
     2>/dev/null | xargs cat | wc -l)
 
 echo
