@@ -6,7 +6,7 @@ HOSTNAME="leaf.dragonflybsd.org"
 REMOTEDIR="public_html"
 
 echo ">>> Creating git archive with name $FILENAME"
-git archive --format=tar HEAD | gzip > $FILENAME
+git archive --format=tar HEAD | gzip > "$FILENAME"
 echo "DONE"
 
 echo ">>> Uploading git archive to $USERNAME@$HOSTNAME/~$REMOTEDIR"
