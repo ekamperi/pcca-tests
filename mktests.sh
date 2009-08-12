@@ -259,7 +259,11 @@ fi
 # Symbol tests.
 [ ! -z "$symbols" ] && runsymbols "$STARTDIR"
 
-# Fire!
+# Build sandboxes.
 [ ! -z "$sandbox" ] && buildsandboxes "$STARTDIR"
+
+# Build regular tests.
 [ ! -z "$clean"  ] || [ ! -z "$build" ] && buildtests "$STARTDIR"
+
+# Run regular tests.
 [ ! -z "$run"    ] && runtests "$STARTDIR"
