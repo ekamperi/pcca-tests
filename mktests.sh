@@ -144,21 +144,22 @@ runsymbols()
 
 runtests()
 {
-    # We really need to skip the .git/objects/* subdirectories.
-    # Also we don't look for directories ending with .h only, as we may later
-    # need to run tests on utilities as well, e.g. utilities/basemame.
+    # We skip the .git/objects/* subdirectories.
+    # We don't look for directories ending with .h only, as we also need to run
+    # tests on utilities as well, e.g. utilities/basemame.
 
     for dir in $(find "$1" -name .git -prune -o -type d -a ! -name . \
 	2>/dev/null | sort)
     do
-	if [ -f "$dir/tfile" ]
-	then
+	if [ -f "$dir/tfile" ]; then
+	    # Make sure there is no missing sandbox/ directory.
 	    if [ -f "$dir/need-sandbox" ] && [ ! -d "$dir/sandbox" ]; then
 		echo "WARNING: Missing sandbox/ directory."
 		echo "Did you forget to run ./mktests.s -s ?"
 		buildsandbox "$dir"
 	    fi
-	    # We pass control to the test leader script.
+
+	    # All good -- pass control to the test leader script.
 	    ./tleader.sh "$dir"
 	fi
     done
