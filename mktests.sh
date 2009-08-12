@@ -241,7 +241,7 @@ do
 done
 shift `expr $OPTIND - 1`
 
-# We treat the last (non-option) argument (if any), to be the starting path.
+# We treat the last (non-option) argument (if any), as the starting path.
 if [ ! -z $1 ]
 then
     STARTDIR=$1
