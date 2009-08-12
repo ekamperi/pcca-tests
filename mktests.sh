@@ -81,6 +81,24 @@ populatesandbox()
     chmod 777 "$1/fifo"
 }
 
+buildsandbox()
+{
+    # XXX: Fix permissions or else we won't be able to delete it.
+    chmod 777 "$dir/sandbox/dir000" 2>/dev/null
+    chmod 777 "$dir/sandbox/zeropermdir" 2>/dev/null
+
+    # Remove old sandbox.
+    rm -rf "$dir/sandbox"
+
+    # Create new sandbox directory.
+    mkdir "$dir/sandbox"
+
+    # Populate new sandbox directory with stuff.
+    populatesandbox "$dir/sandbox"
+
+    echo "Created $dir/sandbox directory"
+}
+
 buildsandboxes()
 {
     # We skip .git/objects/* subdirectories.
@@ -88,20 +106,7 @@ buildsandboxes()
 	2>/dev/null | sort)
     do
 	if [ -f "$dir/need-sandbox" ]; then
-	    # XXX: Fix permissions or else we won't be able to delete it.
-	    chmod 777 "$dir/sandbox/dir000" 2>/dev/null
-	    chmod 777 "$dir/sandbox/zeropermdir" 2>/dev/null
-
-	    # Remove old sandbox.
-	    rm -rf "$dir/sandbox"
-
-	    # Create new sandbox directory.
-	    mkdir "$dir/sandbox"
-
-	    # Populate new sandbox directory with stuff.
-	    populatesandbox "$dir/sandbox"
-
-	    echo "Created $dir/sandbox directory"
+	    buildsandbox "$dir"
 	fi
     done
 }
@@ -109,7 +114,7 @@ buildsandboxes()
 runmanpages()
 {
     echo 'A missing man page may be due to a missing MLINK' \
-         'or an unimplemented function.'
+	 'or an unimplemented function.'
     echo
 
     # We skip .git/objects/* subdirectories.
@@ -148,6 +153,11 @@ runtests()
     do
 	if [ -f "$dir/tfile" ]
 	then
+	    if [ -f "$dir/need-sandbox" ] && [ ! -d "$dir/sandbox" ]; then
+		echo "WARNING: Missing sandbox/ directory."
+		echo "Did you forget to run ./mktests.s -s ?"
+		buildsandbox "$dir"
+	    fi
 	    # We pass control to the test leader script.
 	    ./tleader.sh "$dir"
 	fi
@@ -197,10 +207,10 @@ buildtests()
 while getopts "cbrsmyh" f
 do
     case $f in
-        c)
+	c)
 	    # Clean stale files.
-            clean=$f
-            ;;
+	    clean=$f
+	    ;;
 	b)
 	    # Build tests.
 	    build=$f
@@ -221,14 +231,14 @@ do
 	    # Run symbol tests.
 	    symbols=$f
 	    ;;
-        h)
+	h)
 	    # Print a help message.
-            usage
-            ;;
-        \?)
+	    usage
+	    ;;
+	\?)
 	    # Same as before.
-            usage
-            ;;
+	    usage
+	    ;;
     esac
 done
 shift `expr $OPTIND - 1`
