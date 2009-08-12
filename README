@@ -20,6 +20,8 @@ tracked by git:
 Created ./foo.h/sandbox directory
 ~/pcca-tests%
 
+--------------------------------------------------------------------------------
+
 RUNNING THE TESTS
 
 You may run the tests in two ways, either automatically via mktests.sh by
@@ -63,6 +65,8 @@ t_ctermid: passed
 ...
 t_tmpfile: passed
 ~/pcca-tests/stdio.h%
+
+--------------------------------------------------------------------------------
 
 GETTING STATISTICS
 
@@ -112,6 +116,8 @@ There is no magic involved in here (or nowhere else). The whole test repository
 layout is dead simple. In each $header.h/ directory you can find two files:
 log{passed,failed} containing the names of the test binaries that passed or
 failed respectively.
+
+--------------------------------------------------------------------------------
 
 POSSIBLE PLACES OF CONFUSION
 
