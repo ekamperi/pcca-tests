@@ -1,3 +1,25 @@
+SANDBOXES
+
+Various tests need to check against all sort of weird situations like trying
+to access a file without search/execute permission or resolve an unresolvable
+symbolic link and so on. For this purpose we have introduced the notion of a
+sandbox/ directory, which acts as a provider for them.
+The sandbox/ directories are created and populated via mktests.sh script. Every
+$header.h/ directory that needs one, there must have a file need-sandbox in it.
+No need for that file to contain anything at all, just exist. But, it MUST be
+tracked by git:
+
+~/pcca-tests% mkdir foo.h
+~/pcca-tests% cd foo.h
+~/pcca-tests/foo.h% touch need-sandbox
+~/pcca-tests/foo.h% git add need-sandbox
+~/pcca-tests/foo.h% git commit -m "foo.h: Add need-sandbox file"
+...
+~/pcca-tests%
+~/pcca-tests% ./mktests.sh -s ./foo.h
+Created ./foo.h/sandbox directory
+~/pcca-tests%
+
 RUNNING THE TESTS
 
 You may run the tests in two ways, either automatically via mktests.sh by
