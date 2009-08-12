@@ -178,15 +178,12 @@ buildtests()
 	cd "$dir" 2>/dev/null
 
 	# Tests must come with a Makefile.
-	if [ -f "Makefile" ]
-	then
-	    if [ ! -z "$clean" ]
-	    then
+	if [ -f "Makefile" ]; then
+	    if [ ! -z "$clean" ]; then
 		make clean >/dev/null
 	    fi
 
-	    if [ ! -z "$build" ]
-	    then
+	    if [ ! -z "$build" ]; then
 		# Continue processing after errors (only for targets that aren't
 		# affected). There's nothing to worry about tests that fail to
 		# compile. This normally means that the host misses some stuff.
