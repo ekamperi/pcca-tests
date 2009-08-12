@@ -9,16 +9,16 @@ $header.h/ directory that needs one, there must have a file need-sandbox in it.
 No need for that file to contain anything at all, just exist. But, it MUST be
 tracked by git:
 
-~/pcca-tests% mkdir foo.h
-~/pcca-tests% cd foo.h
-~/pcca-tests/foo.h% touch need-sandbox
-~/pcca-tests/foo.h% git add need-sandbox
-~/pcca-tests/foo.h% git commit -m "foo.h: Add need-sandbox file"
+pcca-tests% mkdir foo.h
+pcca-tests% cd foo.h
+pcca-tests/foo.h% touch need-sandbox
+pcca-tests/foo.h% git add need-sandbox
+pcca-tests/foo.h% git commit -m "foo.h: Add need-sandbox file"
 ...
-~/pcca-tests%
-~/pcca-tests% ./mktests.sh -s ./foo.h
+pcca-tests%
+pcca-tests% ./mktests.sh -s ./foo.h
 Created ./foo.h/sandbox directory
-~/pcca-tests%
+pcca-tests%
 
 --------------------------------------------------------------------------------
 
@@ -37,34 +37,34 @@ killed and the rest of the tests run normally. Finally, while running the tests,
 log statistics are generated for every $header.h/ directory, which can later be
 retrieved by the getstats.sh script. Here is a usual workflow:
 
-~/pcca-tests% ./mktests.sh -c	     # Clean files from previous build/run
-~/pcca-tests% ./mktests.sh -s	     # Construct sandbox/ directories
+pcca-tests% ./mktests.sh -c	     # Clean files from previous build/run
+pcca-tests% ./mktests.sh -s	     # Construct sandbox/ directories
 ...	      		   	     # Messages from the construction
-~/pcca-tests% ./mktests.sh -b	     # Build test cases
+pcca-tests% ./mktests.sh -b	     # Build test cases
 ...	      		   	     # Messages from gcc compilation
-~/pcca-tests% ./mktests.sh -r	     # Run tests (if none given, . is assumed
+pcca-tests% ./mktests.sh -r	     # Run tests (if none given, . is assumed
                                      # as the top level directory to start from)
-~/pcca-tests% ./mktests.sh -r
+pcca-tests% ./mktests.sh -r
 /aio.h/t_aio: Assertion failed: (aio_read(&iocb) != -1), function main, file
 t_aio.c, line 56.
 /complex.h/t_cabs: passed
 /complex.h/t_carg: passed
 /complex.h/t_cacos: passed
 ...
-~/pcca-tests%
+pcca-tests%
 
 In manual mode, one cd's into the directory of interest, types 'make' to
 build the tests and 'make run' to run them.
 
-~/pcca-tests% cd stdio.h
-~/pcca-tests/stdio.h% make
+pcca-tests% cd stdio.h
+pcca-tests/stdio.h% make
 ...       # Messages from gcc compilation
-~/pcca-tests/stdio.h% make run
+pcca-tests/stdio.h% make run
 t_clearerr: passed
 t_ctermid: passed
 ...
 t_tmpfile: passed
-~/pcca-tests/stdio.h%
+pcca-tests/stdio.h%
 
 --------------------------------------------------------------------------------
 
@@ -74,7 +74,7 @@ After a bulk run has been completed (or even interrupted, since logs are
 generated incrementally) the log statistics can be retrieved via the getstats.sh
 script.
 
-~/pcca-tests% ./getstats.sh	# If no argument is given, "." is assumed
+pcca-tests% ./getstats.sh	# If no argument is given, "." is assumed
 >>> Headers
         Audited:       77
 
@@ -94,7 +94,7 @@ script.
 It is also possible to explicitly set the top level directory. Suppose we need
 to know about the complex arithmetic support of the host environment:
 
-~/pcca-tests% ./getstats.sh ./complex.h
+pcca-tests% ./getstats.sh ./complex.h
 >>> Headers
         Audited:        1
 
@@ -110,7 +110,7 @@ to know about the complex arithmetic support of the host environment:
 >>> Results from last run
         Passed :       26
         Failed :        0
-~/git-repos/pcca-tests%
+pcca-tests%
 
 There is no magic involved in here (or nowhere else). The whole test repository
 layout is dead simple. In each $header.h/ directory you can find two files:
@@ -137,10 +137,10 @@ failed test.
 If you want to get the list of suid binaries in the repository, after you have
 built the tests, type:
 
-~/git-repos/pcca-tests% find . -type f \( -perm -4000 -o -perm -2000 \) -exec \
+pcca-tests% find . -type f \( -perm -4000 -o -perm -2000 \) -exec \
 > ls -lh {} \; 2>/dev/null
 -rwsr-xr-x  1 root  beket   6.9K Aug 12 00:09 ./unistd.h/t_access2
-~/git-repos/pcca-tests%
+pcca-tests%
 
 
 * If you try to grep(1) recursively inside a $header.h directory that contains
@@ -156,10 +156,10 @@ with mktests.sh -c and then grep.
 * If you try to find(1) inside a repository that has the sandbox/ directories in
 it, errors will be printed to your console:
 
-~/git-repos/pcca-tests% find . -name foo
+pcca-tests% find . -name foo
 find: ./unistd.h/sandbox/dir000: Permission denied
 ...
-~/git-repos/pcca-tests%
+pcca-tests%
 
 These are harmless but annoying nonetheless. You can try deleting the sandboxes
 with mktests.sh -c and the call find. You may also use one of the specialized
@@ -171,22 +171,22 @@ directory, which may save you a little bit of execution time.
 * Log files are generated ONLY when tests are executed via mktests.sh and NOT
 manually with make && make run.
 
-~/pcca-tests% ./mktests.sh -c
-~/pcca-tests% cd stdio.h
-~/pcca-tests/stdio.h% make
+pcca-tests% ./mktests.sh -c
+pcca-tests% cd stdio.h
+pcca-tests/stdio.h% make
 ...
-~/pcca-tests/stdio.h% make run
+pcca-tests/stdio.h% make run
 ...
-~/git-repos/pcca-tests% ./getstats.sh ./stdio.h
+pcca-tests% ./getstats.sh ./stdio.h
 ...
 >>> Results from last run
         Passed :        0
         Failed :        0
-~/pcca-tests% ./mktests.sh -r ./stdio.h
+pcca-tests% ./mktests.sh -r ./stdio.h
 ...
-~/pcca-tests% ./getstats.sh ./stdio.h
+pcca-tests% ./getstats.sh ./stdio.h
 ...
 >>> Results from last run
         Passed :        7
         Failed :        0
-~/pcca-tests%
+pcca-tests%
