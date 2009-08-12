@@ -166,3 +166,27 @@ with mktests.sh -c and the call find. You may also use one of the specialized
 scripts in the repository (getheaders.sh, getheaders.sh, getspecs.sh, etc).
 The latter not only silences the error messages, but also skips the .git/
 directory, which may save you a little bit of execution time.
+
+
+* Log files are generated ONLY when tests are executed via mktests.sh and NOT
+manually with make && make run.
+
+~/pcca-tests% ./mktests.sh -c
+~/pcca-tests% cd stdio.h
+~/pcca-tests/stdio.h% make
+...
+~/pcca-tests/stdio.h% make run
+...
+~/git-repos/pcca-tests% ./getstats.sh ./stdio.h
+...
+>>> Results from last run
+        Passed :        0
+        Failed :        0
+~/pcca-tests% ./mktests.sh -r ./stdio.h
+...
+~/pcca-tests% ./getstats.sh ./stdio.h
+...
+>>> Results from last run
+        Passed :        7
+        Failed :        0
+~/pcca-tests%
