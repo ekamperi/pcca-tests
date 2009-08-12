@@ -37,7 +37,7 @@ do
     if [ ! -x "$task" ]
     then
 	echo "failed (test does not exist)"
-	echo "$task" >> "$LOGFAILED"
+	echo "$1/$task" >> "$LOGFAILED"
 	continue
     fi
 
@@ -71,9 +71,9 @@ do
     done
 
     if wait $pid; then
-	echo "$task" >> "$LOGPASSED"
+	echo "$1/$task" >> "$LOGPASSED"
     else
-	echo "$task" >> "$LOGFAILED"
+	echo "$1/$task" >> "$LOGFAILED"
     fi
 done < tfile
 
