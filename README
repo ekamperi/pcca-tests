@@ -31,7 +31,7 @@ basis.
 
 The are a few unique characteristics embedded in mktests.sh that render it
 the preferred way to run the tests. First, mktests.sh can recursively run tests,
-eg. run all tests associated with sys/* headers. Second, it supports job control,
+eg. run all tests associated with sys/* headers. Second, it supports job control
 which means that if a test exceeds a specified amount of execution time, it gets
 killed and the rest of the tests run normally. Finally, while running the tests,
 log statistics are generated for every $header.h/ directory, which can later be
@@ -164,7 +164,7 @@ POSSIBLE PLACES OF CONFUSION
 but it's not just that. Some tests require that they are executed in a non-
 privileged context, eg. unistd.h/t_access2.
 On the other hand, the user MUST belong to the sudoers, because in some places,
-we need to set-user_ID bit or change the owner of a file, eg. unistd.t_access2.
+we need to set-user-ID bit or change the owner of a file, eg. unistd.t_access2.
 XXX: What about Solaris 10 and later?
 
 
