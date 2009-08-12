@@ -1,7 +1,5 @@
 #!/bin/sh
 
-STARTDIR="."	# Default top level directory to start from when running tests.
-
 usage()
 {
     cat <<EOF
@@ -245,6 +243,8 @@ shift `expr $OPTIND - 1`
 # If none is given we current as the default one.
 if [ ! -z $1 ]; then
     STARTDIR=$1
+else
+    STARTDIR="."
 fi
 
 # At least one of -c, -b, -r, -s, -m, -y options must be set.
