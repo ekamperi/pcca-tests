@@ -151,7 +151,7 @@ the export.sh script which is found in the root directory of the repository:
 pcca-tests% ./export.sh
 >>> Creating git archive with name pcca-tests-12-08-09.tar.gz
 DONE
->>> Uploading git archive to beket@leaf.dragonflybsd.org/~public_html
+>>> Uploading git archive to beket@leaf.dragonflybsd.org:~/public_html
 pcca-tests-12-08-09.tar.gz                        100%  108KB 108.1KB/s   00:00
 DONE
 pcca-tests%
