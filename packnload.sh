@@ -1,11 +1,14 @@
 #!/bin/sh
 
 FILENAME=pcca-tests-`date '+%d-%m-%y'`.tar.gz
+USERNAME="beket"
+HOSTNAME="leaf.dragonflybsd.org"
+REMOTEDIR="public_html"
 
-printf "Creating git archive with name $FILENAME... "
+echo ">>> Creating git archive with name $FILENAME"
 git archive --format=tar HEAD | gzip > $FILENAME
-printf "DONE\n"
+echo "DONE"
 
-printf "Uploading git archive to leaf.dragonflybsd.org/~public_html... "
-scp $FILENAME beket@leaf.dragonflybsd.org:~/public_html
-printf "DONE\n"
+echo ">>> Uploading git archive to $USERNAME@$HOSTNAME/~$REMOTEDIR"
+scp "$FILENAME" "$USERNAME@$HOSTNAME:~/$REMOTEDIR"
+echo "DONE"
