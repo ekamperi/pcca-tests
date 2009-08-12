@@ -9,6 +9,6 @@ echo ">>> Creating git archive with name $FILENAME"
 git archive --format=tar HEAD | gzip > "$FILENAME"
 echo "DONE"
 
-echo ">>> Uploading git archive to $USERNAME@$HOSTNAME/~$REMOTEDIR"
+echo ">>> Uploading git archive to $USERNAME@$HOSTNAME:~/$REMOTEDIR"
 scp "$FILENAME" "$USERNAME@$HOSTNAME:~/$REMOTEDIR"
 echo "DONE"
