@@ -62,8 +62,12 @@ int main(void)
 	unlimited = 0;
 	if (rv != -1) {
 		overflowed = 0;
+		/*
+		 * if (rv + 1 > rv) won't overflow on i386/DragonFlyBSD,
+		 * but it will on sparc/Solaris 10.
+		 */
 		newlimit = rv + 1;
-		if (newlimit > rv) {	/* if (rv + 1 > rv) won't overflow! */
+		if (newlimit > rv) {
 			errno = 0;
 			rv = ulimit(UL_SETFSIZE, rv + 1);
 			assert(rv == -1 && errno == EPERM);
