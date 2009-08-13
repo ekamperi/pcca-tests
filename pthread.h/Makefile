@@ -36,7 +36,7 @@ all:	t_pthread_attr_getdetachstate		\
 
 
 CC=gcc
-CCFLAGS=-Wall -W -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
+CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
