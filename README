@@ -1,3 +1,14 @@
+--------------------------------------------------------------------------------
+
+GETTING THE TEST REPOSITORY
+
+The test case repository is (not so much) tight to git. That said, the best way
+to get is to clone it:
+
+~% git clone git://gitweb.dragonflybsd.org/~beket/pcca-tests.git
+
+--------------------------------------------------------------------------------
+
 SANDBOXES
 
 Various tests need to check against all sort of weird situations like trying
