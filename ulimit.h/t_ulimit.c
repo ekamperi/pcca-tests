@@ -25,20 +25,29 @@
  * SUCH DAMAGE.
  */
 
+#define _XOPEN_SOURCE 600
+
 #include <assert.h>
 #include <errno.h>
 #include <limits.h>	/* for INT_MAX */
 #include <stdio.h>
 #include <stdlib.h>
 #include <ulimit.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
 int main(void)
 {
 	long rv;
+	int overflowed, unlimited;
+	pid_t pid;
 
 	/*
 	 * We expect this simple call to succeed.  All return values are
-	 * permissible in a successful situation, including -1 (?).
+	 * permissible in a successful situation according to the specs.
+	 * Which makes me wonder what does exactly a -1 value represent?
+	 * Infinite or indefinite (as in inconclusive) limit ? Here we
+	 * assume the former.
 	 */
 	errno = 0;
 	rv = ulimit(UL_GETFSIZE);
@@ -46,15 +55,28 @@ int main(void)
 
         /*
 	 * Try to increase our file size limit, without being privileged.
-	 * Make sure we don't overflow though.
+	 * Make sure we don't overflow though. Because if we do we may
+	 * get false successful outcomes. Also, skip the test if the
+	 * previous call to ulimit() returned an infinite limit.
 	 */
-	if (rv + 1 > rv) {
-		errno = 0;
-		rv = ulimit(UL_SETFSIZE, rv + 1);
-		assert(rv == -1 && errno == EPERM);
+	unlimited = 0;
+	if (rv != -1) {
+		overflowed = 0;
+		if (rv + 1 > rv) {
+			errno = 0;
+			rv = ulimit(UL_SETFSIZE, rv + 1);
+			assert(rv == -1 && errno == EPERM);
+		} else {
+			overflowed = 1;
+		}
+	} else {
+		unlimited = 1;
 	}
 
-	/* Try to lower our file size limit. */
+	/*
+	 * Try to lower our file size limit. This doesn't require special
+	 * privileges.
+	 */
 	errno = 0;
 	rv = ulimit(UL_SETFSIZE, 0);
 	assert(rv != -1 || errno == 0);
@@ -63,7 +85,30 @@ int main(void)
 	rv = ulimit(-INT_MAX);
 	assert(rv == -1 && errno == EINVAL);
 
-	printf("passed\n");
+	/* The limit must be inherited by a child processes. */
+	pid = fork();
+	assert(pid != -1);
+
+	if (pid != 0) {
+		/* We are inside the parent. */
+		int status;
+
+		/* Wait for child to complete. */
+		assert(wait(&status) == pid);
+
+		if (unlimited == 1)
+			printf("passed (unlimited)\n");
+		else if (overflowed == 1)
+			printf("passed (overflowed)\n");
+		else
+			printf("passed\n");
+
+	} else {
+		/* We are inside the child. */
+		errno = 0;
+		rv = ulimit(UL_GETFSIZE);
+		assert(rv == 0);
+	}
 
 	return (EXIT_SUCCESS);
 }
