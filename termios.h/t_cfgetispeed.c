@@ -94,10 +94,10 @@ int main(void)
 	size_t i, speedfound;
 
 	/* Make sure we are associated with a tty. */
-	assert(isatty(STDIN_FILENO) != 0);
+	assert(isatty(STDOUT_FILENO) != 0);
 
 	/* Get current termios structure. */
-	assert(tcgetattr(STDIN_FILENO, &t) != -1);
+	assert(tcgetattr(STDOUT_FILENO, &t) != -1);
 
 	/*
 	 * Extract input speed.

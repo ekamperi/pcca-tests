@@ -46,7 +46,7 @@ int main(void)
 	int fd;
 
         /* Make sure we are associated with a tty. */
-	assert(isatty(STDIN_FILENO) != 0);
+	assert(isatty(STDOUT_FILENO) != 0);
 
 	/* Fork! */
 	pid = fork();
@@ -56,7 +56,7 @@ int main(void)
 		/* We are inside the parent. */
 		/* Make us the foreground process group. */
 		pgid = getpgid(0);
-		assert(tcsetpgrp(STDIN_FILENO, pgid) == 0);
+		assert(tcsetpgrp(STDOUT_FILENO, pgid) == 0);
 
 		/* Wait for child to complete. */
 		int status;
@@ -96,7 +96,7 @@ int main(void)
 		 * write to the terminal while belonging to a background process
 		 * group.
 		 */
-		assert(tcdrain(STDIN_FILENO) == 0);
+		assert(tcdrain(STDOUT_FILENO) == 0);
 
 		assert(issignaled == 1);
 	}

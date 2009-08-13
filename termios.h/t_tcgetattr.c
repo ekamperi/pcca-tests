@@ -40,10 +40,10 @@ int main(void)
 	int fd;
 
 	/* Make sure we are associated with a tty. */
-	assert(isatty(STDIN_FILENO) != 0);
+	assert(isatty(STDOUT_FILENO) != 0);
 
 	/* Get current termios structure. */
-	assert(tcgetattr(STDIN_FILENO, &oldt) != -1);
+	assert(tcgetattr(STDOUT_FILENO, &oldt) != -1);
 
 	/* Bad file descriptor. */
 	assert(tcgetattr(-1, &oldt) == -1 && errno == EBADF);

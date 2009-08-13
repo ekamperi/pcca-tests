@@ -38,10 +38,10 @@ int main(void)
 	int fd;
 
 	/* Make sure we are associated with a tty. */
-	assert(isatty(STDIN_FILENO) != 0);
+	assert(isatty(STDOUT_FILENO) != 0);
 
 	/* We expect this simple call to succeed. */
-	assert(tcgetsid(STDIN_FILENO) != (pid_t)-1);
+	assert(tcgetsid(STDOUT_FILENO) != (pid_t)-1);
 
 	/* Bad file descriptor. */
         assert(tcgetsid(-1) == (pid_t)-1 && errno == EBADF);

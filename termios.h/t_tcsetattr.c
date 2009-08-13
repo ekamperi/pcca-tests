@@ -40,13 +40,13 @@ int main(void)
 	int fd;
 
 	/* Make sure we are associated with a tty. */
-	assert(isatty(STDIN_FILENO) != 0);
+	assert(isatty(STDOUT_FILENO) != 0);
 
 	/* Get current termios structure. */
-	assert(tcgetattr(STDIN_FILENO, &t) != -1);
+	assert(tcgetattr(STDOUT_FILENO, &t) != -1);
 
 	/* ... and set it again! */
-	assert(tcsetattr(STDIN_FILENO, TCSANOW, &t) != -1);
+	assert(tcsetattr(STDOUT_FILENO, TCSANOW, &t) != -1);
 
 	/* Bad file descriptor. */
 	assert(tcsetattr(-1, TCSANOW, &t) == -1 && errno == EBADF);
@@ -60,16 +60,16 @@ int main(void)
 	 * don't validate input, disable it for now.
 	 * Source: http://www.ietf.org/rfc/rfc0791.txt
 	 */
-	assert(tcsetattr(STDIN_FILENO, TCSANOW | TCSADRAIN, &t) == -1
+	assert(tcsetattr(STDOUT_FILENO, TCSANOW | TCSADRAIN, &t) == -1
 	       && errno == EINVAL);
 
-	assert(tcsetattr(STDIN_FILENO, TCSANOW | TCSAFLUSH, &t) == -1
+	assert(tcsetattr(STDOUT_FILENO, TCSANOW | TCSAFLUSH, &t) == -1
 	       && errno == EINVAL);
 
-	assert(tcsetattr(STDIN_FILENO, TCSADRAIN | TCSAFLUSH, &t) == -1
+	assert(tcsetattr(STDOUT_FILENO, TCSADRAIN | TCSAFLUSH, &t) == -1
 	       && errno == EINVAL);
 #endif
-	assert(tcsetattr(STDIN_FILENO, -INT_MAX, &t) == -1
+	assert(tcsetattr(STDOUT_FILENO, -INT_MAX, &t) == -1
 	       && errno == EINVAL);
 
 	/* File descriptor is not associated with a terminal. */
