@@ -45,12 +45,12 @@ do
     pid=$!	# The process ID of the most recent background command
                 # executed from the current shell. We need it in case
                 # the test goes wild and need must kill it.
-    sleep 0.2
+    sleep 1
 
     cnt=0
     while jobs -l %+ >/dev/null 2>/dev/null
     do
-        sleep 0.5
+        sleep 1
 	cnt=$((cnt+1))
 
 	if [ $cnt -ge 20 ]; then
