@@ -42,7 +42,7 @@ echof()
 }
 
 if [ -n "$LINENO" ]; then
-    if [ $LINENO -ne 42 ]; then
+    if [ $LINENO -ne 45 ]; then
 	echof 'LINENO is affected by comments and/or newlines.'
 	echof 'Subsequent output may give false negative results.'
     fi
@@ -61,7 +61,7 @@ fi
 echo 'This is the beginning' \
      'of a continuation line.' >/dev/null
 
-if [ $LINENO -ne 61 ]; then
+if [ $LINENO -ne 64 ]; then
     echof 'LINENO built-in var is affected by continuation lines.'
 fi
 
