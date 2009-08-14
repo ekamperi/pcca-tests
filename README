@@ -7,6 +7,29 @@ to get is to clone it:
 
 ~% git clone git://gitweb.dragonflybsd.org/~beket/pcca-tests.git
 
+See the "EXPORTING TEST REPOSITORY TO A GIT-LESS HOST" section on how to create
+a tar archive and pass it around.
+
+--------------------------------------------------------------------------------
+
+SUPPORTED PLATFORMS
+
+A lot of care has been taken to ensure that the test suite runs in as many
+environments as possible. We refer to both the shell scripts that are provided
+for administration (mktests.sh, get*.sh, etc) and the _actual_ test cases.
+
+The strive for portability wasn't entirely noble. By being able to run the tests
+in many platforms, we verified the correctness of the tests and reduced the
+possibility of relying on some non-standard feature of the host OS. Not only did
+we ran the tests in different OSes, but we spread its development across them.
+
+The test suite has been tested and proved to work under DragonFlyBSD, NetBSD,
+Linux and OpenBSD in both automatic/bulk (aka via mktests.sh) mode and in manual
+as well (aka via make && make run).
+
+The bulk runs don't quite work in Solaris 10, but manually running individual
+tests works as a charm.
+
 --------------------------------------------------------------------------------
 
 SANDBOXES
