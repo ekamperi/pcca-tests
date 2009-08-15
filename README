@@ -19,18 +19,18 @@ environments as possible. By the term 'suite' we refer to both the shell
 scripts that are provided for administration (mktests.sh, get*.sh, etc)
 and the _actual_ test cases.
 
-The strive for portability wasn't entirely nobble. By being able to run the
+The strive for portability hasn't been entirely nobble. By being able to run the
 tests in many platforms, we verified the correctness of the tests and reduced
 the probability of relying on some non-standard feature of the host OS. Not only
 did we ran the tests in different OSes, but we spread its development across
 them.
 
 The suite has been tested and proved to work (with decreasing levels of
-confidence) under DragonFlyBSD, NetBSD, Linux and OpenBSD in both automatic/
-bulk (aka via mktests.sh) mode and in manual as well (aka via make && make run).
+confidence) under DragonFlyBSD, NetBSD, Linux and OpenBSD in both automated/
+bulk mode (via mktests.sh) and in manual as well (via make && make run).
 
 The bulk runs don't quite work in Solaris 10 yet, but manually running
-individual tests works as a charm.
+individual tests works like a charm.
 
 --------------------------------------------------------------------------------
 
@@ -40,6 +40,7 @@ Various tests need to check against all sort of weird situations like trying
 to access a file without search/execute permission or resolve an unresolvable
 symbolic link and so on. For this purpose we have introduced the notion of a
 sandbox/ directory, which acts as a provider for them.
+
 The sandbox/ directories are created and populated via mktests.sh script. Every
 $header.h/ directory that needs one, there must have a file 'need-sandbox' in
 it. No need for that file to contain anything at all, just exist. But, it MUST
@@ -55,6 +56,19 @@ pcca-tests%
 pcca-tests% ./mktests.sh -s ./foo.h
 Created ./foo.h/sandbox directory
 pcca-tests%
+
+We could have supplied only one top-level such directory, and have let the tests
+refer to it via ../../sandbox/* and so on. The reason we wanted to have per
+$header.h/ sandboxes, is because we wanted the various $header.h/ directories to
+be completely self-sufficient. So that one could tar -say- pthread.h/ tests,
+send the archive over to a remote machine, untar it, and be able to run the
+tests.
+
+On top of that, having all tests use the same exact file structures could
+potentially lead to undesired results. For example, among the provided files
+there is a FIFO special file. Although it is an unlikely to happen scenario,
+what whould be the consequences of two different tests trying to access it
+at the same time ?
 
 --------------------------------------------------------------------------------
 
