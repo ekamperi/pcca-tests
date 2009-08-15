@@ -43,7 +43,7 @@ int main(void)
 	assert(tcsetpgrp(-1, getpgid(0)) == -1 && errno == EBADF);
 
 	/* Invalid process group id. */
-	assert(tcsetpgrp(STDIN_FILENO, -INT_MAX) ==  -1 && errno == EINVAL);
+	assert(tcsetpgrp(STDOUT_FILENO, -INT_MAX) ==  -1 && errno == EINVAL);
 
 	/* Not a controlling terminal. */
 	fd = open("sandbox/notatty", O_RDONLY);
@@ -70,7 +70,7 @@ int main(void)
 		 * XXX: In Linux this call "succeeds" (i.e. it returns 0),
 		 * but the process group id doesn't change at all!
 		 */
-		assert(tcsetpgrp(STDIN_FILENO, getpid()) == -1
+		assert(tcsetpgrp(STDOUT_FILENO, getpid()) == -1
 		    && errno == EPERM);
 	}
 	
