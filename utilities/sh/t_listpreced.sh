@@ -43,6 +43,8 @@ echof()
 
 # According to Teh Standard (2.9.3), the operators "&&" and "||" shall have
 # equal precedence and shall be evaluated with left associativity.
+# Mind that this is different from C semantics, where && has higher precedence
+# over ||.
 rv=$(false && echo foo || echo bar)
 if [ "$rv" != "bar" ]; then
     echof '&& and || precedence equality or left associativity violated'
