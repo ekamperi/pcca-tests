@@ -2,4 +2,5 @@ t_alias.sh
 t_lineno.sh
 t_listpreced.sh
 t_negpipe.sh
+t_reset_getopt.sh
 t_wait.sh
