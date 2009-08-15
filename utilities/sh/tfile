@@ -1,4 +1,5 @@
 t_alias.sh
 t_lineno.sh
+t_listpreced.sh
 t_negpipe.sh
 t_wait.sh
