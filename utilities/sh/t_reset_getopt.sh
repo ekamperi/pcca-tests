@@ -42,8 +42,12 @@ echof()
 }
 
 # See also commit edc2dda3dc3fccec8603cc28bc8650188872e8d4.
-jobs -l >/dev/null 2>/dev/null	# this advances optind
-printf "test\n" >/dev/null 2>/dev/null	# and this fails if getopt isn't reset
+# This advances the `optind' index.
+jobs -l >/dev/null 2>/dev/null
+
+# And this fails if the shell itself didn't reset getopt, prior to
+# calling printf.
+printf "test" >/dev/null 2>/dev/null
 
 if [ ! $? -eq 0 ]; then
     echof 'printf after jobs -l failed (not resetting getopt ?)'
