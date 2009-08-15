@@ -89,7 +89,7 @@ cat > "$TESTFILE" <<'EOF'
 EOF
 rv=$(/bin/sh "$TESTFILE" 2>/dev/null)
 if [ "$rv" != "pass" ]; then
-    echof "1> space in the first alias ignored"
+    echof ">1 space in the first alias ignored"
 fi
 rm -f "$TESTFILE"
 
@@ -103,7 +103,7 @@ cat > "$TESTFILE" <<'EOF'
 EOF
 rv=$(/bin/sh "$TESTFILE" 2>/dev/null)
 if [ "$rv" != "pass" ]; then
-    echof "1> space in both aliases ignored"
+    echof ">1 space in both aliases ignored"
 fi
 rm -f "$TESTFILE"
 
