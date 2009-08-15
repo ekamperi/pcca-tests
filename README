@@ -263,3 +263,15 @@ pcca-tests% ./getstats.sh ./stdio.h
         Passed :        7
         Failed :        0
 pcca-tests%
+
+--------------------------------------------------------------------------------
+
+TIPS
+
+* If your sleep(1) supports decimal delays, a non standard feature, you may
+edit tleaders.sh and replace 'sleep 1' occurences with 'sleep 0.2' or so.
+This will decrease the time needed by the test suite to complete a bulk run.
+Especially in fast machines.
+
+Solaris 10 doesn't support it, but I've been told that opensolaris ships with
+gnu sleep as well, which will work.
