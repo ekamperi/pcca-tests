@@ -180,7 +180,7 @@ pcca-tests% git archive --format=tar HEAD | gzip > "tests.tar.gz"
 # Exporting only a part of it
 pcca-tests% git archive --format=tar HEAD ./math.h | gzip > "tests.tar.gz"
 
-# Verify tar's contents
+# Verifying tar's contents
 pcca-tests% gunzip < tests.tar.gz | tar tf -
 math.h/
 math.h/Makefile
@@ -190,7 +190,7 @@ math.h/math.h.spec
 ...
 pcca-tests%
 
-# Get the commit ID
+# Getting the commit ID
 pcca-tests% git get-tar-commit-id < tests.tar
 1b56e96931aa1c58e138b57b8066732a7950f043
 pcca-tests%
@@ -282,7 +282,7 @@ pcca-tests%
 
 --------------------------------------------------------------------------------
 
-TIPS
+TIPS & TRICKS
 
 * If your sleep(1) supports decimal delays, a non standard feature, you may
 edit tleaders.sh and replace 'sleep 1' occurences with 'sleep 0.2' or so.
