@@ -43,6 +43,39 @@ echof()
 
 sleep 20 &
 
+# Output when neither -p nor -l is given to jobs
+# Format: [%d] %c %s %s\n", <job-number>, <current>, <state>, <command>
+rv=$(jobs)
+if [ ! $? -eq 0 ]; then
+    echof 'jobs fatal error (should not happen)'
+    exit 1	# fatal
+else
+    # Job number
+    #rv="[123] running sleep    10"
+    rv2=$(echo "$rv" | awk '$1 ~ /^\[[+-]?[0-9]+\]$/ { print $1 }')
+    if [ -z "$rv2" ]; then
+	echof 'format violated in <job number>'
+    fi
+
+    # Current (maybe space or + or -)
+    rv2=$(echo "$rv" | awk '$2 ~ /[+-]+|[a-zA-z]+/ { print $2 }')
+    if [ -z "$rv2" ]; then
+	echof 'format violated in <current>'
+    fi
+
+    # State
+    rv2=$(echo "$rv" | awk '/[ \t]+[Rr]unning[ \t]+/ { print }')
+    if [ -z "$rv2" ]; then
+	echof 'format violated in <state>'
+    fi
+
+    # Command
+    rv2=$(echo "$rv" | awk '/[ \t]+sleep[ \t]+10[ \t]*/ { print }')
+    if [ -z "$rv2" ]; then
+	echof 'format violated in <command>'
+    fi
+fi
+
 # Make sure -p is supported (mandatory)
 rv=$(jobs -p)
 if [ ! $? -eq 0 ]; then
@@ -60,10 +93,12 @@ fi
 rv=$(jobs -l)
 if [ ! $? -eq 0 ]; then
     echof 'jobs -l not supported'
-else
-    # XXX: Implement a precise regexp against:
-    # "[%d] %c %s %s\n", <job-number>, <current>, <state>, <command>
+
+    # XXX: Should we bother checking jobs -l output ?
+    # It should be pretty much the same as jobs, except for the new 'process
+    # group ID' field or so.
 fi
+
 
 # Done
 [ $FAIL -eq 0 ] && echo "$SCRIPTNAME: passed"
