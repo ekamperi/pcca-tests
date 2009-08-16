@@ -1,4 +1,5 @@
 t_alias.sh
+t_if_compound_list.sh
 t_jobs_output.sh
 t_lineno.sh
 t_listpreced.sh
