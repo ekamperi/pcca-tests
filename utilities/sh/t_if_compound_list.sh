@@ -66,7 +66,7 @@ EOF
 
 rv=$(/bin/sh "$TESTFILE" 2>/dev/null)
 if [ ! -z "$rv" ]; then
-    echof 'null compound list in if clause is allowed'
+    echof 'null compound list encountered in if clause'
 fi
 rm -f "$TESTFILE"
 
