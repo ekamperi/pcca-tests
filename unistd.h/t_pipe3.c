@@ -112,19 +112,13 @@ readerthr(void *arg)
 	/* Get the number of pipe we will be reading from. */
 	idx = *(int *)arg;
 
-	printf("R: %d\n", idx);
-	fflush(NULL);
-
 	for (i = 0; i < MAX_BLOCKS; i++) {
 		/* Read block from pipe. */
 		bytesread = 0;
 		do {
 			rv = read(fd[idx][0], (char *)&myblock + bytesread,
 			    sizeof(myblock) - bytesread);
-			if (rv == -1) {
-				perror("");
-				assert(rv != -1);
-			}
+			assert(rv != -1);
 			bytesread += rv;
 		} while(bytesread < sizeof(myblock));
 
@@ -153,9 +147,6 @@ writerthr(void *arg)
 	/* Get the number of pipe we will be writing to. */
 	idx = *(int *)arg;
 
-	printf("W: %d\n", idx);
-	fflush(NULL);
-
 	/* Open /dev/urandom. */
 	rndfd = open("/dev/urandom", O_RDONLY);
 	assert(rndfd != -1);
@@ -180,7 +171,6 @@ writerthr(void *arg)
 			perror("");
 			assert(0);
 		}
-
 	}
 
 	/* We no longer need /dev/urandom. */
