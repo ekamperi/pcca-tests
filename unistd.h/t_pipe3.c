@@ -99,6 +99,8 @@ int main(void)
 	for (i = 1; i < 2*MAX_PAIRS; i+=2)
 		assert(pthread_join(tid[i], NULL) == 0);
 
+	printf("passed\n");
+
 	return (EXIT_SUCCESS);
 }
 
@@ -167,10 +169,8 @@ writerthr(void *arg)
 		SHA1(myblock.b_data, myblock.b_len, myblock.b_sha);
 
 		/* Write block to pipe. */
-		if (write(fd[idx][1], &myblock, sizeof(myblock)) == -1) {
-			perror("");
-			assert(0);
-		}
+		assert(write(fd[idx][1], &myblock, sizeof(myblock))
+		       == sizeof(myblock));
 	}
 
 	/* We no longer need /dev/urandom. */
