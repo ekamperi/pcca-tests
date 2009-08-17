@@ -23,6 +23,7 @@ all:	t_access	\
 	t_nice_thr	\
 	t_pause		\
 	t_pipe		\
+	t_pipe2		\
 	t_readlink	\
 	t_ttyname	\
 	t_tcsetpgrp	\
@@ -109,6 +110,9 @@ t_pause: t_pause.c
 
 t_pipe: t_pipe.c
 	$(CC) $(CCFLAGS) $(LIB) t_pipe.c -o t_pipe
+
+t_pipe2: t_pipe2.c
+	$(CC) $(CCFLAGS) $(LIB) t_pipe2.c -o t_pipe2 -lcrypto
 
 t_readlink: t_readlink.c
 	$(CC) $(CCFLAGS) $(LIB) t_readlink.c -o t_readlink
@@ -203,6 +207,9 @@ run:
 
 	@printf "t_pipe: "
 	@-./t_pipe
+
+	@printf "t_pipe2: "
+	@-./t_pipe2
 
 	@printf "t_readlink: "
 	@-./t_readlink
