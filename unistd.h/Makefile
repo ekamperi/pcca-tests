@@ -24,6 +24,7 @@ all:	t_access	\
 	t_pause		\
 	t_pipe		\
 	t_pipe2		\
+	t_pipe3		\
 	t_readlink	\
 	t_ttyname	\
 	t_tcsetpgrp	\
@@ -113,6 +114,9 @@ t_pipe: t_pipe.c
 
 t_pipe2: t_pipe2.c
 	$(CC) $(CCFLAGS) $(LIB) t_pipe2.c -o t_pipe2 -lcrypto
+
+t_pipe3: t_pipe3.c
+	$(CC) $(CCFLAGS) $(LIB) t_pipe3.c -o t_pipe3 -lcrypto -pthread
 
 t_readlink: t_readlink.c
 	$(CC) $(CCFLAGS) $(LIB) t_readlink.c -o t_readlink

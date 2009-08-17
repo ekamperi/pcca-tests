@@ -24,6 +24,8 @@ t_nice
 t_nice_thr
 t_pause
 t_pipe
+t_pipe2
+t_pipe3
 t_readlink
 t_tcsetpgrp
 t_ttyname
