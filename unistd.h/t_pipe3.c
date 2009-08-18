@@ -48,7 +48,7 @@ int fd[MAX_PAIRS][2];
 struct block {
 	char          b_sha[41];		/* SHA hash */
 	unsigned char b_data[MAX_DATALEN];	/* Data payload */
-	unsigned int  b_len;			/* Data lenghth */
+	unsigned int  b_len;			/* Data length */
 };
 
 /* Function prototypes. */
@@ -67,7 +67,7 @@ int main(void)
 	 * Create the pipes.
 	 *
 	 * fd[i][0] is the read end.
-	 * fd[1][1] is the write end.
+	 * fd[i][1] is the write end.
 	 */
 	for (i = 0; i < MAX_PAIRS; i++)
 		assert(pipe(fd[i]) != -1);
