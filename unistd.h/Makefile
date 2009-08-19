@@ -212,7 +212,7 @@ run:
 	@printf "t_pipe: "
 	@-./t_pipe
 
-	@printf "t_t_pipe_fork: "
+	@printf "t_pipe_fork: "
 	@-./t_pipe_fork
 
 	@printf "t_pipe_thr: "
