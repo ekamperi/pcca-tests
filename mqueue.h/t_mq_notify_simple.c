@@ -56,7 +56,10 @@ int main(void)
 
 	sigev.sigev_signo = SIGUSR1;
 	sigev.sigev_notify = SIGEV_SIGNAL;
-	/*sigev.sigev_value.sival_int = (int)md;*/
+	/* This is a temporary (famous last words) hack for DragonFly. */
+#ifndef __DragonFly__
+	sigev.sigev_value.sival_int = (int)md;
+#endif
 
 	assert(mq_notify(md, &sigev) != -1);
 
