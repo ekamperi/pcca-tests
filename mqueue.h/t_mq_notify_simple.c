@@ -32,7 +32,7 @@
 #include <stdlib.h>
 #include <unistd.h>	/* for sleep() */
 
-#define MQNAME	"/tmqnotifysimple"
+#define MQNAME	"/t_mq_notify_simple"
 
 int notified = 0;	/* Whether we were notified or not. */
 
@@ -49,7 +49,7 @@ int main(void)
 
 	/*
 	 * At this point the message queue is empty.
-	 * We then register ourselves for notification, upon the arrival of a
+	 * We register ourselves for notification, upon the arrival of a
 	 * message.
 	 */
 	struct sigevent sigev;
@@ -75,14 +75,14 @@ int main(void)
 	assert(notified == 0);
 
 	/*
-	 * We send one message to the queue so that the transition
-	 * empty->non empty takes place and the signal is generated.
+	 * We send a message to the queue so that the transition
+	 * empty->non empty takes place and the signal is raised.
 	 */
 	assert(mq_send(md, "foo", sizeof("foo"), 0) != -1);
 
 	/*
-	 * Make sure we were notified, but first sleep a bit so that the
-	 * implementation makes it.
+	 * Make sure we were notified, but first take a nap so that the
+	 * implementation has enough time at its disposal.
 	 */
 	sleep(1);
 	assert(notified == 1);
