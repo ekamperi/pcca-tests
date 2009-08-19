@@ -24,7 +24,7 @@ all:	t_access	\
 	t_pause		\
 	t_pipe		\
 	t_pipe_fork	\
-	t_pipe3		\
+	t_pipe_thr	\
 	t_readlink	\
 	t_ttyname	\
 	t_tcsetpgrp	\
@@ -115,8 +115,8 @@ t_pipe: t_pipe.c
 t_pipe_fork: t_pipe_fork.c
 	$(CC) $(CCFLAGS) $(LIB) t_pipe_fork.c -o t_pipe_fork -lcrypto
 
-t_pipe3: t_pipe3.c
-	$(CC) $(CCFLAGS) $(LIB) t_pipe3.c -o t_pipe3 -lcrypto -pthread
+t_pipe_thr: t_pipe_thr.c
+	$(CC) $(CCFLAGS) $(LIB) t_pipe_thr.c -o t_pipe_thr -lcrypto -pthread
 
 t_readlink: t_readlink.c
 	$(CC) $(CCFLAGS) $(LIB) t_readlink.c -o t_readlink
@@ -214,6 +214,9 @@ run:
 
 	@printf "t_t_pipe_fork: "
 	@-./t_pipe_fork
+
+	@printf "t_pipe_thr: "
+	@-./t_pipe_thr
 
 	@printf "t_readlink: "
 	@-./t_readlink
