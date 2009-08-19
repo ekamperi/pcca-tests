@@ -56,7 +56,7 @@ int main(void)
 
 	sigev.sigev_signo = SIGUSR1;
 	sigev.sigev_notify = SIGEV_SIGNAL;
-	sigev.sigev_value.sival_int = (int)md;
+	/*sigev.sigev_value.sival_int = (int)md;*/
 
 	assert(mq_notify(md, &sigev) != -1);
 
@@ -67,6 +67,9 @@ int main(void)
 	sa.sa_flags = SA_SIGINFO;
 
 	assert(sigaction(SIGUSR1, &sa, NULL) != -1);
+
+	/* A little bit paranoid. */
+	assert(notified == 0);
 
 	/*
 	 * We send one message to the queue so that the transition
@@ -88,7 +91,7 @@ int main(void)
 	/* Remove the message queue from the system. */
 	assert(mq_unlink(MQNAME) != -1);
 
-	/* Paranoia. */
+	/* A little bit of paranoia again. We don't want spurious wakeups. */
 	assert(notified == 0);
 
 	printf("passed\n");
