@@ -18,16 +18,18 @@ static void
 act_handler(int signal, siginfo_t *siginfo, void *context)
 {
 	struct sigaction sa;
-	char *str;
 
 	assert(sigaction(SIGUSR1, NULL, &sa) != -1);
 	assert(sa.sa_handler == SIG_DFL);
 	assert(siginfo != NULL);
-#if 
+#if 0
+	char *str;
+
 	asprintf(&str, "act_handler: signal %d, siginfo %p, context %p\n",
 		 signal, siginfo, context);
 	write(STDOUT_FILENO, str, strlen(str));
 	free(str);
+#endif
 }
  
 static void *
@@ -37,7 +39,6 @@ thread(void * arg)
 	sigset_t suspender_mask;
 
 	/* wait for sigusr1 */
-
 	/* Run with all signals blocked, then suspend for SIGUSR1 */
 	sigfillset(&run_mask);
 	assert(sigprocmask(SIG_SETMASK, &run_mask, NULL) != -1);
@@ -46,7 +47,9 @@ thread(void * arg)
 	for (;;) {
 		sigsuspend(&suspender_mask);
 		assert(errno == EINTR);
+#if 0
 		printf("Thread %s woke up\n", (char*) arg);
+#endif
 	}
 		
 }
