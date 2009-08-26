@@ -6,7 +6,7 @@
  * is delivered to the correct thread and proper signal processing
  * is performed.
  */
-#define ASSERT assert
+
 #include <assert.h>
 #include <errno.h>
 #include <signal.h>
@@ -21,8 +21,9 @@ act_handler(int signal, siginfo_t *siginfo, void *context)
 	char *str;
 
 	assert(sigaction(SIGUSR1, NULL, &sa) != -1);
-	ASSERT(sa.sa_handler == SIG_DFL);
-	ASSERT(siginfo != NULL);
+	assert(sa.sa_handler == SIG_DFL);
+	assert(siginfo != NULL);
+#if 
 	asprintf(&str, "act_handler: signal %d, siginfo %p, context %p\n",
 		 signal, siginfo, context);
 	write(STDOUT_FILENO, str, strlen(str));
@@ -44,7 +45,7 @@ thread(void * arg)
 	sigdelset(&suspender_mask, SIGUSR1);
 	for (;;) {
 		sigsuspend(&suspender_mask);
-		ASSERT(errno == EINTR);
+		assert(errno == EINTR);
 		printf("Thread %s woke up\n", (char*) arg);
 	}
 		
