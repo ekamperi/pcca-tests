@@ -17,6 +17,7 @@ all:	t_pthread_attr_getdetachstate		\
 	t_pthread_condattr_init			\
 	t_pthread_equal				\
 	t_pthread_getcpuclockid			\
+	t_pthread_kill				\
 	t_pthread_rwlock			\
 	t_pthread_rwlock_init			\
 	t_pthread_rwlock_deadlock		\
@@ -99,6 +100,9 @@ t_pthread_equal: t_pthread_equal.c
 
 t_pthread_getcpuclockid:  t_pthread_getcpuclockid.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_getcpuclockid.c -o t_pthread_getcpuclockid
+
+t_pthread_kill: t_pthread_kill.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_kill.c -o t_pthread_kill
 
 t_pthread_rwlock: t_pthread_rwlock.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_rwlock.c -o t_pthread_rwlock
@@ -208,6 +212,9 @@ run:
 
 	@printf "t_pthread_getcpuclockid: "
 	@-./t_pthread_getcpuclockid
+
+	@printf "t_pthread_kill: "
+	@-./t_pthread_kill
 
 	@printf "t_pthread_rwlock: "
 	@-./t_pthread_rwlock
