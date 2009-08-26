@@ -29,7 +29,6 @@ main(int argc, char **argv)
 	int (*sj)(jmp_buf);
 	void (*lj)(jmp_buf, int);
 	int ch;
-	extern char *__progname;
 
 	sj = setjmp;
 	lj = longjmp;
@@ -41,7 +40,7 @@ main(int argc, char **argv)
 			lj = _longjmp;
 			break;
 		default:
-			fprintf(stderr, "Usage: %s [-_]\n", __progname);
+			fprintf(stderr, "Usage: %s [-_]\n", argv[0]);
 			exit(1);
 		}
 	}
