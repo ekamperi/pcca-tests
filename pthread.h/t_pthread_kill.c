@@ -22,14 +22,6 @@ act_handler(int signal, siginfo_t *siginfo, void *context)
 	assert(sigaction(SIGUSR1, NULL, &sa) != -1);
 	assert(sa.sa_handler == SIG_DFL);
 	assert(siginfo != NULL);
-#if 0
-	char *str;
-
-	asprintf(&str, "act_handler: signal %d, siginfo %p, context %p\n",
-		 signal, siginfo, context);
-	write(STDOUT_FILENO, str, strlen(str));
-	free(str);
-#endif
 }
  
 static void *
@@ -38,20 +30,27 @@ thread(void * arg)
 	sigset_t run_mask;
 	sigset_t suspender_mask;
 
-	/* wait for sigusr1 */
-	/* Run with all signals blocked, then suspend for SIGUSR1 */
+	/*
+	 * Run with all signals blocked.
+	 *
+	 * sigfillset() adds all signals to the list and
+	 * sigprocmask() blocks the listed signals.
+	 */
 	sigfillset(&run_mask);
 	assert(sigprocmask(SIG_SETMASK, &run_mask, NULL) != -1);
+
+	/*
+	 * sigsuspend() replaces the current signal mask and then suspends
+	 * the thread until the delivery of a signal.
+	 */
 	sigfillset(&suspender_mask);
 	sigdelset(&suspender_mask, SIGUSR1);
+
+	/* Wait for SIGUSR1. */
 	for (;;) {
 		sigsuspend(&suspender_mask);
 		assert(errno == EINTR);
-#if 0
-		printf("Thread %s woke up\n", (char*) arg);
-#endif
-	}
-		
+	}		
 }
 
 int main(int argc, char **argv)
@@ -60,24 +59,35 @@ int main(int argc, char **argv)
 	pthread_t thread2;
 	struct sigaction act;
 
+	/* Setup the signal handler. */
 	act.sa_sigaction = act_handler;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_SIGINFO | SA_RESETHAND | SA_NODEFER;
+
+	/* Install the signal handler. */
 	assert(sigaction(SIGUSR1, &act, NULL) != -1);
+
+	/*
+	 * Create the threads and sleep for a while, making sure that they are
+	 * actually created (would a barrier be overkill here ?).
+	 */
 	assert(pthread_create(&thread1, NULL, thread, "T1") == 0);
 	assert(pthread_create(&thread2, NULL, thread, "T2") == 0);
 	sleep(1);
 
-	/* Signal handler should run once, both threads should awaken */
+	/*
+	 * Send us a SIGUSR1 signal.
+	 * Signal handler should run once, both threads should awaken.
+	 */
 	assert(kill(getpid(), SIGUSR1) != -1);
 	sleep(1);
 
-	/* Signal handler run once, only T1 should awaken */
+	/* Signal handler sould run once, only T1 should awaken. */
 	assert(sigaction(SIGUSR1, &act, NULL) != -1);
 	assert(pthread_kill(thread1, SIGUSR1) == 0);
 	sleep(1);
 
-	/* Signal handler run once, only T2 should awaken */
+	/* Signal handler should run once, only T2 should awaken. */
 	assert(sigaction(SIGUSR1, &act, NULL) != -1);
 	assert(pthread_kill(thread2, SIGUSR1) == 0);
 	sleep(1);
