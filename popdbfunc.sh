@@ -22,6 +22,6 @@ fi
 	fi
 
         printf "INSERT INTO psx_functions VALUES('$header', '$func', 'pending',"
-	printf " 'pending', 'pending', 'pending', '$manpage');\n"
+	printf " 'pending', 'pending', 'pending', 'pending', '$manpage', 'pending');\n"
     done
 } < "$1"
