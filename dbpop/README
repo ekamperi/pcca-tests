@@ -1,14 +1,35 @@
 --------------------------------------------------------------------------------
-POPULATING THE DATABASE
+USING DRAGONFLY'S EXISTING DATABASE
+
+XXX: TODO:
+http://gitweb.dragonflybsd.org/~beket/pcca-dbdump.git
+
+--------------------------------------------------------------------------------
+POPULATE THE DATABASE
 
 If you have an empty database and you would like to add one record for every
-function that POSIX mandates, you need to run the following:
+function that POSIX mandates, you need to follow the next steps.
+
+1. ADD THE HEADERS
+
+pcca-tests/dbpop% ./popdbheaders.sh | psql
+pcca-tests/dbpop%
+
+This is a script that generates SQL commands, that we later on pipe into the
+PostgreSQL prompt. Eg:
+
+pcca-tests/dbpop% ./popdbheaders.sh | head -n2
+INSERT INTO psx_headers VALUES('aio.h');
+INSERT INTO psx_headers VALUES('inet.h');
+pcca-tests/dbpop%
+
+
+2. ADD FUNCTIONS FOR EVERY HEADER
 
 pcca-tests/dbpop% ./popdbfunc.sh | psql
 pcca-tests/dbpop%
 
-Or, if you'd like to examine the SQL commands prior to pipe'ing them into
-PostgreSQL prompt:
+Same as before for the skeptical reader:
 
 pcca-tests/dbpop% ./popdbfunc.sh
 INSERT INTO psx_functions VALUES('aio.h', 'aio_cancel', ..., 'pending');
