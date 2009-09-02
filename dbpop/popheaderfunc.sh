@@ -16,12 +16,7 @@ fi
 	    continue
 	fi
 
-	manpage="yes"
-	if ! man "$func" >/dev/null 2>/dev/null; then
-	    manpage="no"
-	fi
-
         printf "INSERT INTO psx_functions VALUES('$header', '$func', 'pending',"
-	printf " 'pending', 'pending', 'pending', '$manpage');\n"
+	printf " 'pending', 'pending', 'pending', 'pending', 'pending', 'pending');\n"
     done
 } < "$1"
