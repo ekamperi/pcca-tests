@@ -10,8 +10,7 @@ else
     STARTDIR=".."
 fi
 
-for header in $(find "$STARTDIR" -name .git -prune -o \( -type d -name "*.h" \) \
-    2>/dev/null | sort); do
-    
+for header in $(find "$STARTDIR" -name .git -prune -o \( -type d -name "*.h" \
+    -print \) 2>/dev/null | sort); do
     printf "INSERT INTO psx_headers VALUES('$(basename $header)');\n"
 done
