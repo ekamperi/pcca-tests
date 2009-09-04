@@ -1,4 +1,4 @@
-#!/usr/pkg/bin/bash
+#!/bin/bash
 
 # Exit immediately if any untested command fails in non-interactive mode.
 set -e
