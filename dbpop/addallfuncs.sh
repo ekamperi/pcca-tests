@@ -11,4 +11,4 @@ else
 fi
 
 find "$STARTDIR" -name .git -prune -o \( -type d -name "*.h" -exec \
-    ./popheaderfunc.sh {}/functions.list \; \) 2>/dev/null | sort
+    ./addheaderfuncs.sh {}/functions.list \; \) 2>/dev/null | sort
