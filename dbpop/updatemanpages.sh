@@ -20,9 +20,9 @@ scanheader()
 	    # even for a non-reachable man page. So, this can only
 	    # produce meaningful results in Linux/BSD hosts.
 	    if ! man "$func" >/dev/null 2>/dev/null; then
-		echo "UPDATE $func SET man_page = no"
+		echo "UPDATE psx_functions SET man_page = 'no'  WHERE function_name = '$func'"
 	    else
-		echo "UPDATE $func SET man_page = yes"
+		echo "UPDATE psx_functions SET man_page = 'yes' WHERE function_name = '$func'"
 	    fi
 	done
     } < "$1"
