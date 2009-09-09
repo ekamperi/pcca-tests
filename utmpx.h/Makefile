@@ -2,8 +2,7 @@ all:	t_utmpx			\
 	t_utmpx_enum		\
 	t_utmpx_pututxline	\
 
-CC=gcc
-CC99=gcc -std=c99
+CC=gcc -std=c99
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
@@ -11,7 +10,7 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 
 t_utmpx: t_utmpx.c
-	$(CC99) $(CCFLAGS) $(LIB) t_utmpx.c -o t_utmpx
+	$(CC) $(CCFLAGS) $(LIB) t_utmpx.c -o t_utmpx
 
 t_utmpx_enum: t_utmpx_enum.c
 	$(CC) $(CCFLAGS) $(LIB) t_utmpx_enum.c -o t_utmpx_enum
