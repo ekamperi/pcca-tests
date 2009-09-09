@@ -25,6 +25,8 @@
  * SUCH DAMAGE.
  */
 
+#define _XOPEN_SOURCE 600
+
 #include <assert.h>
 #include <err.h>
 #include <errno.h>
