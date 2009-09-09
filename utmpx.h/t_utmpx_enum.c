@@ -54,7 +54,7 @@ int main(void)
 			 */
 			assert(feof(fp));
 		} else {
-#ifdef thisisatest
+#if 0
 			printf("ut_name = %-20s\tut_id = %-20s\t"
 			    "ut_line = %-20s\tut_host = %s\n",
 			    ut.ut_name, ut.ut_id, ut.ut_line, ut.ut_host);
