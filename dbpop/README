@@ -12,13 +12,13 @@ function that POSIX mandates, you need to follow the next steps.
 
 1. ADD THE HEADERS
 
-pcca-tests/dbpop% ./popdbheaders.sh | psql
+pcca-tests/dbpop% ./addheaders.sh | psql
 pcca-tests/dbpop%
 
 This is a script that generates SQL commands, that we later on pipe into the
 PostgreSQL prompt. Eg:
 
-pcca-tests/dbpop% ./popdbheaders.sh | head -n2
+pcca-tests/dbpop% ./addheaders.sh | head -n2
 INSERT INTO psx_headers VALUES('aio.h');
 INSERT INTO psx_headers VALUES('inet.h');
 pcca-tests/dbpop%
@@ -26,12 +26,12 @@ pcca-tests/dbpop%
 
 2. ADD FUNCTIONS FOR EVERY HEADER
 
-pcca-tests/dbpop% ./popdbfunc.sh | psql
+pcca-tests/dbpop% ./addallfuncs.sh | psql
 pcca-tests/dbpop%
 
 Same as before for the skeptical reader:
 
-pcca-tests/dbpop% ./popdbfunc.sh
+pcca-tests/dbpop% ./addallfuncs.sh
 INSERT INTO psx_functions VALUES('aio.h', 'aio_cancel', ..., 'pending');
 INSERT INTO psx_functions VALUES('aio.h', 'aio_error', ...,  'pending');
 INSERT INTO psx_functions VALUES('aio.h', 'aio_fsync', ..., 'pending');
@@ -39,3 +39,16 @@ INSERT INTO psx_functions VALUES('aio.h', 'aio_fsync', ..., 'pending');
 .
 .
 pcca-tests/dbpop%
+
+
+3. UPDATE MAN PAGES COLUMN
+
+In order to update the man page field, you need to run the following:
+
+pcca-tests/dbpop% ./updatemanpages.sh | psql
+pcca-tests/dbpop%
+
+
+4. UPDATE TEST CASES COLUMN
+
+XXX: TODO

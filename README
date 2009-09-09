@@ -208,6 +208,25 @@ pcca-tests%
 
 --------------------------------------------------------------------------------
 
+ADDING A NEW TEST CASE
+
+The addition of a new test case is very straightforward. Assuming you have the
+actual source code of the test case as a C file, you need to do the following:
+
+1. Copy the file over to the proper $header/ directory.
+2. Add a target in the Makefile.
+3. Add the name of the executable in the `tfile'.
+
+Both the Makefile and tfile are located in the $header/ directory.
+
+You are encouraged, although not required, to name the test case as the
+principal function you are testing against. E.g., t_pthread_join.c if you
+are writing a test case for the pthread_join() function. This will allow you
+to automatically generate SQL commands with dbpop/updatetestcases.sh, if you are
+maintaining a POSIX conformance tracking site. 
+
+--------------------------------------------------------------------------------
+
 POSSIBLE PLACES OF CONFUSION
 
 * The user that runs the test must NOT be root. This is a good practice anyway,

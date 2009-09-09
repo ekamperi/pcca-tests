@@ -25,14 +25,11 @@
  * SUCH DAMAGE.
  */
 
+#define _XOPEN_SOURCE 600
+
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#if defined(_NETBSD_SOURCE)
-#include <util.h>
-#else
-#include <libutil.h>	/* for DragonFly */
-#endif
 #include <utmpx.h>
 
 int main(void)
@@ -41,6 +38,10 @@ int main(void)
 	FILE *fp;
 
 	/* Open utmpx database. */
+#if defined (__SVR4) && defined (__sun)
+	#undef _PATH_UTMPX
+	#define _PATH_UTMPX "/etc/utmpx"
+#endif
 	fp = fopen(_PATH_UTMPX, "r");
 	assert(fp != NULL);
 
@@ -53,7 +54,7 @@ int main(void)
 			 */
 			assert(feof(fp));
 		} else {
-#ifdef thisisatest
+#if 0
 			printf("ut_name = %-20s\tut_id = %-20s\t"
 			    "ut_line = %-20s\tut_host = %s\n",
 			    ut.ut_name, ut.ut_id, ut.ut_line, ut.ut_host);
