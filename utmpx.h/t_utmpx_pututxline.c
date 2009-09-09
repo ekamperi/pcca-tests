@@ -30,62 +30,66 @@
 #include <assert.h>
 #include <err.h>
 #include <errno.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <utmpx.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#if defined(_NETBSD_SOURCE)
-#include <util.h>
-#else
-#include <libutil.h>
-#endif
-#include <utmpx.h>
 
 #define NUSERS 10	/* Number of users to simulate. */
+
+/* Function prototypes. */
+static void myhandler(int sig);
 
 int main(void)
 {
 	struct utmpx ut;
-	struct utmpx *rv;
+	struct utmpx *utp;
 	struct stat sb;
-	size_t i;
+	int i, rv;
 
-	/* It must be run with root privileges. */
-	if (geteuid() != 0) {
-		errx(EXIT_FAILURE,
-		    "it must be run with root privileges");
-	}
+#define _PATH_UTMPX "sandbox/utmpx"
 
-	/* There must exist an empty utmpx file. */
-	if (stat(_PATH_UTMPX, &sb) == -1) {
-		if (errno == ENOENT) {
-			errx(EXIT_FAILURE,
-			    "there must exist an empty " _PATH_UTMPX " file");
-		}
-	} else {
-		if (sb.st_size != 0)
-			errx(EXIT_FAILURE, _PATH_UTMPX " must be empty");
-	}
+	/* We don't want to leave remnants behind us, if we fail prematurely. */
+	signal(SIGABRT, myhandler);
 
+	/*
+	 * It must be run with root privileges, even if we don't modify the real
+	 * system-wide utmpx database. Specifically, pututxline() may fail if
+	 * done otherwise.
+	 */
+	assert(geteuid() == 0);
+
+	/* Make sure there is no other utmpx file flying around. */
+	rv = stat(_PATH_UTMPX, &sb);
+	assert(rv == -1 && errno == ENOENT);
+
+	/* Create an empty utmpx file. */
+	FILE *fp = fopen(_PATH_UTMPX, "w");
+	assert(fp != NULL);
+	assert(fclose(fp) != EOF);
+
+	/* Populate the utmpx database with artificial entries. */
 	for (i = 0; i < NUSERS; i++) {
-		/* XXX: how does pututxline() identify a user in database ? */
-                memset(&ut, 0, sizeof(ut));
+		/* XXX: How does pututxline() identify a user in database ? */
+		memset(&ut, 0, sizeof(ut));
 
-                snprintf(ut.ut_id, sizeof(ut.ut_id), "X%u", i);
+		snprintf(ut.ut_id, sizeof(ut.ut_id), "X%u", i);
 		strncpy(ut.ut_name, "user", sizeof(ut.ut_name));
 		strncpy(ut.ut_line, "tty", sizeof(ut.ut_line));
 		strncpy(ut.ut_host, "voyager", sizeof(ut.ut_host));
 		ut.ut_type = USER_PROCESS;
 		ut.ut_pid = i;
 
-		/* Update database. */
+		/* Update the utmpx database. */
 		assert(pututxline(&ut) != NULL);
 	}
 
 	/*
-	 * Reset utmpx database, so that the next getutxent() call  will get the
+	 * Reset utmpx database, so that the next getutxent() call will get the
 	 * first entry. Closing the database and deferring to getutxent() the
 	 * responsibility to open it, would have the same effect.
 	 */
@@ -93,21 +97,22 @@ int main(void)
 
 	/* Loop through the whole utmpx database. */
 	for (i = 0; i < NUSERS; i++) {
-		/* getutxent() might fail if the end of utmpx database has been
+		/*
+		 * getutxent() may fail if the end of utmpx database has been
 		 * reached (which is clearly not the case here, since we read
 		 * exactly as many entries as we write), or due to problems
 		 * reading from database. That's why, treat errors as fatal.
 		 */
-		rv = getutxent();
+		utp = getutxent();
 		assert(rv != NULL);
 
 		/* Verify entries. */
 		snprintf(ut.ut_id, sizeof(ut.ut_id), "X%u", i);
-		assert(strcmp(rv->ut_id, ut.ut_id) == 0);
-		assert(strcmp(rv->ut_name, "user") == 0);
-		assert(strcmp(rv->ut_line, "tty") == 0);
-		assert(strcmp(rv->ut_host, "voyager") == 0);
-		assert(rv->ut_type == USER_PROCESS);
+		assert(strcmp(utp->ut_id, ut.ut_id) == 0);
+		assert(strcmp(utp->ut_name, "user") == 0);
+		assert(strcmp(utp->ut_line, "tty") == 0);
+		assert(strcmp(utp->ut_host, "voyager") == 0);
+		assert(utp->ut_type == USER_PROCESS);
 	}
 
 	/* Close database. */
@@ -116,4 +121,10 @@ int main(void)
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
+}
+
+static void
+myhandler(int sig)
+{
+	unlink(_PATH_UTMPX);
 }
