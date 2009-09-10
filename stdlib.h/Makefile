@@ -4,6 +4,7 @@ all:	t_posix_memalign	\
 	t_stdlib
 
 CC=gcc
+CC99=gcc -std=c99
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
@@ -15,7 +16,7 @@ t_posix_memalign: t_posix_memalign.c
 	$(CC) $(CCFLAGS) $(LIB) t_posix_memalign.c -o t_posix_memalign
 
 t_posix_openpt: t_posix_openpt.c
-	$(CC) $(CCFLAGS) $(LIB) t_posix_openpt.c -o t_posix_openpt
+	$(CC99) $(CCFLAGS) $(LIB) t_posix_openpt.c -o t_posix_openpt
 
 t_putenv: t_putenv.c
 	$(CC) $(CCFLAGS) $(LIB) t_putenv.c -o t_putenv
