@@ -1,6 +1,7 @@
 all:	t_posix_memalign	\
 	t_posix_openpt		\
 	t_putenv		\
+	t_qsort			\
 	t_stdlib
 
 CC=gcc
@@ -21,6 +22,9 @@ t_posix_openpt: t_posix_openpt.c
 t_putenv: t_putenv.c
 	$(CC) $(CCFLAGS) $(LIB) t_putenv.c -o t_putenv
 
+t_qsort: t_qsort.c
+	$(CC) $(CCFLAGS) t_qsort.c -o t_qsort
+
 t_stdlib: t_stdlib.c
 	$(CC) $(CCFLAGS) $(LIB) t_stdlib.c -o t_stdlib
 
@@ -36,6 +40,9 @@ run:
 
 	@printf "t_putenv: "
 	@-./t_putenv
+
+	@printf "t_qsort: "
+	@-./t_qsort
 
 	@printf "t_stdlib: "
 	@-./t_stdlib
