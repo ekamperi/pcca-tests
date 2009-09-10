@@ -40,6 +40,12 @@ int main(void)
 #ifdef _PC_PATH_MAX
 	/* Determine maximum path length. */
 	sz = pathconf(".", _PC_PATH_MAX);
+
+	/*
+	 * We can't allow for an infinite value nor any other error whatsoever.
+	 * Checking `sz' against -1 is enough for both situations.
+	 */
+	assert(sz != -1);
 #endif
 	buf = malloc(sz);
 	assert(buf != NULL);
