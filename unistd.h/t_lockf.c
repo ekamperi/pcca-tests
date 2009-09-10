@@ -30,13 +30,14 @@
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <limits.h>	/* for INT_MAX */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
 int main(void)
 {
-	int fd, function;
+	int fd;
 
 	/* Invalid file descriptor. */
 	assert(lockf(-1, F_TLOCK, 0) == -1 && errno == EBADF);
@@ -54,23 +55,9 @@ int main(void)
 	assert(close(fd) != -1);
 
 	/* Invalid `function' requested. */
-	function = 0;
-#ifdef	F_LOCK
-	function += F_LOCK;
-#endif
-#ifdef	F_TLOCK
-	function += F_TLOCK;
-#endif
-#ifdef	F_TEST
-	function += F_TEST;
-#endif
-#ifdef	F_ULOCK
-	function += F_ULOCK;
-#endif
-
 	fd = open("sandbox/file777", O_RDWR);
 	assert(fd != -1);
-	assert(lockf(fd, function, 0) == -1 && errno == EINVAL);
+	assert(lockf(fd, -INT_MAX, 0) == -1 && errno == EINVAL);
 
 	/* Size plus current file offset is less than 0. */
 	assert(lseek(fd, 0, SEEK_SET) != -1);	/* Just a sanity check. */
