@@ -36,6 +36,7 @@
 int main(void)
 {
 	char buf[BUFSIZE + 1];  /* Reserve space for '\0' */
+	memset(buf, 0, sizeof(buf));
 
 	/*
 	 * The following are all extensions to the standard,
