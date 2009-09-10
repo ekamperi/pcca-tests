@@ -35,7 +35,7 @@
 int main(void)
 {
 	char *buf;
-	size_t sz = 4096;	/* Default value for PATH_MAX */
+	size_t sz = 65536;	/* Rediculously large value for PATH_MAX */
 
 #ifdef _PC_PATH_MAX
 	/* Determine maximum path length. */
