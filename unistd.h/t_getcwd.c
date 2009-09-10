@@ -51,7 +51,7 @@ int main(void)
 	assert(buf != NULL);
 
         /* We expect this simple call to succeed. */
-        assert(getcwd(buf, sz - 1) != NULL);
+        assert(getcwd(buf, sz) != NULL);
 
 	/* The size argument is 0. */
 	assert(getcwd(buf, 0) == NULL && errno == EINVAL);
