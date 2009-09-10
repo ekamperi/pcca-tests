@@ -99,7 +99,7 @@ t_link: t_link.c
 	$(CC) $(CCFLAGS) $(LIB) t_link.c -o t_link
 
 t_lockf: t_lockf.c
-	$(CC) $(CCFLAGS) $(LIB) t_lockf.c -o t_lockf
+	$(CC99) $(CCFLAGS) $(LIB) t_lockf.c -o t_lockf
 
 t_nice: t_nice.c
 	$(CC) $(CCFLAGS) $(LIB) t_nice.c -o t_nice
