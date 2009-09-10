@@ -217,7 +217,8 @@ actual source code of the test case as a C file, you need to do the following:
 2. Add a target in the Makefile.
 3. Add the name of the executable in the `tfile'.
 
-Both the Makefile and tfile are located in the $header/ directory.
+Both the Makefile and tfile are located in the $header/ directory. You can use
+the existing rules and entries as templates.
 
 You are encouraged, although not required, to name the test case as the
 principal function you are testing against. E.g., t_pthread_join.c if you
