@@ -19,6 +19,7 @@ all:	t_access	\
 	t_isatty	\
 	t_link		\
 	t_lockf		\
+	t_lockf2	\
 	t_nice		\
 	t_nice_thr	\
 	t_pause		\
@@ -100,6 +101,9 @@ t_link: t_link.c
 
 t_lockf: t_lockf.c
 	$(CC99) $(CCFLAGS) $(LIB) t_lockf.c -o t_lockf
+
+t_lockf2: t_lockf2.c
+	$(CC99) $(CCFLAGS) t_lockf2.c -o t_lockf2
 
 t_nice: t_nice.c
 	$(CC) $(CCFLAGS) $(LIB) t_nice.c -o t_nice
@@ -200,6 +204,9 @@ run:
 
 	@printf "t_lockf: "
 	@-./t_lockf
+
+	@printf "t_lockf2: "
+	@-./t_lockf2
 
 	@printf "t_nice: "
 	@-./t_nice
