@@ -25,6 +25,11 @@
  * SUCH DAMAGE.
  */
 
+/* Solaris needs this for bringing in the standard getlogin_r() prototype. */
+#if defined __sun__
+        #define _POSIX_PTHREAD_SEMANTICS
+#endif
+
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h>
