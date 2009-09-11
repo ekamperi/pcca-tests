@@ -25,43 +25,67 @@
  * SUCH DAMAGE.
  */
 
+#define _XOPEN_SOURCE 600
+
 #include <assert.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>	/* strlen() */
 #include <unistd.h>
+#include <sys/wait.h>
 
 int main(void)
 {
-	char *buf;
-	size_t sz = 65536;	/* Rediculously large value for PATH_MAX */
+	pid_t pid;
+	int fd;
 
-#ifdef _PC_PATH_MAX
-	/* Determine maximum path length. */
-	sz = pathconf(".", _PC_PATH_MAX);
+	/* Open file. */
+	fd = open("sandbox/file777", O_RDWR);
+	assert(fd != -1);
 
-	/*
-	 * We can't allow for an infinite value nor any other error whatsoever.
-	 * Checking `sz' against -1 is enough for both situations.
-	 */
-	assert(sz != -1);
-#endif
-	buf = malloc(sz);
-	assert(buf != NULL);
+	/* Fork. */
+	pid = fork();
+	assert(pid != -1);
 
-        /* We expect this simple call to succeed. */
-        assert(getcwd(buf, sz) != NULL);
+	if (pid == 0) {
+		/* We are inside the child. */
+		/* Acquire the lock. */
+		assert(lockf(fd, F_LOCK, 0) != -1);
 
-	/* The size argument is 0. */
-	assert(getcwd(buf, 0) == NULL && errno == EINVAL);
+		/*
+		 * We need to sleep here. If we don't, the child will terminate,
+		 * and the locks held by it released, which will bring us to
+		 * square one.
+		 */
+		sleep(2);
+	} else {
+		/* We are inside the parent. */
+		/* Sleep a bit, so that the child can acquire the lock. */
+		sleep(1);
 
-	/* The size is too small (but greater than 0) to hold pathname + 1. */
-	assert(getcwd(buf, 1) == NULL && errno == ERANGE);
+		/*
+		 * Just a sanity check.
+		 * Make sure the child has actually acquired the lock.
+		 */
+		assert(lockf(fd, F_TEST, 0) == -1);
+		assert(errno == EACCES || errno == EAGAIN);
 
-	free(buf);
+		/*
+		 * Try to re-acquire the lock.
+		 * As parent, we are a different process now and we should fail.
+		 */
+		assert(lockf(fd, F_TLOCK, 0) == -1);
+		assert(errno == EACCES || errno == EAGAIN);
 
-	printf("passed\n");
+		/* Wait for child to complete. */
+		int status;
+		assert(wait(&status) == pid);
+
+		assert(close(fd) != -1);
+
+		printf("passed\n");
+	}
 
 	return (EXIT_SUCCESS);
 }

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2009, Stathis Kamperis
  * All rights reserved.
-
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -36,6 +36,7 @@
 int main(void)
 {
 	char buf[BUFSIZE + 1];  /* Reserve space for '\0' */
+	memset(buf, 0, sizeof(buf));
 
 	/*
 	 * The following are all extensions to the standard,

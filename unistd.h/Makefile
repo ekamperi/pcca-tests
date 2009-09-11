@@ -19,6 +19,7 @@ all:	t_access	\
 	t_isatty	\
 	t_link		\
 	t_lockf		\
+	t_lockf2	\
 	t_nice		\
 	t_nice_thr	\
 	t_pause		\
@@ -32,6 +33,7 @@ all:	t_access	\
 #	t_ttyname_r
 
 CC=gcc
+CC99=gcc -std=c99
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
@@ -53,7 +55,7 @@ t_chdir: t_chdir.c
 	$(CC) $(CCFLAGS) $(LIB) t_chdir.c -o t_chdir	
 
 t_confstr: t_confstr.c
-	$(CC) $(CCFLAGS) $(LIB) t_confstr.c -o t_confstr
+	$(CC99) $(CCFLAGS) $(LIB) t_confstr.c -o t_confstr
 
 t_fchdir: t_fchdir.c
 	$(CC) $(CCFLAGS) $(LIB) t_fchdir.c -o t_fchdir
@@ -65,7 +67,7 @@ t_getgroups: t_getgroups.c
 	$(CC) $(CCFLAGS) $(LIB) t_getgroups.c -o t_getgroups
 
 t_gethostid: t_gethostid.c
-	$(CC) $(CCFLAGS) $(LIB) t_gethostid.c -o t_gethostid
+	$(CC99) $(CCFLAGS) $(LIB) t_gethostid.c -o t_gethostid
 
 t_gethostname: t_gethostname.c
 	$(CC) $(CCFLAGS) $(LIB) t_gethostname.c -o t_gethostname
@@ -77,7 +79,7 @@ t_getlogin_r: t_getlogin_r.c
 	$(CC) $(CCFLAGS) $(LIB) t_getlogin_r.c -o t_getlogin_r
 
 t_getpgid: t_getpgid.c
-	$(CC) $(CCFLAGS) $(LIB) t_getpgid.c -o t_getpgid
+	$(CC99) $(CCFLAGS) $(LIB) t_getpgid.c -o t_getpgid
 
 t_getpgrp: t_getpgrp.c
 	$(CC) $(CCFLAGS) $(LIB) t_getpgrp.c -o t_getpgrp
@@ -98,7 +100,10 @@ t_link: t_link.c
 	$(CC) $(CCFLAGS) $(LIB) t_link.c -o t_link
 
 t_lockf: t_lockf.c
-	$(CC) $(CCFLAGS) $(LIB) t_lockf.c -o t_lockf
+	$(CC99) $(CCFLAGS) $(LIB) t_lockf.c -o t_lockf
+
+t_lockf2: t_lockf2.c
+	$(CC99) $(CCFLAGS) t_lockf2.c -o t_lockf2
 
 t_nice: t_nice.c
 	$(CC) $(CCFLAGS) $(LIB) t_nice.c -o t_nice
@@ -125,7 +130,7 @@ tcsetpgrp: t_tcsetpgrp.c
 	$(CC) $(CCFLAGS) $(LIB) t_tcsetpgrp.c -o t_tcsetpgrp
 
 t_getsid: t_getsid.c
-	$(CC) $(CCFLAGS) $(LIB) t_getsid.c -o t_getsid
+	$(CC99) $(CCFLAGS) $(LIB) t_getsid.c -o t_getsid
 
 t_ttyname: t_ttyname.c
 	$(CC) $(CCFLAGS) $(LIB) t_ttyname.c -o t_ttyname
@@ -199,6 +204,9 @@ run:
 
 	@printf "t_lockf: "
 	@-./t_lockf
+
+	@printf "t_lockf2: "
+	@-./t_lockf2
 
 	@printf "t_nice: "
 	@-./t_nice
