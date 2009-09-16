@@ -11,8 +11,8 @@
 #include <errno.h>
 #include <signal.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 static void
 act_handler(int signal, siginfo_t *siginfo, void *context)
