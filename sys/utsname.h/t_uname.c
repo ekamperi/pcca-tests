@@ -49,7 +49,8 @@ int main(void)
 	(void)un.machine;	/* Name of the hardware type on which the system
 				   is running. */
 
-	/* We expect this simple call to succeed.
+	/*
+	 * We expect this simple call to succeed.
 	 * POSIX doesn't define any required errnos, but various implementations
 	 * may provide their own.
 	 */
