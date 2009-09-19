@@ -23,6 +23,12 @@ int main(void)
 	assert(oldmode2 == (S_IRWXU | S_IRWXG | S_IRWXO));
 	assert(oldmode3 == oldmode);
 
+	/*
+	 * XXX: We should add tests to check whether creation mask is _actually_
+	 * honoured by at least: open(), creat(), mkdir(), mkfifo() and
+	 * optionally mknod(), mq_open(), sem_open().
+	 */
+
 	printf("passed\n");
 #else
 	printf("passed (critical: umask modification skipped)\n");
