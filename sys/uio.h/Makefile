@@ -8,7 +8,7 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 
 t_uio: t_uio.c
-	$(CC) $(CCFLAGS) $(LIB) t_uio.c -o t_uio
+	$(CC) $(CCFLAGS) t_uio.c -o t_uio
 
 clean:
 	git clean -f
