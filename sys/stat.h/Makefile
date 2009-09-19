@@ -1,6 +1,7 @@
 all:	t_mkfifo	\
 	t_mkfifo2	\
-	t_stat
+	t_stat		\
+	t_umask
 
 CC=gcc
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -18,6 +19,9 @@ t_mkfifo2: t_mkfifo2.c
 t_stat: t_stat.c
 	$(CC) $(CCFLAGS) $(LIB) t_stat.c -o t_stat
 
+t_umask: t_umask.c
+	$(CC) $(CCFLAGS) t_umask.c -o t_umask
+
 clean:
 	git clean -f
 
@@ -30,3 +34,6 @@ run:
 
 	@printf "t_stat: "
 	@-./t_stat
+
+	@printf "t_umask: "
+	@-./t_umask
