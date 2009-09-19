@@ -11,13 +11,13 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 
 t_mkfifo: t_mkfifo.c
-	$(CC) $(CCFLAGS) $(LIB) t_mkfifo.c -o t_mkfifo
+	$(CC) $(CCFLAGS) t_mkfifo.c -o t_mkfifo
 
 t_mkfifo2: t_mkfifo2.c
-	$(CC) $(CCFLAGS) $(LIB) t_mkfifo2.c -o t_mkfifo2
+	$(CC) $(CCFLAGS) t_mkfifo2.c -o t_mkfifo2
 
 t_stat: t_stat.c
-	$(CC) $(CCFLAGS) $(LIB) t_stat.c -o t_stat
+	$(CC) $(CCFLAGS) t_stat.c -o t_stat
 
 t_umask: t_umask.c
 	$(CC) $(CCFLAGS) t_umask.c -o t_umask
