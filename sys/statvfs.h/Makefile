@@ -9,10 +9,10 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 
 t_fstatvfs: t_fstatvfs.c
-	$(CC) $(CCFLAGS) $(LIB) t_fstatvfs.c -o t_fstatvfs
+	$(CC) $(CCFLAGS) t_fstatvfs.c -o t_fstatvfs
 
 t_statvfs: t_statvfs.c
-	$(CC) $(CCFLAGS) $(LIB) t_statvfs.c -o t_statvfs
+	$(CC) $(CCFLAGS) t_statvfs.c -o t_statvfs
 
 clean:
 	git clean -f
