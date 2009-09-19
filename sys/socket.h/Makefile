@@ -8,7 +8,7 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 
 t_socket: t_socket.c
-	$(CC) $(CCFLAGS) $(LIB) t_socket.c -o t_socket
+	$(CC) $(CCFLAGS) t_socket.c -o t_socket
 
 clean:
 	git clean -f

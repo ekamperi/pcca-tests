@@ -28,35 +28,38 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/utsname.h>
+#include <sys/stat.h>
 
 int main(void)
 {
-	/*
-	 * The `utsname' structure must be defined, including at least
-	 * the following members.
-	 */
-	struct utsname un;
+	mode_t oldmode, oldmode2, oldmode3;
 
-	(void)un.sysname;	/* Name of this implementation of the operating
-				   system. */
-	(void)un.nodename;	/* Name of this node within the communications
-				   network to which this node is attached,
-				   if any. */
-	(void)un.release;	/* Current release level of this
-				   implementation. */
-	(void)un.version;	/* Current version level of this release. */
-	(void)un.machine;	/* Name of the hardware type on which the system
-				   is running. */
+#if defined(S_IRWXU) && defined(S_IRWXG) && defined(S_IRWXO)
+	/* Set the file creation mask. */
+	oldmode = umask(S_IRWXU | S_IRWXG | S_IRWXO);
+
+	/* Restore the original creation mask. */
+	oldmode2 = umask(oldmode);
 
 	/*
-	 * We expect this simple call to succeed.
-	 * POSIX doesn't define any required errnos, but various implementations
-	 * may provide their own.
+	 * After this, oldmode3 must be equal to the very original
+	 * creation mask.
 	 */
-	assert(uname(&un) != -1);
+	oldmode3 = umask(oldmode);
+
+	assert(oldmode2 == (S_IRWXU | S_IRWXG | S_IRWXO));
+	assert(oldmode3 == oldmode);
+
+	/*
+	 * XXX: We should add tests to check whether creation mask is _actually_
+	 * honoured by at least: open(), creat(), mkdir(), mkfifo() and
+	 * optionally mknod(), mq_open(), sem_open().
+	 */
 
 	printf("passed\n");
+#else
+	printf("passed (critical: umask modification skipped)\n");
+#endif
 
 	return (EXIT_SUCCESS);
 }

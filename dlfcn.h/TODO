@@ -1,0 +1,2 @@
+* Linux wants t_dlsym to be linked against -ldl.
+  Can we fix this in some portable way ?

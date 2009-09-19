@@ -274,9 +274,9 @@ These are harmless but annoying nonetheless. You can try the following:
 1. Redirect stderr to null (e.g., find . -name foo 2>/dev/null).
 2. Delete the sandboxes with mktests.sh -c and then call find.
 3. Use one of the specialized scripts in the repository (getheaders.sh,
-   getheaders.sh, getspecs.sh, etc). The latter not only silences the error 
-   messages, but also skips the .git/ directory, which may save you a little bit
-   of execution time.
+   getheaders.sh, getspecs.sh, etc). These not only silence the error messages,
+   but also skip the .git/ directory, which may save you a little bit of
+   execution time in low spec machines.
 
 
 * Log files are generated ONLY when tests are executed via mktests.sh and NOT

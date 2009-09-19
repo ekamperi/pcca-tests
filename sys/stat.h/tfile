@@ -1,3 +1,4 @@
 t_mkfifo
 t_mkfifo2
 t_stat
+t_umask

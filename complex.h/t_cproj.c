@@ -35,7 +35,6 @@ int main(void)
 {
 	double rl, im;
 	double complex z;
-	size_t i;
 
 	/*
 	 * If the complex number doesn't have any infinite parts,

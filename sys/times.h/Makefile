@@ -8,7 +8,7 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 
 t_times: t_times.c
-	$(CC) $(CCFLAGS) $(LIB) t_times.c -o t_times
+	$(CC) $(CCFLAGS) t_times.c -o t_times
 
 clean:
 	git clean -f
