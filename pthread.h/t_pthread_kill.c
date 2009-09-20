@@ -51,7 +51,7 @@ thread(void * arg)
 	for (;;) {
 		sigsuspend(&suspender_mask);
 		assert(errno == EINTR);
-	}		
+	}
 
 	pthread_exit(NULL);
 }
