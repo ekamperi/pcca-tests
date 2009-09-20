@@ -9,13 +9,14 @@
 
 #include <assert.h>
 #include <errno.h>
+#include <pthread.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
 static void
-act_handler(int signal, siginfo_t *siginfo, void *context)
+myhandler(int signal, siginfo_t *siginfo, void *context)
 {
 	struct sigaction sa;
 
@@ -51,28 +52,30 @@ thread(void * arg)
 		sigsuspend(&suspender_mask);
 		assert(errno == EINTR);
 	}		
+
+	pthread_exit(NULL);
 }
 
 int main(void)
 {
 	pthread_t thread1;
 	pthread_t thread2;
-	struct sigaction act;
+	struct sigaction sa;
 
 	/* Setup the signal handler. */
-	act.sa_sigaction = act_handler;
-	sigemptyset(&act.sa_mask);
-	act.sa_flags = SA_SIGINFO | SA_RESETHAND | SA_NODEFER;
+	sa.sa_sigaction = myhandler;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_SIGINFO | SA_RESETHAND | SA_NODEFER;
 
 	/* Install the signal handler. */
-	assert(sigaction(SIGUSR1, &act, NULL) != -1);
+	assert(sigaction(SIGUSR1, &sa, NULL) != -1);
 
 	/*
 	 * Create the threads and sleep for a while, making sure that they are
 	 * actually created (would a barrier be overkill here ?).
 	 */
-	assert(pthread_create(&thread1, NULL, thread, "T1") == 0);
-	assert(pthread_create(&thread2, NULL, thread, "T2") == 0);
+	assert(pthread_create(&thread1, NULL, thread, NULL) == 0);
+	assert(pthread_create(&thread2, NULL, thread, NULL) == 0);
 	sleep(1);
 
 	/*
@@ -93,4 +96,6 @@ int main(void)
 	sleep(1);
 
 	printf("passed\n");
+
+	return (EXIT_SUCCESS);
 }
