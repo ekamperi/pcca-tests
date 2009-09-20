@@ -118,7 +118,7 @@ int main(void)
 	 * But first make sure that we don't set the speed to the old value.
 	 */
 	ns = s;
-	for (i = 0; i < sizeof(speeds) / sizeof(speeds[0]); i++) {
+	for (i = 1; i < sizeof(speeds) / sizeof(speeds[0]); i++) {
 		if (speeds[i] != s) {
 			ns = speeds[i];
 			break;
