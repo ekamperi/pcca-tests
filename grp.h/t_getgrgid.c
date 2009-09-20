@@ -25,6 +25,11 @@
  * SUCH DAMAGE.
  */
 
+/* Solaris needs this to bring in the POSIX semantics. */
+#if defined (__SVR4) && defined (__sun)
+	#define _POSIX_PTHREAD_SEMANTICS
+#endif
+
 #include <assert.h>
 #include <grp.h>
 #include <stdio.h>
