@@ -15,10 +15,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+int awake[2] = { 0 };
+int sig_cnt = 0;
+
 static void
-myhandler(int signal, siginfo_t *siginfo, void *context)
+myhandler(int sig, siginfo_t *siginfo, void *context)
 {
 	struct sigaction sa;
+
+	sig_cnt++;
 
 	assert(sigaction(SIGUSR1, NULL, &sa) != -1);
 	assert(sa.sa_handler == SIG_DFL);
@@ -26,10 +31,14 @@ myhandler(int signal, siginfo_t *siginfo, void *context)
 }
  
 static void *
-thread(void * arg)
+thread(void *arg)
 {
+	int id;
 	sigset_t run_mask;
 	sigset_t suspender_mask;
+
+	/* Which thread are we ? */
+	id = *(int *)arg;
 
 	/*
 	 * Run with all signals blocked.
@@ -42,16 +51,18 @@ thread(void * arg)
 
 	/*
 	 * sigsuspend() replaces the current signal mask and then suspends
-	 * the thread until the delivery of a signal.
+	 * the thread until the delivery of a signal. There isn't really
+	 * any success value for it. If it returns, it means that it was
+	 * interrupted.
 	 */
 	sigfillset(&suspender_mask);
 	sigdelset(&suspender_mask, SIGUSR1);
 
 	/* Wait for SIGUSR1. */
 	for (;;) {
-		sigsuspend(&suspender_mask);
-		perror("lala");
+		assert(sigsuspend(&suspender_mask) == -1);
 		assert(errno == EINTR);
+		awake[id]++;
 	}
 
 	pthread_exit(NULL);
@@ -62,6 +73,7 @@ int main(void)
 	pthread_t thread1;
 	pthread_t thread2;
 	struct sigaction sa;
+	int id[2];
 
 	/* Setup the signal handler. */
 	sa.sa_sigaction = myhandler;
@@ -75,26 +87,36 @@ int main(void)
 	 * Create the threads and sleep for a while, making sure that they are
 	 * actually created (would a barrier be overkill here ?).
 	 */
-	assert(pthread_create(&thread1, NULL, thread, NULL) == 0);
-	assert(pthread_create(&thread2, NULL, thread, NULL) == 0);
+	id[0] = 0;
+	id[1] = 1;
+	assert(pthread_create(&thread1, NULL, thread, &id[0]) == 0);
+	assert(pthread_create(&thread2, NULL, thread, &id[1]) == 0);
 	sleep(1);
 
 	/*
-	 * Send us a SIGUSR1 signal.
-	 * Signal handler should run once, both threads should awaken.
+	 * Send us (the process) a SIGUSR1 signal.
+	 * It is indeterminate to which thread (main, thread 1, thread 2) will
+	 * the signal be delivered.
 	 */
 	assert(kill(getpid(), SIGUSR1) != -1);
 	sleep(1);
+	assert(sig_cnt == 1);
 
-	/* Signal handler sould run once, only T1 should awaken. */
+	/* */
+	awake[0] = 0;
+	awake[1] = 0;
+
+	/* Signal handler sould run once, only tread 1 should awaken. */
 	assert(sigaction(SIGUSR1, &sa, NULL) != -1);
 	assert(pthread_kill(thread1, SIGUSR1) == 0);
 	sleep(1);
+	assert(sig_cnt == 2 && awake[0] == 1 && awake[1] == 0);
 
-	/* Signal handler should run once, only T2 should awaken. */
+	/* Signal handler should run once, only thread 2 should awaken. */
 	assert(sigaction(SIGUSR1, &sa, NULL) != -1);
 	assert(pthread_kill(thread2, SIGUSR1) == 0);
 	sleep(1);
+	assert(sig_cnt == 3 && awake[1] == 1 && awake[1] == 1);
 
 	printf("passed\n");
 
