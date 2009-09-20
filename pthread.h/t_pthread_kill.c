@@ -50,6 +50,7 @@ thread(void * arg)
 	/* Wait for SIGUSR1. */
 	for (;;) {
 		sigsuspend(&suspender_mask);
+		perror("lala");
 		assert(errno == EINTR);
 	}
 
@@ -86,12 +87,12 @@ int main(void)
 	sleep(1);
 
 	/* Signal handler sould run once, only T1 should awaken. */
-	assert(sigaction(SIGUSR1, &act, NULL) != -1);
+	assert(sigaction(SIGUSR1, &sa, NULL) != -1);
 	assert(pthread_kill(thread1, SIGUSR1) == 0);
 	sleep(1);
 
 	/* Signal handler should run once, only T2 should awaken. */
-	assert(sigaction(SIGUSR1, &act, NULL) != -1);
+	assert(sigaction(SIGUSR1, &sa, NULL) != -1);
 	assert(pthread_kill(thread2, SIGUSR1) == 0);
 	sleep(1);
 
