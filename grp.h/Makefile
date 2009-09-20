@@ -3,6 +3,7 @@ all:	t_getgrent	\
 	t_grp
 
 CC=gcc
+CC99=gcc -std=c99
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
@@ -10,7 +11,7 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 
 t_getgrent: t_getgrent.c
-	$(CC) $(CCFLAGS) $(LIB) t_getgrent.c -o t_getgrent
+	$(CC99) $(CCFLAGS) $(LIB) t_getgrent.c -o t_getgrent
 
 t_getgrgid: t_getgrgid.c
 	$(CC) $(CCFLAGS) $(LIB) t_getgrgid.c -o t_getgrgid
