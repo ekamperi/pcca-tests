@@ -113,8 +113,6 @@ int main(void)
 		}
 	}
 
-	assert(speedfound == 1);
-
 	/*
 	 * Set new input speed.
 	 * But first make sure that we don't set the speed to the old value.
@@ -138,7 +136,11 @@ int main(void)
 	s = cfgetispeed(&t);
 	assert(s == ns);
 
-	printf("passed\n");
+	printf("passed ");
+
+	if (speedfound == 0)
+		printf("(terminal speed surpasses POSIX limits)");
+	printf("\n");
 
 	return (EXIT_SUCCESS);
 }
