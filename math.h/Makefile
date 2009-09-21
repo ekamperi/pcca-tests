@@ -7,9 +7,11 @@ all:	t_fmax \
 	t_fdim	\
 	t_fdimf	\
 	t_fdiml \
+	t_tgamma	\
 	t_generr
 
 CC=gcc
+CC99=gcc -std=c99
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
@@ -44,6 +46,9 @@ t_fdimf: t_fdimf.c
 t_fdiml: t_fdiml.c
 	$(CC) $(CCFLAGS) $(LIB) t_fdiml.c -o t_fdiml
 
+t_tgamma: t_tgamma.c
+	$(CC99) $(CCFLAGS) $(LIB) t_tgamma.c -o t_tgamma
+
 t_generr: t_generr.c
 	$(CC) $(CCFLAGS) $(LIB) t_generr.c -o t_generr
 
@@ -77,6 +82,9 @@ run:
 
 	@printf "t_fdiml: "
 	@-./t_fdiml
+
+	@printf "t_tgamma: "
+	@-./t_tgamma
 
 	@printf "t_generr: "
 	@-./t_generr
