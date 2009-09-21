@@ -214,7 +214,7 @@ int main(void)
 
 		if (pid == 0) {
 			/* We are inside the child. */
-			printf("/math.h/t_generr: %s: ", te->desc);
+			printf("/math.h/t_generr: %-8s: ", te->desc);
 			fflush(NULL);
 
 			/* Run the actual test. */
