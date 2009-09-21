@@ -295,7 +295,7 @@ void runtest(const struct tentry *te)
 	*/
         assert(t_errno != 0 || t_fp != 0);
 
-        printf("passed\t");
+        printf("passed ");
 
         if (t_errno != 0 && t_fp == 0)
                 printf("(fp check was skipped)");
