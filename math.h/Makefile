@@ -38,13 +38,13 @@ t_fminl: t_fminl.c
 	$(CC) $(CCFLAGS) $(LIB) t_fminl.c -o t_fminl
 
 t_fdim: t_fdim.c
-	$(CC) $(CCFLAGS) $(LIB) t_fdim.c -o t_fdim
+	$(CC99) $(CCFLAGS) $(LIB) t_fdim.c -o t_fdim
 
 t_fdimf: t_fdimf.c
-	$(CC) $(CCFLAGS) $(LIB) t_fdimf.c -o t_fdimf
+	$(CC99) $(CCFLAGS) $(LIB) t_fdimf.c -o t_fdimf
 
 t_fdiml: t_fdiml.c
-	$(CC) $(CCFLAGS) $(LIB) t_fdiml.c -o t_fdiml
+	$(CC99) $(CCFLAGS) $(LIB) t_fdiml.c -o t_fdiml
 
 t_tgamma: t_tgamma.c
 	$(CC99) $(CCFLAGS) $(LIB) t_tgamma.c -o t_tgamma
