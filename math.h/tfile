@@ -11,3 +11,4 @@ t_tgamma
 t_generr
 t_rint
 t_sin
+t_trig_ident

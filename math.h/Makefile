@@ -10,7 +10,8 @@ all:	t_fmax \
 	t_tgamma	\
 	t_generr	\
 	t_rint		\
-	t_sin
+	t_sin		\
+	t_trig_ident
 
 CC=gcc
 CC99=gcc -std=c99
@@ -60,6 +61,9 @@ t_rint: t_rint.c
 t_sin: t_sin.c
 	$(CC) $(CCFLAGS) $(LIB) t_sin.c -o t_sin
 
+t_trig_ident: t_trig_ident.c
+	$(CC) $(CCFLAGS) $(LIB) t_trig_ident.c -o t_trig_ident
+
 clean:
 	git clean -f
 
@@ -102,3 +106,6 @@ run:
 
 	@printf "t_sin: "
 	@-./t_sin
+
+	@printf "t_trig_ident: "
+	@-./t_trig_ident
