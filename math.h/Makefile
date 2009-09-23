@@ -9,6 +9,7 @@ all:	t_fmax \
 	t_fdiml \
 	t_tgamma	\
 	t_generr	\
+	t_log		\
 	t_rint		\
 	t_sin		\
 	t_trig_ident
@@ -55,6 +56,9 @@ t_tgamma: t_tgamma.c
 t_generr: t_generr.c
 	$(CC) $(CCFLAGS) $(LIB) t_generr.c -o t_generr
 
+t_log: t_log.c
+	$(CC99) $(CCFLAGS) $(LIB) t_log.c -o t_log
+
 t_rint: t_rint.c
 	$(CC) $(CCFLAGS) $(LIB) t_rint.c -o t_rint
 
@@ -100,6 +104,9 @@ run:
 
 	@printf "t_generr: "
 	@-./t_generr
+
+	@printf "t_log: "
+	@-./t_log
 
 	@printf "t_rint: "
 	@-./t_rint
