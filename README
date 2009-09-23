@@ -56,6 +56,9 @@ pcca-tests%
 pcca-tests% ./mktests.sh -s ./foo.h
 Created ./foo.h/sandbox directory
 pcca-tests%
+pcca-tests% ls ./foo.h/sandbox
+dir000    dir666  dirloop  file000  file666  fileloop  infloop2  notatty
+dir555    dir777  fifo	  file555  file777  infloop   notadir   rootfile600
 
 We could have supplied only one top-level such directory, and have let the tests
 refer to it via ../../sandbox/* and so on. The reason we wanted to have per
