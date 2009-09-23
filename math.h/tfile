@@ -9,4 +9,5 @@ t_fminf
 t_fminl
 t_tgamma
 t_generr
+t_rint
 t_sin
