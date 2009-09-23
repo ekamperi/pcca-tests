@@ -91,8 +91,8 @@ int main(void)
 			assert(fabs(cos(x)*sin(y) - s) < 0.001);
 		}
 
-		y = sin(x) * sin(x) + cos(x) * cos(x);
-		assert(fabs(y - 1) < 0.001);
+		s = sin(x) * sin(x) + cos(x) * cos(x);
+		assert(fabs(s - 1) < 0.001);
 
 		/* XXX: Power reduction ? */
 	}
