@@ -61,8 +61,8 @@ dir000    dir666  dirloop  file000  file666  fileloop  infloop2  notatty
 dir555    dir777  fifo	  file555  file777  infloop   notadir   rootfile600
 
 We could have supplied only one top-level such directory, and have let the tests
-refer to it via ../../sandbox/* and so on. The reason we wanted to have per
-$header.h/ sandboxes, is because we wanted the various $header.h/ directories to
+refer to it via ../../sandbox/* and so on. The reason for separate $header.h/
+sandboxes, is because we wanted the various $header.h/ directories to
 be completely self-sufficient. So that one could tar -say- pthread.h/ tests,
 send the archive over to a remote machine, untar it, and be able to run the
 tests.
@@ -77,18 +77,16 @@ at the same time ?
 
 RUNNING THE TESTS
 
-You may run the tests in two ways, either automatically via mktests.sh by
-supplying a top level directory to start from and letting it traverse the
-whole directory hierarchy underneath it, or manually on a per directory
-basis.
+You may run the tests in two ways, either automatically via the mktests.sh
+script, or manually on a per directory basis.
 
-The are a few unique characteristics embedded in mktests.sh that render it
-the preferred way to run the tests. First, mktests.sh can recursively run tests,
-eg. run all tests associated with sys/* headers. Second, it supports job control
-which means that if a test exceeds a specified amount of execution time, it gets
-killed and the rest of the tests run normally. Finally, while running the tests,
-log statistics are generated for every $header.h/ directory, which can later be
-retrieved by the getstats.sh script. Here is a usual workflow:
+The are some unique feautures in mktests.sh that make it the preferred way to
+run the tests. First, mktests.sh can recursively run tests, e.g. run all tests
+associated with the sys/* headers. Second, it supports job control which means
+that if a test exceeds a specified amount of execution time, it gets killed and
+the rest of the tests run normally. Finally, while running the tests, log
+statistics are generated for every $header.h/ directory, which can later be
+retrieved with the getstats.sh script. Here is a usual workflow:
 
 pcca-tests% ./mktests.sh -c	     # Clean files from previous build/run
 pcca-tests% ./mktests.sh -s	     # Construct sandbox/ directories
