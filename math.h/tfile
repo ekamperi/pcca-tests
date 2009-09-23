@@ -7,8 +7,8 @@ t_fmaxl
 t_fmin
 t_fminf
 t_fminl
-t_tgamma
 t_generr
+t_tgamma
 t_log
 t_rint
 t_sin
