@@ -96,7 +96,16 @@ threadfun(void *arg)
 	size_t i;
 
 	for (i = 0; i < 100; i++) {
+		pgrp = NULL;
 		assert(getgrnam_r("root", &grp, buf, sz, &pgrp) == 0);
+
+		/*
+		 * At this point `pgrp' must have been updated to point at the
+		 * `grp' data structure. Some implementations don't, namely
+		 * {DragonFly, Net, Free}BSD. The common denominator is the
+		 * "name-server switch service".
+		 */
+		assert(pgrp != NULL);
 
 		/* Make sure that getgrnam_r() doesn't lie to us. */
 		assert(strcmp(pgrp->gr_name, "root") == 0);
