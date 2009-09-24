@@ -79,9 +79,9 @@ t_ctermid: passed
 t_tmpfile: passed
 pcca-tests/stdio.h%
 
-If some test fails to build (because the host OS misses some function for
-example), make(1) will stop building further targets. If this is the case,
-please pass -k option to make:
+If a test fails to build (because the host OS misses a function for example),
+make(1) will stop building further targets. If this is the case, please pass
+-k option to make:
 
 pcca-tests% cd stdio.h
 pcca-tests/stdio.h% make -k
@@ -89,8 +89,9 @@ pcca-tests/stdio.h% make -k
 pcca-tests/stdio.h%
 
 With -k, when a rule returns an error, make(1) skips the work on the current
-target, and continues with other dependency branches that do not depend on it.
-(-k is actually a POSIX mandated option)
+target, and continues with other dependency branches that do not depend on it
+(on the failed target that is). Note that -k is actually a POSIX mandated
+option.
 
 --------------------------------------------------------------------------------
 
