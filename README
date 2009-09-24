@@ -4,7 +4,7 @@ SUPPORTED PLATFORMS
 
 A lot of care has been taken to ensure that the test suite runs in as many
 environments as possible. By the term 'suite' we refer to both the shell
-scripts that are provided for administration (mktests.sh, get*.sh, etc)
+scripts that are provided for its administration (mktests.sh, get*.sh, etc)
 and the _actual_ test cases.
 
 The strive for portability hasn't been entirely nobble. By being able to run the
@@ -15,10 +15,10 @@ them.
 
 The suite has been tested and proved to work (with decreasing levels of
 confidence) under DragonFlyBSD, NetBSD, Linux and OpenBSD in both automated/
-bulk mode (via mktests.sh) and in manual as well (via make && make run).
+bulk mode (via mktests.sh script) and manually as well (via make && make run).
 
 The bulk runs don't quite work in Solaris 10 yet, but manually running
-individual tests works like a charm.
+individual tests works fine.
 
 --------------------------------------------------------------------------------
 
@@ -62,6 +62,9 @@ t_aio.c, line 56.
 /complex.h/t_cacos: passed
 ...
 pcca-tests%
+
+Collapsing individual arguments is possible. E.g.,
+pcca-tests% ./mktests.sh -csbr
 
 In manual mode, one cd's into the directory of interest, types 'make' to
 build the tests and 'make run' to run them.
