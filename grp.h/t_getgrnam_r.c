@@ -67,7 +67,17 @@ threadfun(void *arg)
 
 #ifdef _SC_GETGR_R_SIZE_MAX
 	sz = sysconf(_SC_GETGR_R_SIZE_MAX);
-	assert(sz != -1);
+
+	/*
+	 * Normally, we wouldn't allow for a fail/-1 here, in the sense that if
+	 * an implementation defines a _SC_XXX symbol, it ought to return
+	 * meaningful results when this symbol is passed as an argument to
+	 * sysconf().
+	 *
+	 * But, since we have another test (unistd.h/t_unistd) checking for such
+	 * inconsistencies, let's be a bit lenient.
+	 */
+	/* assert(sz != -1); */
 #endif
 
 	/*
