@@ -1,17 +1,5 @@
 --------------------------------------------------------------------------------
 
-GETTING THE TEST REPOSITORY
-
-The test case repository is (not so much) tight to git. That said, the best way
-to get it is to clone it:
-
-~% git clone git://gitweb.dragonflybsd.org/~beket/pcca-tests.git
-
-See the "EXPORTING TEST REPOSITORY TO A GIT-LESS HOST" section on how to create
-a tar archive and pass it around.
-
---------------------------------------------------------------------------------
-
 SUPPORTED PLATFORMS
 
 A lot of care has been taken to ensure that the test suite runs in as many
@@ -34,44 +22,15 @@ individual tests works like a charm.
 
 --------------------------------------------------------------------------------
 
-SANDBOXES
+GETTING THE TEST REPOSITORY
 
-Various tests need to check against all sort of weird situations like trying
-to access a file without search/execute permission or resolve an unresolvable
-symbolic link and so on. For this purpose we have introduced the notion of a
-sandbox/ directory, which acts as a provider for them.
+The test case repository is (not so much) tight to git. That said, the best way
+to get it is to clone it:
 
-The sandbox/ directories are created and populated via mktests.sh script. Every
-$header.h/ directory that needs one, there must have a file 'need-sandbox' in
-it. No need for that file to contain anything at all, just exist. But, it MUST
-be tracked by git:
+~% git clone git://gitweb.dragonflybsd.org/~beket/pcca-tests.git
 
-pcca-tests% mkdir foo.h
-pcca-tests% cd foo.h
-pcca-tests/foo.h% touch need-sandbox
-pcca-tests/foo.h% git add need-sandbox
-pcca-tests/foo.h% git commit -m "foo.h: Add need-sandbox file"
-...
-pcca-tests%
-pcca-tests% ./mktests.sh -s ./foo.h
-Created ./foo.h/sandbox directory
-pcca-tests%
-pcca-tests% ls ./foo.h/sandbox
-dir000    dir666  dirloop  file000  file666  fileloop  infloop2  notatty
-dir555    dir777  fifo	  file555  file777  infloop   notadir   rootfile600
-
-We could have supplied only one top-level such directory, and have let the tests
-refer to it via ../../sandbox/* and so on. The reason for separate $header.h/
-sandboxes, is because we wanted the various $header.h/ directories to
-be completely self-sufficient. So that one could tar -say- pthread.h/ tests,
-send the archive over to a remote machine, untar it, and be able to run the
-tests.
-
-On top of that, having all tests use the same exact file structures could
-potentially lead to undesired results. For example, among the provided files
-there is a FIFO special file. Although it is an unlikely to happen scenario,
-what whould be the consequences of two different tests trying to access it
-at the same time ?
+See the "EXPORTING TEST REPOSITORY TO A GIT-LESS HOST" section on how to create
+a tar archive and pass it around.
 
 --------------------------------------------------------------------------------
 
@@ -226,6 +185,47 @@ principal function you are testing against. E.g., t_pthread_join.c if you
 are writing a test case for the pthread_join() function. This will allow you
 to automatically generate SQL commands with dbpop/updatetestcases.sh, if you are
 maintaining a POSIX conformance tracking site. 
+
+--------------------------------------------------------------------------------
+
+SANDBOXES
+
+Various tests need to check against all sort of weird situations like trying
+to access a file without search/execute permission or resolve an unresolvable
+symbolic link and so on. For this purpose we have introduced the notion of a
+sandbox/ directory, which acts as a provider for them.
+
+The sandbox/ directories are created and populated via mktests.sh script. Every
+$header.h/ directory that needs one, there must have a file 'need-sandbox' in
+it. No need for that file to contain anything at all, just exist. But, it MUST
+be tracked by git:
+
+pcca-tests% mkdir foo.h
+pcca-tests% cd foo.h
+pcca-tests/foo.h% touch need-sandbox
+pcca-tests/foo.h% git add need-sandbox
+pcca-tests/foo.h% git commit -m "foo.h: Add need-sandbox file"
+...
+pcca-tests%
+pcca-tests% ./mktests.sh -s ./foo.h
+Created ./foo.h/sandbox directory
+pcca-tests%
+pcca-tests% ls ./foo.h/sandbox
+dir000    dir666  dirloop  file000  file666  fileloop  infloop2  notatty
+dir555    dir777  fifo	  file555  file777  infloop   notadir   rootfile600
+
+We could have supplied only one top-level such directory, and have let the tests
+refer to it via ../../sandbox/* and so on. The reason for separate $header.h/
+sandboxes, is because we wanted the various $header.h/ directories to
+be completely self-sufficient. So that one could tar -say- pthread.h/ tests,
+send the archive over to a remote machine, untar it, and be able to run the
+tests.
+
+On top of that, having all tests use the same exact file structures could
+potentially lead to undesired results. For example, among the provided files
+there is a FIFO special file. Although it is an unlikely to happen scenario,
+what whould be the consequences of two different tests trying to access it
+at the same time ?
 
 --------------------------------------------------------------------------------
 
