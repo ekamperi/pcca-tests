@@ -70,19 +70,20 @@ threadfun(void *arg)
 
 	/*
 	 * Normally, we wouldn't allow for a fail/-1 here, in the sense that if
-	 * an implementation defines a _SC_XXX symbol, it ought to return
-	 * meaningful results when this symbol is passed as an argument to
+	 * an implementation defines an _SC_XXX symbol, it ought to return
+	 * a meaningful result when this symbol is passed as an argument to
 	 * sysconf().
 	 *
 	 * But, since we have another test (unistd.h/t_unistd) checking for such
-	 * inconsistencies, let's be a bit lenient.
+	 * inconsistencies, let's be a bit lenient here.
 	 */
 	/* assert(sz != -1); */
 #endif
 
 	/*
 	 * If we couldn't determine the size of the buffer via sysconf(),
-	 * just use some 'large enough' value.
+	 * just use some 'large enough' value. OpenSolaris build 123 uses
+	 * some surprisingly large value (524288).
 	 */
 	char *buf;
 
@@ -100,10 +101,10 @@ threadfun(void *arg)
 		assert(getgrnam_r("root", &grp, buf, sz, &pgrp) == 0);
 
 		/*
-		 * At this point `pgrp' must have been updated to point at the
-		 * `grp' data structure. Some implementations don't, namely
-		 * {DragonFly, Net, Free}BSD. The common denominator is the
-		 * "name-server switch service".
+		 * As of now `pgrp' must have been updated by getgrnam_r()
+		 * to point at the `grp' data structure. Some implementations
+		 * don't do so, namely {DragonFly, Net, Free}BSD. The common
+		 * denominator is the "name-server switch service".
 		 */
 		assert(pgrp != NULL);
 
