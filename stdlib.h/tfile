@@ -1,4 +1,5 @@
 t_posix_memalign
 t_posix_openpt
 t_putenv
+t_qsort
 t_stdlib
