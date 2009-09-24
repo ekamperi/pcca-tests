@@ -1,3 +1,4 @@
 t_getgrent
 t_getgrgid
+t_getgrnam
 t_grp
