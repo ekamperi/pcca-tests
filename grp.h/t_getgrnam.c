@@ -34,7 +34,7 @@ int main(void)
 {
 	struct group *pgrp;
 
-	/* Try to search for an inexistent user. */
+	/* Try to search for an inexistent group. */
 	pgrp = getgrnam("Cosmos is all that is or ever was or ever will be."	\
 	    "Our feeblest contemplations of the Cosmos stir us — there is a"	\
 	    "tingling in the spine, a catch in the voice, a faint sensation,"	\
@@ -44,10 +44,11 @@ int main(void)
 	assert(pgrp == NULL);
 
 	/*
-	 * Try to search for root user.
+	 * Try to search for root group.
 	 *
 	 * POSIX doesnt, to my knowledge, explicitly require the existence of
-	 * the root user, but it does refer to it occasionally. E.g.,
+	 * the root user (or group), but it refers to the former occasionally.
+	 * E.g.,
 	 * http://www.opengroup.org/onlinepubs/009695399/functions/getpwuid.html
 	 */
 	pgrp = getgrnam("root");
