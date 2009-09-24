@@ -92,13 +92,13 @@ threadfun(void *arg)
 	buf = malloc(sz);
 	assert(buf != NULL);
 
-	/* Search for `root' user, many many times. */
+	/* Search for `root' group, many many times. */
 	size_t i;
 
 	for (i = 0; i < 100; i++) {
 		assert(getgrnam_r("root", &grp, buf, sz, &pgrp) == 0);
 
-		/* Make sure that getgrnam_r() don't lie to us. */
+		/* Make sure that getgrnam_r() does't lie to us. */
 		assert(strcmp(pgrp->gr_name, "root") == 0);
 
 		/* Since we are here, let's check `group's data structure members. */
