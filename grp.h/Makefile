@@ -22,7 +22,7 @@ t_getgrnam: t_getgrnam.c
 	$(CC) $(CCFLAGS) $(LIB) t_getgrnam.c -o t_getgrnam
 
 t_getgrnam_r: t_getgrnam_r.c
-	$(CC99) $(CCFLAGS) $(LIB) t_getgrnam_r.c -o t_getgrnam_r
+	$(CC99) $(CCFLAGS) $(LIB) -lpthread t_getgrnam_r.c -o t_getgrnam_r
 
 t_grp: t_grp.c
 	$(CC) $(CCFLAGS) $(LIB) t_grp.c -o t_grp
