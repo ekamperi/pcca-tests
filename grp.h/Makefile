@@ -1,6 +1,7 @@
 all:	t_getgrent	\
 	t_getgrgid	\
 	t_getgrnam	\
+	t_getgrnam_r	\
 	t_grp
 
 CC=gcc
@@ -20,6 +21,9 @@ t_getgrgid: t_getgrgid.c
 t_getgrnam: t_getgrnam.c
 	$(CC) $(CCFLAGS) $(LIB) t_getgrnam.c -o t_getgrnam
 
+t_getgrnam_r: t_getgrnam_r.c
+	$(CC99) $(CCFLAGS) $(LIB) t_getgrnam_r.c -o t_getgrnam_r
+
 t_grp: t_grp.c
 	$(CC) $(CCFLAGS) $(LIB) t_grp.c -o t_grp
 
@@ -36,6 +40,8 @@ run:
 	@printf "t_getgrnam: "
 	@-./t_getgrnam
 
+	@printf "t_getgrnam_r: "
+	@-./t_getgrnam_r
 
 	@printf "t_grp: "
 	@-./t_grp
