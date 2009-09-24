@@ -98,7 +98,7 @@ threadfun(void *arg)
 	for (i = 0; i < 100; i++) {
 		assert(getgrnam_r("root", &grp, buf, sz, &pgrp) == 0);
 
-		/* Make sure that getgrnam_r() does't lie to us. */
+		/* Make sure that getgrnam_r() doesn't lie to us. */
 		assert(strcmp(pgrp->gr_name, "root") == 0);
 
 		/* Since we are here, let's check `group's data structure members. */
