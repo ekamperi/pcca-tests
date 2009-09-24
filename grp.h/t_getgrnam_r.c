@@ -110,8 +110,10 @@ threadfun(void *arg)
 		/* Make sure that getgrnam_r() doesn't lie to us. */
 		assert(strcmp(pgrp->gr_name, "root") == 0);
 
-		/* Since we are here, let's check `group's data structure members. */
-		(void)pgrp->gr_name;
+		/*
+		 * Since we are here, let's check the rest of the group's
+		 * structure members.
+		 */
 		(void)pgrp->gr_gid;
 		while(*pgrp->gr_mem) {
 			(void)*pgrp->gr_mem;
