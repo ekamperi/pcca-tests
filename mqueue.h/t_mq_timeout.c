@@ -59,9 +59,12 @@ int main(void)
 	/* Mark the end. */
 	assert(gettimeofday(&tv2, NULL) == 0);
 
-	printf("The mq_timedsend() call timed out in ca. %ld msec\n",
-	    (tv2.tv_sec - tv1.tv_sec) * 1000 +
-	    (tv2.tv_usec - tv1.tv_usec) / 1000);
+	/* Make sure the time ellapsed is roughly 3sec. */
+	long int msec;
+
+	msec = (tv2.tv_sec - tv1.tv_sec) * 1000 +
+	       (tv2.tv_usec - tv1.tv_usec) / 1000;
+	assert(msec >= 2900 && msec <= 3100);
 
 	/* Cleanup. */
 	assert(mq_close(md) != -1);
