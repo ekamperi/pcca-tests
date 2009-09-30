@@ -70,5 +70,7 @@ int main(void)
 	assert(mq_close(md) != -1);
 	assert(mq_unlink(MQNAME) != -1);
 
+	printf("passed\n");
+
 	return (EXIT_SUCCESS);
 }
