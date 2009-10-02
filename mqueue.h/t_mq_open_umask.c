@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 
-#define MQNAME	"/XY0sdds"
+#define MQNAME	"/t_mq_open_umask"
 
 int
 main(void)
@@ -88,7 +88,6 @@ main(void)
 
 		/* Wait for child to complete. */
 		int status;
-
 		assert(wait(&status) == pid);
 
 		/*
