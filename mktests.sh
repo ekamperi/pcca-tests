@@ -42,7 +42,7 @@ populatesandbox()
     touch "$1/file000"
     chmod 0000 "$1/file000"
 
-    # Creat file {read,write}able only by root.
+    # Create file {read,write}able only by root.
     touch "$1/rootfile600"
     sudo chown root "$1/rootfile600"
     sudo chmod 600 "$1/rootfile600"
@@ -174,7 +174,7 @@ buildtests()
 	2>/dev/null | sort)
     do
 	# We save the current directory, so we can step into the target,
-	# run 'make' and then return to were we are. We must always cd
+	# run 'make' and then return to where we are. We must always cd
 	# from the directory where we ran find(1), otherwise the paths
 	# returned by it won't be valid.
 	OLDPWD=`pwd`
