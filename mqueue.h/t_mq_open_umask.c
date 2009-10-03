@@ -128,4 +128,7 @@ main(void)
 			return (EXIT_SUCCESS);
 		}
 	}
+
+	/* Only reached by child upon success. */
+	return (EXIT_SUCCESS);
 }
