@@ -47,6 +47,11 @@ populatesandbox()
     sudo chown root "$1/rootfile600"
     sudo chmod 600 "$1/rootfile600"
 
+    # Create directory {read,write,search}able only by root.
+    mkdir "$1/rootdir700"
+    sudo chown root "$1/rootdir700"
+    sudo chmod 700 "$1/rootdir700"
+
     # Create directory with full permissions.
     mkdir "$1/dir777"
     chmod 0777 "$1/dir777"

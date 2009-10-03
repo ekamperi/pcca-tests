@@ -58,6 +58,9 @@ main(void)
 
 	fd = open("sandbox/rootdir700", O_RDONLY);
 	assert(fd != -1);
+
+	assert(fchdir(fd) != -1);
+
 	assert(close(fd) != -1);
 
 	printf("passed\n");
