@@ -5,6 +5,7 @@ t_alarm
 t_chdir
 t_confstr
 t_fchdir
+t_fchdir_suid
 t_getcwd
 t_getgroups
 t_gethostid
