@@ -39,7 +39,7 @@ main(void)
 	 * Make sure we don't run the test as root. This is a prerequisite,
 	 * documented in the README file in our root directory.
 	 */
-	if (getuid == 0) {
+	if (getuid() == 0) {
 		fprintf(stderr, "WARNING: Test cases shouldn't be running "
 				"as root user!\n");
 		assert(getuid() != 0);
