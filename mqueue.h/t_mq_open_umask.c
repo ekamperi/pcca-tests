@@ -102,7 +102,7 @@ main(void)
 
 		size_t i;
 		for (i = 0; i < sizeof(modes) / sizeof(*modes); i++)
-			assert(mq_open(MQNAME, O_CREAT, modes[i]) == (mqd_t)-1
+		  assert(mq_open(MQNAME, O_CREAT, modes[i], NULL) == (mqd_t)-1
 			    && errno == EACCES);
 
 		/* Remove the message queue from the system. */
