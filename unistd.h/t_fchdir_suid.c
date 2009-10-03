@@ -40,7 +40,7 @@ main(void)
 	 * documented in the README file in our root directory.
 	 */
 	if (getuid == 0) {
-		fprintf(stderr, "WARNING: Test cases shouldn't be running"
+		fprintf(stderr, "WARNING: Test cases shouldn't be running "
 				"as root user!\n");
 		assert(getuid() != 0);
 	}
