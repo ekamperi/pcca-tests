@@ -46,6 +46,7 @@ main(void)
 	 * of a new message queue.
 	 */
 	umask(777);
+	assert(umask(777) == 777);	/* Paranoia */
 
 	/*
 	 * Create the message queue with permission bits set to 777.
