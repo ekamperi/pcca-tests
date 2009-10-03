@@ -32,7 +32,8 @@
 #include <string.h>	/* for memset() */
 #include <unistd.h>
 
-int main(int argc, char *argv[])
+int
+main(void)
 {
 	char *buf;
 	long sz = 32768;	/* Default value for PATH_MAX */
