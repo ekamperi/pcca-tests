@@ -45,8 +45,8 @@ main(void)
 	 * We will check later on, if it is honoured during the creation
 	 * of a new message queue.
 	 */
-	umask(777);
-	assert(umask(777) == 777);	/* Paranoia */
+	umask(0777);
+	assert(umask(0777) == 0777);	/* Paranoia */
 
 	/*
 	 * Create the message queue with permission bits set to 777.
@@ -70,10 +70,13 @@ main(void)
 		/* We are inside the child. */
 
 		/*
-		 * The file creation mask isn't inherited by the child process,
-		 * during fork(). Given this info, we try to open the queue with
-		 * inappropriate permission bits.
+		 * The file creation mask isn't inherited by the child process
+		 * during fork(), but we will set it to 000 anyway as we don't
+		 * want to interfere with our modes.
 		 */
+		umask(0);
+		assert(umask(0) == 0);	/* Paranoia */
+
 		mode_t modes[] = { 000,	001, 002, 004,	/* XXX: What about 000 ? */
 				   010, 012, 011, 014,
 				   020, 021, 022, 024,
