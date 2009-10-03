@@ -72,7 +72,7 @@ main(void)
 		/*
 		 * The file creation mask isn't inherited by the child process
 		 * during fork(), but we will set it to 000 anyway as we don't
-		 * want to interfere with our modes.
+		 * want it to interfere with our modes.
 		 */
 		umask(0);
 		assert(umask(0) == 0);	/* Paranoia */
