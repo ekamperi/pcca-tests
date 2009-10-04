@@ -40,44 +40,34 @@
 
 int main(void)
 {
-	struct mq_attr attr;
-	struct timespec abs_timeout;
-	mqd_t md, md2;
-	pid_t pid;
+	mqd_t md2;
 
-	/*
-	 * Create a message queue for write only with capacity `1'
-	 * (we want to emulate a full queue).
-	 */
+	/* Create a message queue for with capacity `1'. */
+	struct mq_attr attr;
+	mqd_t md;
+
 	memset(&attr, 0, sizeof(attr));
 	attr.mq_maxmsg = 1;	/* Maximum number of messages. */
 	attr.mq_msgsize = 1024;	/* Maximum message size. */
 
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, &attr);
-	assert(md != -1);
+	assert(md != (mqd_t)-1);
 
-	/* Send a message to fill the queue. */
+	/* Send a message to fill in the queue. */
 	assert(mq_send(md, "foo", sizeof("foo"), /* priority */ 0) != -1);
 
-	/* Timeout in 3 seconds, if the queue doesn't empty. */
-	abs_timeout.tv_sec = 3;
-	abs_timeout.tv_nsec = 0;
-
-	assert(mq_timedsend(md, "foo", sizeof("foo"), /* priority */ 0,
-		&abs_timeout) == -1 && errno == ETIMEDOUT);
-
 	/*
-	 * Fork and let parent block on mq_timedsend(). In the meantime,
-	 * child receives the existing message from the queue, making room
-	 * for parent to send her!
+	 * Fork and let the parent block on mq_timedsend().
+	 * Meanwhile, the child receives the old message from the queue, making
+	 * room for parent to send the new one!
 	 */
-	pid = fork();
+	pid_t pid = fork();
 	assert(pid != -1);
 
 	if (pid == 0) {
 		/* We are inside the child. */
 		md2 = mq_open(MQNAME, O_RDONLY);
-		assert(md2 != -2);
+		assert(md2 != (mqd_t)-1);
 
 		char msg_recvd[8192];	/* Implementation defined. */
 		assert(mq_receive(md2, msg_recvd, sizeof(msg_recvd),
@@ -89,11 +79,20 @@ int main(void)
 		/* We are inside the parent. */
 		/* Make sure the child has completed. */
 		int status;
-		wait(&status);
+		assert(wait(&status) == pid);
 
-		/* This shouldn't block now, since queue isn't full. */
+		/*
+		 * This shouldn't timeout now, since the queue is or is about to
+		 * become empty. It may block though for a while.
+		 */
+		struct timespec now, timeout;
+
+		assert(clock_gettime(CLOCK_REALTIME, &now) == 0);
+		timeout.tv_sec  = now.tv_sec + 3;
+		timeout.tv_nsec = now.tv_nsec;
+
 		assert(mq_timedsend(md, "foo", sizeof("foo"), /* priority */ 0,
-			&abs_timeout) != -1);
+			&timeout) != -1);
 
 		/* Disassociate from message queue. */
 		mq_close(md);
