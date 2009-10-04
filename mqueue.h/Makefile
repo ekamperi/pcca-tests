@@ -12,6 +12,7 @@ all:	t_mq_ambig		\
 	t_mq_setattr		\
 	t_mq_timedsend		\
 	t_mq_timedreceive_timeout	\
+	t_mq_timedsend_timeout		\
 	t_mq_timeout
 
 CC=gcc
@@ -65,8 +66,8 @@ t_mq_timedsend: t_mq_timedsend.c
 t_mq_timedreceive_timeout: t_mq_timedreceive_timeout.c
 	$(CC99) $(CCFLAGS) $(LIB) t_mq_timedreceive_timeout.c -o t_mq_timedreceive_timeout
 
-t_mq_timeout: t_mq_timeout.c
-	$(CC99) $(CCFLAGS) $(LIB) t_mq_timeout.c -o t_mq_timeout
+t_mq_timedsend_timeout: t_mq_timedsend_timeout.c
+	$(CC99) $(CCFLAGS) $(LIB) t_mq_timedsend_timeout.c -o t_mq_timedsend_timeout
 
 clean:
 	git clean -f
@@ -114,5 +115,5 @@ run:
 	@printf "t_mq_timedreceive_timeout: "
 	@-./t_mq_timedreceive_timeout
 
-	@printf "t_mq_timeout: "
-	@-./t_mq_timeout
+	@printf "t_mq_timedsend_timeout: "
+	@-./t_mq_timedsend_timeout
