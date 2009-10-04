@@ -13,7 +13,6 @@ all:	t_mq_ambig		\
 	t_mq_timedsend		\
 	t_mq_timedreceive_timeout	\
 	t_mq_timedsend_timeout		\
-	t_mq_timeout
 
 CC=gcc
 CC99=gcc -std=c99
