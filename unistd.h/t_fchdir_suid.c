@@ -58,7 +58,6 @@ main(void)
 
 	/*
 	 * Normally, search permission is denied for the rootdir700/ directory.
-	 *
 	 * But given that our binary is setuid and the owner of it is root, our
 	 * privileges should escalate without a problem.
 	 *
