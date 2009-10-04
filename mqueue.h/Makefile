@@ -2,7 +2,7 @@ all:	t_mq_ambig		\
 	t_mq_close		\
 	t_mq_notify_simple	\
 	t_mq_open		\
-	t_mq_openclose		\
+	t_mq_open_close		\
 	t_mq_open_umask		\
 	t_mq_parent_child	\
 	t_mq_parent_child_multmsg	\
@@ -34,8 +34,8 @@ t_mq_notify_simple: t_mq_notify_simple.c
 t_mq_open: t_mq_open.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_open.c -o t_mq_open
 
-t_mq_openclose: t_mq_openclose.c
-	$(CC) $(CCFLAGS) $(LIB) t_mq_openclose.c -o t_mq_openclose
+t_mq_open_close: t_mq_open_close.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_open_close.c -o t_mq_open_close
 
 t_mq_open_umask: t_mq_open_umask.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_open_umask.c -o t_mq_open_umask
@@ -80,8 +80,8 @@ run:
 	@printf "t_mq_open: "
 	@-./t_mq_open
 
-	@printf "t_mq_openclose: "
-	@-./t_mq_openclose
+	@printf "t_mq_open_close: "
+	@-./t_mq_open_close
 
 	@printf "t_mq_open_umask: "
 	@-./t_mq_open_umask
