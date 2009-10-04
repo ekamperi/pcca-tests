@@ -74,7 +74,7 @@ int main(void)
 			/* priority */ NULL) != -1);
 
 		/* Disassociate from message queue. */
-		mq_close(md2);
+		assert(mq_close(md2) != -1);
 	} else {
 		/* We are inside the parent. */
 		/* Make sure the child has completed. */
