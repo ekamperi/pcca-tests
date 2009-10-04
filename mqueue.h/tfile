@@ -10,5 +10,6 @@ t_mq_select
 t_mq_send
 t_mq_setattr
 t_mq_timedsend
+t_mq_timedreceive_timeout
 t_mq_timeout
 t_mq_sysctl

@@ -11,6 +11,7 @@ all:	t_mq_ambig		\
 	t_mq_send		\
 	t_mq_setattr		\
 	t_mq_timedsend		\
+	t_mq_timedreceive_timeout	\
 	t_mq_timeout
 
 CC=gcc
@@ -61,6 +62,9 @@ t_mq_setattr: t_mq_setattr.c
 t_mq_timedsend: t_mq_timedsend.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_timedsend.c -o t_mq_timedsend
 
+t_mq_timedreceive_timeout: t_mq_timedreceive_timeout.c
+	$(CC99) $(CCFLAGS) $(LIB) t_mq_timedreceive_timeout.c -o t_mq_timedreceive_timeout
+
 t_mq_timeout: t_mq_timeout.c
 	$(CC99) $(CCFLAGS) $(LIB) t_mq_timeout.c -o t_mq_timeout
 
@@ -106,6 +110,9 @@ run:
 
 	@printf "t_mq_timedsend: "
 	@-./t_mq_timedsend
+
+	@printf "t_mq_timedreceive_timeout: "
+	@-./t_mq_timedreceive_timeout
 
 	@printf "t_mq_timeout: "
 	@-./t_mq_timeout
