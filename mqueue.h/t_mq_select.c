@@ -94,10 +94,10 @@ int main(void)
 		 */
 
 		/* Disassociate with message queue. */
-		mq_close(md);
+		assert(mq_close(md) != -1);
 
 		/* Remove the message queue from the system. */
-		mq_unlink(MQNAME);
+		assert(mq_unlink(MQNAME) != -1);
 
 		printf("passed\n");
 	}
