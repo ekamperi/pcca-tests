@@ -40,7 +40,7 @@ int main(void)
 
 	/* Create a message queue for write only with default parameters. */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0777, NULL);
-	assert(md != -1);
+	assert(md != (mqd_t)-1);
 
 	/* Disassociate with message queue. */
 	assert(mq_close(md) != -1);
