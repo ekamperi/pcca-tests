@@ -82,6 +82,15 @@ int main(void)
 		assert(wait(&status) == pid);
 
 		/*
+		 * Determine if the child exited normally, or due to a SIGABRT
+		 * signal being delivered to it by a failed assertion.
+		 */
+		if (WIFSIGNALED(status)) {
+			assert(WTERMSIG(status) == SIGABRT);
+			return (EXIT_FAILURE);
+		}
+
+		/*
 		 * This shouldn't timeout now, since the queue is or is about to
 		 * become empty. It may block though for a while.
 		 */
@@ -101,7 +110,10 @@ int main(void)
 		mq_unlink(MQNAME);
 
 		printf("passed\n");
+
+		return (EXIT_SUCCESS);
 	}
 
+	/* Only reached by child upon success. */
 	return (EXIT_SUCCESS);
 }
