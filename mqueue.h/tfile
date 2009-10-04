@@ -12,4 +12,3 @@ t_mq_setattr
 t_mq_timedsend
 t_mq_timedreceive_timeout
 t_mq_timedsend_timeout
-t_mq_sysctl
