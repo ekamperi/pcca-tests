@@ -35,20 +35,26 @@
 
 int main(void)
 {
-	int rv;
-
-	/*
-	 * Make sure we don't run the test as root. This is a prerequisite.
-	 * XXX: Should we print a more user friendly message ?
-	 */
-	assert(getuid() != 0);
+        /*
+         * Make sure we don't run the test as root. This is a prerequisite,
+         * documented in the README file in our root directory.
+         */
+        if (getuid() == 0) {
+		fprintf(stderr, "WARNING: Test cases shouldn't be running "
+				"as root user!\n");
+		assert(getuid() != 0);
+        }
 
 	/*
 	 * Make sure that the setuid bit is set and the owner of the binary
 	 * is root. This is a prerequisite.
-	 * XXX: Should we print a more user friendly message ?
 	 */
-	assert(geteuid() == 0);
+	if (geteuid() != 0 ) {
+		fprintf(stderr, "WARNING: We were unable to escalate our uid!\n"
+				"WARNING: Make sure the fs isn't mounted with "
+				"some sort of nosuid option set.\n");
+		assert(geteuid() == 0);
+	}
 
 	/*
 	 * According to POSIX access() is supposed to use the real user ID in
@@ -58,6 +64,8 @@ int main(void)
 	 * should fail. Even though the binary has the setuid bit set and the
 	 * owner of it is root.
 	 */
+	int rv;
+
 	rv = access("sandbox/rootfile600", R_OK);
 	assert(rv == -1 && errno == EACCES);
 
