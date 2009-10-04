@@ -46,6 +46,17 @@ main(void)
 	}
 
 	/*
+	 * Make sure that the setuid bit is set, the owner of the binary is root
+	 * and that we were able to escalate our uid. This is a prerequisite.
+	 */
+	if (geteuid() != 0 ) {
+		fprintf(stderr, "WARNING: We were unable to escalate our uid!\n"
+				"WARNING: Make sure the fs isn't mounted with "
+				"some sort of nosuid option set.\n");
+		assert(geteuid() == 0);
+	}
+
+	/*
 	 * Normally, search permission is denied for the rootdir700/ directory.
 	 *
 	 * But given that our binary is setuid and the owner of it is root, our
