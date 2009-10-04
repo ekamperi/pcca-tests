@@ -46,8 +46,8 @@ int main(void)
         }
 
 	/*
-	 * Make sure that the setuid bit is set and the owner of the binary
-	 * is root. This is a prerequisite.
+	 * Make sure that the setuid bit is set, the owner of the binary is root
+	 * and that we were able to escalate our uid. This is a prerequisite.
 	 */
 	if (geteuid() != 0 ) {
 		fprintf(stderr, "WARNING: We were unable to escalate our uid!\n"
