@@ -1,6 +1,6 @@
 all:	t_ndbm
 
-CC=gcc
+CC99=gcc -std=c99
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
@@ -8,7 +8,7 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 
 t_ndbm: t_ndbm.c
-	$(CC) $(CCFLAGS) $(LIB) t_ndbm.c -o t_ndbm
+	$(CC99) $(CCFLAGS) $(LIB) t_ndbm.c -o t_ndbm
 
 clean:
 	git clean -f
