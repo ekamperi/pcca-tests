@@ -72,4 +72,10 @@ main(void)
 
 		return (EXIT_SUCCESS);
 	}
+
+	/*
+	 * Never reached.
+	 * (just to silence a gcc warning)
+	 */
+	return (EXIT_SUCCESS);
 }
