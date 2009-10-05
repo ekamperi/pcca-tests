@@ -5,6 +5,7 @@ all:	t_access	\
 	t_confstr	\
 	t_fchdir	\
 	t_fchdir_suid	\
+	t_fork_signal	\
 	t_getcwd	\
 	t_getgroups	\
 	t_gethostid	\
@@ -65,6 +66,9 @@ t_fchdir_suid: t_fchdir_suid.c
 	$(CC) $(CCFLAGS) t_fchdir_suid.c -o t_fchdir_suid
 	sudo chown root ./t_fchdir_suid
 	sudo chmod u+s ./t_fchdir_suid	# set setuid bit
+
+t_fork_signal: t_fork_signal.c
+	$(CC) $(CCFLAGS) t_fork_signal.c -o t_fork_signal
 
 t_getcwd: t_getcwd.c
 	$(CC) $(CCFLAGS) t_getcwd.c -o t_getcwd
@@ -171,6 +175,9 @@ run:
 
 	@printf "t_fchdir_suid: "
 	@-./t_fchdir_suid
+
+	@printf "t_fork_signal: "
+	@-./t_fork_signal
 
 	@printf "t_getcwd: "
 	@-./t_getcwd
