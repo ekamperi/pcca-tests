@@ -38,6 +38,9 @@ main(void)
 	ptr->size = SHMSIZE;
 	memset(ptr->buf, 0, SHMSIZE);
 
+	/* Unmap memory. */
+	munmap(ptr, sizeof(struct sharedregion));
+
 	/* Disassociate from the shared memory object. */
 	assert(close(shmd) != -1);
 
