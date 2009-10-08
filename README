@@ -14,8 +14,9 @@ did we ran the tests in different OSes, but we spread its development across
 them.
 
 The suite has been tested and proved to work (with decreasing levels of
-confidence) under DragonFlyBSD, NetBSD, Linux and OpenBSD in both automated/
-bulk mode (via mktests.sh script) and manually as well (via make && make run).
+confidence) under DragonFlyBSD, NetBSD, Linux, OpenSolaris and OpenBSD in both
+automated/ bulk mode (via mktests.sh script) and manually as well (via make &&
+make run).
 
 The bulk runs don't quite work in Solaris 10 yet, but manually running
 individual tests works fine.
