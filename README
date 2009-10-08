@@ -34,6 +34,26 @@ a tar archive and pass it around.
 
 --------------------------------------------------------------------------------
 
+SETTING UP THE HOST a.k.a. REQUIREMENTS
+
+What you need to run the tests is basically these:
+
+* A POSIX compliant shell found in /bin/sh.
+  If you can't afford one, you can instead try with bash. For example, Solaris
+  10 /bin/sh or even /usr/xpg4/bin/sh don't play nice with us. In any case, you
+  may have to edit the various scripts (mktests.sh, tleader.sh most importantly)
+  to set the path of the shell.
+* The sudo utility. This is used by mktests.sh and various Makefiles to set the
+  suid bit to various test case binaries. The ability of these binaries to
+  escalate their privileges is part of the test.
+* A non-root user that is listed in the sudoers file. Some tests, will fail if
+  ran as a root user. Which is a bad choice anyway.
+
+If you find a portable way to set the suid bit, without using sudo, please drop
+me a note.
+
+--------------------------------------------------------------------------------
+
 RUNNING THE TESTS
 
 You may run the tests in two ways, either automatically via the mktests.sh
