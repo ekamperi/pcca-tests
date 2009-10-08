@@ -55,18 +55,20 @@ me a note.
 
 --------------------------------------------------------------------------------
 
-RUNNING THE TESTS
+RUNNING THE TESTS - AUTOMATIC MODE
 
 You may run the tests in two ways, either automatically via the mktests.sh
-script, or manually on a per directory basis.
+script or manually on a per directory basis. The are some unique feautures
+in mktests.sh that make it the superior way of running the tests:
 
-The are some unique feautures in mktests.sh that make it the preferred way to
-run the tests. First, mktests.sh can recursively run tests, e.g. run all tests
-associated with the sys/* headers. Second, it supports job control which means
-that if a test exceeds a specified amount of execution time, it gets killed and
-the rest of the tests run normally. Finally, while running the tests, log
-statistics are generated for every $header.h/ directory, which can later be
-retrieved with the getstats.sh script. Here is a usual workflow:
+* The mktests.sh script can recursively run tests, e.g. run all tests associated
+  with the sys/* headers.
+* It supports job control which means that if a test exceeds a specified amount
+  of execution time, it gets killed and the rest of the tests run normally.
+* While running the tests, log statistics are generated for every $header.h/
+  directory, which can later be retrieved with the getstats.sh script.
+
+Here is a usual workflow:
 
 pcca-tests% ./mktests.sh -c	     # Clean files from previous build/run
 pcca-tests% ./mktests.sh -s	     # Construct sandbox/ directories
@@ -86,6 +88,10 @@ pcca-tests%
 
 Collapsing individual arguments is possible. E.g.,
 pcca-tests% ./mktests.sh -csbr
+
+--------------------------------------------------------------------------------
+
+RUNNING THE TESTS - MANUAL MODE
 
 In manual mode, one cd's into the directory of interest, types 'make' to
 build the tests and 'make run' to run them.
