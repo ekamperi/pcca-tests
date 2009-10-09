@@ -7,16 +7,15 @@ environments as possible. By the term 'suite' we refer to both the shell
 scripts that are provided for its administration (mktests.sh, get*.sh, etc)
 and the _actual_ test cases.
 
-The strive for portability hasn't been entirely nobble. By being able to run the
-tests in many platforms, we verified the correctness of the tests and reduced
-the probability of relying on some non-standard feature of the host OS. Not only
-did we ran the tests in different OSes, but we spread its development across
-them.
+By being able to run the tests in many platforms, we verified the correctness
+of the tests and reduced the probability of relying on some non-standard feature
+of the host OS. Not only did we ran the tests in different OSes, but we spread
+its development across them.
 
 The suite has been tested and proved to work (with decreasing levels of
 confidence) under DragonFlyBSD, NetBSD, Linux, OpenSolaris and OpenBSD in both
-automated/ bulk mode (via mktests.sh script) and manually as well (via make &&
-make run).
+automated/bulk mode (via mktests.sh script) and in manual mode as well (via make
+&& make run).
 
 The bulk runs don't quite work in Solaris 10 yet, but manually running
 individual tests works fine.
@@ -45,10 +44,10 @@ What you need to run the tests is basically these:
   may have to edit the various scripts (mktests.sh, tleader.sh most importantly)
   to set the path of the shell.
 * The sudo utility. This is used by mktests.sh and various Makefiles to set the
-  suid bit to various test case binaries. The ability of these binaries to
+  suid bit to some test case binaries. The ability of these binaries to
   escalate their privileges is part of the test.
 * A non-root user that is listed in the sudoers file. Some tests, will fail if
-  ran as a root user. Which is a bad choice anyway.
+  ran by root user. Which is a bad call anyway.
 
 If you find a portable way to set the suid bit, without using sudo, please drop
 me a note.
@@ -146,7 +145,7 @@ pcca-tests% ./getstats.sh	# If no argument is given, "." is assumed
         Failed :       31
 
 It is also possible to explicitly set the top level directory. Suppose we need
-to know about the complex arithmetic support of the host environment:
+to know the complex arithmetic support of the host environment:
 
 pcca-tests% ./getstats.sh ./complex.h
 >>> Headers
@@ -166,10 +165,9 @@ pcca-tests% ./getstats.sh ./complex.h
         Failed :        0
 pcca-tests%
 
-There is no magic involved in here (or nowhere else). The whole test repository
-layout is dead simple. In each $header.h/ directory you can find two files:
-log{passed,failed} containing the names of the test binaries that passed or
-failed respectively.
+There is no magic involved in here (or nowhere else). In each $header.h/
+directory you can find two files: log{passed, failed} containing the names of
+the test binaries that passed or failed respectively.
 
 --------------------------------------------------------------------------------
 
@@ -316,12 +314,12 @@ find: ./unistd.h/sandbox/dir000: Permission denied
 pcca-tests%
 
 These are harmless but annoying nonetheless. You can try the following:
-1. Redirect stderr to null (e.g., find . -name foo 2>/dev/null).
-2. Delete the sandboxes with mktests.sh -c and then call find.
-3. Use one of the specialized scripts in the repository (getheaders.sh,
-   getheaders.sh, getspecs.sh, etc). These not only silence the error messages,
-   but also skip the .git/ directory, which may save you a little bit of
-   execution time in low spec machines.
+* Redirect stderr to null (e.g., find . -name foo 2>/dev/null).
+* Delete the sandboxes with mktests.sh -c and then call find.
+* Use one of the specialized scripts in the repository (getheaders.sh,
+  getheaders.sh, getspecs.sh, etc). These not only silence the error messages,
+  but also skip the .git/ directory, which may save you a little bit of
+  execution time in low spec machines.
 
 
 * Log files are generated ONLY when tests are executed via mktests.sh and NOT
