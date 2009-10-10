@@ -3,22 +3,16 @@
 SUPPORTED PLATFORMS
 
 A lot of care has been taken to ensure that the test suite runs in as many
-environments as possible. By the term 'suite' we refer to both the shell
-scripts that are provided for its administration (mktests.sh, get*.sh, etc)
-and the _actual_ test cases.
+environments as possible.
 
 By being able to run the tests in many platforms, we verified the correctness
-of the tests and reduced the probability of relying on some non-standard feature
-of the host OS. Not only did we ran the tests in different OSes, but we spread
-its development across them.
+of them and lowered the probability of relying on some non-standard feature
+of the host operating system. Not only did we ran the tests in different OSes,
+but we spread its development across them.
 
-The suite has been tested and proved to work (with decreasing levels of
-confidence) under DragonFlyBSD, NetBSD, Linux, OpenSolaris and OpenBSD in both
-automated/bulk mode (via mktests.sh script) and in manual mode as well (via make
-&& make run).
-
-The bulk runs don't quite work in Solaris 10 yet, but manually running
-individual tests works fine.
+The suite has been deployed and proved to work (with decreasing levels of
+confidence) under DragonFlyBSD, NetBSD, Linux, OpenSolaris and OpenBSD both in
+automated/bulk and manual mode.
 
 --------------------------------------------------------------------------------
 
@@ -38,34 +32,41 @@ SETTING UP THE HOST a.k.a. REQUIREMENTS
 
 What you need to run the tests is basically these:
 
+* GNU C Compiler, either 3.x or 4.x.
+  Limited tests (namely regarding complex arithmetic support) were conducted
+  succesfully with clang/llvm.
+* A decent make(1) utility.
 * A POSIX compliant shell found in /bin/sh.
   If you can't afford one, you can instead try with bash. For example, Solaris
   10 /bin/sh or even /usr/xpg4/bin/sh don't play nice with us. In any case, you
   may have to edit the various scripts (mktests.sh, tleader.sh most importantly)
-  to set the path of the shell.
-* The sudo utility. This is used by mktests.sh and various Makefiles to set the
-  suid bit to some test case binaries. The ability of these binaries to
-  escalate their privileges is part of the test.
-* A non-root user that is listed in the sudoers file. Some tests, will fail if
-  ran by root user. Which is a bad call anyway.
+  to set the path of the shell binary.
+* The sudo(1) utility.
+  This is used by mktests.sh script and various Makefiles to set the suid bit to
+  certain test case binaries. The ability of these binaries to escalate their
+  privileges is paramount to the test logic.
+* A non-root user.
+  The user must be listed in the sudoers file. Some tests, will fail if ran by
+  root user. Which is a bad call anyway.
 
 If you find a portable way to set the suid bit, without using sudo, please drop
 me a note.
 
 --------------------------------------------------------------------------------
 
-RUNNING THE TESTS - AUTOMATIC MODE
+RUNNING THE TESTS - AUTOMATED MODE
 
 You may run the tests in two ways, either automatically via the mktests.sh
-script or manually on a per directory basis. The are some unique feautures
-in mktests.sh that make it the superior way of running the tests:
+script or manually on a per $header.h/ basis. There are some unique aspects
+of mktests.sh, rendering it the superior way for running the tests:
 
-* The mktests.sh script can recursively run tests, e.g. run all tests associated
-  with the sys/* headers.
-* It supports job control which means that if a test exceeds a specified amount
-  of execution time, it gets killed and the rest of the tests run normally.
-* While running the tests, log statistics are generated for every $header.h/
-  directory, which can later be retrieved with the getstats.sh script.
+* It can recursively run tests, e.g. run all tests associated with the sys/*
+  headers.
+* It supports job control,meaning that if a test exceeds a specified amount
+  of execution time, it gets killed and the rest of the tests continue to run
+  normally.
+* Log statistics are generated for every $header.h/ directory, which can later
+  be retrieved with the getstats.sh script.
 
 Here is a usual workflow:
 
@@ -73,7 +74,7 @@ pcca-tests% ./mktests.sh -c	     # Clean files from previous build/run
 pcca-tests% ./mktests.sh -s	     # Construct sandbox/ directories
 ...	      		   	     # Messages from the construction
 pcca-tests% ./mktests.sh -b	     # Build test cases
-...	      		   	     # Messages from gcc compilation
+...	      		   	     # Messages from compilation
 pcca-tests% ./mktests.sh -r	     # Run tests (if none given, . is assumed
                                      # as the top level directory to start from)
 pcca-tests% ./mktests.sh -r
@@ -97,7 +98,7 @@ build the tests and 'make run' to run them.
 
 pcca-tests% cd stdio.h
 pcca-tests/stdio.h% make
-...       # Messages from gcc compilation
+...				# Messages from gcc compilation
 pcca-tests/stdio.h% make run
 t_clearerr: passed
 t_ctermid: passed
@@ -107,7 +108,7 @@ pcca-tests/stdio.h%
 
 If a test fails to build (because the host OS misses a function for example),
 make(1) will stop building further targets. If this is the case, please pass
--k option to make:
+-k option:
 
 pcca-tests% cd stdio.h
 pcca-tests/stdio.h% make -k
@@ -125,7 +126,7 @@ GETTING STATISTICS
 
 After a bulk run has been completed (or even interrupted, since logs are
 generated incrementally) the log statistics can be retrieved via the getstats.sh
-script.
+script:
 
 pcca-tests% ./getstats.sh	# If no argument is given, "." is assumed
 >>> Headers
@@ -215,9 +216,9 @@ ADDING A NEW TEST CASE
 The addition of a new test case is very straightforward. Assuming you have the
 actual source code of the test case as a C file, you need to do the following:
 
-1. Copy the file over to the proper $header/ directory.
-2. Add a target in the Makefile.
-3. Add the name of the executable in the `tfile'.
+* Copy the file over to the proper $header/ directory.
+* Add a target in the Makefile.
+* Add the name of the executable in the `tfile'.
 
 Both the Makefile and tfile are located in the $header/ directory. You can use
 the existing rules and entries as templates.
