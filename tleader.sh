@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Exit immediately if any untested command fails in non-interactive mode.
 set -e
