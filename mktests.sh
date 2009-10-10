@@ -104,9 +104,9 @@ buildsandbox()
 
 buildsandboxes()
 {
-    # We skip .git/objects/* subdirectories.
-    for dir in $(find "$1" -name .git -prune -o -type d -name "*.h" \
-	2>/dev/null | sort)
+    # We skip .git/
+    for dir in $(find "$1" -name .git -prune -o \( -type d -name "*.h" \
+	-print \) 2>/dev/null | sort)
     do
 	if [ -f "$dir/need-sandbox" ]; then
 	    buildsandbox "$dir"
