@@ -166,9 +166,28 @@ pcca-tests% ./getstats.sh ./complex.h
         Failed :        0
 pcca-tests%
 
-There is no magic involved in here (or nowhere else). In each $header.h/
-directory you can find two files: log{passed, failed} containing the names of
-the test binaries that passed or failed respectively.
+In each $header.h/ directory you can find two files: log{passed, failed}
+containing the names of the test binaries that passed or failed respectively.
+
+pcca-tests% cat unistd.h/log.failed
+./unistd.h/t_access2
+./unistd.h/t_fchdir_suid
+...
+
+For your convenience the `getfailed.sh' script is provided that can print the
+failed test cases on a per $header.h basis:
+
+pcca-tests% ./getfailed.sh unistd.h
+./unistd.h/t_access2
+./unistd.h/t_fchdir_suid
+...
+pcca-tests%
+
+or, more importantly, for the whole repository:
+
+pcca-tests% ./getfailed.sh
+./aio.h/t_aio
+...
 
 --------------------------------------------------------------------------------
 
