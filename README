@@ -219,6 +219,8 @@ actual source code of the test case as a C file, you need to do the following:
 * Copy the file over to the proper $header/ directory.
 * Add a target in the Makefile.
 * Add the name of the executable in the `tfile'.
+* git add t_foo.c Makefile tfile
+* git commit -m "$header.h: Add new t_foo test case."
 
 Both the Makefile and tfile are located in the $header/ directory. You can use
 the existing rules and entries as templates.
