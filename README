@@ -11,8 +11,8 @@ system. Not only did we ran the tests in different OSes, but we spread its
 development across them as well.
 
 The suite has been deployed and proved to work (with decreasing levels of
-confidence) under DragonFlyBSD, NetBSD, Linux, OpenSolaris and OpenBSD both in
-automated/bulk and manual mode.
+confidence) under DragonFlyBSD, NetBSD, Linux, OpenSolaris, FreeBSD and OpenBSD
+both in automated/bulk and manual mode.
 
 --------------------------------------------------------------------------------
 
