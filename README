@@ -205,45 +205,6 @@ pcca-tests% ./getfailed.sh
 
 --------------------------------------------------------------------------------
 
-EXPORTING TEST REPOSITORY TO A GIT-LESS HOST
-
-You may want to run the test suite in a host where git is unavailable. In this
-case you need the git-archive command:
-
-# Exporting the whole repository
-pcca-tests% git archive --format=tar HEAD | gzip > "tests.tar.gz"
-
-# Exporting only a part of it
-pcca-tests% git archive --format=tar HEAD ./math.h | gzip > "tests.tar.gz"
-
-# Verifying tar's contents
-pcca-tests% gunzip < tests.tar.gz | tar tf -
-math.h/
-math.h/Makefile
-math.h/NOTES
-math.h/functions.list
-math.h/math.h.spec
-...
-pcca-tests%
-
-# Getting the commit ID
-pcca-tests% git get-tar-commit-id < tests.tar
-1b56e96931aa1c58e138b57b8066732a7950f043
-pcca-tests%
-
-If you also need to upload the result to some ssh shell account, you can use
-the export.sh script which is found in the root directory of the repository:
-
-pcca-tests% ./export.sh
->>> Creating git archive with name pcca-tests-12-08-09.tar.gz
-DONE
->>> Uploading git archive to beket@leaf.dragonflybsd.org:~/public_html
-pcca-tests-12-08-09.tar.gz                        100%  108KB 108.1KB/s   00:00
-DONE
-pcca-tests%
-
---------------------------------------------------------------------------------
-
 ADDING A NEW TEST CASE
 
 The addition of a new test case is very straightforward. Assuming you have the
@@ -379,6 +340,45 @@ pcca-tests% ./getstats.sh ./stdio.h
 >>> Results from last run
         Passed :        7
         Failed :        0
+pcca-tests%
+
+--------------------------------------------------------------------------------
+
+EXPORTING TEST REPOSITORY TO A GIT-LESS HOST
+
+You may want to run the test suite in a host where git is unavailable. In this
+case you need the git-archive command:
+
+# Exporting the whole repository
+pcca-tests% git archive --format=tar HEAD | gzip > "tests.tar.gz"
+
+# Exporting only a part of it
+pcca-tests% git archive --format=tar HEAD ./math.h | gzip > "tests.tar.gz"
+
+# Verifying tar's contents
+pcca-tests% gunzip < tests.tar.gz | tar tf -
+math.h/
+math.h/Makefile
+math.h/NOTES
+math.h/functions.list
+math.h/math.h.spec
+...
+pcca-tests%
+
+# Getting the commit ID
+pcca-tests% git get-tar-commit-id < tests.tar
+1b56e96931aa1c58e138b57b8066732a7950f043
+pcca-tests%
+
+If you also need to upload the result to some ssh shell account, you can use
+the export.sh script which is found in the root directory of the repository:
+
+pcca-tests% ./export.sh
+>>> Creating git archive with name pcca-tests-12-08-09.tar.gz
+DONE
+>>> Uploading git archive to beket@leaf.dragonflybsd.org:~/public_html
+pcca-tests-12-08-09.tar.gz                        100%  108KB 108.1KB/s   00:00
+DONE
 pcca-tests%
 
 --------------------------------------------------------------------------------
