@@ -5,10 +5,10 @@ SUPPORTED PLATFORMS
 A lot of care has been taken to ensure that the test suite runs in as many
 environments as possible.
 
-By being able to run the tests in many platforms, we verified the correctness
-of them and lowered the probability of relying on some non-standard feature
-of the host operating system. Not only did we ran the tests in different OSes,
-but we spread its development across them.
+This way we verified the correctness of the test cases and lowered the
+probability of relying on some non-standard feature of the host operating
+system. Not only did we ran the tests in different OSes, but we spread its
+development across them as well.
 
 The suite has been deployed and proved to work (with decreasing levels of
 confidence) under DragonFlyBSD, NetBSD, Linux, OpenSolaris and OpenBSD both in
@@ -46,8 +46,8 @@ What you need to run the tests is basically these:
   certain test case binaries. The ability of these binaries to escalate their
   privileges is paramount to the test logic.
 * A non-root user.
-  The user must be listed in the sudoers file. Some tests, will fail if ran by
-  root user. Which is a bad call anyway.
+  The user must be listed in the /etc/sudoers file. Some tests, will fail if ran
+  by root user. Which is a bad call anyway.
 
 If you find a portable way to set the suid bit, without using sudo, please drop
 me a note.
@@ -166,8 +166,22 @@ pcca-tests% ./getstats.sh ./complex.h
         Failed :        0
 pcca-tests%
 
-In each $header.h/ directory you can find two files: log{passed, failed}
-containing the names of the test binaries that passed or failed respectively.
+--------------------------------------------------------------------------------
+
+GETTING STATISTICS - WHICH TESTS FAILED ?
+
+A failure may originate from:
+
+* An unmet assertion during the test's execution.
+* Test's failure to compile, due to host OS missing some critical stuff.
+* Test having exceeded the time slice that was allowed to run.
+
+The only way to differentiate between the above is to look at the output during
+test case execution.
+
+In each $header.h/ directory, for which statistics are available, there is a
+`log.passed' and a `log.failed' file. These files contain the pathnames of the
+test binaries that succeeded or failed respectively. E.g.,
 
 pcca-tests% cat unistd.h/log.failed
 ./unistd.h/t_access2
