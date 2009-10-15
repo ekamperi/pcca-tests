@@ -126,7 +126,6 @@ hiprio_thread(void *arg)
 	int policy;
 
 	assert(pthread_getschedparam(pthread_self(), &policy, &param) == 0);
-	printf("%d\n", policy);
 	assert(policy == SCHED_RR);
 	assert(param.sched_priority == HIPRIO);
 
@@ -162,7 +161,6 @@ lowprio_thread(void *arg)
 	int policy;
 
 	assert(pthread_getschedparam(pthread_self(), &policy, &param) == 0);
-	printf("%d\n", policy);
 	assert(policy == SCHED_RR);
 	assert(param.sched_priority == LOWPRIO);
 
