@@ -53,6 +53,26 @@ main(void)
 	assert(pthread_mutex_init(&mtx, NULL) == 0);
 	assert(pthread_cond_init(&cond, NULL) == 0);
 
+	/* Create a low priority thread. */
+	pthread_attr_t lowprio_attr;
+	pthread_t lowprio_tid;
+
+	assert(pthread_attr_init(&lowprio_attr) == 0);
+	assert(pthread_attr_setschedpolicy(&lowprio_attr, SCHED_RR) == 0);
+	param.sched_priority = LOWPRIO;
+	assert(pthread_attr_setschedparam(&lowprio_attr, &param) == 0);
+	assert(pthread_create(&lowprio_tid, &lowprio_attr, lowprio_thread, NULL)
+	       == 0);
+
+	/*
+	 * Sleep a bit so that the low priority thread manages to acquire the
+	 * mutex and block on the condition variable.
+	 * We want the low thread to acquire first the lock and make sure that
+	 * the lock order isn't more significant than the scheduling policy/
+	 * priority.
+	 */
+	sleep(1);
+
 	/* Create a high priority thread. */
 	pthread_attr_t hiprio_attr;
 	pthread_t hiprio_tid;
@@ -64,20 +84,9 @@ main(void)
 	assert(pthread_create(&hiprio_tid, &hiprio_attr, hiprio_thread, NULL)
 	    == 0);
 
-	/* Create a low priority thread. */
-	pthread_attr_t lowprio_attr;
-	pthread_t lowprio_tid;
-
-	assert(pthread_attr_init(&lowprio_attr) == 0);
-	assert(pthread_attr_setschedpolicy(&lowprio_attr, SCHED_RR) == 0);
-	param.sched_priority = LOWPRIO;
-	assert(pthread_attr_setschedparam(&lowprio_attr, &param) == 0);
-	assert(pthread_create(&lowprio_tid, &lowprio_attr, lowprio_thread, NULL)
-	    == 0);
-
 	/*
-	 * Sleep a bit so that both high and low priority thread manage to
-	 * block on the condition variable.
+	 * Sleep a bit so that the high priority thread managed to acquire the
+	 * mutex and block on the condition variable.
 	 */
 	sleep(1);
 
@@ -157,11 +166,11 @@ lowprio_thread(void *arg)
 	assert(policy == SCHED_RR);
 	assert(param.sched_priority == LOWPRIO);
 
-        /* Acquire the mutex. */
-        assert(pthread_mutex_lock(&mtx) == 0);
+	/* Acquire the mutex. */
+	assert(pthread_mutex_lock(&mtx) == 0);
 
-        /* Huhu, this will block us! */
-        assert(pthread_cond_wait(&cond, &mtx) == 0);
+	/* Huhu, this will block us! */
+	assert(pthread_cond_wait(&cond, &mtx) == 0);
 
 	low_unblocked = 1;
 
