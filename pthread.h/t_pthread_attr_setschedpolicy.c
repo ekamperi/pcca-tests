@@ -30,6 +30,7 @@
 #include <sched.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #define	HIPRIO	1
 #define	LOWPRIO	0
