@@ -68,9 +68,10 @@ main(void)
 	/*
 	 * Sleep a bit so that the low priority thread manages to acquire the
 	 * mutex and block on the condition variable.
-	 * We want the low thread to acquire first the lock and make sure that
-	 * the lock order isn't more significant than the scheduling policy/
-	 * priority.
+	 *
+	 * We want the low thread to acquire _first_ the lock, in order to make
+	 * sure that the lock order isn't more significant than the scheduling
+	 * policy/priority.
 	 */
 	sleep(1);
 
@@ -92,9 +93,10 @@ main(void)
 	sleep(1);
 
 	/*
-	 * The pthread_cond_broadcast() function will unblock all threads currently
-	 * blocked on the specified condition variable. We want to make sure that
-	 * the high priority thread takes precedence over the low one.
+	 * The pthread_cond_broadcast() function will unblock _all_ threads
+	 * currently blocked on the specified condition variable. We want to
+	 * make sure that the high priority thread takes precedence over the low
+	 * one.
 	 */
 	assert(pthread_cond_broadcast(&cond) == 0);
 
@@ -106,6 +108,7 @@ main(void)
 	assert(pthread_mutex_destroy(&mtx) == 0);
 	assert(pthread_cond_destroy(&cond) == 0);
 
+	/* All the hassle was about this. */
 	assert(hi_unblocked == 1);
 
 	printf("passed\n");
@@ -168,7 +171,7 @@ lowprio_thread(void *arg)
 	/* Acquire the mutex. */
 	assert(pthread_mutex_lock(&mtx) == 0);
 
-	/* Huhu, this will block us! */
+	/* This will block us! */
 	assert(pthread_cond_wait(&cond, &mtx) == 0);
 
 	low_unblocked = 1;
