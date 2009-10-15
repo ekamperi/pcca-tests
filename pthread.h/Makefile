@@ -5,6 +5,7 @@ all:	t_pthread_attr_getdetachstate		\
 	t_pthread_attr_getscope			\
 	t_pthread_attr_getstack			\
 	t_pthread_attr_getstacksize		\
+	t_pthread_attr_setschedpolicy		\
 	t_pthread_barrier_init			\
 	t_pthread_barrier_wait			\
 	t_pthread_barrier_wait_nested		\
@@ -64,6 +65,9 @@ t_pthread_attr_getstack:  t_pthread_attr_getstack.c
 
 t_pthread_attr_getstacksize: t_pthread_attr_getstacksize.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_getstacksize.c -o t_pthread_attr_getstacksize
+
+t_pthread_attr_setschedpolicy: t_pthread_attr_setschedpolicy.c
+	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_setschedpolicy.c -o t_pthread_attr_setschedpolicy
 
 t_pthread_barrier_init: t_pthread_barrier_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_barrier_init.c -o t_pthread_barrier_init
@@ -176,6 +180,9 @@ run:
 
 	@printf "t_pthread_attr_getstacksize: "
 	@-./t_pthread_attr_getstacksize
+
+	@printf "t_pthread_attr_setschedpolicy: "
+	@-./t_pthread_attr_setschedpolicy
 
 	@printf "t_pthread_barrier_init: "
 	@-./t_pthread_barrier_init

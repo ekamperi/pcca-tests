@@ -5,6 +5,7 @@ t_pthread_attr_getschedpolicy
 t_pthread_attr_getscope
 t_pthread_attr_getstack
 t_pthread_attr_getstacksize
+t_pthread_attr_setschedpolicy
 t_pthread_barrier_init
 t_pthread_barrier_wait
 t_pthread_barrierattr_getpshared
