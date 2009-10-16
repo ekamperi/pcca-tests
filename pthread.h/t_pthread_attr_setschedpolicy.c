@@ -59,6 +59,8 @@ main(void)
 	pthread_t lowprio_tid;
 
 	assert(pthread_attr_init(&lowprio_attr) == 0);
+	assert(pthread_attr_setinheritsched(&lowprio_attr,
+		PTHREAD_EXPLICIT_SCHED) == 0);
 	assert(pthread_attr_setschedpolicy(&lowprio_attr, SCHED_RR) == 0);
 	param.sched_priority = LOWPRIO;
 	assert(pthread_attr_setschedparam(&lowprio_attr, &param) == 0);
@@ -80,6 +82,8 @@ main(void)
 	pthread_t hiprio_tid;
 
 	assert(pthread_attr_init(&hiprio_attr) == 0);
+	assert(pthread_attr_setinheritsched(&hiprio_attr,
+		PTHREAD_EXPLICIT_SCHED) == 0);
 	assert(pthread_attr_setschedpolicy(&hiprio_attr, SCHED_RR) == 0);
 	param.sched_priority = HIPRIO;
 	assert(pthread_attr_setschedparam(&hiprio_attr, &param) == 0);
