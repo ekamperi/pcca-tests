@@ -32,12 +32,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define	HIPRIO	1
-#define	LOWPRIO	0
-
 pthread_mutex_t mtx;
 pthread_cond_t cond;
 
+int hiprio = 0;
+int lowprio = 0;
 int hi_unblocked  = 0;	/* Whether the high priority thread was unblocked */
 int low_unblocked = 0;	/* Whether the low priority thread was unblocked */
 
@@ -54,6 +53,12 @@ main(void)
 	assert(pthread_mutex_init(&mtx, NULL) == 0);
 	assert(pthread_cond_init(&cond, NULL) == 0);
 
+	/* Get min, max priorities. */
+	lowprio = sched_get_priority_min(SCHED_RR);
+	hiprio = sched_get_priority_max(SCHED_RR);
+
+	assert(lowprio < hiprio);
+
 	/* Create a low priority thread. */
 	pthread_attr_t lowprio_attr;
 	pthread_t lowprio_tid;
@@ -62,7 +67,7 @@ main(void)
 	assert(pthread_attr_setinheritsched(&lowprio_attr,
 		PTHREAD_EXPLICIT_SCHED) == 0);
 	assert(pthread_attr_setschedpolicy(&lowprio_attr, SCHED_RR) == 0);
-	param.sched_priority = LOWPRIO;
+	param.sched_priority = lowprio;
 	assert(pthread_attr_setschedparam(&lowprio_attr, &param) == 0);
 	assert(pthread_create(&lowprio_tid, &lowprio_attr, lowprio_thread, NULL)
 	       == 0);
@@ -85,7 +90,7 @@ main(void)
 	assert(pthread_attr_setinheritsched(&hiprio_attr,
 		PTHREAD_EXPLICIT_SCHED) == 0);
 	assert(pthread_attr_setschedpolicy(&hiprio_attr, SCHED_RR) == 0);
-	param.sched_priority = HIPRIO;
+	param.sched_priority = hiprio;
 	assert(pthread_attr_setschedparam(&hiprio_attr, &param) == 0);
 	assert(pthread_create(&hiprio_tid, &hiprio_attr, hiprio_thread, NULL)
 	    == 0);
@@ -135,7 +140,7 @@ hiprio_thread(void *arg)
 
 	assert(pthread_getschedparam(pthread_self(), &policy, &param) == 0);
 	assert(policy == SCHED_RR);
-	assert(param.sched_priority == HIPRIO);
+	assert(param.sched_priority == hiprio);
 
 	/* Acquire the mutex. */
 	assert(pthread_mutex_lock(&mtx) == 0);
@@ -170,7 +175,7 @@ lowprio_thread(void *arg)
 
 	assert(pthread_getschedparam(pthread_self(), &policy, &param) == 0);
 	assert(policy == SCHED_RR);
-	assert(param.sched_priority == LOWPRIO);
+	assert(param.sched_priority == lowprio);
 
 	/* Acquire the mutex. */
 	assert(pthread_mutex_lock(&mtx) == 0);
