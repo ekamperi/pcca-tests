@@ -81,6 +81,14 @@ main(void)
 	 * We want the low thread to acquire _first_ the lock, in order to make
 	 * sure that the lock order isn't more significant than the scheduling
 	 * policy/priority.
+	 *
+	 * According to POSIX, the thread that are unblocked shall contend for
+	 * the mutex according to the scheduling policy (if applicable), and as
+	 * if each had called pthread_mutex_lock().
+	 *
+	 * XXX: We still need to investigate if this test returns reliable
+	 * results. Concerns have been raised whether the threads should be
+	 * running bound in the same CPU.
 	 */
 	sleep(1);
 
