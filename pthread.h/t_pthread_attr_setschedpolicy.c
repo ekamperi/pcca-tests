@@ -57,6 +57,8 @@ main(void)
 	lowprio = sched_get_priority_min(SCHED_RR);
 	hiprio = sched_get_priority_max(SCHED_RR);
 
+	assert(lowprio != -1);
+	assert(hiprio != -1);
 	assert(lowprio < hiprio);
 
 	/* Create a low priority thread. */
