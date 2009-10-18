@@ -68,6 +68,8 @@ t_pthread_attr_getstacksize: t_pthread_attr_getstacksize.c
 
 t_pthread_attr_setschedpolicy: t_pthread_attr_setschedpolicy.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_attr_setschedpolicy.c -o t_pthread_attr_setschedpolicy
+	sudo chown root ./t_pthread_attr_setschedpolicy
+	sudo chmod u+s ./t_pthread_attr_setschedpolicy	# set setuid bit
 
 t_pthread_barrier_init: t_pthread_barrier_init.c
 	$(CC) $(CCFLAGS) $(LIB) t_pthread_barrier_init.c -o t_pthread_barrier_init
