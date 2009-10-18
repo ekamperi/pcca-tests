@@ -49,6 +49,18 @@ main(void)
 {
 	struct sched_param param;
 
+        /*
+         * Make sure that the setuid bit is set, the owner of the binary is root
+         * and that we were able to escalate our uid. This is a prerequisite.
+         */
+        if (geteuid() != 0 ) {
+		fprintf(stderr, "WARNING: We were unable to escalate our uid!\n"
+		    "WARNING: Make sure that the binary has the setuid bit "
+			"set, the owner is root and fs isn't mounted with some "
+			"sort of nosuid option set.\n");
+		assert(geteuid() == 0);
+        }
+
 	/* Initialize mutex lock and condition variable. */
 	assert(pthread_mutex_init(&mtx, NULL) == 0);
 	assert(pthread_cond_init(&cond, NULL) == 0);
