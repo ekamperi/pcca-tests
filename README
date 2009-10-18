@@ -48,6 +48,11 @@ What you need to run the tests is basically these:
 * A non-root user.
   The user must be listed in the /etc/sudoers file. Some tests, will fail if ran
   by root user. Which is a bad call anyway.
+* Please read any README.$os files that refer to your host operating system.
+  E.g., mqueue.h/README.freebsd, if you are running the test suite under
+  FreeBSD, which describes how to enable POSIX message queues support. For your
+  convenience you can retrieve such files (if any) with the help of
+  `getreadme.sh' script.
 
 If you find a portable way to set the suid bit, without using sudo, please drop
 me a note.
