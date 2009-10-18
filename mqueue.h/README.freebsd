@@ -2,4 +2,8 @@ To enable POSIX message queues support, you need to load the appropriate kernel
 module, by running the following command:
 # kldload mqueuefs
 
+or link into the kernel, by adding the following option in your kernel
+configuration file:
+options P1003_1B_MQUEUE
+
 For more information, please read the mqueuefs(5) man page.
