@@ -49,17 +49,17 @@ main(void)
 {
 	struct sched_param param;
 
-        /*
-         * Make sure that the setuid bit is set, the owner of the binary is root
-         * and that we were able to escalate our uid. This is a prerequisite.
-         */
-        if (geteuid() != 0 ) {
+	/*
+	 * Make sure that the setuid bit is set, the owner of the binary is root
+	 * and that we were able to escalate our uid. This is a prerequisite.
+	 */
+	if (geteuid() != 0 ) {
 		fprintf(stderr, "WARNING: We were unable to escalate our uid!\n"
 		    "WARNING: Make sure that the binary has the setuid bit "
 			"set, the owner is root and fs isn't mounted with some "
 			"sort of nosuid option set.\n");
 		assert(geteuid() == 0);
-        }
+	}
 
 	/* Initialize mutex lock and condition variable. */
 	assert(pthread_mutex_init(&mtx, NULL) == 0);
@@ -93,14 +93,6 @@ main(void)
 	 * We want the low thread to acquire _first_ the lock, in order to make
 	 * sure that the lock order isn't more significant than the scheduling
 	 * policy/priority.
-	 *
-	 * According to POSIX, the thread that are unblocked shall contend for
-	 * the mutex according to the scheduling policy (if applicable), and as
-	 * if each had called pthread_mutex_lock().
-	 *
-	 * XXX: We still need to investigate if this test returns reliable
-	 * results. Concerns have been raised whether the threads should be
-	 * running bound in the same CPU.
 	 */
 	sleep(1);
 
@@ -118,16 +110,22 @@ main(void)
 	    == 0);
 
 	/*
-	 * Sleep a bit so that the high priority thread managed to acquire the
+	 * Sleep a bit so that the high priority thread manages to acquire the
 	 * mutex and block on the condition variable.
 	 */
 	sleep(1);
 
 	/*
-	 * The pthread_cond_broadcast() function will unblock _all_ threads
-	 * currently blocked on the specified condition variable. We want to
-	 * make sure that the high priority thread takes precedence over the low
-	 * one.
+	 * According to POSIX, all the threads that are unblocked by
+	 * pthread_cond_broadcast() shall contend for the mutex according to the
+	 * scheduling policy (if applicable), and as if each had called
+	 * pthread_mutex_lock(). Here, we want to investigate whether the high
+	 * priority thread takes precedence over the lower one.
+	 *
+	 * XXX: Concerns have been raised whether this test returns meaningful
+	 * results. Some people suggested binding the two threads in the same
+	 * CPU and using a more probalistic approach, such as making the threads
+	 * busy-loop and see how far they have ran based on their priorities.
 	 */
 	assert(pthread_cond_broadcast(&cond) == 0);
 
