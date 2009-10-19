@@ -60,7 +60,7 @@ main(void)
 	assert(getegid() == egid);
 
 	/*
-	 * Invalid value of real and effective group ID.
+	 * Invalid (os so we hope) value of real and effective group ID.
 	 *
 	 * But since we are not privileged, we may fail with EPERM before the
 	 * values reach the validation code! POSIX doesn't say which one takes
