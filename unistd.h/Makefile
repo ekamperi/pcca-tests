@@ -29,6 +29,7 @@ all:	t_access	\
 	t_pipe_fork	\
 	t_pipe_thr	\
 	t_readlink	\
+	t_setregid	\
 	t_ttyname	\
 	t_tcsetpgrp	\
 	t_unistd
@@ -135,6 +136,9 @@ t_pipe_thr: t_pipe_thr.c
 
 t_readlink: t_readlink.c
 	$(CC) $(CCFLAGS) t_readlink.c -o t_readlink
+
+t_setregid: t_setregid.c
+	$(CC) $(CCFLAGS) t_setregid.c -o t_setregid
 
 tcsetpgrp: t_tcsetpgrp.c
 	$(CC) $(CCFLAGS) t_tcsetpgrp.c -o t_tcsetpgrp
@@ -247,6 +251,9 @@ run:
 
 	@printf "t_tcsetpgrp: "
 	@-./t_tcsetpgrp
+
+	@printf "t_setregid: "
+	@-./t_setregid
 
 	@printf "t_ttyname: "
 	@-./t_ttyname
