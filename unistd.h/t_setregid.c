@@ -34,6 +34,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/* Function prototypes. */
+static void chk_postfail_ids(gid_t, gid_t);
+
 int
 main(void)
 {
@@ -51,14 +54,14 @@ main(void)
 	 * being privileged enough. We hope that increasing the old values
 	 * by 1, will result in a valid group ID.
 	 */
-	assert(setregid(rgid + 1, egid + 1) == -1 && errno == EPERM);
+	assert(setregid(rgid + 1, egid) == -1 && errno == EPERM);
+	chk_postfail_ids(rgid, egid);
 
-	/*
-	 * After a failed call to setregid() neither of the group IDs are
-	 * changed.
-	 */
-	assert(getgid() == rgid);
-	assert(getegid() == egid);
+	assert(setregid(rgid, egid + 1) == -1 && errno == EPERM);
+	chk_postfail_ids(rgid, egid);
+
+        assert(setregid(rgid + 1, egid + 1) == -1 && errno == EPERM);
+        chk_postfail_ids(rgid, egid);
 
 	/*
 	 * Invalid (or so we hope) value of real and effective group ID.
@@ -67,17 +70,29 @@ main(void)
 	 * values reach the validation code! POSIX doesn't say which one takes
 	 * precedence over the other.
 	 */
+        assert(setregid(-INT_MAX, -1) == -1 &&
+	       (errno == EINVAL || errno == EPERM));
+        chk_postfail_ids(rgid, egid);
+
+        assert(setregid(-1, -INT_MAX) == -1 &&
+	       (errno == EINVAL || errno == EPERM));
+        chk_postfail_ids(rgid, egid);
+
 	assert(setregid(-INT_MAX, -INT_MAX) == -1 &&
 	    (errno == EINVAL || errno == EPERM));
-
-	/*
-	 * After a failed call to setregid() neither of the group IDs are
-	 * changed.
-	 */
-	assert(getgid() == rgid);
-	assert(getegid() == egid);
+	chk_postfail_ids(rgid, egid);
 
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
+}
+
+/*
+ * After a failed call to setregid() neither of the group IDs are
+ * changed.
+ */
+static void chk_postfail_ids(gid_t old_rgid, gid_t old_egid)
+{
+	assert(getgid() == old_rgid);
+	assert(getegid() == old_egid);
 }
