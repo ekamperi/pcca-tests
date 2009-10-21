@@ -14,8 +14,9 @@ main(void)
 	 */
 	if (getegid() != 0 ) {
 		fprintf(stderr, "WARNING: We were unable to escalate our gid!\n"
-		    "WARNING: Make sure the fs isn't mounted with "
-		    "some sort of nosuid option set.\n");
+                    "WARNING: Make sure that the binary has the setgid bit "
+		    "set, the group is root and fs isn't mounted with some "
+		    "sort of nosuid option set.\n");
 		assert(getegid() == 0);
 	}
 
