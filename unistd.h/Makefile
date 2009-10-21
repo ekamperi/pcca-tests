@@ -30,7 +30,7 @@ all:	t_access	\
 	t_pipe_thr	\
 	t_readlink	\
 	t_setregid	\
-	t_setregid_priv	\
+	t_setregid_sgid	\
 	t_ttyname	\
 	t_tcsetpgrp	\
 	t_unistd
@@ -141,10 +141,10 @@ t_readlink: t_readlink.c
 t_setregid: t_setregid.c
 	$(CC) $(CCFLAGS) t_setregid.c -o t_setregid
 
-t_setregid_priv: t_setregid_priv.c
-	$(CC) $(CCLFAGA) t_setregid_priv.c -o t_setregid_priv
-	sudo chgrp root ./t_setregid_priv
-	sudo chmod g+s ./t_setregid_priv
+t_setregid_sgid: t_setregid_sgid.c
+	$(CC) $(CCLFAGA) t_setregid_sgid.c -o t_setregid_sgid
+	sudo chgrp root ./t_setregid_sgid
+	sudo chmod g+s ./t_setregid_sgid
 
 tcsetpgrp: t_tcsetpgrp.c
 	$(CC) $(CCFLAGS) t_tcsetpgrp.c -o t_tcsetpgrp
@@ -261,8 +261,8 @@ run:
 	@printf "t_setregid: "
 	@-./t_setregid
 
-	@printf "t_setregid_priv: "
-	@-./t_setregid_priv
+	@printf "t_setregid_sgid: "
+	@-./t_setregid_sgid
 
 	@printf "t_ttyname: "
 	@-./t_ttyname
