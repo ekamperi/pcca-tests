@@ -142,7 +142,7 @@ t_setregid: t_setregid.c
 	$(CC) $(CCFLAGS) t_setregid.c -o t_setregid
 
 t_setregid_sgid: t_setregid_sgid.c
-	$(CC) $(CCLFAGA) t_setregid_sgid.c -o t_setregid_sgid
+	$(CC99) $(CCLFAGA) t_setregid_sgid.c -o t_setregid_sgid
 	sudo chgrp root ./t_setregid_sgid
 	sudo chmod g+s ./t_setregid_sgid
 
