@@ -34,9 +34,6 @@
 #include <string.h>	/* memset() */
 
 #define	MQNAME	"/t_mq_send"
-#ifndef MQ_PRIO_MAX
-#define MQ_PRIO_MAX	32768	/* XXX: linux specific */
-#endif
 
 int main(void)
 {
@@ -48,11 +45,25 @@ int main(void)
 	rv = mq_send(-1, "", 0, 0);
 	assert (rv == -1 && errno == EBADF);
 
-	/* Priority is out of range (0...MQ_PRIO_MAX-1) */
+	/*
+	 * Priority is out of range 0...{MQ_PRIO_MAX}-1
+	 * Mind that count starts from 0.
+	 */
+	long maxprio = -1;
+#ifdef _SC_MQ_PRIO_MAX
+	maxprio = sysconf(_SC_MQ_PRIO_MAX);
+#endif
+	if (maxprio == -1) {
+		/*
+		 * Use some ridiculously high value.
+		 * Linux claims that supports 32768 priorities!
+		 */
+		maxprio = 65536;
+	}
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
 	assert(md != 1);
 
-	rv = mq_send(md, "foo", sizeof("foo"), 2*MQ_PRIO_MAX);
+	rv = mq_send(md, "foo", sizeof("foo"), maxprio);
 	assert(rv == -1 && errno == EINVAL);
 
 	mq_close(md);
