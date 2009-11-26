@@ -10,6 +10,7 @@ all:	t_fmax \
 	t_tgamma	\
 	t_generr	\
 	t_log		\
+	t_nearbyint	\
 	t_rint		\
 	t_sin		\
 	t_trig_ident
@@ -58,6 +59,9 @@ t_generr: t_generr.c
 
 t_log: t_log.c
 	$(CC99) $(CCFLAGS) $(LIB) t_log.c -o t_log
+
+t_nearbyint: t_nearbyint.c
+	$(CC99) $(CCFLAGS) $(LIB) t_nearbyint.c -o t_nearbyint
 
 t_rint: t_rint.c
 	$(CC) $(CCFLAGS) $(LIB) t_rint.c -o t_rint

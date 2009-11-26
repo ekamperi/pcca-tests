@@ -10,6 +10,7 @@ t_fminl
 t_generr
 t_tgamma
 t_log
+t_nearbyint
 t_rint
 t_sin
 t_trig_ident
