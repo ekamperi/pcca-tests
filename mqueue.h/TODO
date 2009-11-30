@@ -1,2 +1,2 @@
 * Make mqueues a kernel module.
-* Implement S_TYPEISMQ() macro to test against message queue (sys/stath.h).
+
