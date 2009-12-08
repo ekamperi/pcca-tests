@@ -26,6 +26,7 @@
  */
 
 #include <assert.h>
+#include <fenv.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,6 +34,18 @@
 int
 main(void)
 {
+	int inexacttest = 0;	/* skipped */
+
+	/*
+	 * The nearbyint*() functions shouldn't raise the inexact exception.
+	 * Clear it now, so that we can check if it was raised later on.
+	 */
+#if defined(math_errhandling) && defined(MATH_ERREXCEPT) && \
+        (math_errhandling & MATH_ERREXCEPT)
+	feclearexcept(FE_INEXACT);
+	inexacttest = 1;
+#endif
+
 	/* If x is NaN, a NaN shall be returned. */
 	assert(isnan(nearbyint(nan(""))) != 0);
 
@@ -51,7 +64,13 @@ main(void)
 	assert(isinf(nearbyint(x)) && signbit(x) != 0);
 #endif
 
-	printf("passed\n");
+#if defined(math_errhandling) && defined(MATH_ERREXCEPT) && \
+        (math_errhandling & MATH_ERREXCEPT)
+	assert(fetestexcept(FE_INEXACT) == 0);
+#endif
+
+	printf("passed%s\n", inexacttest == 0 ?
+	    " (inexact exception test skipped)" : "");
 
 	return (EXIT_SUCCESS);
 }
