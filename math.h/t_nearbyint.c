@@ -49,9 +49,14 @@ main(void)
 	/* If x is NaN, a NaN shall be returned. */
 	assert(isnan(nearbyint(nan(""))) != 0);
 
-	/* If x is ±0, ±0 shall be returned. */
-	assert(signbit(nearbyint(+0)) == 0);
-	assert(signbit(nearbyint(-0)) != 0);
+	/*
+	 * If x is +/-0, +/-0 shall be returned.
+	 *
+	 * Don't use integers as they are promoted to float/double types,
+	 * but they lose their signedness in the process.
+	 */
+	assert(signbit(nearbyint(+0.0)) == 0);
+	assert(signbit(nearbyint(-0.0)) != 0);
 
 	/* If x is ±Inf, x shall be returned. */
 #ifdef INFINITY
