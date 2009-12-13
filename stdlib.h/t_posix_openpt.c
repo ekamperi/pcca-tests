@@ -83,11 +83,22 @@ int main(void)
 		int status;
 		assert(wait(&status) == pid);
 
+		/*
+		 * Determine if the child exited normally, or due to a SIGABRT
+		 * signal being delivered to it by a failed assertion.
+		 */
+		if (WIFSIGNALED(status)) {
+			assert(WTERMSIG(status) == SIGABRT);
+			return (EXIT_FAILURE);
+		}
+
 		/* Close file descriptors. */
 		assert(close(slavefd) != -1);
 		assert(close(masterfd) != -1);
 
 		printf("passed\n");
+
+		return (EXIT_SUCCESS);
 	} else {
 		/*
 		 * Write to slave file descriptor. This, normally, will make
@@ -96,5 +107,6 @@ int main(void)
 		assert(write(slavefd, MESSAGE, sizeof(MESSAGE)) != -1);
 	}
 
+	/* Only reached by child upon success. */
 	return (EXIT_SUCCESS);
 }
