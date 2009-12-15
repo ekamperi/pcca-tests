@@ -5,6 +5,7 @@ all:	t_sem_circbuf	\
 	t_sem_init_pshared \
 	t_sem_open	\
 	t_sem_thr	\
+	t_sem_timedwait	\
 	t_sem_trywait
 
 CC=gcc
@@ -36,6 +37,9 @@ t_sem_open: t_sem_open.c
 t_sem_thr: t_sem_thr.c
 	$(CC) $(CCFLAGS) $(LIB) -lpthread t_sem_thr.c -o t_sem_thr
 
+t_sem_timedwait: t_sem_timedwait.c
+	$(CC) $(CCFLAGS) $(LIB) t_sem_timedwait.c -o t_sem_timedwait
+
 t_sem_trywait: t_sem_trywait.c
 	$(CC) $(CCFLAGS) $(LIB) t_sem_trywait.c -o t_sem_trywait
 
@@ -60,6 +64,9 @@ run:
 
 	@printf "t_sem_thr: "
 	@-./t_sem_thr
+
+	@printf "t_sem_timedwait: "
+	@-./t_sem_timedwait
 
 	@printf "t_sem_open: "
 	@-./t_sem_open
