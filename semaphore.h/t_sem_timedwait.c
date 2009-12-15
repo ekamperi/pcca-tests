@@ -40,30 +40,32 @@ main(void)
 
 	assert(sem_init(&mysem,
 		   0 /* not shared between processes */,
-		   0 /* semaphore value */) == 0);
+		   1 /* semaphore value */) == 0);
 
-	/*
-	 * Setup a 1-sec timeout.
-	 * Timeouts are absolute, i.e. measured since Epoch!
-	 */
-	struct timespec now, timeout;
+	/* Invalid timeout and the lock can be acquired immediately. */
+        struct timespec now, timeout;
 
+	timeout.tv_sec  = 0;
+	timeout.tv_nsec = -1;
+	assert(sem_timedwait(&mysem, &timeout) != -1);
+	assert(sem_post(&mysem) != -1);
+
+	timeout.tv_sec  = 0;
+	timeout.tv_nsec = 1000*1000*1000+1;
+	assert(sem_timedwait(&mysem, &timeout) != -1);
+	/* We intentionally don't unlock the semaphore here! */
+
+	/* Invalid timeout and the lock cannot be acquired immediately. */
+	timeout.tv_sec  = 0;
+	timeout.tv_nsec = -1;
+
+	assert(sem_timedwait(&mysem, &timeout) == -1 && errno == EINVAL);
+
+	/* Valid timeout and the lock cannot be acquired immediately. */
 	assert(clock_gettime(CLOCK_REALTIME, &now) == 0);
 	timeout.tv_sec  = now.tv_sec + 2;
 	timeout.tv_nsec = now.tv_nsec;
-
-	/*
-	 * Since we created the semaphore with a value of zero `0',
-	 * sem_timedwait() won't be able to lock it in the given timeout.
-	 */
 	assert(sem_timedwait(&mysem, &timeout) == -1 && errno == ETIMEDOUT);
-
-	/*
-	 * Increment the value of the semaphore. Thus, sem_timedwait() shouldn't
-	 * fail since the lock can now be acquired immediately.
-	 */
-	assert(sem_post(&mysem) != -1);
-	assert(sem_timedwait(&mysem, &timeout) != -1);
 
 	/* Cleanup. */
 	assert(sem_destroy(&mysem) == 0);
