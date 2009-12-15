@@ -58,8 +58,11 @@ main(void)
 	/* Invalid timeout and the lock cannot be acquired immediately. */
 	timeout.tv_sec  = 0;
 	timeout.tv_nsec = -1;
-
 	assert(sem_timedwait(&mysem, &timeout) == -1 && errno == EINVAL);
+
+        timeout.tv_sec  = 0;
+        timeout.tv_nsec = 1000*1000*1000+1;
+        assert(sem_timedwait(&mysem, &timeout) == -1 && errno == EINVAL);
 
 	/* Valid timeout and the lock cannot be acquired immediately. */
 	assert(clock_gettime(CLOCK_REALTIME, &now) == 0);
