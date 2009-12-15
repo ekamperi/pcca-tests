@@ -10,13 +10,13 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 
 t_utmpx: t_utmpx.c
-	$(CC) $(CCFLAGS) $(LIB) t_utmpx.c -o t_utmpx
+	$(CC) $(CCFLAGS) t_utmpx.c -o t_utmpx
 
 t_utmpx_enum: t_utmpx_enum.c
-	$(CC) $(CCFLAGS) $(LIB) t_utmpx_enum.c -o t_utmpx_enum
+	$(CC) $(CCFLAGS) t_utmpx_enum.c -o t_utmpx_enum
 
 t_utmpx_pututxline: t_utmpx_pututxline.c
-	$(CC) $(CCFLAGS) $(LIB) t_utmpx_pututxline.c -o t_utmpx_pututxline
+	$(CC) $(CCFLAGS) t_utmpx_pututxline.c -o t_utmpx_pututxline
 	sudo chown root ./t_utmpx_pututxline
 	sudo chmod u+s ./t_utmpx_pututxline   # set setuid bit
 
