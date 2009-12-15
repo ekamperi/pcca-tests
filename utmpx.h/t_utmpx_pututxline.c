@@ -58,11 +58,18 @@ int main(void)
 	signal(SIGABRT, myhandler);
 
 	/*
-	 * It must be run with root privileges, even if we don't modify the real
+	 * Make sure that the setuid bit is set, the owner of the binary is root
+	 * and that we were able to escalate our uid.
+	 * We must run with root privileges, even if we don't modify the real
 	 * system-wide utmpx database. Specifically, pututxline() may fail if
 	 * done otherwise.
 	 */
-	assert(geteuid() == 0);
+	if (geteuid() != 0 ) {
+		fprintf(stderr, "WARNING: We were unable to escalate our uid!\n"
+				"WARNING: Make sure the fs isn't mounted with "
+				"some sort of nosuid option set.\n");
+		assert(geteuid() == 0);
+	}
 
 	/* Make sure there is no other utmpx file flying around. */
 	rv = stat(_PATH_UTMPX, &sb);
