@@ -17,7 +17,8 @@ t_utmpx_enum: t_utmpx_enum.c
 
 t_utmpx_pututxline: t_utmpx_pututxline.c
 	$(CC) $(CCFLAGS) $(LIB) t_utmpx_pututxline.c -o t_utmpx_pututxline
-
+	sudo chown root ./t_utmpx_pututxline
+	sudo chmod u+s ./t_utmpx_pututxline   # set setuid bit
 
 clean:
 	git clean -f
