@@ -43,12 +43,10 @@ int main(void)
 	/* Destroy previous. */
 	assert(sem_destroy(&mysem) == 0);
 
-	/* Semaphore argument doesn't represent a valid semaphore. */
-	assert(sem_destroy(NULL) == -1 && errno == EINVAL);
-
 	/*
 	 * XXX: We don't support shared semaphores across processes, so
-	 * we can't check against EBUSY.
+	 * we can't check against EBUSY. And EINVAL has been made optional
+	 * as well.
 	 */
 
 	printf("passed\n");
