@@ -65,9 +65,6 @@ int main(void)
 	/* Destroy previous. */
 	assert(sem_destroy(&mysem) == 0);
 
-        /* XXX optional */
-        assert(sem_trywait(NULL) == -1 && errno == EINVAL);
-
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
