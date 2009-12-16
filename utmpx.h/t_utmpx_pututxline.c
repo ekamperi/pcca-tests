@@ -28,7 +28,6 @@
 #define _XOPEN_SOURCE 600
 
 #include <assert.h>
-#include <err.h>
 #include <errno.h>
 #include <signal.h>
 #include <stdio.h>
@@ -51,17 +50,25 @@ int main(void)
 	struct stat sb;
 	int i, rv;
 
+#undef _PATH_UTMPX
 #define _PATH_UTMPX "sandbox/utmpx"
 
 	/* We don't want to leave remnants behind us, if we fail prematurely. */
 	signal(SIGABRT, myhandler);
 
 	/*
-	 * It must be run with root privileges, even if we don't modify the real
+	 * Make sure that the setuid bit is set, the owner of the binary is root
+	 * and that we were able to escalate our uid.
+	 * We must run with root privileges, even if we don't modify the real
 	 * system-wide utmpx database. Specifically, pututxline() may fail if
 	 * done otherwise.
 	 */
-	assert(geteuid() == 0);
+	if (geteuid() != 0 ) {
+		fprintf(stderr, "WARNING: We were unable to escalate our uid!\n"
+				"WARNING: Make sure the fs isn't mounted with "
+				"some sort of nosuid option set.\n");
+		assert(geteuid() == 0);
+	}
 
 	/* Make sure there is no other utmpx file flying around. */
 	rv = stat(_PATH_UTMPX, &sb);
@@ -78,7 +85,7 @@ int main(void)
 		memset(&ut, 0, sizeof(ut));
 
 		snprintf(ut.ut_id, sizeof(ut.ut_id), "X%u", i);
-		strncpy(ut.ut_name, "user", sizeof(ut.ut_name));
+		strncpy(ut.ut_user, "user", sizeof(ut.ut_user));
 		strncpy(ut.ut_line, "tty", sizeof(ut.ut_line));
 		strncpy(ut.ut_host, "voyager", sizeof(ut.ut_host));
 		ut.ut_type = USER_PROCESS;
@@ -104,12 +111,12 @@ int main(void)
 		 * reading from database. That's why, treat errors as fatal.
 		 */
 		utp = getutxent();
-		assert(rv != NULL);
+		assert(utp != NULL);
 
 		/* Verify entries. */
 		snprintf(ut.ut_id, sizeof(ut.ut_id), "X%u", i);
 		assert(strcmp(utp->ut_id, ut.ut_id) == 0);
-		assert(strcmp(utp->ut_name, "user") == 0);
+		assert(strcmp(utp->ut_user, "user") == 0);
 		assert(strcmp(utp->ut_line, "tty") == 0);
 		assert(strcmp(utp->ut_host, "voyager") == 0);
 		assert(utp->ut_type == USER_PROCESS);
