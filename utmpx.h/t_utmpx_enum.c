@@ -68,6 +68,12 @@ main(void)
 			 */
 			assert(feof(fp));
 		} else {
+
+		  /* Do some silly checks. */
+		  assert(sizeof(ut.ut_pid) == sizeof(pid_t));
+		  assert(sizeof(ut.ut_type) == sizeof(short));
+		  assert(sizeof(ut.ut_tv) == sizeof(struct timeval));
+
 #if 0
 			printf("ut_name = %-20s\tut_id = %-20s\t"
 			    "ut_line = %-20s\tut_host = %s\n",
