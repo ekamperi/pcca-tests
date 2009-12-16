@@ -38,15 +38,24 @@ main(void)
 	struct utmpx ut;
 	FILE *fp;
 
-	/* Open utmpx database. */
+	/* Determine the path of the utmpx database file. */
 #if defined (__SVR4) && defined (__sun)
 	/*
-	 * Note: /etc/utmpx is a symlink to /var/adm/utmpx in opensolaris.
+	 * In OpenSolaris /etc/utmpx is a symlink to /var/adm/utmpx.
 	 */
 	#define MY_UTMPX_PATH "/var/adm/utmpx"
+#elif defined(__linux)
+	/*
+	 * Linux defines the utmpx structure to be the same as the utmp
+	 * structure.
+	 */
+	#define MY_UTMPX_PATH "/var/run/utmp"
 #else
+	/* Default case. */
 	#define MY_UTMPX_PATH "/etc/utmpx"
 #endif
+
+	/* Open utmpx database. */
 	fp = fopen(MY_UTMPX_PATH, "r");
 	assert(fp != NULL);
 
