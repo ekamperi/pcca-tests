@@ -38,20 +38,19 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#define NUSERS 10	/* Number of users to simulate. */
+#define MY_UTMPX_PATH	"/etc/utmpx"
+#define NUSERS		10		/* Number of users to simulate. */
 
 /* Function prototypes. */
 static void myhandler(int sig);
 
-int main(void)
+int
+main(void)
 {
 	struct utmpx ut;
 	struct utmpx *utp;
 	struct stat sb;
 	int i, rv;
-
-#undef _PATH_UTMPX
-#define _PATH_UTMPX "sandbox/utmpx"
 
 	/* We don't want to leave remnants behind us, if we fail prematurely. */
 	signal(SIGABRT, myhandler);
@@ -71,11 +70,11 @@ int main(void)
 	}
 
 	/* Make sure there is no other utmpx file flying around. */
-	rv = stat(_PATH_UTMPX, &sb);
+	rv = stat(MY_UTMPX_PATH, &sb);
 	assert(rv == -1 && errno == ENOENT);
 
 	/* Create an empty utmpx file. */
-	FILE *fp = fopen(_PATH_UTMPX, "w");
+	FILE *fp = fopen(MY_UTMPX_PATH, "w");
 	assert(fp != NULL);
 	assert(fclose(fp) != EOF);
 
@@ -133,5 +132,5 @@ int main(void)
 static void
 myhandler(int sig)
 {
-	unlink(_PATH_UTMPX);
+	unlink(MY_UTMPX_PATH);
 }

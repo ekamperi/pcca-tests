@@ -30,5 +30,5 @@ run:
 	@printf "t_utmpx_enum: "
 	@-./t_utmpx_enum
 
-	@printf "t_utmpx_pututxline: "
-	@-./t_utmpx_pututxline
+#	@printf "t_utmpx_pututxline: "
+#	@-./t_utmpx_pututxline
