@@ -32,17 +32,22 @@
 #include <stdlib.h>
 #include <utmpx.h>
 
-int main(void)
+int
+main(void)
 {
 	struct utmpx ut;
 	FILE *fp;
 
 	/* Open utmpx database. */
 #if defined (__SVR4) && defined (__sun)
-	#undef _PATH_UTMPX
-	#define _PATH_UTMPX "/etc/utmpx"
+	/*
+	 * Note: /etc/utmpx is a symlink to /var/adm/utmpx in opensolaris.
+	 */
+	#define MY_UTMPX_PATH "/var/adm/utmpx"
+#else
+	#define MY_UTMPX_PATH "/etc/utmpx"
 #endif
-	fp = fopen(_PATH_UTMPX, "r");
+	fp = fopen(MY_UTMPX_PATH, "r");
 	assert(fp != NULL);
 
 	/* Loop over the whole database. */
