@@ -68,7 +68,6 @@ main(void)
 			 */
 			assert(feof(fp));
 		} else {
-
 		  /* Do some silly checks. */
 		  assert(sizeof(ut.ut_pid) == sizeof(pid_t));
 		  assert(sizeof(ut.ut_type) == sizeof(short));
