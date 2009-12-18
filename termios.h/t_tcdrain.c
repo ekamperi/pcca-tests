@@ -48,6 +48,15 @@ int main(void)
         /* Make sure we are associated with a tty. */
 	assert(isatty(STDOUT_FILENO) != 0);
 
+	/* Bad file descriptor. */
+	assert(tcgetsid(-1) == (pid_t)-1 && errno == EBADF);
+
+	/* File descriptor is not associated with a terminal. */
+	fd = open("sandbox/notatty", O_RDONLY);
+	assert(fd != -1);
+	assert(tcgetsid(fd) == (pid_t)-1 && errno == ENOTTY);
+	assert(close(fd) != -1);
+
 	/* Fork! */
 	pid = fork();
 	assert(pid != -1);
@@ -61,15 +70,6 @@ int main(void)
 		/* Wait for child to complete. */
 		int status;
 		assert(wait(&status) == pid);
-
-		/* Bad file descriptor. */
-		assert(tcgetsid(-1) == (pid_t)-1 && errno == EBADF);
-
-		/* File descriptor is not associated with a terminal. */
-		fd = open("sandbox/notatty", O_RDONLY);
-		assert(fd != -1);
-		assert(tcgetsid(fd) == (pid_t)-1 && errno == ENOTTY);
-		assert(close(fd) != -1);
 
 		printf("passed\n");
 	} else {
