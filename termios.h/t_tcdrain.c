@@ -71,7 +71,18 @@ int main(void)
 		int status;
 		assert(wait(&status) == pid);
 
+                /*
+                 * Determine if the child exited normally, or due to a SIGABRT
+                 * signal being delivered to it by a failed assertion.
+                 */
+                if (WIFSIGNALED(status)) {
+			assert(WTERMSIG(status) == SIGABRT);
+			return (EXIT_FAILURE);
+                }
+
 		printf("passed\n");
+
+		return (EXIT_SUCCESS);
 	} else {
 		/* We are inside the child. */
 		/*
@@ -101,6 +112,7 @@ int main(void)
 		assert(issignaled == 1);
 	}
 
+        /* Only reached by child upon success. */
 	return (EXIT_SUCCESS);
 }
 
