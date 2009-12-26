@@ -42,7 +42,7 @@ main(void)
 
 	/* XXX: Perhaps add some math operations here? */
 
-	/* Make sure that no floating-point is set. */
+	/* Make sure that no floating-point exception is set. */
 	ex = fetestexcept(FE_ALL_EXCEPT);
 	assert((ex & FE_ALL_EXCEPT) == 0);
 
