@@ -34,6 +34,18 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+/*
+ * This provides a means to inform the implementation when an application
+ * will access the floating-point environment, e.g. to test floating-point
+ * status flags.
+ *
+ * The default state (on or off) is implementation-defined.
+ *
+ * Trying to use floating-point environment with pragma set to off
+ * the behavior is undefined. Therefore, let us be explicit.
+ */
+#pragma STDC FENV_ACCESS ON
+
 /* Floating point exceptions. */
 #if defined(math_errhandling) && defined(MATH_ERREXCEPT) && \
 	   (math_errhandling & MATH_ERREXCEPT)
