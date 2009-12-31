@@ -50,11 +50,11 @@ main(void)
 	    && errno == ELOOP);
 
 	/*
-	 * A component of filename does not name an existing file or file_name
+	 * A component of filename does not name an existing file or filename
 	 * points to an empty string.
 	 */
-	assert(realpath("sandbox/thisdefinitelydoesntexist", actualpath) == NULL
-	    && errno == ENOENT);
+	assert(realpath("sandbox/thisdefinitelydoesntexist/doesntmatter",
+			actualpath) == NULL && errno == ENOENT);
 	assert(realpath("", actualpath) == NULL && errno == ENOENT);
 
 	/* A component of the path prefix is not a directory. */
