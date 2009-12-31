@@ -1,4 +1,5 @@
-all:	t_mkfifo	\
+all:	t_lstat		\
+	t_mkfifo	\
 	t_mkfifo2	\
 	t_stat		\
 	t_umask
@@ -9,6 +10,9 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
+
+t_lstat: t_lstat.c
+	$(CC) $(CCFLAGS) t_lstat.c -o t_lstat
 
 t_mkfifo: t_mkfifo.c
 	$(CC) $(CCFLAGS) t_mkfifo.c -o t_mkfifo
@@ -26,6 +30,9 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_lstat: "
+	@-./t_lstat
+
 	@printf "t_mkfifo: "
 	@-./t_mkfifo
 
