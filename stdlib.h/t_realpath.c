@@ -30,17 +30,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define PATH_MAX 1024
-
 int
 main(void)
 {
-	char actualpath[PATH_MAX + 1];
-#if 0
+	char actualpath[1000];	/* Doesn't matter how big it is. */
+
 	/* Read or search permission was denied for a component of filename. */
-	assert(realpath("sandbox/file000", actualpath) == NULL
+	assert(realpath("sandbox/dir000/doesntmatter", actualpath) == NULL
 	    && errno == EACCES);
-#endif
 
 	/* The filename argument is a null pointer. */
 	assert(realpath(NULL, actualpath) == NULL && errno == EINVAL);
