@@ -33,17 +33,17 @@
 
 #define BUFSIZE 1024
 
-int main(void)
+int
+main(void)
 {
 	char buf[BUFSIZE + 1];  /* Reserve space for '\0' */
 	memset(buf, 0, sizeof(buf));
 
 	/*
-	 * The following are all extensions to the standard,
-	 * but they are good for an implementation to have
-	 * them. Mind that putenv() has been changed to take
-	 * char * as argument, so we can't supply string
-	 * literals safely.
+	 * The following are all extensions to the standard, but it is nice for
+	 * an implementation to have them.
+	 * Mind that putenv() has been changed to take char * as argument, so we
+	 * can't supply string literals safely any more.
 	 */
 
 	/* String doesn't contain an ``='' character . */
