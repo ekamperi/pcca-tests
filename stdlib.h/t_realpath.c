@@ -58,7 +58,7 @@ main(void)
 	assert(realpath("", actualpath) == NULL && errno == ENOENT);
 
 	/* A component of the path prefix is not a directory. */
-	assert(realpath("sandbox/notadir/foobar", actualpath) == NULL
+	assert(realpath("sandbox/notadir/doesntmatter", actualpath) == NULL
 	    && errno == ENOTDIR);
 
 	printf("passed\n");
