@@ -37,6 +37,11 @@ struct psxentry {
 	int psx_constant;
 	int psx_minval;
 } psxtable[] = {
+	/*
+	 * To be honest, POSIX doesn't say that _POSIX_* symbolic constants are
+	 * necessarily numerical or that they can be used in #if statements.
+	 * Still, we bite the bullet and treat them as integer constants.
+	 */
 #ifdef	_POSIX_AIO_LISTIO_MAX
 	{ "_POSIX_AIO_LISTIO_MAX",	_POSIX_AIO_LISTIO_MAX,		2    },
 #endif
