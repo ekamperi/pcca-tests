@@ -7,7 +7,7 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 
-t_ftw: t_minvalues
+t_minvalues: t_minvalues.c
 	$(CC99) $(CCFLAGS) t_minvalues.c -o t_minvalues
 
 clean:
