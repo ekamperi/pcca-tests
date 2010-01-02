@@ -190,6 +190,30 @@ struct psxentry {
 #ifdef	_XOPEN_PATH_MAX
 	{ "_XOPEN_PATH_MAX",		_XOPEN_PATH_MAX,		1024 },
 #endif
+
+	/*
+	 * Other invariant values
+	 */
+#ifdef	NL_ARGMAX
+	{ "NL_ARGMAX",			NL_ARGMAX,			9    },
+#endif
+#ifdef	NL_LANGMAX
+	{ "NL_LANGMAX",			NL_LANGMAX,			14   },
+#endif
+#ifdef	NL_MSGMAX
+	{ "NL_MSGMAX",			NL_MSGMAX,			32767},
+#endif
+#ifdef	NL_SETMAX
+	{ "NL_SETMAX",			NL_SETMAX,			255  },
+#endif
+#ifdef	NL_TEXTMAX
+#ifdef	_POSIX2_LINE_MAX
+	{ "NL_TEXTMAX",			NL_TEXTMAX,	     _POSIX2_LINE_MAX},
+#endif
+#endif
+#ifdef	NZERO
+	{ "NZERO",			NZERO,				20   },
+#endif
 	{ NULL,				-1,				-1   }
 };
 
