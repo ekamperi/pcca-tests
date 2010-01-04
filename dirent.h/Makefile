@@ -5,6 +5,7 @@ all:    t_closedir	\
 	t_readdir_r
 
 CC=gcc
+CC99=gcc -std=c99
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
@@ -15,7 +16,7 @@ t_closedir: t_closedir.c
 	$(CC) $(CCFLAGS) $(LIB) t_closedir.c -o t_closedir
 
 t_dirent: t_dirent.c
-	$(CC) $(CCFLAGS) $(LIB) t_dirent.c -o t_dirent
+	$(CC99) $(CCFLAGS) $(LIB) t_dirent.c -o t_dirent
 
 t_opendir: t_opendir.c
 	$(CC) $(CCFLAGS) $(LIB) t_opendir.c -o t_opendir
