@@ -36,7 +36,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-int main(void)
+int
+main(void)
 {
 	pid_t pid;
 
@@ -70,9 +71,9 @@ int main(void)
 		if (getpgid(pid) == (pid_t)-1) {
 			assert(errno == EPERM);
 			printf("passed\n");
-		}
-		else
+		} else {
 			printf("passed (EPERM check skipped)\n");
+		}
 
 		/* Wait for child to complete. */
 		int status;
