@@ -68,16 +68,34 @@ main(void)
 		 *
 		 * openbsd/sys/kern/kern_prot.c#101
 		 */
-		if (getpgid(pid) == (pid_t)-1) {
-			assert(errno == EPERM);
-			printf("passed\n");
+		int passed;
+
+		if (getpgid(pid) != (pid_t)-1) {
+			passed = 1;
 		} else {
-			printf("passed (EPERM check skipped)\n");
+			assert(errno == EPERM);
+			passed = 2;
 		}
 
 		/* Wait for child to complete. */
 		int status;
 		assert(wait(&status) == pid);
+
+		/*
+		 * Determine if the child exited normally, or due to a SIGABRT
+		 * signal being delivered to it by a failed assertion.
+		 */
+		if (WIFSIGNALED(status)) {
+			assert(WTERMSIG(status) == SIGABRT);
+			return (EXIT_FAILURE);
+		}
+
+		if (passed == 1)
+			printf("passed (EPERM check skipped)\n");
+		else
+			printf("passed\n");
+
+		return (EXIT_SUCCESS);
 	} else {
 		/* We are inside the child. */
 
@@ -88,5 +106,6 @@ main(void)
 		sleep(2);
 	}
 
+	/* Only reached by child upon success. */
 	return (EXIT_SUCCESS);
 }
