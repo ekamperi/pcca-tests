@@ -2,6 +2,7 @@ all:	t_clearerr	\
 	t_ctermid	\
 	t_ferror	\
 	t_fileno	\
+	t_flockfile	\
 	t_stdio		\
 	t_tempnam	\
 	t_tmpfile
@@ -24,6 +25,9 @@ t_ferror: t_ferror.c
 
 t_fileno: t_fileno.c
 	$(CC) $(CCFLAGS) $(LIB) t_fileno.c -o t_fileno
+
+t_flockfile: t_flockfile.c
+	$(CC) $(CCFLAGS) t_flockfile.c t_flockfile
 
 t_stdio: t_stdio.c
 	$(CC) $(CCFLAGS) $(LIB) t_stdio.c -o t_stdio
@@ -49,6 +53,9 @@ run:
 
 	@printf "t_fileno: "
 	@-./t_fileno
+
+	@printf "t_flockfile: "
+	@-./t_flockfile
 
 	@printf "t_stdio: "
 	@-./t_stdio
