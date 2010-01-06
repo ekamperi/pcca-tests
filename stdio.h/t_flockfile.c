@@ -45,8 +45,13 @@ main(void)
 	for (i = 0; i < 1000; i++)
 		funlockfile(fp);
 
-	/* Wait for thread to complete. */
-	assert(pthread_join(tid, NULL) == 0);
+	/*
+	 * Don't wait for thread to complete, as we don't know if the
+	 * implementation we are running on is correct and do the right thing of
+	 * unblocking the thread once the FILE* lock count reaches zero. Instead
+	 * just sleep a bit.
+	 */
+	sleep(1);
 	assert(wasblocked == 0);
 
 	/* Close file -- we are done. */
