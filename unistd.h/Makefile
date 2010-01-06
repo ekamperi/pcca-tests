@@ -29,7 +29,6 @@ all:	t_access	\
 	t_pipe_fork	\
 	t_pipe_thr	\
 	t_readlink	\
-	t_setpriority	\
 	t_setregid	\
 	t_setregid_sgid	\
 	t_ttyname	\
@@ -150,9 +149,6 @@ t_setregid_sgid: t_setregid_sgid.c
 tcsetpgrp: t_tcsetpgrp.c
 	$(CC) $(CCFLAGS) t_tcsetpgrp.c -o t_tcsetpgrp
 
-t_setpriority: t_setpriority.c
-	$(CC99) $(CCFLAGS) t_setpriority.c -o t_setpriority
-
 t_getsid: t_getsid.c
 	$(CC99) $(CCFLAGS) t_getsid.c -o t_getsid
 
@@ -261,9 +257,6 @@ run:
 
 	@printf "t_tcsetpgrp: "
 	@-./t_tcsetpgrp
-
-	@printf "t_setpriority: "
-	@-./t_setpriority
 
 	@printf "t_setregid: "
 	@-./t_setregid
