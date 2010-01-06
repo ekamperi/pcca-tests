@@ -8,6 +8,7 @@ all:	t_clearerr	\
 	t_tmpfile
 
 CC=gcc
+CC99=gcc -std=c99
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
@@ -27,7 +28,7 @@ t_fileno: t_fileno.c
 	$(CC) $(CCFLAGS) $(LIB) t_fileno.c -o t_fileno
 
 t_flockfile: t_flockfile.c
-	$(CC) $(CCFLAGS) -lpthread t_flockfile.c -o t_flockfile
+	$(CC99) $(CCFLAGS) -lpthread t_flockfile.c -o t_flockfile
 
 t_stdio: t_stdio.c
 	$(CC) $(CCFLAGS) $(LIB) t_stdio.c -o t_stdio

@@ -1,3 +1,6 @@
+/* OpenSolaris needs it */
+#define _XOPEN_SOURCE 600
+
 #include <assert.h>
 #include <pthread.h>
 #include <stdio.h>
