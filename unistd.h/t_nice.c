@@ -32,13 +32,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int main(void)
+int
+main(void)
 {
 	int rv, rv2;
 
         /*
-	 * Try to lower our nice value (thus go to a more favorable
-         * scheduling), without being privileged (root?).
+	 * Try to lower our nice value (thus go to a more favorable scheduling),
+	 * without being privileged enough.
 	 */
         rv = nice(-2);
         assert(rv == -1 && errno == EPERM);
