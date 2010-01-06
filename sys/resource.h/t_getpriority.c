@@ -32,6 +32,7 @@
 #include <limits.h>	/* INT_MAX */
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/resource.h>
 
 int
@@ -41,6 +42,11 @@ main(void)
 	 * getpriority() may return -1 on success, so zero out `errno' in order
 	 * to distinguish between a legitimate priority and an error condition.
 	 */
+
+	/* Valid nice values are in the range [0, {NZERO}*2-1]. */
+	int prio;
+	prio = getpriority(PRIO_PROCESS, getpid());
+	assert(prio >= 0 && prio <= 2*NZERO - 1);
 
 	/* XXX: ESRCH */
 
