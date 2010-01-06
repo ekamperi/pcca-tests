@@ -29,6 +29,7 @@ t_pipe
 t_pipe_fork
 t_pipe_thr
 t_readlink
+t_setpriority
 t_setregid
 t_setregid_priv
 t_tcsetpgrp
