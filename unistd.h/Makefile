@@ -118,7 +118,7 @@ t_lockf2: t_lockf2.c
 	$(CC99) $(CCFLAGS) t_lockf2.c -o t_lockf2
 
 t_nice: t_nice.c
-	$(CC) $(CCFLAGS) t_nice.c -o t_nice
+	$(CC99) $(CCFLAGS) t_nice.c -o t_nice
 
 t_nice_thr: t_nice_thr.c
 	$(CC) $(CCFLAGS) -lpthread t_nice_thr.c -o t_nice_thr
