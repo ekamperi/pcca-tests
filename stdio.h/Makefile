@@ -27,7 +27,7 @@ t_fileno: t_fileno.c
 	$(CC) $(CCFLAGS) $(LIB) t_fileno.c -o t_fileno
 
 t_flockfile: t_flockfile.c
-	$(CC) $(CCFLAGS) t_flockfile.c t_flockfile
+	$(CC) $(CCFLAGS) -lpthread t_flockfile.c -o t_flockfile
 
 t_stdio: t_stdio.c
 	$(CC) $(CCFLAGS) $(LIB) t_stdio.c -o t_stdio
