@@ -8,3 +8,8 @@ A: The first tests were developed as part of the Google Summer of Code project
    appeared to me as the next best choice. After the end of the project, I
    didn't bother changing it, for reasons of uniformity.
 
+Q: Why some test cases run slow eventhough my machine is very fast ?
+A: There are test cases that call sleep(...) in order to ensure that
+   certain time conditions are met. These conditions are paramount to
+   the proper execution of the test cases themselves and cannot be
+   circumvented.
