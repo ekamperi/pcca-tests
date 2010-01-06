@@ -30,6 +30,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <limits.h>	/* for INT_MAX */
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
