@@ -27,52 +27,73 @@
 
 #include <assert.h>
 #include <errno.h>
+#include <limits.h>	/* INT_MAX */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>	/* for pid_t */
 #include <sys/resource.h>
 
-int main(void)
+int
+main(void)
 {
 	pid_t pid;
-	int prio;
+	int prio, prio2;
 
-	/* We expect this simple operation to succeed. */
+	/* Make sure we don't run the test as root. */
+	if (getuid() == 0) {
+		fprintf(stderr, "FATAL: Test cases shouldn't be running "
+		    "as root user!\n");
+		assert(getuid() != 0);
+	}
+
 	pid = getpid();
 
-	assert(setpriority(PRIO_PROCESS, pid, 2) == 0);
-
-	/* getpriority() can return -1 on success, so zero out errno. */
+	/*
+	 * getpriority() may return -1 on success, so zero out `errno' in order
+	 * to distinguish between a legitimate priority and an error condition.
+	 */
 	errno = 0;
 	prio = getpriority(PRIO_PROCESS, pid);
 	assert(prio != -1 || errno == 0);
-	assert(prio == 2);
 
-	/* Invalid `which' value. */
-	assert(setpriority(-112233, 1, /* nice */ 0) == -1 && errno == EINVAL);
-	assert(setpriority( 112233, 1, /* nice */ 0) == -1 && errno == EINVAL);
-
-	/* Valid `which' value, but no process with `which,who' pair found. */
-	assert(setpriority(PRIO_USER, -1, /* nice */ 0) == -1
-	    && errno == ESRCH);
-
-        /* Try to mess around with the mother of all process. */
-        assert(setpriority(PRIO_PROCESS, 1, /* nice */ 0) == -1
-	    && errno == EPERM);
-
-#if 0
 	/*
-	 * Be bad and try to lower our nice value, without having privilege.
-	 * POSIX only suggests in this matter, so we can't expect one behaviour.
-	 * E.g, the OS may renice up to the minimum allowed nice value
-	 * (DragonFly does).
+	 * Increasing our nice values shouldn't require escalated privileges.
+	 * The implementation shall enforce the highest supported value, if by
+	 * any chance `prio + 1' is out of range.
 	 */
-	pid_t pid;
-	pid = getpid();
+	assert(setpriority(PRIO_PROCESS, pid, prio + 1) == 0);
+	prio2 = getpriority(PRIO_PROCESS, pid);
+	assert(prio2 == prio || prio2 == prio + 1);
 
-	assert(setpriority(PRIO_PROCESS, pid, /* nice */ -10) == -1
+	/* XXX: ESRCH */
+
+	/* The value of the `which' argument was not recognized. */
+	assert(setpriority(-112233, pid, /* nice */ 0) == -1
+	    && errno == EINVAL);
+	assert(setpriority( 112233, pid, /* nice */ 0) == -1
+	    && errno == EINVAL);
+
+	/*
+	 * Valid `which' value, but the value of the `who' argument is not a
+	 * valid process ID, process group ID, or user ID.
+	 */
+	assert(setpriority(PRIO_PROCESS, -INT_MAX, /* nice */ 0) == -1
+	       && errno == EINVAL);
+	assert(setpriority(PRIO_PGRP,    -INT_MAX, /* nice */ 0) == -1
+	       && errno == EINVAL);
+	assert(setpriority(PRIO_USER,    -INT_MAX, /* nice */ 0) == -1
+	       && errno == EINVAL);
+
+        /* Try to mess around with init, the mother of all processes. */
+        assert(setpriority(PRIO_PROCESS, /* init */ 1, 0) == -1
+	       && errno == EPERM);
+
+	/*
+	 * Be naughty and try to lower our nice value, without having enough
+	 * privileges.
+	 */
+	assert(setpriority(PRIO_PROCESS, pid, /* nice */ -INT_MAX) == -1
 	    && errno == EACCES);
-#endif
 
 	printf("passed\n");
 
