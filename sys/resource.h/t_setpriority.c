@@ -68,8 +68,10 @@ main(void)
 	/* XXX: ESRCH */
 
 	/* The value of the `which' argument was not recognized. */
+	errno = 0;
 	assert(setpriority(-112233, pid, /* nice */ 0) == -1
 	    && errno == EINVAL);
+	errno = 0;
 	assert(setpriority( 112233, pid, /* nice */ 0) == -1
 	    && errno == EINVAL);
 
@@ -77,14 +79,18 @@ main(void)
 	 * Valid `which' value, but the value of the `who' argument is not a
 	 * valid process ID, process group ID, or user ID.
 	 */
+	errno = 0;
 	assert(setpriority(PRIO_PROCESS, -INT_MAX, /* nice */ 0) == -1
 	       && errno == EINVAL);
+	errno = 0;
 	assert(setpriority(PRIO_PGRP,    -INT_MAX, /* nice */ 0) == -1
 	       && errno == EINVAL);
+	errno = 0;
 	assert(setpriority(PRIO_USER,    -INT_MAX, /* nice */ 0) == -1
 	       && errno == EINVAL);
 
         /* Try to mess around with init, the mother of all processes. */
+	errno = 0;
         assert(setpriority(PRIO_PROCESS, /* init */ 1, 0) == -1
 	       && errno == EPERM);
 
@@ -92,6 +98,7 @@ main(void)
 	 * Be naughty and try to lower our nice value, without having enough
 	 * privileges.
 	 */
+	errno = 0;
 	assert(setpriority(PRIO_PROCESS, pid, /* nice */ -INT_MAX) == -1
 	    && errno == EACCES);
 
