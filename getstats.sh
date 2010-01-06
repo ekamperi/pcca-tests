@@ -14,6 +14,10 @@ NHEADERS=$(find "$DIR" -name .git -prune -o \( -type d -name "*.h" -print \) \
 NTESTS=$(find "$DIR" -name .git -prune -o \( -type f -name "tfile" -print \) \
     2>/dev/null | xargs cat | wc -l)
 
+# Number of assert()'s (as found in .c files)
+NASSERTS=$(find "$DIR" -name .git -prune -o \( -name "*.c" -print \) \
+    2>/dev/null | xargs grep "assert(" | wc -l)
+
 # Number of lines of code in .c files
 CLOC=$(find "$DIR" -name .git -prune -o \( -name "*.c" -print \) 2>/dev/null \
     | xargs cat | wc -l)
@@ -36,6 +40,7 @@ printf "\tAudited: $NHEADERS\n"
 echo
 echo ">>> Test files"
 printf "\ttfiles : $NTESTS\n"
+printf "\tasserts: $NASSERTS\n"
 
 echo
 echo ">>> Lines of code"
