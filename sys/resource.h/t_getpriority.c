@@ -25,28 +25,41 @@
  * SUCH DAMAGE.
  */
 
+#define _XOPEN_SOURCE 600
+
 #include <assert.h>
 #include <errno.h>
+#include <limits.h>	/* INT_MAX */
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/resource.h>
 
-int main(void)
+int
+main(void)
 {
 	/*
-	 * Invalid `which' value.
-	 * Since getpriority() may return -1, zero out errno variable
-	 * prior to calling it and check it afterwards to distinguish
-	 * a legitimate value from a failure.
+	 * getpriority() may return -1 on success, so zero out `errno' in order
+	 * to distinguish between a legitimate priority and an error condition.
 	 */
+
+	/* XXX: ESRCH */
+
+	/* The value of the `which' argument was not recognized. */
 	errno = 0;
 	assert(getpriority(-112233, 1) == -1 && errno == EINVAL);
 	errno = 0;
 	assert(getpriority( 112233, 1) == -1 && errno == EINVAL);
 
-	/* Valid `which' value, but no process with `which,who' pair found. */
+	/*
+	 * Valid `which' value, but the value of the `who' argument is not a
+	 * valid process ID, process group ID, or user ID.
+	 */
 	errno = 0;
-	assert(getpriority(PRIO_USER, -1) == -1 && errno == ESRCH);
+	assert(getpriority(PRIO_PROCESS, -INT_MAX) == -1 && errno == EINVAL);
+	errno = 0;
+	assert(getpriority(PRIO_PGRP,    -INT_MAX) == -1 && errno == EINVAL);
+	errno = 0;
+	assert(getpriority(PRIO_USER,    -INT_MAX) == -1 && errno == EINVAL);
 
 	printf("passed\n");
 
