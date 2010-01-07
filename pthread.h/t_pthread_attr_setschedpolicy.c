@@ -162,7 +162,13 @@ hiprio_thread(void *arg)
 	assert(policy == SCHED_RR);
 	assert(param.sched_priority == hiprio);
 
-	/* Acquire the mutex. */
+	/*
+	 * Acquire the mutex.
+	 *
+	 * IMPORTANT: At this point the call to pthread_cond_wait() in low
+	 * priority thread will have released the mutex lock. So, we can
+	 * acquire it here,without being blocked!
+	 */
 	assert(pthread_mutex_lock(&mtx) == 0);
 
 	/* This will block us! */
@@ -200,7 +206,13 @@ lowprio_thread(void *arg)
 	/* Acquire the mutex. */
 	assert(pthread_mutex_lock(&mtx) == 0);
 
-	/* This will block us! */
+	/*
+	 * This will block us!
+	 *
+	 * IMPORTANT: pthread_cond_wait() will automatically release the mutex
+	 * that we pass to it, while it waits. Therefore, the mutex will become
+	 * available for the high priority thread to acquire it.
+	 */
 	assert(pthread_cond_wait(&cond, &mtx) == 0);
 
 	low_unblocked = 1;
