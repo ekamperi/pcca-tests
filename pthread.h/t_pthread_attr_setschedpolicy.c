@@ -167,7 +167,7 @@ hiprio_thread(void *arg)
 	 *
 	 * IMPORTANT: At this point the call to pthread_cond_wait() in low
 	 * priority thread will have released the mutex lock. So, we can
-	 * acquire it here,without being blocked!
+	 * acquire it here, without being blocked!
 	 */
 	assert(pthread_mutex_lock(&mtx) == 0);
 
