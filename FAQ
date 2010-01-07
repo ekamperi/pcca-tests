@@ -1,15 +1,22 @@
-Q: Why did you choose BSD license ? Some tests look rather trivial to the point
-   that a public domain license would fit better.
+Q: Why did you choose a BSD license ? Some tests look rather trivial to the
+   point that a public domain license would fit better.
 A: The first tests were developed as part of the Google Summer of Code project
    and they had to be licensed under some free license listed in here:
    http://www.opensource.org/licenses/alphabetical . Unfortunately, public
-   domain, which has been my initial intention, isn't. A 2-clause BSD license
+   domain, which has been my initial intention, wasn't. A 2-clause BSD license
    appeared to me as the next best choice. After the end of the project, I
-   didn't bother changing it, for reasons of uniformity.
+   didn't bother changing it for reasons of uniformity.
 
 
 Q: Why some test cases run slow eventhough my machine is very fast ?
 A: There are test cases that call sleep(...) in order to ensure that
    certain time conditions are met. These conditions are paramount to
-   the proper execution of the test cases themselves and cannot be
-   circumvented.
+   the proper execution of the test cases and cannot be circumvented.
+
+
+Q: While building the test cases, I see lots of compile/linking errors. Why ?
+A: This usually happens when the host OS misses some POSIX mandated stuff,
+   e.g. doesnt implement utmpx or complex arithmetic support. In this sense,
+   we treat an unbuildable test case, as a failed test case. While running
+   the regression suite these tests will appeas as:
+   /foo.h/t_bar: failed (test case doesn't exist).
