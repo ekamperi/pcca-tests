@@ -46,8 +46,14 @@ t_mq_timedsend_timeout.c
   </test>
 
   <test>
-    <desc>Opens and closes a message queue</desc>
+    <desc>Parent - Child</desc>
     <binary timeout="5">t_mq_parent_child</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Parent - Child - Mult messages</desc>
+    <binary timeout="5">t_mq_parent_child_multmsg</binary>
     <covers>foo</covers>
   </test>
 

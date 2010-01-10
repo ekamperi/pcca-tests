@@ -1,15 +1,15 @@
 #!/usr/bin/ruby
 
 require 'rexml/document'
-require 'timeout'
 include REXML
 
 file = File.new("test.xml")
 doc = Document.new(file)
 
-passed = 0
-failed = 0
-killed = 0
+log_passed = File.open("log.passed", "w+")
+log_failed = File.open("log.failed", "w+")
+log_killed = File.open("log.killed", "w+")
+log_stderr = File.open("log.stderr", "w+")
 
 doc.root.each_element('//test/binary') { |binary|
         name    = binary.text
@@ -22,11 +22,17 @@ doc.root.each_element('//test/binary') { |binary|
                 done = 1
         }
         pid = fork {
-                exec("./" + name)
+                begin
+                        exec("./" + name)
+                rescue StandardError => error
+                        puts "#{error}\n"
+                        log_stderr.write(name + "\n")
+                        raise
+                end
         }
 
-        now = Time.now
-        while ((Time.now - now) < timeout) do
+        start = Time.now
+        while ((Time.now - start) < timeout) do
                 break if done == 1
                 sleep 0.5
                 #puts "sleep"
@@ -35,17 +41,18 @@ doc.root.each_element('//test/binary') { |binary|
         if (done == 1)
                 Process.wait(pid)
                 if ($?.exitstatus == 0)
-                        passed += 1
+                        log_passed.write(name + "\n")
                 else
-                        failed += 1
+                        log_failed.write(name + "\n")
                 end
         else
-                killed += 1
+                log_killed.write(name + "\n")
                 Process.kill("KILL", pid);
                 puts "Test case timed out"
         end
 }
 
-puts "passed #{passed}" 
-puts "failed #{failed}"
-puts "killed #{killed}"
+log_passed.close()
+log_failed.close()
+log_killed.close()
+log_stderr.close()
