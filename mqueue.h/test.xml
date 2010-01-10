@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<list-of-tests>
+t_mq_parent_child.c
+t_mq_parent_child_multmsg.c
+t_mq_prio.c
+t_mq_select.c
+t_mq_send.c
+t_mq_setattr.c
+t_mq_timedreceive_timeout.c
+t_mq_timedsend.c
+t_mq_timedsend_timeout.c
+  <test>
+    <desc>oflag vs mode_t ambiguity exploration</desc>
+    <binary timeout="5">t_mq_ambig</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Closes a message queue</desc>
+    <binary timeout="5">t_mq_close</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Message queue notification</desc>
+    <binary timeout="5">t_mq_notify_simple</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Opens a message queue</desc>
+    <binary timeout="5">t_mq_open</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Opens and closes a message queue</desc>
+    <binary timeout="5">t_mq_open_close</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Opens and closes a message queue</desc>
+    <binary timeout="5">t_mq_open_umask</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Opens and closes a message queue</desc>
+    <binary timeout="5">t_mq_parent_child</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Timeouts while waiting to send</desc>
+    <binary timeout="5">halt.sh</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Timeouts while waiting to receive</desc>
+    <binary timeout="5">t_mq_timedreceive_timeout</binary>
+    <covers>foo</covers>
+  </test>
+
+</list-of-tests>
