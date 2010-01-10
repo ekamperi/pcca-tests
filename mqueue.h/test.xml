@@ -52,8 +52,32 @@ t_mq_timedsend_timeout.c
   </test>
 
   <test>
+    <desc>Message queues priorities</desc>
+    <binary timeout="5">t_mq_prio</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
     <desc>Timeouts while waiting to send</desc>
     <binary timeout="5">halt.sh</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Select</desc>
+    <binary timeout="5">t_mq_select</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Sends</desc>
+    <binary timeout="5">t_mq_send</binary>
+    <covers>foo</covers>
+  </test>
+
+  <test>
+    <desc>Sets the attributes</desc>
+    <binary timeout="5">t_mq_setattr</binary>
     <covers>foo</covers>
   </test>
 

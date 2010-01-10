@@ -11,10 +11,6 @@ passed = 0
 failed = 0
 killed = 0
 
-Signal.trap("CHLD") {
-        done = 1
-}
-
 doc.root.each_element('//test/binary') { |binary|
         name    = binary.text
         timeout = binary.attributes['timeout'].to_f
@@ -22,6 +18,9 @@ doc.root.each_element('//test/binary') { |binary|
         print name + ": "
 
         done = 0
+        Signal.trap("CHLD") {
+                done = 1
+        }
         pid = fork {
                 exec("./" + name)
         }
@@ -30,6 +29,7 @@ doc.root.each_element('//test/binary') { |binary|
         while ((Time.now - now) < timeout) do
                 break if done == 1
                 sleep 0.5
+                #puts "sleep"
         end
 
         if (done == 1)
@@ -42,6 +42,7 @@ doc.root.each_element('//test/binary') { |binary|
         else
                 killed += 1
                 Process.kill("KILL", pid);
+                puts "Test case timed out"
         end
 }
 
