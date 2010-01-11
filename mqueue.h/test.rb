@@ -9,7 +9,6 @@ doc = Document.new(file)
 log_passed = File.open("log.passed", "w+")
 log_failed = File.open("log.failed", "w+")
 log_killed = File.open("log.killed", "w+")
-log_stderr = File.open("log.stderr", "w+")
 
 doc.root.each_element('//test/binary') { |binary|
         name    = binary.text
@@ -26,8 +25,7 @@ doc.root.each_element('//test/binary') { |binary|
                         exec("./" + name)
                 rescue StandardError => error
                         puts "#{error}\n"
-                        log_stderr.write(name + "\n")
-                        raise
+                        exit 1
                 end
         }
 
@@ -50,9 +48,12 @@ doc.root.each_element('//test/binary') { |binary|
                 Process.kill("KILL", pid);
                 puts "Test case timed out"
         end
+
+        log_passed.flush
+        log_failed.flush
+        log_killed.flush
 }
 
 log_passed.close()
 log_failed.close()
 log_killed.close()
-log_stderr.close()
