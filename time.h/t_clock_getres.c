@@ -33,14 +33,15 @@
 int
 main(void)
 {
-	struct timespec clres;
+	struct timespec ts;
 	int monotonic = 0;
 
 	/*
 	 * Get the resolution of the clock.
 	 * CLOCK_REALTIME is mandatory.
 	 */
-	assert(clock_getres(CLOCK_REALTIME, &clres) != -1);
+	assert(clock_getres(CLOCK_REALTIME, &ts) != -1);
+	assert(clock_gettime(CLOCK_REALTIME, &ts) != -1);
 
 	/* Contrary to CLOCK_MONOTONIC, which is optional. */
 #ifdef	_POSIX_MONOTONIC_CLOCK
@@ -48,7 +49,8 @@ main(void)
 	long rv = sysconf(_SC_MONOTONIC_CLOCK);
 	assert(rv != -1 || errno == 0);
 
-	assert(clock_getres(CLOCK_MONOTONIC, &clres) != -1);
+	assert(clock_getres(CLOCK_MONOTONIC, &ts) != -1);
+	assert(clock_gettime(CLOCK_MONOTONIC, ts) != -1);
 	monotonic = 1;
 #endif
 
