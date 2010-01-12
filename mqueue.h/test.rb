@@ -10,11 +10,23 @@ log_passed = File.open("log.passed", "w+")
 log_failed = File.open("log.failed", "w+")
 log_killed = File.open("log.killed", "w+")
 
-doc.root.each_element('//test/binary') { |binary|
-        name    = binary.text
-        timeout = binary.attributes['timeout'].to_f
+doc.root.each_element('//test') { |t|
+        elms_a = t.elements().to_a
+        keys = []
+        values = []
+        elms_a.each { |e|
+                keys << e.name
+                values << e.text
+        }
+        elms_h = Hash[*keys.zip(values).flatten]
 
-        print name + ": "
+        binary  = elms_h['binary']
+        timeout = elms_h['timeout'].to_f
+
+        # Defaults
+        timeout = 10 if timeout < 10
+
+        print binary + ": "
 
         done = 0
         Signal.trap("CHLD") {
@@ -22,7 +34,7 @@ doc.root.each_element('//test/binary') { |binary|
         }
         pid = fork {
                 begin
-                        exec("./" + name)
+                        exec("./" + binary)
                 rescue StandardError => error
                         puts "#{error}\n"
                         exit 1
@@ -39,12 +51,12 @@ doc.root.each_element('//test/binary') { |binary|
         if (done == 1)
                 Process.wait(pid)
                 if ($?.exitstatus == 0)
-                        log_passed.write(name + "\n")
+                        log_passed.write(binary + "\n")
                 else
-                        log_failed.write(name + "\n")
+                        log_failed.write(binary + "\n")
                 end
         else
-                log_killed.write(name + "\n")
+                log_killed.write(binary + "\n")
                 Process.kill("KILL", pid);
                 puts "Test case timed out"
         end

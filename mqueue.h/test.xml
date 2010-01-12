@@ -1,96 +1,104 @@
 <?xml version="1.0"?>
 <list-of-tests>
-t_mq_parent_child.c
-t_mq_parent_child_multmsg.c
-t_mq_prio.c
-t_mq_select.c
-t_mq_send.c
-t_mq_setattr.c
-t_mq_timedreceive_timeout.c
-t_mq_timedsend.c
-t_mq_timedsend_timeout.c
+
   <test>
     <desc>oflag vs mode_t ambiguity exploration</desc>
-    <binary timeout="5">t_mq_ambig</binary>
+    <binary>t_mq_ambig</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Closes a message queue</desc>
-    <binary timeout="5">t_mq_close</binary>
+    <binary>t_mq_close</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Message queue notification</desc>
-    <binary timeout="5">t_mq_notify_simple</binary>
+    <binary>t_mq_notify_simple</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Opens a message queue</desc>
-    <binary timeout="5">t_mq_open</binary>
+    <binary>t_mq_open</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Opens and closes a message queue</desc>
-    <binary timeout="5">t_mq_open_close</binary>
+    <binary>t_mq_open_close</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Opens and closes a message queue</desc>
-    <binary timeout="5">t_mq_open_umask</binary>
+    <binary>t_mq_open_umask</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Parent - Child</desc>
-    <binary timeout="5">t_mq_parent_child</binary>
+    <binary>t_mq_parent_child</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Parent - Child - Mult messages</desc>
-    <binary timeout="5">t_mq_parent_child_multmsg</binary>
+    <binary>t_mq_parent_child_multmsg</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Message queues priorities</desc>
-    <binary timeout="5">t_mq_prio</binary>
+    <binary>t_mq_prio</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Timeouts while waiting to send</desc>
-    <binary timeout="5">halt.sh</binary>
+    <binary>halt.sh</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Select</desc>
-    <binary timeout="5">t_mq_select</binary>
+    <binary>t_mq_select</binary>
+    <timeout>10</timeout>
+    <optional>yes</optional>	
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Sends</desc>
-    <binary timeout="5">t_mq_send</binary>
+    <binary>t_mq_send</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Sets the attributes</desc>
-    <binary timeout="5">t_mq_setattr</binary>
+    <binary>t_mq_setattr</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
   <test>
     <desc>Timeouts while waiting to receive</desc>
-    <binary timeout="5">t_mq_timedreceive_timeout</binary>
+    <binary>t_mq_timedreceive_timeout</binary>
+    <timeout>10</timeout>
     <covers>foo</covers>
   </test>
 
 </list-of-tests>
+
