@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-int main(void)
+int
+main(void)
 {
 	struct timespec clres;
 	int monotonic = 0;
