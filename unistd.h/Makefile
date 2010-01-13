@@ -71,7 +71,7 @@ t_fchdir_suid: t_fchdir_suid.c
 	sudo chmod u+s ./t_fchdir_suid	# set setuid bit
 
 t_fork_buf: t_fork_buf.c
-	$(CC) $(CCFLAGS) t_fork_buf.c -o t_fork_buf	
+	$(CC) $(CCFLAGS) t_fork_buf.c -o t_fork_buf
 
 t_fork_signal: t_fork_signal.c
 	$(CC) $(CCFLAGS) t_fork_signal.c -o t_fork_signal
