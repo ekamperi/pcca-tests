@@ -11,6 +11,7 @@ log_failed = File.open("log.failed", "w+")
 log_killed = File.open("log.killed", "w+")
 
 doc.root.each_element('//test') { |t|
+        # Convert array of elements to hash table.
         elms_a = t.elements().to_a
         keys = []
         values = []
@@ -20,12 +21,15 @@ doc.root.each_element('//test') { |t|
         }
         elms_h = Hash[*keys.zip(values).flatten]
 
+        # Extract properties
         binary  = elms_h['binary']
         timeout = elms_h['timeout'].to_f
+        optional= elms_h['optional']
 
         # Defaults
         timeout = 10 if timeout < 10
 
+        print "[optional] " if optional
         print binary + ": "
 
         done = 0
@@ -61,6 +65,8 @@ doc.root.each_element('//test') { |t|
                 puts "Test case timed out"
         end
 
+        # Flush buffers or else they me cloned across fork() and duplicate output
+        # be written to disk!
         log_passed.flush
         log_failed.flush
         log_killed.flush
