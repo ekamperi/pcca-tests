@@ -77,7 +77,7 @@ main(void)
 
 	/*
 	 * Since we are on blocking mode, any invalid `nsec' field in the
-	 * timeout structure we provide to mq_timedsend() shall result in an
+	 * timeout structure we provide to mq_timedsend(), shall result in an
 	 * EINVAL error.
 	 */
 	struct timespec now, timeout;
@@ -92,10 +92,10 @@ main(void)
 	}
 
 	/* Disassociate from message queue. */
-	mq_close(md);
+	assert(mq_close(md) != -1);
 
 	/* Remove message queue from the system. */
-	mq_unlink(MQNAME);
+	assert(mq_unlink(MQNAME) != -1);
 
 	printf("passed\n");
 
