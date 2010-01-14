@@ -64,7 +64,7 @@ t_mq_timedsend: t_mq_timedsend.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_timedsend.c -o t_mq_timedsend
 
 t_mq_timedsend2: t_mq_timedsend2.c
-	$(CC) $(CCFLAGS) $(LIB) t_mq_timedsend2.c -o t_mq_timedsend2.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_timedsend2.c -o t_mq_timedsend2
 
 t_mq_timedreceive_timeout: t_mq_timedreceive_timeout.c
 	$(CC99) $(CCFLAGS) $(LIB) t_mq_timedreceive_timeout.c -o t_mq_timedreceive_timeout
