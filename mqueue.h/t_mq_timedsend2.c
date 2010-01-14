@@ -45,7 +45,7 @@ struct {
 	{ 0, -LONG_MAX	},
 	{ 0, 1000000000	},
 	{ 0, 1000000001	},
-	{ 0, +LONG_MAX	}
+	{ 0, +LONG_MAX	},
 
         { 1, -1         },
         { 1, -LONG_MAX  },
@@ -80,7 +80,7 @@ main(void)
 	 * timeout structure we provide to mq_timedsend(), shall result in an
 	 * EINVAL error.
 	 */
-	struct timespec now, timeout;
+	struct timespec timeout;
 	size_t i;
 
 	for (i = 0; i < sizeof(tstable) / sizeof(tstable[0]); i++) {
