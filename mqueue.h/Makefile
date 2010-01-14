@@ -115,6 +115,9 @@ run:
 	@printf "t_mq_timedsend: "
 	@-./t_mq_timedsend
 
+	@printf "t_mq_timedsend2: "
+	@-./t_mq_timedsend2
+
 	@printf "t_mq_timedreceive_timeout: "
 	@-./t_mq_timedreceive_timeout
 
