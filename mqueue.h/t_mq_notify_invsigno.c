@@ -26,6 +26,7 @@
  */
 
 #include <assert.h>
+#include <errno.h>
 #include <limits.h>	/* for INT_MAX */
 #include <mqueue.h>
 #include <signal.h>
@@ -63,8 +64,15 @@ main(void)
 	sigev.sigev_value.sival_int = (int)md;
 #endif
 
-	/* XXX: OpenSolaris returns -1/EINVAL. */
-	assert(mq_notify(md, &sigev) != -1);
+	/*
+	 * POSIX (up untill issue 7) doesn't specify an error condition for
+	 * invalid signal numbers. OpenSolaris and NetBSD (perhaps others too)
+	 * return -1/EINVAL.
+	 */
+	if (mq_notify(md, &sigev) == -1) {
+		assert(errno == EINVAL);
+		goto PASSED;
+	}
 
 	/* Give it a break (!) */
 	sleep(1);
@@ -72,8 +80,15 @@ main(void)
 	/*
 	 * We send a message to the queue so that the transition
 	 * empty->non empty takes place and the signal is raised.
+	 * This could pontentially crash the OS!
 	 */
 	assert(mq_send(md, "foo", sizeof("foo"), 0) != -1);
+
+PASSED:
+	/*
+	 * If we have reached so far (i.e., the system didn't panic), we
+	 * consider the run as successful.
+	 */
 
 	/* Disassociate with message queue. */
 	assert(mq_close(md) != -1);
@@ -81,10 +96,6 @@ main(void)
 	/* Remove the message queue from the system. */
 	assert(mq_unlink(MQNAME) != -1);
 
-	/*
-	 * If we have reached so far (i.e., the system didn't panic), we
-	 * the run as successful.
-	 */
 	printf("passed\n");
 
 	return (EXIT_SUCCESS);
