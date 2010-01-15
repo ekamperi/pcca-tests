@@ -1,5 +1,6 @@
 all:	t_mq_ambig		\
 	t_mq_close		\
+	t_mq_notify_invsigno	\
 	t_mq_notify_simple	\
 	t_mq_open		\
 	t_mq_open_close		\
@@ -30,6 +31,9 @@ t_mq_ambig: t_mq_ambig.c
 
 t_mq_close: t_mq_close.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_close.c -o t_mq_close
+
+t_mq_notify_invsigno: t_mq_notify_invsigno.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_notify_invsigno.c -o t_mq_notify_invsigno
 
 t_mq_notify_simple: t_mq_notify_simple.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_notify_simple.c -o t_mq_notify_simple
@@ -85,6 +89,9 @@ run:
 
 	@printf "t_mq_close: "
 	@-./t_mq_close
+
+	@printf "t_mq_notify_invsigno: "
+	@-./t_mq_notify_invsigno
 
 	@printf "t_mq_notify_simple: "
 	@-./t_mq_notify_simple
