@@ -7,6 +7,11 @@ A: The first tests were developed as part of the Google Summer of Code project
    appeared to me as the next best choice. After the end of the project, I
    didn't bother changing it for reasons of uniformity.
 
+Q: But, there are a couple of test cases licensed under public domain. Why?
+A: I have taken a few test cases from OpenBSD. They were licensed as public
+   domain and, therefore, I respected original's author wish by leaving them
+   as they are.
+
 
 Q: Why some test cases run slow eventhough my machine is very fast ?
 A: There are test cases that call sleep(...) in order to ensure that
@@ -17,6 +22,18 @@ A: There are test cases that call sleep(...) in order to ensure that
 Q: While building the test cases, I see lots of compile/linking errors. Why ?
 A: This usually happens when the host OS misses some POSIX mandated stuff,
    e.g. doesnt implement utmpx or complex arithmetic support. In this sense,
-   we treat an unbuildable test case, as a failed test case. While running
-   the regression suite these tests will appeas as:
+   we treat an unbuildable test case, as a failed test case. No need to worry.
+   While running the regression suite these tests will appeas as:
    /foo.h/t_bar: failed (test case doesn't exist).
+
+
+Q: Is it possible that my system crashes by running the tests ?
+A: YES, ABSOLUTELY.
+   The test cases excercise many code paths of the host OS. Therefore, they may
+   trigger some deficit and crash your system, cause data corruption or any
+   other conceivable (or not) unpleasant situation.
+   Which is exactly what a test suite is all about: to reveal any concealed
+   bugs. As a matter of fact, some test cases are specifically written in a way
+   to trigger panic's, such as mqueue.h/t_mq_notify_invsigno.
+   DO NOT RUN THE TEST SUITE ON A PRODUCTION MACHINE. LET ME REPEAT IT.
+   DO NOT RUN THE TEST SUITE ON A PRODUCTION MACHINE. Use a tinderbox instead.
