@@ -111,9 +111,6 @@ main(void)
 
 		/* Remove the message queue from the system. */
 		assert(mq_unlink(MQNAME) != -1);
-
-		printf("passed\n");
-
 	} else {
 		/* We are inside the parent. */
 
@@ -129,6 +126,8 @@ main(void)
 			assert(WTERMSIG(status) == SIGABRT);
 			return (EXIT_FAILURE);
 		} else {
+			printf("passed\n");
+
 			return (EXIT_SUCCESS);
 		}
 	}
