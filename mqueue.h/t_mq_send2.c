@@ -27,24 +27,21 @@
 
 #include <assert.h>
 #include <errno.h>
-#include <fcntl.h>
 #include <mqueue.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>	/* memset() */
-#include <time.h>
 #include <unistd.h>	/* fork() */
 #include <sys/wait.h>
 
-#define	MQNAME	"/t_asdasds"
+#define	MQNAME	"/t_mq_send2"
 
 int
 main(void)
 {
 	/* Create a message queue with capacity `1'. */
 	struct mq_attr attr;
-	mqd_t md;
 
 	memset(&attr, 0, sizeof(attr));
 	attr.mq_maxmsg = 1;	/* Maximum number of messages. */
@@ -54,6 +51,8 @@ main(void)
 	 * We intentionally omit the O_NONBLOCK flag as we want our queue to
 	 * operate on blocking mode.
 	 */
+	mqd_t md;
+
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0777, &attr);
 	assert(md != (mqd_t)-1);
 
@@ -79,7 +78,7 @@ main(void)
 			/* priority */ NULL) != -1);
 
 		/*
-		 * There is no point in calling mq_close() here, as normally
+		 * There is no point in calling mq_close() here, as (normally)
 		 * this code block will never be reached. Instead we do it
 		 * inside the parent.
 		 */ 
