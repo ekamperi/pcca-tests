@@ -65,7 +65,7 @@ main(void)
 #endif
 
 	/*
-	 * POSIX (up untill issue 7) doesn't specify an error condition for
+	 * POSIX (up until issue 7) doesn't specify an error condition for
 	 * invalid signal numbers. OpenSolaris and NetBSD (perhaps others too)
 	 * return -1/EINVAL.
 	 */
