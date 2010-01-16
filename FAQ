@@ -36,4 +36,5 @@ A: YES, ABSOLUTELY.
    bugs. As a matter of fact, some test cases are specifically written in a way
    to trigger panic's, such as mqueue.h/t_mq_notify_invsigno.
    DO NOT RUN THE TEST SUITE ON A PRODUCTION MACHINE. LET ME REPEAT IT.
-   DO NOT RUN THE TEST SUITE ON A PRODUCTION MACHINE. Use a tinderbox instead.
+   DO NOT RUN THE TEST SUITE ON A PRODUCTION MACHINE. Use a tinderbox instead or
+   a virtual machine, e.g. VirtualBox.
