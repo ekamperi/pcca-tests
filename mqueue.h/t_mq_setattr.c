@@ -40,8 +40,8 @@ int main(void)
 	/* Invalid (or so we hope) message queue descriptor. */
 	struct mq_attr attr, curattr;
 
-	assert(mq_setattr(-1, &attr, NULL    ) == -1 && errno == EBADF);
-	assert(mq_setattr(-1, &attr, &curattr) == -1 && errno == EBADF);
+	assert(mq_setattr((mqd_t)-1, &attr, NULL    ) == -1 && errno == EBADF);
+	assert(mq_setattr((mqd_t)-1, &attr, &curattr) == -1 && errno == EBADF);
 
 	/*
 	 * mq_getattr() must report the same exact values as those we provided
