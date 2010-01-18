@@ -11,6 +11,7 @@ all:	t_mq_ambig		\
 	t_mq_select		\
 	t_mq_send		\
 	t_mq_send2		\
+	t_mq_send3		\
 	t_mq_setattr		\
 	t_mq_timedsend		\
 	t_mq_timedsend2			\
@@ -64,6 +65,9 @@ t_mq_send: t_mq_send.c
 
 t_mq_send2: t_mq_send2.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_send2.c -o t_mq_send2
+
+t_mq_send3: t_mq_send2.c
+	$(CC) $(CCFLAGS) $(LIB) t_mq_send3.c -o t_mq_send3
 
 t_mq_setattr: t_mq_setattr.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_setattr.c -o t_mq_setattr
@@ -122,6 +126,9 @@ run:
 
 	@printf "t_mq_send2: "
 	@-./t_mq_send2
+
+	@printf "t_mq_send3: "
+	@-./t_mq_send3
 
 	@printf "t_mq_setattr: "
 	@-./t_mq_setattr
