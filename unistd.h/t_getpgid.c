@@ -57,7 +57,7 @@ main(void)
 		/* We are inside the parent. */
 
 		/* Allow the child to create a new session. */
-		sleep(1);
+		assert(sleep(1) == 0);
 
 		/*
 		 * Try to retrieve the process group ID from child which now

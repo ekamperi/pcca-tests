@@ -46,7 +46,7 @@ int main(void)
 	assert(alarm(0) != 0);
 
 	/* Just a sanity check */
-	sleep(2);
+	assert(sleep(2) == 0);
 	assert(generated == 0);
 
 	/*
@@ -54,7 +54,7 @@ int main(void)
 	 * and delivered to us.
 	 */
 	assert(alarm(1) == 0);
-	sleep(2);
+	assert(sleep(2) == 0);
 	assert(generated == 1);
 
 	printf("passed\n");

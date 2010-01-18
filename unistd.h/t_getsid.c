@@ -86,7 +86,7 @@ int main(void)
 		assert(setsid() != (pid_t)-1);
 
 		/* And then sleep for a while, so that parent can probe us. */
-		sleep(2);
+		assert(sleep(2) == 0);
 	}
 
 	return (EXIT_SUCCESS);

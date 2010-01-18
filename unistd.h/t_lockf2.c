@@ -58,11 +58,11 @@ int main(void)
 		 * and the locks held by it released, which will bring us to
 		 * square one.
 		 */
-		sleep(2);
+		assert(sleep(2) == 0);
 	} else {
 		/* We are inside the parent. */
 		/* Sleep a bit, so that the child can acquire the lock. */
-		sleep(1);
+		assert(sleep(1) == 0);
 
 		/*
 		 * Just a sanity check.
