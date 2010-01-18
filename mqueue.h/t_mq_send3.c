@@ -31,7 +31,7 @@ main(void)
 	 */
 	mqd_t md;
 
-	md = mq_open(MQNAME, O_CREAT | O_RDWR, 700, &attr);
+	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_RDWR, 700, &attr);
 	assert(md != (mqd_t)-1);
 
 	/*
