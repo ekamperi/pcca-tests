@@ -54,7 +54,7 @@ int main(void)
 		assert(write(fd[1], "Parent says hello\n", 19) == 19);
 
 		/* Wait for child to complete. */
-		wait(&status);
+		assert(wait(&status) == pid);
 
 		printf("passed\n");
 		
