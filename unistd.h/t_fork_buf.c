@@ -93,7 +93,7 @@ main(void)
 
 		size_t cnt = 0;
 		char buf[1024];
-		while(!feof(fp)) {			
+		while(!feof(fp)) {
 			if (fgets(buf, sizeof(buf), fp) == NULL) {
 				assert(feof(fp));
 				break;
