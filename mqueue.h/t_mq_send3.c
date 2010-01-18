@@ -58,13 +58,14 @@ main(void)
 		 * can hold. In the last message, the mq_send() call will block.
 		 */
 		size_t i;
+
 		for (i = 0; i < NMESSAGES + 1; i++) {
 			assert(mq_send(md, "foo", sizeof("foo"),
 				/* priority */ 0) != -1);
 
 			/*
 			 * Notify the parent that we have sent a message, by
-			 * sending him a signal.
+			 * sending her a `SIGUSR1' signal.
 			 */
 			assert(kill(getppid(), SIGUSR1) != -1);
 		}
@@ -79,10 +80,11 @@ main(void)
 		assert(sigaction(SIGUSR1, &sa, 0) != -1);
 
 		size_t i;
+
 		for (i = 0; i < NMESSAGES + 1; i++) {
 			/*
 			 * The value returned by sleep() is the `unslept'
-			 * amount.
+			 * amount of time.
 			 */
 			if (sleep(2) == 0) {
 				/*
@@ -97,7 +99,7 @@ main(void)
 		assert(i < NMESSAGES);
 
 		/*
-		 * We receive a message from the queue.
+		 * We drain a message from the queue.
 		 * This should normally cause the child that is blocked on
 		 * mq_send() to unblock and complete.
 		 */
@@ -107,7 +109,7 @@ main(void)
 
 		rv = mq_receive(md, buf, sizeof(buf), &prio);
 		if (rv == -1) {
-			/* Kill child. */
+			/* Kill child (which is blocked). */
 			assert(kill(pid, SIGKILL) != -1);
 
 			/* Probe its status to make sure it's gone. */
@@ -120,18 +122,21 @@ main(void)
 
 		/*
 		 * At this point the child has been unblocked and sent us the
-		 * last message along with the last SIGUSR1 signal.
+		 * last message along with the last `SIGUSR1' signal.
 		 */
-		rv = sleep(3);
+		rv = sleep(2);
 		if (rv == 0) {
 			/* Kill child. */
 			assert(kill(pid, SIGKILL) != -1);
+
+			/* Abort. */
 			assert(rv != 0);
 		}
 
 		/* We are done -- cleanup */
 		assert(mq_close(md) != -1);
 		assert(mq_unlink(MQNAME) != -1);
+
 		printf("passed\n");
 
 		return (EXIT_SUCCESS);
