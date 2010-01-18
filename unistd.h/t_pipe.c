@@ -28,11 +28,15 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 
-int main(void)
+#define MESSAGE "Parent says hello"
+
+int
+main(void)
 {
 	char buf[1024];
 	int fd[2], status;
@@ -51,7 +55,8 @@ int main(void)
 	if (pid != 0) {
 		/* We are inside the parent. */
 		assert(close(fd[0]) != -1);
-		assert(write(fd[1], "Parent says hello\n", 19) == 19);
+		assert(write(fd[1], MESSAGE, sizeof(MESSAGE))
+		    == sizeof(MESSAGE));
 
 		/* Wait for child to complete. */
 		assert(wait(&status) == pid);
@@ -61,7 +66,9 @@ int main(void)
 	} else {
 		/* We are inside the child. */
 		assert(close(fd[1]) != -1);
-		assert(read(fd[0], buf, sizeof(buf)) == 19);
+		assert(read(fd[0], buf, sizeof(buf)) == sizeof(MESSAGE));
+		assert(strncmp(buf, MESSAGE, sizeof(buf)) == 0);
+
 	}
 
 	return (EXIT_SUCCESS);
