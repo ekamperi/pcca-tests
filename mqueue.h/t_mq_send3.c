@@ -9,8 +9,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#define MQNAME "/t_mq_send3"
-#define NMESSAGES 5
+#define MQNAME    "/t_mq_send3"
+#define NMESSAGES 10
 
 /* Function prototypes. */
 static void intrhandler(int signo);
@@ -64,7 +64,7 @@ main(void)
 				/* priority */ 0) != -1);
 
 			/*
-			 * Notify the parent that we have sent a message, by
+			 * Notify the parent that we have sent her a message, by
 			 * sending her a `SIGUSR1' signal.
 			 */
 			assert(kill(getppid(), SIGUSR1) != -1);
