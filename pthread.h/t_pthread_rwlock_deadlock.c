@@ -49,7 +49,7 @@ int main(void)
 	 * implementation supports deadlock detection. Instead, we sleep for
 	 * 1 second.
 	 */
-	sleep(1);
+	assert(sleep(1) == 0);
 
 	assert(!isdeadlock);
 
