@@ -27,20 +27,15 @@
 
 #include <assert.h>
 #include <mqueue.h>
-#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>	/* memset() */
-#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
 #define MQNAME    "/t_mq_send3"
 #define NMESSAGES 10
-
-/* Function prototypes. */
-static void intrhandler(int signo);
 
 int
 main(void)
@@ -103,7 +98,6 @@ main(void)
 		 * is the first to be delivered.
 		 */
 		char buf[1024];
-		int rv;
 		unsigned int prio;
 
 		/*
