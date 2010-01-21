@@ -53,11 +53,17 @@ printf "\tPerl   : $PERLLOC\n"
 NPASSED=$(find "$DIR" -name .git -prune -o \( -name "log.passed" -print \) \
     2>/dev/null | xargs cat | wc -l)
 
-# Number of tests that failed
-NFAILED=$(find "$DIR" -name .git -prune -o \( -name "log.failed" -print \) \
-    2>/dev/null | xargs cat | wc -l)
+
+# Number of tests that failed during runtime
+NFAILED_BUILDTIME=$(find "$DIR" -name .git -prune -o \
+    \( -name "log.failed-runtime" -print \) 2>/dev/null | xargs cat | wc -l)
+
+# Number of tests that failed to build
+NFAILED_RUNTIME=$(find "$DIR" -name .git -prune -o \
+    \( -name "log.failed-buildtime" -print \) 2>/dev/null | xargs cat | wc -l)
 
 echo
 echo ">>> Results from last run"
-printf "\tPassed : $NPASSED\n"
-printf "\tFailed : $NFAILED\n"
+printf "\tPassed         : $NPASSED\n"
+printf "\tFailed to run  : $NFAILED_BUILDTIME\n"
+printf "\tFailed to build: $NFAILED_RUNTIME\n"

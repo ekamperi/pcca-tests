@@ -8,10 +8,12 @@ cd "$1"
 
 # Remove log files from previous runs.
 LOGPASSED="log.passed"
-LOGFAILED="log.failed"
+LOGFAILED_RUNTIME="log.failed-runtime"
+LOGFAILED_BUILDTIME="log.failed-buildtime"
 
-rm -f "$LOGPASSED" 2>/dev/null
-rm -f "$LOGFAILED" 2>/dev/null
+rm -f "$LOGPASSED"           2>/dev/null
+rm -f "$LOGFAILED_BUILDTIME" 2>/dev/null
+rm -f "$LOGFAILED_RUNTIME"   2>/dev/null
 
 # Every directory with test cases contains a `tfile' listing  which test cases
 # are supposed to be run. The entries of this file are basically the names
@@ -33,11 +35,11 @@ do
     fi
 
     # If we can't find the binary, most likely it failed to build during
-    # compilation. We treat this as a failed test case.
+    # compilation. We treat this as a failed test case, by logging it as such.
     if [ ! -x "$task" ]
     then
 	echo "failed (test does not exist)"
-	echo "$1/$task" >> "$LOGFAILED"
+	echo "$1/$task" >> "$LOGFAILED_BUILDTIME"
 	continue
     fi
 
@@ -73,7 +75,6 @@ do
     if wait $pid; then
 	echo "$1/$task" >> "$LOGPASSED"
     else
-	echo "$1/$task" >> "$LOGFAILED"
+	echo "$1/$task" >> "$LOGFAILED_RUNTIME"
     fi
 done < tfile
-
