@@ -66,7 +66,7 @@ t_mq_send: t_mq_send.c
 t_mq_send2: t_mq_send2.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_send2.c -o t_mq_send2
 
-t_mq_send3: t_mq_send2.c
+t_mq_send3: t_mq_send3.c
 	$(CC) $(CCFLAGS) $(LIB) t_mq_send3.c -o t_mq_send3
 
 t_mq_setattr: t_mq_setattr.c
