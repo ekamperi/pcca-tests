@@ -1,19 +1,41 @@
+/*
+ * Copyright (c) 2010, Stathis Kamperis
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE
+ * COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+
 #include <assert.h>
 #include <mqueue.h>
-#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>	/* memset() */
-#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
-#define MQNAME "/t_mq_send3"
-#define NMESSAGES 5
-
-/* Function prototypes. */
-static void intrhandler(int signo);
+#define MQNAME    "/t_mq_send3"
+#define NMESSAGES 10
 
 int
 main(void)
@@ -50,8 +72,6 @@ main(void)
 
 	if (pid == 0) {
 		/* We are inside the child. */
-		/* Sleep a bit so that parent manages to setup the handler. */
-		assert(sleep(1) == 0);
 
 		/*
 		 * Send one more message than the maximum messages the queue
@@ -61,77 +81,41 @@ main(void)
 
 		for (i = 0; i < NMESSAGES + 1; i++) {
 			assert(mq_send(md, "foo", sizeof("foo"),
-				/* priority */ 0) != -1);
-
-			/*
-			 * Notify the parent that we have sent a message, by
-			 * sending her a `SIGUSR1' signal.
-			 */
-			assert(kill(getppid(), SIGUSR1) != -1);
+				/* priority */ i + 1) != -1);
 		}
 	} else {
-		/* We are inside the parent. */
-		/* Setup signal handler. */
-		struct sigaction sa;
-
-		sa.sa_handler = intrhandler;
-		sa.sa_flags = 0;
-		assert(sigemptyset(&sa.sa_mask) != -1);
-		assert(sigaction(SIGUSR1, &sa, 0) != -1);
-
-		size_t i;
-
-		for (i = 0; i < NMESSAGES + 1; i++) {
-			/*
-			 * The value returned by sleep() is the `unslept'
-			 * amount of time.
-			 */
-			if (sleep(2) == 0) {
-				/*
-				 * If sleep() completed, child is most likely
-				 * being blocked on mq_send().
-				 */
-				break;
-			}
-		}
-
-		/* If child never blocked, it's a failure. */
-		assert(i < NMESSAGES);
+		/*
+		 * We are inside the parent.
+		 *
+		 * Sleep a bit so that child takes its time to block on
+		 * mq_send().
+		 */
+		assert(sleep(2) == 0);
 
 		/*
-		 * We drain a message from the queue.
-		 * This should normally cause the child that is blocked on
-		 * mq_send() to unblock and complete.
+		 * Start draining messages from the queue.
+		 * Messages are sent with increasing priority, so the last sent
+		 * is the first to be delivered.
 		 */
 		char buf[1024];
-		int rv;
 		unsigned int prio;
 
-		rv = mq_receive(md, buf, sizeof(buf), &prio);
-		if (rv == -1) {
-			/* Kill child (which is blocked). */
-			assert(kill(pid, SIGKILL) != -1);
+		/*
+		 * 10th message --
+		 * this means that the last mq_send() call blocked.
+		 */
+		assert(mq_receive(md, buf, sizeof(buf), &prio) != -1);
+		assert(prio == NMESSAGES);
 
-			/* Probe its status to make sure it's gone. */
-			int status;
-			assert(wait(&status) == pid);
-
-			/* Abort. */
-			assert(rv != -1);
-		}
+		assert(sleep(1) == 0);
 
 		/*
-		 * At this point the child has been unblocked and sent us the
-		 * last message along with the last `SIGUSR1' signal.
+		 * 11th message --
+		 * this means that the last mq_send() call unblocked as it ought
+		 * to.
 		 */
-		rv = sleep(2);
-		if (rv == 0) {
-			/* Kill child. */
-			assert(kill(pid, SIGKILL) != -1);
-
-			/* Abort. */
-			assert(rv != 0);
-		}
+		assert(mq_receive(md, buf, sizeof(buf), &prio) != -1);
+		assert(prio == NMESSAGES + 1);
 
 		/* We are done -- cleanup */
 		assert(mq_close(md) != -1);
@@ -142,15 +126,6 @@ main(void)
 		return (EXIT_SUCCESS);
 	}
 
-	/* Only reached by child. */
+	/* Only reached by the child. */
 	return (EXIT_SUCCESS);
-}
-
-static void
-intrhandler(int signo)
-{
-	/* To keep compiler happy. */
-	(void)signo;
-
-	return;
 }
