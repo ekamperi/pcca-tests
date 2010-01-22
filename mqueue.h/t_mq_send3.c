@@ -71,9 +71,9 @@ main(void)
 	assert(pid != -1);
 
 	if (pid == 0) {
-		/* We are inside the child. */
-
 		/*
+		 * We are inside the child.
+		 *
 		 * Send one more message than the maximum messages the queue
 		 * can hold. In the last message, the mq_send() call will block.
 		 */
@@ -101,7 +101,7 @@ main(void)
 		unsigned int prio;
 
 		/*
-		 * 10th message --
+		 * Deliver 10th message --
 		 * this means that the last mq_send() call blocked.
 		 */
 		assert(mq_receive(md, buf, sizeof(buf), &prio) != -1);
@@ -110,7 +110,7 @@ main(void)
 		assert(sleep(1) == 0);
 
 		/*
-		 * 11th message --
+		 * Deliver 11th message --
 		 * this means that the last mq_send() call unblocked as it ought
 		 * to.
 		 */
