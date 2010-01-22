@@ -10,5 +10,5 @@ else
     STARTDIR="."
 fi
 
-find "$STARTDIR" -name .git -prune -o \( -type f -name "log.failed" -exec \
+find "$STARTDIR" -name .git -prune -o \( -type f -name "log.failed-*" -exec \
     cat {} \; \) 2>/dev/null | sort
