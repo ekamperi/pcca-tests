@@ -1,12 +1,12 @@
-all:	t_fmax \
-	t_fmaxf	\
-	t_fmaxl	\
-	t_fmin	\
-	t_fminf	\
-	t_fminl	\
-	t_fdim	\
-	t_fdimf	\
-	t_fdiml \
+all:	t_fmax		\
+	t_fmaxf		\
+	t_fmaxl		\
+	t_fmin		\
+	t_fminf		\
+	t_fminl		\
+	t_fdim		\
+	t_fdimf		\
+	t_fdiml 	\
 	t_tgamma	\
 	t_generr	\
 	t_log		\
