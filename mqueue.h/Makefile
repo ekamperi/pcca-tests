@@ -1,19 +1,19 @@
-all:	t_mq_ambig		\
-	t_mq_close		\
-	t_mq_notify_invsigno	\
-	t_mq_notify_simple	\
-	t_mq_open		\
-	t_mq_open_close		\
-	t_mq_open_umask		\
-	t_mq_parent_child	\
+all:	t_mq_ambig			\
+	t_mq_close			\
+	t_mq_notify_invsigno		\
+	t_mq_notify_simple		\
+	t_mq_open			\
+	t_mq_open_close			\
+	t_mq_open_umask			\
+	t_mq_parent_child		\
 	t_mq_parent_child_multmsg	\
-	t_mq_prio		\
-	t_mq_select		\
-	t_mq_send		\
-	t_mq_send2		\
-	t_mq_send3		\
-	t_mq_setattr		\
-	t_mq_timedsend		\
+	t_mq_prio			\
+	t_mq_select			\
+	t_mq_send			\
+	t_mq_send2			\
+	t_mq_send3			\
+	t_mq_setattr			\
+	t_mq_timedsend			\
 	t_mq_timedsend2			\
 	t_mq_timedreceive_timeout	\
 	t_mq_timedsend_timeout		\
