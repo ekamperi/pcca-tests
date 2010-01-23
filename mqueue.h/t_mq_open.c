@@ -28,70 +28,89 @@
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <limits.h>	/* for LONG_MAX */
 #include <mqueue.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>	/* memset() */
 
-#define	MQNAME	"/t_mq_open"
-#define	PATH_MAX 1024	/* XXX */
+#define	MQNAME	"/t_mq_opensws"
 
-int main(void)
+int
+main(void)
 {
-	mqd_t md, md2;
+	mqd_t md;
 
+	/* ------------------------------------------------------------------ */
 	/* Empty message queue name. */
-	assert(mq_open("", O_CREAT | O_EXCL | O_RDWR, 0777, NULL) == (mqd_t)-1
+	assert(mq_open("", O_CREAT | O_EXCL | O_RDWR, 0700, NULL) == (mqd_t)-1
 	    && errno == EINVAL);
 
+
+	/* ------------------------------------------------------------------ */
 	/* O_CREAT is not set and the named mqueue doesn't exist. */
-	md = mq_open("nonexistentmqueuename", O_WRONLY, 0700, NULL);
-	assert (md == (mqd_t)-1 && errno == ENOENT);
+	assert(mq_open("/t_mq_definitelydoesntexist", O_RDWR, 0700, NULL)
+	       == (mqd_t)-1 && errno == ENOENT);
 
-	/* Pathname is too long. */
-	char *pathname = malloc(2 * PATH_MAX);
+
+	/* ------------------------------------------------------------------ */
+	/* Pathname is too long. XXX Probe host OS to real report PATH_MAX. */
+	char *pathname =  malloc(65536);
 	assert(pathname != NULL);
-	memset(pathname, 0xff, 2 * PATH_MAX);	/* Make sure we don't terminate
-						   prematurely. */
 
-	md = mq_open(pathname, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
-	assert(md == (mqd_t)-1 && errno == ENAMETOOLONG);
+	/* Make sure we don't terminate prematurely. */
+	memset(pathname, 0xFF, 65536);
+
+	assert(mq_open(pathname, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL)
+	       == -1 && errno == ENAMETOOLONG);
 	free(pathname);
 
-	/* Name already exists and O_CREAT, O_EXCL are both set. */
+
+	/* ------------------------------------------------------------------ */
+	/* Message queue already exists and O_CREAT, O_EXCL are both set. */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
 	assert(md != (mqd_t)-1);
 
 	assert(mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL)
 	       == (mqd_t)-1 && errno == EEXIST);
-	mq_close(md);
-	mq_unlink(MQNAME);
 
+	assert(mq_close(md) != -1);
+	assert(mq_unlink(MQNAME) != -1);
+
+
+        /* ------------------------------------------------------------------ */
 	/* Try to open a read only message queue for write. */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL, 0400, NULL);
 	assert(md != (mqd_t)-1);
 
-	md2 = mq_open(MQNAME, O_RDWR);
-	assert(md2 == (mqd_t)-1 && errno == EACCES);
+	assert(mq_open(MQNAME, O_RDWR)   == (mqd_t)-1 && errno == EACCES);
+	assert(mq_open(MQNAME, O_WRONLY) == (mqd_t)-1 && errno == EACCES);
 
-	md2 = mq_open(MQNAME, O_WRONLY);
-	assert(md2 == (mqd_t)-1 && errno == EACCES);
+	assert(mq_close(md) != -1);
+	assert(mq_unlink(MQNAME) != -1);
 
-	mq_close(md);
-	mq_unlink(MQNAME);
 
+	/* ------------------------------------------------------------------ */
 	/* Try to open a write only message queue for read. */
 	md = mq_open(MQNAME, O_CREAT | O_EXCL, 0200, NULL);
 	assert(md != (mqd_t)-1);
 
-	md2 = mq_open(MQNAME, O_RDWR);
-	assert(md2 == (mqd_t)-1 && errno == EACCES);
+	assert(mq_open(MQNAME, O_RDWR)   == (mqd_t)-1 && errno == EACCES);
+	assert(mq_open(MQNAME, O_RDONLY) == (mqd_t)-1 && errno == EACCES);
 
-	md2 = mq_open(MQNAME, O_RDONLY);
-	assert(md2 == (mqd_t)-1 && errno == EACCES);
+	assert(mq_close(md) != -1);
+	assert(mq_unlink(MQNAME) != -1);
 
-	mq_close(md);
-	mq_unlink(MQNAME);
+
+	/* ------------------------------------------------------------------ */
+	/* Try to open a queue with enormous capacity. */
+	struct mq_attr attr;
+
+	memset(&attr, 0, sizeof(attr));
+	attr.mq_maxmsg = LONG_MAX;
+	attr.mq_msgsize = 1024;
+
+	assert(mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, &attr) == -1);
 
 	printf("passed\n");
 
