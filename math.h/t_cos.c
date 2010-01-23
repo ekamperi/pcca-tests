@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009, Stathis Kamperis
+ * Copyright (c) 2010, Stathis Kamperis
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
