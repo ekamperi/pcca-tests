@@ -1,4 +1,5 @@
-all:	t_fmax		\
+all:	t_cos		\
+	t_fmax		\
 	t_fmaxf		\
 	t_fmaxl		\
 	t_fmin		\
@@ -23,6 +24,9 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 LIB=-lm
+
+t_cos: t_cos.c
+	$(CC) $(CCFLAGS) $(LIB) t_cos.c -o t_cos
 
 t_fmax: t_fmax.c
 	$(CC) $(CCFLAGS) $(LIB) t_fmax.c -o t_fmax
@@ -76,6 +80,9 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_cos: "
+	@-./t_cos
+
 	@printf "t_fmax: "
 	@-./t_fmax
 
