@@ -33,7 +33,7 @@
 #include <stdlib.h>
 #include <string.h>	/* memset() */
 
-#define	MQNAME	"/t_mq_send_dos11"
+#define	MQNAME	"/t_mq_send_dos"
 
 int
 main(void)
@@ -46,15 +46,18 @@ main(void)
 	mqd_t md;
 
 	memset(&attr, 0, sizeof(attr));
-	attr.mq_maxmsmsgsizemsgsizecsg = 10;	/* Maximum number of messages. */
-	attr.mq_msgsize = 1024;	/* Maximum message size. */
+	attr.mq_maxmsg = LONG_MAX;	/* Maximum number of messages. */
+	attr.mq_msgsize = 1024;		/* Maximum message size. */
 
-	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0777, &attr);
-	perror("");
-	assert(md != (mqd_t)-1);
+	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, &attr);
+	if (md == (mqd_t)-1) {
+		assert(errno == EINVAL);
+		printf("passed\n");
+		return (EXIT_SUCCESS);
+	}
 
-	/* Start sending messages perpetially. */
-	cgar buf[1024];
+	/* Start sending messages untill we eat up all memory. */
+	char buf[1024];
 	long i;
 
 	for (i = 0; i < LONG_MAX; i++)
@@ -62,6 +65,8 @@ main(void)
 
 	assert(mq_close(md) != -1);
 	assert(mq_unlink(MQNAME) != -1);
+
+	printf("passed (Oh My God!)\n");
 
 	return (EXIT_SUCCESS);
 }
