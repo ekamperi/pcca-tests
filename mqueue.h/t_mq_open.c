@@ -34,7 +34,7 @@
 #include <stdlib.h>
 #include <string.h>	/* memset() */
 
-#define	MQNAME	"/t_mq_opensws"
+#define	MQNAME	"/t_mq_open"
 
 int
 main(void)
