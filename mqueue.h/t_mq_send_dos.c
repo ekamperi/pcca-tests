@@ -56,7 +56,7 @@ main(void)
 		return (EXIT_SUCCESS);
 	}
 
-	/* Start sending messages untill we eat up all memory. */
+	/* Start sending messages until we eat up all memory. */
 	char buf[1024];
 	long i;
 
