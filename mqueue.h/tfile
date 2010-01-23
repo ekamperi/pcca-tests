@@ -11,6 +11,7 @@ t_mq_select
 t_mq_send
 t_mq_send2
 t_mq_send3
+t_mq_send_dos
 t_mq_setattr
 t_mq_timedsend
 t_mq_timedsend2
