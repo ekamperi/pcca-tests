@@ -76,7 +76,7 @@ main(void)
 
 	N = sizeof(ttable) / sizeof(struct tentry);
 	for (i = 0; i < N; i++)
-		assert(fabs(tgamma(ttable[i].x) - ttable[i].y) < 0.01);
+		assert(fabs(tgamma(ttable[i].x) - ttable[i].y) < 0.001);
 
 	/* If x is NaN, a NaN shall be returned. */
 	assert(isnan(tgamma(nan(""))) != 0);
