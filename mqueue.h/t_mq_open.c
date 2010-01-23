@@ -54,7 +54,7 @@ main(void)
 
 
 	/* ------------------------------------------------------------------ */
-	/* Pathname is too long. XXX Probe host OS to real report PATH_MAX. */
+	/* Pathname is too long. XXX Probe host OS to report real PATH_MAX. */
 	char *pathname =  malloc(65536);
 	assert(pathname != NULL);
 
