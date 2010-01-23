@@ -58,7 +58,7 @@ main(void)
 	assert(signbit(nearbyint(+0.0)) == 0);
 	assert(signbit(nearbyint(-0.0)) != 0);
 
-	/* If x is ±Inf, x shall be returned. */
+	/* If x is +/-Inf, x shall be returned. */
 #ifdef INFINITY
 	double x;
 
