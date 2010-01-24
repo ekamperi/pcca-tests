@@ -61,17 +61,17 @@ main(void)
 	/* Make sure we don't terminate prematurely. */
 	memset(pathname, 0xFF, 65536);
 
-	assert(mq_open(pathname, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL)
+	assert(mq_open(pathname, O_CREAT | O_EXCL | O_RDWR, 0700, NULL)
 	       == -1 && errno == ENAMETOOLONG);
 	free(pathname);
 
 
 	/* ------------------------------------------------------------------ */
 	/* Message queue already exists and O_CREAT, O_EXCL are both set. */
-	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
+	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_RDWR, 0700, NULL);
 	assert(md != (mqd_t)-1);
 
-	assert(mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL)
+	assert(mq_open(MQNAME, O_CREAT | O_EXCL | O_RDWR, 0700, NULL)
 	       == (mqd_t)-1 && errno == EEXIST);
 
 	assert(mq_close(md) != -1);
@@ -110,7 +110,7 @@ main(void)
 	attr.mq_maxmsg = LONG_MAX;
 	attr.mq_msgsize = 1024;
 
-	assert(mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, &attr) == -1);
+	assert(mq_open(MQNAME, O_CREAT | O_EXCL | O_RDWR, 0700, &attr) == -1);
 
 	printf("passed\n");
 
