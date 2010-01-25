@@ -6,7 +6,7 @@ include REXML
 Dir.chdir("#{ARGV[0]}")
 puts Dir.pwd
 
-file = File.new("test.xml")
+file = File.new("tfile.xml")
 doc = Document.new(file)
 
 log_passed = File.open("log.passed", "w+")
@@ -37,7 +37,7 @@ doc.root.each_element('//test') { |t|
                 timeout = 10 if timeout < 10
 
                 print "[#{cnt}/#{iterations}] " + binary + ": "
-                print "[optional] " if optional        
+                print "[optional] " if optional == "true"
 
                 done = 0
                 Signal.trap("CHLD") {
