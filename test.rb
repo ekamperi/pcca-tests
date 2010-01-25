@@ -3,6 +3,9 @@
 require 'rexml/document'
 include REXML
 
+Dir.chdir("#{ARGV[0]}")
+puts Dir.pwd
+
 file = File.new("test.xml")
 doc = Document.new(file)
 
