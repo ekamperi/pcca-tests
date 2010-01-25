@@ -60,7 +60,7 @@
 		<desc></desc>
 		<binary>t_pthread_attr_setschedpolicy</binary>
 		<timeout>10</timeout>
-		<iterations>1</iterations>
+		<iterations>10</iterations>
 		<optional>false</optional>
 	</test>
 
