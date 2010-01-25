@@ -56,7 +56,15 @@ main(void)
 		return (EXIT_SUCCESS);
 	}
 
-	/* Start sending messages until we eat up all memory. */
+	/*
+	 * Start sending messages until we consume all memory.
+	 *
+	 * In OSes that implement message queues inside the kernel,
+	 * this could lead to a panic and a denial of service attack.
+	 *
+	 * Such implementations may be found in {Net, DragonFly}BSD, as
+	 * opposed to the userland mqueue incarnation of Solaris.
+	 */
 	char buf[1024];
 	long i;
 
