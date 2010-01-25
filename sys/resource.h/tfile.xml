@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<list-of-tests>
+	<test>
+		<desc></desc>
+		<binary>t_getpriority</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getrlimit</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getrusage</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_setpriority</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_setrlimit</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+</list-of-tests>

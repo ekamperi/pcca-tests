@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<list-of-tests>
+	<test>
+		<desc></desc>
+		<binary>t_ndbm</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+</list-of-tests>

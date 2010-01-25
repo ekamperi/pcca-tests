@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<list-of-tests>
+	<test>
+		<desc></desc>
+		<binary>t_pthread_attr_getdetachstate</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_attr_getguardsize</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_attr_getschedparam</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_attr_getschedpolicy</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_attr_getscope</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_attr_getstack</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_attr_getstacksize</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_attr_setschedpolicy</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_barrier_init</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_barrier_wait</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_barrierattr_getpshared</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_barrierattr_init</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_cond_init</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_cond_wait</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_condattr_init</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_condattr_getclock</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_condattr_getpshared</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_equal</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_getcpuclockid</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_kill</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_rwlock</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_rwlock_init</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_rwlock_deadlock</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_rwlock_timedrdlock</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_rwlock_timedwrlock</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_rwlock_trywrlock</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_setcancelstate</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_setcanceltype</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_spin_init</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_spin_lock</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_spin_lock2</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_testcancel</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pthread_tsdata</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+</list-of-tests>

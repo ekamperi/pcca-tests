@@ -1,0 +1,299 @@
+<?xml version="1.0"?>
+<list-of-tests>
+	<test>
+		<desc></desc>
+		<binary>uleader.sh</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_access</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_access2</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_alarm</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_chdir</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_confstr</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_fchdir</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_fchdir_suid</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_fork_buf</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_fork_signal</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getcwd</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getgroups</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_gethostid</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_gethostname</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getlogin</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getlogin_r</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getpgid</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getpgrp</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getpid</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getppid</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getsid</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_getuid</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_isatty</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_link</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_lockf</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_nice</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_nice_thr</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pause</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pipe</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pipe_fork</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_pipe_thr</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_readlink</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_setregid</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_setregid_priv</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_tcsetpgrp</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_ttyname</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_unistd</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+</list-of-tests>

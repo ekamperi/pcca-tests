@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<list-of-tests>
+	<test>
+		<desc></desc>
+		<binary>t_sem_circbuf</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_sem_destroy</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_sem_getvalue</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_sem_init</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_sem_open</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_sem_pshared</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_sem_timedwait</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_sem_thr</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_sem_trywait</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+	</test>
+
+</list-of-tests>
