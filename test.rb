@@ -4,7 +4,7 @@ require 'rexml/document'
 include REXML
 
 Dir.chdir("#{ARGV[0]}")
-puts Dir.pwd
+#puts Dir.pwd
 
 file = File.new("tfile.xml")
 doc = Document.new(file)
@@ -38,6 +38,13 @@ doc.root.each_element('//test') { |t|
 
                 print "[#{cnt}/#{iterations}] " + binary + ": "
                 print "[optional] " if optional == "true"
+
+                # If we can't find the binary, most likely it failed to build during.
+                # We treat this as a failed test case, by logging it as such.
+                if ! File.exists?(binary)
+                        puts "failed (test case doesn't exist)"
+                        break
+                end
 
                 done = 0
                 Signal.trap("CHLD") {
