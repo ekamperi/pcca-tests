@@ -22,54 +22,59 @@ doc.root.each_element('//test') { |t|
         elms_h = Hash[*keys.zip(values).flatten]
 
         # Extract properties
-        binary  = elms_h['binary']
-        timeout = elms_h['timeout'].to_f
-        optional= elms_h['optional']
+        binary     = elms_h['binary']
+        timeout    = elms_h['timeout'].to_f
+        optional   = elms_h['optional']
+        iterations = elms_h['iterations'].to_i
 
-        # Defaults
-        timeout = 10 if timeout < 10
+        cnt = 0
+        iterations.times {
+                cnt = cnt + 1
+                # Defaults
+                timeout = 10 if timeout < 10
 
-        print "[optional] " if optional
-        print binary + ": "
+                print "[#{cnt}/#{iterations}] " + binary + ": "
+                print "[optional] " if optional        
 
-        done = 0
-        Signal.trap("CHLD") {
-                done = 1
-        }
-        pid = fork {
-                begin
-                        exec("./" + binary)
-                rescue StandardError => error
-                        puts "#{error}\n"
-                        exit 1
+                done = 0
+                Signal.trap("CHLD") {
+                        done = 1
+                }
+                pid = fork {
+                        begin
+                                exec("./" + binary)
+                        rescue StandardError => error
+                                puts "#{error}\n"
+                                exit 1
+                        end
+                }
+
+                start = Time.now
+                while ((Time.now - start) < timeout) do
+                        break if done == 1
+                        sleep 0.1
+                        #puts "sleep"
                 end
-        }
 
-        start = Time.now
-        while ((Time.now - start) < timeout) do
-                break if done == 1
-                sleep 0.5
-                #puts "sleep"
-        end
-
-        if (done == 1)
-                Process.wait(pid)
-                if ($?.exitstatus == 0)
-                        log_passed.write(binary + "\n")
+                if (done == 1)
+                        Process.wait(pid)
+                        if ($?.exitstatus == 0)
+                                log_passed.write(binary + "\n")
+                        else
+                                log_failed.write(binary + "\n")
+                        end
                 else
-                        log_failed.write(binary + "\n")
+                        log_killed.write(binary + "\n")
+                        Process.kill("KILL", pid);
+                        puts "Test case timed out"
                 end
-        else
-                log_killed.write(binary + "\n")
-                Process.kill("KILL", pid);
-                puts "Test case timed out"
-        end
 
-        # Flush buffers or else they me cloned across fork() and duplicate output
-        # be written to disk!
-        log_passed.flush
-        log_failed.flush
-        log_killed.flush
+                # Flush buffers or else they me cloned across fork() and
+                # duplicate output be written to disk!
+                log_passed.flush
+                log_failed.flush
+                log_killed.flush
+        }
 }
 
 log_passed.close()

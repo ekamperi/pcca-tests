@@ -5,99 +5,98 @@
     <desc>oflag vs mode_t ambiguity exploration</desc>
     <binary>t_mq_ambig</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>3</iterations>
   </test>
 
   <test>
     <desc>Closes a message queue</desc>
     <binary>t_mq_close</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>1</iterations>
   </test>
 
   <test>
     <desc>Message queue notification</desc>
     <binary>t_mq_notify_simple</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>1</iterations>
   </test>
 
   <test>
     <desc>Opens a message queue</desc>
     <binary>t_mq_open</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>1</iterations>
   </test>
 
   <test>
     <desc>Opens and closes a message queue</desc>
     <binary>t_mq_open_close</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
   </test>
 
   <test>
     <desc>Opens and closes a message queue</desc>
     <binary>t_mq_open_umask</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>1</iterations>
   </test>
 
   <test>
     <desc>Parent - Child</desc>
     <binary>t_mq_parent_child</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>1</iterations>
   </test>
 
   <test>
     <desc>Parent - Child - Mult messages</desc>
     <binary>t_mq_parent_child_multmsg</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>1</iterations>
   </test>
 
   <test>
     <desc>Message queues priorities</desc>
     <binary>t_mq_prio</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>1</iterations>
   </test>
 
   <test>
     <desc>Timeouts while waiting to send</desc>
     <binary>halt.sh</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>1</iterations>
   </test>
 
   <test>
     <desc>Select</desc>
     <binary>t_mq_select</binary>
     <timeout>10</timeout>
+    <iterations>2</iterations>
     <optional>yes</optional>	
-    <covers>foo</covers>
   </test>
 
   <test>
     <desc>Sends</desc>
     <binary>t_mq_send</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>1</iterations>
   </test>
 
   <test>
     <desc>Sets the attributes</desc>
     <binary>t_mq_setattr</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>1</iterations>
   </test>
 
   <test>
     <desc>Timeouts while waiting to receive</desc>
     <binary>t_mq_timedreceive_timeout</binary>
     <timeout>10</timeout>
-    <covers>foo</covers>
+    <iterations>2</iterations>
   </test>
 
 </list-of-tests>
