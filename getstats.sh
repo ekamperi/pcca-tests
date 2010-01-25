@@ -61,8 +61,13 @@ NFAILED_BUILDTIME=$(find "$DIR" -name .git -prune -o \
 NFAILED_RUNTIME=$(find "$DIR" -name .git -prune -o \
     \( -name "log.failed-buildtime" -print \) 2>/dev/null | xargs cat | wc -l)
 
+# Number of tests that failed to build
+NKILLED=$(find "$DIR" -name .git -prune -o \
+    \( -name "log.killed" -print \) 2>/dev/null | xargs cat | wc -l)
+
 echo
 echo ">>> Results from last run"
 printf "\tPassed         : $NPASSED\n"
 printf "\tFailed to run  : $NFAILED_BUILDTIME\n"
 printf "\tFailed to build: $NFAILED_RUNTIME\n"
+printf "\tKilled         : $NKILLED\n"

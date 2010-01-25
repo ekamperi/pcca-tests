@@ -9,9 +9,10 @@ Dir.chdir("#{ARGV[0]}")
 file = File.new("tfile.xml")
 doc = Document.new(file)
 
-log_passed = File.open("log.passed", "w+")
-log_failed = File.open("log.failed", "w+")
-log_killed = File.open("log.killed", "w+")
+log_passed           = File.open("log.passed", "w+")
+log_failed_buildtime = File.open("log.failed-buildtime", "w+")
+log_failed_runtime   = File.open("log.failed-runtime", "w+")
+log_killed           = File.open("log.killed", "w+")
 
 doc.root.each_element('//test') { |t|
         # Convert array of elements to hash table.
@@ -43,6 +44,7 @@ doc.root.each_element('//test') { |t|
                 # We treat this as a failed test case, by logging it as such.
                 if ! File.exists?(binary)
                         puts "failed (test case doesn't exist)"
+                        log_failed_buildtime.write(binary + "\n")
                         break
                 end
 
@@ -71,22 +73,24 @@ doc.root.each_element('//test') { |t|
                         if ($?.exitstatus == 0)
                                 log_passed.write(binary + "\n")
                         else
-                                log_failed.write(binary + "\n")
+                                log_failed_runtime.write(binary + "\n")
                         end
                 else
-                        log_killed.write(binary + "\n")
                         Process.kill("KILL", pid);
-                        puts "Test case timed out"
+                        log_killed.write(binary + "\n")
+                        puts "killed (test case timed out)"
                 end
 
                 # Flush buffers or else they me cloned across fork() and
                 # duplicate output be written to disk!
                 log_passed.flush
-                log_failed.flush
+                log_failed_buildtime.flush
+                log_failed_runtime.flush
                 log_killed.flush
         }
 }
 
 log_passed.close()
-log_failed.close()
+log_failed_buildtime.close()
+log_failed_runtime.close()
 log_killed.close()
