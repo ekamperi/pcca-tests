@@ -39,11 +39,8 @@
 
 #define	MQNAME	"/t_mq_parent_child_multmsg"
 
-mqd_t md;
-
-static void diep(const char *s);
-
-int main(void)
+int
+main(void)
 {
 	/* Parent recites a poem. */
 	const char *msg[] = { "But I, being poor, have only my dreams;",
@@ -51,90 +48,58 @@ int main(void)
 			      "Tread softly because you tread on my",
 			      "dreams.",
 			      "W.B. Yeats" };
-	size_t i;
-	int rv;
-	pid_t pid;
 
-	/*
-	 * Create a message queue
-	 * Write only and non-block mode with default parameters.
-	 */
-	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_NONBLOCK | O_WRONLY,
-		     0700, NULL);
-	if (md == -1)
-		diep("mq_open");
+	/* Create the message queue.  */
+	mqd_t md;
+	md = mq_open(MQNAME, O_CREAT | O_EXCL | O_WRONLY, 0700, NULL);
+	assert(md != (mqd_t)-1);
 
 	/* Send messages. */
-	for (i = 0; i < sizeof(msg) / sizeof(msg[0]); i++) {
-		rv = mq_send(md, msg[i], strlen(msg[i]) + 1, /* priority */ 0);
-		if (rv == -1)
-			diep("mq_send");
+	size_t i, N;
+
+	N = sizeof(msg) / sizeof(msg[0]);
+	for (i = 0; i < N; i++) {
+		assert(mq_send(md, msg[i], strlen(msg[i]) + 1,
+			/* priority */ 0) != -1);
 	}
 
 	/* Disassociate with message queue. */
-	rv = mq_close(md);
-	if (rv == -1)
-		diep("mq_close");
+	assert(mq_close(md) != -1);
 
 	/* Fork and have child read the message from parent. */
+	pid_t pid;
 	pid = fork();
-	if (pid == -1) {
-		diep("fork");
-	} else if (pid == 0) {
+	assert(pid != -1);
+
+	if (pid == 0) {
 		/* We are inside the child. */
-		md = mq_open(MQNAME, O_RDONLY);
-		if (md == -1)
-			diep("child: mq_open");
+		md = mq_open(MQNAME, O_RDONLY | O_NONBLOCK);
+		assert(md != (mqd_t)-1);
 
 		char msg_recvd[8192];	/* Implementation defined. */
-		for (i = 0; ; i++) {
-			rv = mq_receive(md, msg_recvd, sizeof(msg_recvd), NULL);
-			if (rv == -1) {
-				if (errno == EAGAIN)
-					break;
-				else
-					diep("child: mq_receive");
-
-			}
+		for (i = 0; i < N; i++) {
+			assert(mq_receive(md, msg_recvd, sizeof(msg_recvd),
+				/* priority */ NULL) != -1);
 
 			/*printf("%s\n", msg_recvd);*/
 			assert(strcmp(msg_recvd, msg[i]) == 0);
 		}
 
 		/* Disassociate with message queue. */
-		rv = mq_close(md);
-		if (rv == -1)
-			diep("child: mq_close");
+		assert(mq_close(md) != -1);
 
 		/* Remove the message queue from the system. */
-		rv = mq_unlink(MQNAME);
-		if (rv == -1)
-			diep("mq_unlink");
-
-		printf("passed\n");
+		assert(mq_unlink(MQNAME) != -1);
 	} else {
 		/* We are inside the parent. */
+
+		/* Wait for child to complete. */
 		int status;
-		wait(&status);
+		assert(wait(&status) == pid);
+
+		printf("passed\n");
 	}
 
+	/* Only reached by child. */
 	return EXIT_SUCCESS;
-}
-
-static void
-diep(const char *s)
-{
-	perror(s);
-
-	/*
-	 * Message queues' name & resources are persistent, i.e., they live
-	 * even after the process dies. That's why, disassociate and destroy
-	 * the queue on failure, or else we might end up with zombie queues and
-	 * hit the limit of max open queues.
-	 * Also, we don't care about the return value of the following calls.
-	 */
-	mq_close(md);
-	mq_unlink(MQNAME);
-
-	exit(EXIT_FAILURE);
 }
