@@ -20,9 +20,9 @@ scanheader()
 	    found=$(find ".." -name .git -prune -o \( -type f -name "t_$func.c" \
 		-print \) 2>/dev/null )
 	    if [ ! -z "$found" ]; then
-		echo "UPDATE psx_functions SET test_case = 'yes' WHERE function_name = '$func'"
+		echo "UPDATE psx_functions SET test_case = 'yes' WHERE function_name = '$func';"
 	    else
-		echo "UPDATE psx_functions SET test_cae = 'no'   WHERE function_name = '$func'"
+		echo "UPDATE psx_functions SET test_case = 'no'  WHERE function_name = '$func';"
 	    fi
 	done
     } < "$1"
