@@ -37,8 +37,11 @@ doc.root.each_element('//test') { |t|
                 # Defaults
                 timeout = 10 if timeout < 10
 
-                print "[#{cnt}/#{iterations}] " + binary + ": "
-                print "[optional] " if optional == "true"
+                # If it's a shell script, let it handle the output on its own.
+                if ! (binary =~ /\.sh$/)
+                        print "[#{cnt}/#{iterations}] " + binary + ": "
+                        print "[optional] " if optional == "true"
+                end
 
                 # If we can't find the binary, most likely it failed to build during.
                 # We treat this as a failed test case, by logging it as such.
@@ -66,6 +69,14 @@ doc.root.each_element('//test') { |t|
                         break if done == 1
                         sleep 0.1
                         #puts "sleep"
+                end
+
+
+                # If what we executed was a shell script, we don't log anything
+                # and delegate the responsibility to the script itself.
+                # E.g., uleader.sh
+                if binary =~ /\.sh$/
+                        next
                 end
 
                 if (done == 1)
