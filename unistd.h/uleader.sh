@@ -14,6 +14,10 @@
 # are stored in the `ffile'. Actually we store only the _POSIX symbols
 # and we use sed(1) to generate the _SC equivalents.
 
+LOGPASSED="log.passed"
+LOGFAILED_RUNTIME="log.failed-runtime"
+LOGFAILED_BUILDTIME="log.failed-buildtime"
+
 while read posix_symbol
 do
     # We replace the _POSIX part with _SC to get the name of the argument
@@ -23,6 +27,9 @@ do
     # Construct C source file name (we use lowercase).
     c_file=$(echo "$posix_symbol.c" | tr '[:upper:]' '[:lower:]')
 
+    # XXX
+    t_file=$(echo "t$posix_symbol" | tr '[:upper:]' '[:lower:]')
+    
     # Inject the right symbols into the C source file.
     sed "s/_POSIX_MYSYMBOL/$posix_symbol/g" template.c > "tmp$c_file"
     sed "s/_SC_MYSYMBOL/$sc_symbol/g" "tmp$c_file" > "$c_file"
@@ -30,9 +37,17 @@ do
 
     # Compile, run, report, cleanup.
     gcc "$c_file" #>/dev/null 2>/dev/null
+    if [ $? -ne 0 ]
+    then
+	echo "$t_file" >> "$LOGFAILED_BUILDTIME"
+    fi
     rm "$c_file"
 
-    printf "$(echo "/unistd.h/t$c_file: " | sed 's/.c//g')"
+    printf "[1/1] $(echo "/unistd.h/$t_file: ")"
     ./a.out
-    rm a.out
+    if [ $? -ne 0 ]
+    then
+	echo "$t_file" >> "$LOGFAILED_RUNTIME"
+    fi
+    rm ./a.out
 done < ffile
