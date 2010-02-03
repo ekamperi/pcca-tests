@@ -236,7 +236,7 @@
 		<desc></desc>
 		<binary>t_pipe_fork</binary>
 		<timeout>10</timeout>
-		<iterations>1</iterations>
+		<iterations>10</iterations>
 		<optional>false</optional>
 	</test>
 
@@ -244,7 +244,7 @@
 		<desc></desc>
 		<binary>t_pipe_thr</binary>
 		<timeout>10</timeout>
-		<iterations>1</iterations>
+		<iterations>10</iterations>
 		<optional>false</optional>
 	</test>
 
