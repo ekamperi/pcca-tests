@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Exit immediately if any untested command fails in non-interactive mode.
-#set -e
+set -e
 
 # Unless explicitly provided, use current directory as the default one.
 if [ ! -z "$1" ]; then
