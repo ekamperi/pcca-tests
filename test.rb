@@ -39,7 +39,8 @@ doc.root.each_element('//test') { |t|
 
                 # If it's a shell script, let it handle the output on its own.
                 if ! (binary =~ /\.sh$/)
-                        print "[#{cnt}/#{iterations}] " + binary + ": "
+                        print "[#{cnt}/#{iterations}] "
+                        print "/" + File.basename(Dir.pwd) + "/" + binary + ": "
                         print "[optional] " if optional == "true"
                 end
 
