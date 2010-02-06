@@ -6,7 +6,7 @@ def getfunc(line)
 
         # Go forward until we meet the first (
         for k in 0..line.length-1
-                if (line[k] == '(')
+                if (line[k, 1] == '(')
                         e = k-1
                         break
                 end
@@ -15,7 +15,7 @@ def getfunc(line)
         # Go backwards until we meet the first whitespace
         k = e-1
         while k > 0 do
-                if (line[k] == ' ')
+                if (line[k, 1] == ' ')
                         s = k+1
                         break
                 end
@@ -53,7 +53,6 @@ emptyline = protfile.gets
 
 while (line = protfile.gets)
         func = getfunc(line)
-
         crtest(header, line, func)
 end
 
