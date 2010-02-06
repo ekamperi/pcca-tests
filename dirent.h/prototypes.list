@@ -1,0 +1,9 @@
+dirent.h
+
+int             closedir(DIR *);
+DIR           * opendir(const char *);
+struct dirent * readdir(DIR *);
+int             readdir_r(DIR *restrict, struct dirent *restrict, struct dirent **restrict);
+void            rewinddir(DIR *);
+void            seekdir(DIR *, long);
+long            telldir(DIR *);
