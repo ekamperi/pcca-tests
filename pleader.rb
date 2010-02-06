@@ -5,7 +5,7 @@ Dir.chdir("#{ARGV[0]}")
 log_passed = File.open("prototypes/log.passed-prototypes", "w+")
 log_failed = File.open("prototypes/log.failed-prototypes", "w+")
 
-cfiles = Dir.glob("t_*_prot.c")
+cfiles = Dir.glob("prototypes/t_*_prot.c")
 
 cfiles.each { |cfile|
         pid = Process.fork {
