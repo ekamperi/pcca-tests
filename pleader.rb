@@ -1,9 +1,11 @@
 #!/usr/bin/ruby
 
-log_passed = File.open("#{ARGV[0]}/log.passed-prototypes", "w+")
-log_failed = File.open("#{ARGV[0]}/log.failed-prototypes", "w+")
+Dir.chdir("#{ARGV[0]}")
 
-tests = Dir.glob("#{ARGV[0]}/t_*_prot.c")
+log_passed = File.open("prototypes/log.passed-prototypes", "w+")
+log_failed = File.open("prototypes/log.failed-prototypes", "w+")
+
+tests = Dir.glob("t_*_prot.c")
 
 tests.each { |t|
         pid = Process.fork {
@@ -11,7 +13,7 @@ tests.each { |t|
         }
 
         Process.wait(pid)
-        print "#{t}: "
+        print "[1/1] /#{File.basename(Dir.pwd)}/prototypes/#{t}: "
         if ($?.exitstatus == 0)
                 puts "passed"
                 log_passed.puts "#{File.basename(t, '.c')}"

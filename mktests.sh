@@ -153,7 +153,7 @@ runprototypes()
     do
 	if [ -d "$dir/prototypes" ]
 	then
-	    ./pleader.rb "$dir/prototypes"
+	    ./pleader.rb "$dir"
 	fi
     done
 }
@@ -176,7 +176,12 @@ runtests()
 	    fi
 
 	    # All good -- pass control to the test leader script.
-	    ./tleader.sh "$dir"
+	    ./test.rb "$dir"
+	fi
+
+	if [ -d "$dir/prototypes" ] && [ ! -z "$prototypes" ]
+	then
+	    ./pleader.rb "$dir/prototypes"
 	fi
     done
 }
@@ -283,7 +288,11 @@ fi
 [ ! -z "$symbols" ] && runsymbols "$STARTDIR"
 
 # Prototype tests.
-[ ! -z "$prototypes" ] && runprototypes "$STARTDIR"
+# They can be executed stand-alone or along with the functional tests.
+if [ ! -z "$prototypes" ] && [ -z "$run" ]
+then
+    runprototypes "$STARTDIR"
+fi
 
 # Build sandboxes.
 [ ! -z "$sandbox" ] && buildsandboxes "$STARTDIR"
