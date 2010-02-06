@@ -10,5 +10,3 @@ int      mq_setattr(mqd_t, const struct mq_attr *restrict, struct mq_attr *restr
 ssize_t  mq_timedreceive(mqd_t, char *restrict, size_t, unsigned *restrict, const struct timespec *restrict);
 int      mq_timedsend(mqd_t, const char *, size_t, unsigned , const struct timespec *);
 int      mq_unlink(const char *);
-
-struct foo baba(void);

@@ -9,6 +9,7 @@ Usage: `basename $0` -cbrsmy [directory]
 -r    Run tests.
 -s    Construct sandbox/ directories.
 -m    Run man pages tests.
+-p    Run prototype tests.
 -y    Run symbol tests.
 -h    Print this help message.
 At least one of the above options must be specified.
@@ -145,6 +146,18 @@ runsymbols()
     done
 }
 
+runprototypes()
+{
+    for dir in $(find "$1" -name .git -prune -o \( -type d -a ! -name . \) \
+	2>/dev/null | sort)
+    do
+	if [ -d "$dir/prototypes" ]
+	then
+	    ./pleader.rb "$dir/prototypes"
+	fi
+    done
+}
+
 runtests()
 {
     # We skip the .git/objects/* subdirectories.
@@ -205,7 +218,7 @@ buildtests()
 }
 
 # Parse user supplied arguments.
-while getopts "cbrsmyh" f
+while getopts "cbrpsmyh" f
 do
     case $f in
 	c)
@@ -227,6 +240,10 @@ do
 	m)
 	    # Run man page tests.
 	    manpages=$
+	    ;;
+	p)
+	    # Run prototype tests.
+	    prototypes=$
 	    ;;
 	y)
 	    # Run symbol tests.
@@ -254,15 +271,19 @@ else
 fi
 
 # At least one of -c, -b, -r, -s, -m, -y options must be set.
-[ -z "$clean"    ] && [ -z "$build"   ] &&
-[ -z "$run"      ] && [ -z "$sandbox" ] &&
-[ -z "$manpages" ] && [ -z "$symbols" ] && usage
+[ -z "$clean"      ] && [ -z "$build"   ] &&
+[ -z "$run"        ] && [ -z "$sandbox" ] &&
+[ -z "$manpages"   ] && [ -z "$symbols" ] &&
+[ -z "$prototypes" ] && usage
 
 # Man page tests.
 [ ! -z "$manpages" ] && runmanpages "$STARTDIR"
 
 # Symbol tests.
 [ ! -z "$symbols" ] && runsymbols "$STARTDIR"
+
+# Prototype tests.
+[ ! -z "$prototypes" ] && runprototypes "$STARTDIR"
 
 # Build sandboxes.
 [ ! -z "$sandbox" ] && buildsandboxes "$STARTDIR"

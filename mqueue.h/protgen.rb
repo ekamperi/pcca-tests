@@ -53,6 +53,7 @@ emptyline = protfile.gets
 
 while (line = protfile.gets)
         func = getfunc(line)
+        next if func.length == 0
         crtest(header, line, func)
 end
 
