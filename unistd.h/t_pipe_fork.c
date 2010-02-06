@@ -60,10 +60,11 @@
 struct {
 	char          b_sha[41];		/* SHA hash */
 	unsigned char b_data[MAX_DATALEN];	/* Data payload */
-	unsigned int  b_len;			/* Data lenghth */
+	unsigned int  b_len;			/* Data length */
 } block;
 
-int main(void)
+int
+main(void)
 {
 	int fd[2];
 	pid_t pid;

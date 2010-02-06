@@ -18,7 +18,7 @@
 
 	<test>
 		<desc></desc>
-		<binary>#t_utmpx_pututxline</binary>
+		<binary>t_utmpx_pututxline</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>

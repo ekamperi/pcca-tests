@@ -25,7 +25,7 @@ scanheader()
 		echo "UPDATE psx_functions SET man_page = 'yes' WHERE function_name = '$func';"
 	    fi
 	done
-    } < "$1"
+    } < "$1/functions.list"
 }
 
 # Scan all $header/ directories.
@@ -33,6 +33,6 @@ for dir in $(find ".." -name .git -prune -o \( -type d -name "*.h" -print \) \
     2>/dev/null | sort)
 do
     if [ -f "$dir/functions.list" ]; then
-        scanheader "$dir/functions.list"
+        scanheader "$dir"
     fi
 done

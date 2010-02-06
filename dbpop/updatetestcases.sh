@@ -15,17 +15,15 @@ scanheader()
 		continue
 	    fi
 
-	    # This isn't so efficient; we will revisit it later.
-	    # (famous last words)
-	    found=$(find ".." -name .git -prune -o \( -type f -name "t_$func.c" \
-		-print \) 2>/dev/null )
+	    #
+	    found=$(grep "$func" "$1"/*.c 2>/dev/null)
 	    if [ ! -z "$found" ]; then
 		echo "UPDATE psx_functions SET test_case = 'yes' WHERE function_name = '$func';"
 	    else
 		echo "UPDATE psx_functions SET test_case = 'no'  WHERE function_name = '$func';"
 	    fi
 	done
-    } < "$1"
+    } < "$1/functions.list"
 }
 
 # Scan all $header/ directories.
@@ -33,6 +31,6 @@ for dir in $(find ".." -name .git -prune -o \( -type d -name "*.h" -print \) \
     2>/dev/null | sort)
 do
     if [ -f "$dir/functions.list" ]; then
-        scanheader "$dir/functions.list"
+        scanheader "$dir"
     fi
 done
