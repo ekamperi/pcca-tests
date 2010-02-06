@@ -33,7 +33,6 @@ def crtest(header, prot, func)
         testfile.puts <<HERE
 #define _XOPEN_SOURCE 600
 
-#include <stdio.h>
 #include <#{header}>
 
 #{prot.gsub(re, "(*fp)")}
