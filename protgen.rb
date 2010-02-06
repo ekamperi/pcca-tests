@@ -26,13 +26,13 @@ def getfunc(line)
 end
 
 def crtest(header, prot, func)
-        testfile = File.new("t_#{func}_prot.c", "w")
+        protpath = File.dirname(ARGV[0]) + "/prototypes"
+        testfile = File.new("#{protpath}/t_#{func}_prot.c", "w")
 
         re = Regexp.new(func)
 
         testfile.puts <<HERE
 #define _XOPEN_SOURCE 600
-
 #include <#{header}>
 
 #{prot.gsub(re, "(*fp)")}
