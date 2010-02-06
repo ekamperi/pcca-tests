@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/pkg/bin/ruby
 
 Dir.chdir("#{ARGV[0]}")
 
@@ -9,7 +9,7 @@ cfiles = Dir.glob("prototypes/t_*_prot.c")
 
 cfiles.each { |cfile|
         pid = Process.fork {
-                exec("gcc -std=c99 -Werror #{cfile} >/dev/null 2>/dev/null")
+                exec("gcc -std=c99 -Werror -c #{cfile} >/dev/null 2>/dev/null")
         }
 
         tname = File.basename(cfile, '.c')
