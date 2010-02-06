@@ -181,7 +181,7 @@ runtests()
 
 	if [ -d "$dir/prototypes" ] && [ ! -z "$prototypes" ]
 	then
-	    ./pleader.rb "$dir/prototypes"
+	    ./pleader.rb "$dir"
 	fi
     done
 }
