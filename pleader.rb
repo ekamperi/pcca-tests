@@ -5,21 +5,24 @@ Dir.chdir("#{ARGV[0]}")
 log_passed = File.open("prototypes/log.passed-prototypes", "w+")
 log_failed = File.open("prototypes/log.failed-prototypes", "w+")
 
-tests = Dir.glob("t_*_prot.c")
+cfiles = Dir.glob("t_*_prot.c")
 
-tests.each { |t|
+cfiles.each { |cfile|
         pid = Process.fork {
-                exec("gcc -std=c99 -Werror #{t} >/dev/null 2>/dev/null")
+                exec("gcc -std=c99 -Werror #{cfile} >/dev/null 2>/dev/null")
         }
 
+        tname = File.basename(cfile, '.c')
+        tpath = File.basename(Dir.pwd)
+        print "[1/1] /#{tpath}/prototypes/#{tname}: "
+
         Process.wait(pid)
-        print "[1/1] /#{File.basename(Dir.pwd)}/prototypes/#{t}: "
         if ($?.exitstatus == 0)
                 puts "passed"
-                log_passed.puts "#{File.basename(t, '.c')}"
+                log_passed.puts "#{tname}"
         else
                 puts "failed"
-                log_failed.puts "#{File.basename(t, '.c')}"
+                log_failed.puts "#{tname}"
         end
 }
 
