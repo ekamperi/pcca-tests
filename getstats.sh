@@ -65,9 +65,23 @@ NFAILED_RUNTIME=$(find "$DIR" -name .git -prune -o \
 NKILLED=$(find "$DIR" -name .git -prune -o \
     \( -name "log.killed" -print \) 2>/dev/null | xargs cat | wc -l)
 
+# Number of prototype tests that passed
+NPROT_PASSED=$(find "$DIR" -name .git -prune -o \
+    \( -name "log.passed-prototypes" -print \) 2>/dev/null | xargs cat | wc -l)
+
+# Number of prototypes tests that failed
+NPROT_FAILED=$(find "$DIR" -name .git -prune -o \
+    \( -name "log.failed-prototypes" -print \) 2>/dev/null | xargs cat | wc -l)
+
 echo
 echo ">>> Results from last run"
+echo "   Functional tests"
 printf "\tPassed         : $NPASSED\n"
 printf "\tFailed to run  : $NFAILED_BUILDTIME\n"
 printf "\tFailed to build: $NFAILED_RUNTIME\n"
 printf "\tKilled         : $NKILLED\n"
+
+echo "   Prototype tests"
+printf "\tPassed         : $NPROT_PASSED\n"
+printf "\tFailed         : $NPROT_FAILED\n"
+

@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
-log_passed = File.open("#{ARGV[0]}/log.passed", "w+")
-log_failed = File.open("#{ARGV[0]}/log.failed", "w+")
+log_passed = File.open("#{ARGV[0]}/log.passed-prototypes", "w+")
+log_failed = File.open("#{ARGV[0]}/log.failed-prototypes", "w+")
 
 tests = Dir.glob("#{ARGV[0]}/t_*_prot.c")
 
