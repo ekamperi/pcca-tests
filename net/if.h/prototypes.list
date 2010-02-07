@@ -1,0 +1,6 @@
+net/if.h
+
+unsigned              if_nametoindex(const char *);
+char                * if_indextoname(unsigned, char *);
+struct if_nameindex * if_nameindex(void);
+void                  if_freenameindex(struct if_nameindex *);
