@@ -1,0 +1,5 @@
+sys/sem.h
+
+int   semctl(int, int, int, ...);
+int   semget(key_t, int, int);
+int   semop(int, struct sembuf *, size_t);

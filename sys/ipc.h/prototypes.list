@@ -1,0 +1,3 @@
+sys/ipc.h
+
+key_t  ftok(const char *, int);
