@@ -15,8 +15,8 @@ scanheader()
 		continue
 	    fi
 
-	    #
-	    found=$(grep "$func" "$1"/*.c 2>/dev/null)
+	    # Cheap hack, for now.
+	    found=$(grep "$func(" "$1"/*.c 2>/dev/null)
 	    if [ ! -z "$found" ]; then
 		echo "UPDATE psx_functions SET test_case = 'yes' WHERE function_name = '$func';"
 	    else
