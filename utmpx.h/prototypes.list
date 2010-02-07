@@ -1,0 +1,8 @@
+utmpx.h
+
+void           endutxent(void);
+struct utmpx * getutxent(void);
+struct utmpx * getutxid(const struct utmpx *);
+struct utmpx * getutxline(const struct utmpx *);
+struct utmpx * pututxline(const struct utmpx *);
+void           setutxent(void);

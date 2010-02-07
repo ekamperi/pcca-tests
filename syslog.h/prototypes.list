@@ -1,0 +1,6 @@
+syslog.h
+
+void  closelog(void);
+void  openlog(const char *, int, int);
+int   setlogmask(int);
+void  syslog(int, const char *, ...);

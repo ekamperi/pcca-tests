@@ -1,0 +1,10 @@
+stropts.h
+
+int    isastream(int);
+int    getmsg(int, struct strbuf *restrict, struct strbuf *restrict, int *restrict);
+int    getpmsg(int, struct strbuf *restrict, struct strbuf *restrict, int *restrict, int *restrict);
+int    ioctl(int, int, ... );
+int    putmsg(int, const struct strbuf *, const struct strbuf *, int);
+int    putpmsg(int, const struct strbuf *, const struct strbuf *, int, int);
+int    fattach(int, const char *);
+int    fdetach(const char *);

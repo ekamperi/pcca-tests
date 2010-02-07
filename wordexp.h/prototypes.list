@@ -1,0 +1,4 @@
+wordexp.h
+
+int  wordexp(const char *restrict, wordexp_t *restrict, int);
+void wordfree(wordexp_t *);

@@ -1,0 +1,8 @@
+semaphore.h
+
+void   longjmp(jmp_buf, int);
+void   siglongjmp(sigjmp_buf, int);
+void  _longjmp(jmp_buf, int);
+int    setjmp(jmp_buf);
+int    sigsetjmp(sigjmp_buf, int);
+int   _setjmp(jmp_buf);
