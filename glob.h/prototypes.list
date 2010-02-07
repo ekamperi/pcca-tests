@@ -1,0 +1,4 @@
+glob.h
+
+int  glob(const char *restrict, int, int (*)(const char *, int), glob_t *restrict);
+void globfree(glob_t *);
