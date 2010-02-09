@@ -1,4 +1,4 @@
-#!/bin/sh
+B0;248;0cB0;248;0cB0;248;0c#!/bin/sh
 
 # Exit immediately if any untested command fails in non-interactive mode.
 set -e
@@ -10,7 +10,7 @@ else
     STARTDIR=".."
 fi
 
-for header in $(find "$STARTDIR" -name .git -prune -o \( -type d -name "*.h" \
-    -print \) 2>/dev/null | sort); do
-    printf "INSERT INTO psx_headers VALUES('$(basename $header)');\n"
+for header in $(find "$STARTDIR" -name .git -prune -o \
+    \( -type d -name "*.h"  -print \) 2>/dev/null | sort); do
+    printf "INSERT INTO psx_headers VALUES('${header#..}');\n"
 done
