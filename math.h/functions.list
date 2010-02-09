@@ -1,17 +1,5 @@
 math.h
 
-fpclassify
-isfinite
-isinf
-isnan
-isnormal
-signbit
-isgreater
-isgreaterequal
-isless
-islessequal
-islessgreater
-isunordered
 acos
 acosf
 acosh
