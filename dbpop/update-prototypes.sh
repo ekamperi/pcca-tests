@@ -10,7 +10,7 @@ else
     STARTDIR=".."
 fi
 
-# First the prototypes tests that passed
+# First the prototypes tests that passed.
 for prot in $(find "$STARTDIR" -name .git -prune -o \
     \( -type f -name "log.passed-prototypes" -exec cat {} \; \) 2>/dev/null | sort)
 do
@@ -18,7 +18,7 @@ do
     echo "UPDATE psx_functions SET prototype = 'yes'  WHERE function_name = '$func';"
 done
 
-# First the prototypes tests that failed
+# Next the prototypes tests that failed.
 for prot in $(find "$STARTDIR" -name .git -prune -o \
     \( -type f -name "log.failed-prototypes" -exec cat {} \; \) 2>/dev/null | sort)
 do
