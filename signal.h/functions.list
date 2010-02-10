@@ -7,7 +7,6 @@ pthread_kill
 pthread_sigmask
 raise
 sigaction
-sigaction
 sigaddset
 sigaltstack
 sigdelset
