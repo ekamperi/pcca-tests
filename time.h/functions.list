@@ -19,7 +19,6 @@ localtime_r
 mktime
 nanosleep
 strftime
-strftime_l
 strptime
 time
 timer_create
