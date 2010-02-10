@@ -7,7 +7,6 @@ int          chown(const char *, uid_t, gid_t);
 int          close(int);
 size_t       confstr(int, char *, size_t);
 char       * crypt(const char *, const char *);
-char       * ctermid(char *);
 int          dup(int);
 int          dup2(int, int);
 void         encrypt(char[64], int);

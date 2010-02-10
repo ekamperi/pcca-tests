@@ -2,6 +2,5 @@ sys/time.h
 
 getitimer
 gettimeofday
-select
 setitimer
 utimes

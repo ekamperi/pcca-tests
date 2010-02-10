@@ -10,18 +10,6 @@ fwprintf
 fwscanf
 getwc
 getwchar
-iswalnum
-iswalpha
-iswcntrl
-iswctype
-iswdigit
-iswgraph
-iswlower
-iswprint
-iswpunct
-iswspace
-iswupper
-iswxdigit
 mbrlen
 mbrtowc
 mbsinit
@@ -30,8 +18,6 @@ putwc
 putwchar
 swprintf
 swscanf
-towlower
-towupper
 ungetwc
 vfwprintf
 vfwscanf

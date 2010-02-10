@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/pkg/bin/ruby
 
 def getfunc(line)
         s = -1
