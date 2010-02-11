@@ -31,7 +31,7 @@ t_pipe_fork
 t_pipe_thr
 t_readlink
 t_setregid
-t_setregid_priv
+t_setregid_sgid
 t_tcsetpgrp
 t_ttyname
 t_unistd
