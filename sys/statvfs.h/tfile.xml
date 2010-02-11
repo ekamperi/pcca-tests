@@ -6,6 +6,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>open</function>
+			<function>statvfs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +19,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>statvfs</function>
+		</calls>
 	</test>
 
 </list-of-tests>

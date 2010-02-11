@@ -6,6 +6,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getpid</function>
+			<function>getpriority</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +18,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getrlimit</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +29,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getrusage</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +40,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getpid</function>
+			<function>getpriority</function>
+			<function>getuid</function>
+			<function>setpriority</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +54,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getrlimit</function>
+			<function>memset</function>
+			<function>perror</function>
+			<function>setrlimit</function>
+		</calls>
 	</test>
 
 </list-of-tests>

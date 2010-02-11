@@ -6,6 +6,8 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+		</calls>
 	</test>
 
 	<test>
@@ -14,14 +16,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
-	</test>
-
-	<test>
-		<desc></desc>
-		<binary>t_utmpx_pututxline</binary>
-		<timeout>10</timeout>
-		<iterations>1</iterations>
-		<optional>false</optional>
+		<calls>
+			<function>fclose</function>
+			<function>feof</function>
+			<function>fopen</function>
+			<function>fread</function>
+		</calls>
 	</test>
 
 </list-of-tests>

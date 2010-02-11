@@ -6,6 +6,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_attr_destroy</function>
+			<function>pthread_attr_getdetachstate</function>
+			<function>pthread_attr_init</function>
+			<function>pthread_attr_setdetachstate</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +20,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_attr_destroy</function>
+			<function>pthread_attr_getguardsize</function>
+			<function>pthread_attr_init</function>
+			<function>pthread_attr_setguardsize</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +34,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_attr_destroy</function>
+			<function>pthread_attr_getschedparam</function>
+			<function>pthread_attr_init</function>
+			<function>pthread_attr_setschedparam</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +48,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_attr_destroy</function>
+			<function>pthread_attr_getschedpolicy</function>
+			<function>pthread_attr_init</function>
+			<function>pthread_attr_setschedpolicy</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +62,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_attr_destroy</function>
+			<function>pthread_attr_getscope</function>
+			<function>pthread_attr_init</function>
+			<function>pthread_attr_setscope</function>
+		</calls>
 	</test>
 
 	<test>
@@ -46,6 +76,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_attr_destroy</function>
+			<function>pthread_attr_getstack</function>
+			<function>pthread_attr_init</function>
+			<function>pthread_attr_setstack</function>
+		</calls>
 	</test>
 
 	<test>
@@ -54,14 +90,49 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_attr_destroy</function>
+			<function>pthread_attr_getstacksize</function>
+			<function>pthread_attr_init</function>
+			<function>pthread_attr_setstacksize</function>
+		</calls>
 	</test>
 
 	<test>
 		<desc></desc>
 		<binary>t_pthread_attr_setschedpolicy</binary>
 		<timeout>10</timeout>
-		<iterations>10</iterations>
+		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_cond_wait</function>
+			<function>pthread_cond_wait</function>
+			<function>pthread_exit</function>
+			<function>pthread_exit</function>
+			<function>pthread_getschedparam</function>
+			<function>pthread_getschedparam</function>
+			<function>pthread_mutex_lock</function>
+			<function>pthread_mutex_lock</function>
+			<function>pthread_mutex_unlock</function>
+			<function>pthread_mutex_unlock</function>
+			<function>pthread_self</function>
+			<function>pthread_self</function>
+			<function>geteuid</function>
+			<function>pthread_attr_init</function>
+			<function>pthread_attr_setinheritsched</function>
+			<function>pthread_attr_setschedparam</function>
+			<function>pthread_attr_setschedpolicy</function>
+			<function>pthread_cond_broadcast</function>
+			<function>pthread_cond_destroy</function>
+			<function>pthread_cond_init</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+			<function>pthread_mutex_destroy</function>
+			<function>pthread_mutex_init</function>
+			<function>sched_get_priority_max</function>
+			<function>sched_get_priority_min</function>
+			<function>sleep</function>
+		</calls>
 	</test>
 
 	<test>
@@ -70,6 +141,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_barrier_destroy</function>
+			<function>pthread_barrier_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -78,6 +153,14 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_barrier_wait</function>
+			<function>pthread_exit</function>
+			<function>pthread_barrier_destroy</function>
+			<function>pthread_barrier_init</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+		</calls>
 	</test>
 
 	<test>
@@ -86,6 +169,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_barrierattr_destroy</function>
+			<function>pthread_barrierattr_getpshared</function>
+			<function>pthread_barrierattr_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -94,6 +182,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>exit</function>
+			<function>signal</function>
+			<function>pthread_barrierattr_destroy</function>
+			<function>pthread_barrierattr_init</function>
+			<function>signal</function>
+		</calls>
 	</test>
 
 	<test>
@@ -102,6 +197,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_cond_destroy</function>
+			<function>pthread_cond_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -110,6 +209,15 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_cond_destroy</function>
+			<function>pthread_cond_init</function>
+			<function>pthread_cond_timedwait</function>
+			<function>pthread_mutex_destroy</function>
+			<function>pthread_mutex_init</function>
+			<function>pthread_mutex_lock</function>
+			<function>pthread_mutex_unlock</function>
+		</calls>
 	</test>
 
 	<test>
@@ -118,6 +226,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_condattr_destroy</function>
+			<function>pthread_condattr_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -126,6 +238,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_condattr_destroy</function>
+			<function>pthread_condattr_getclock</function>
+			<function>pthread_condattr_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -134,6 +251,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_condattr_destroy</function>
+			<function>pthread_condattr_getpshared</function>
+			<function>pthread_condattr_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -142,6 +264,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_exit</function>
+			<function>pthread_create</function>
+			<function>pthread_equal</function>
+		</calls>
 	</test>
 
 	<test>
@@ -150,6 +277,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_getcpuclockid</function>
+			<function>pthread_self</function>
+		</calls>
 	</test>
 
 	<test>
@@ -158,6 +289,21 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_exit</function>
+			<function>sigaction</function>
+			<function>sigdelset</function>
+			<function>sigfillset</function>
+			<function>sigprocmask</function>
+			<function>sigsuspend</function>
+			<function>getpid</function>
+			<function>kill</function>
+			<function>pthread_create</function>
+			<function>pthread_kill</function>
+			<function>sigaction</function>
+			<function>sigemptyset</function>
+			<function>sleep</function>
+		</calls>
 	</test>
 
 	<test>
@@ -166,6 +312,19 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_exit</function>
+			<function>pthread_exit</function>
+			<function>pthread_rwlock_rdlock</function>
+			<function>pthread_rwlock_unlock</function>
+			<function>pthread_rwlock_unlock</function>
+			<function>pthread_rwlock_wrlock</function>
+			<function>memset</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+			<function>pthread_rwlock_destroy</function>
+			<function>pthread_rwlock_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -174,6 +333,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_rwlock_destroy</function>
+			<function>pthread_rwlock_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -182,6 +345,16 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_exit</function>
+			<function>pthread_rwlock_destroy</function>
+			<function>pthread_rwlock_init</function>
+			<function>pthread_rwlock_rdlock</function>
+			<function>pthread_rwlock_unlock</function>
+			<function>pthread_rwlock_wrlock</function>
+			<function>pthread_create</function>
+			<function>sleep</function>
+		</calls>
 	</test>
 
 	<test>
@@ -190,6 +363,17 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>gettimeofday</function>
+			<function>pthread_exit</function>
+			<function>pthread_rwlock_timedrdlock</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+			<function>pthread_rwlock_destroy</function>
+			<function>pthread_rwlock_init</function>
+			<function>pthread_rwlock_unlock</function>
+			<function>pthread_rwlock_wrlock</function>
+		</calls>
 	</test>
 
 	<test>
@@ -198,6 +382,17 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>gettimeofday</function>
+			<function>pthread_exit</function>
+			<function>pthread_rwlock_timedwrlock</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+			<function>pthread_rwlock_destroy</function>
+			<function>pthread_rwlock_init</function>
+			<function>pthread_rwlock_rdlock</function>
+			<function>pthread_rwlock_unlock</function>
+		</calls>
 	</test>
 
 	<test>
@@ -206,6 +401,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_rwlock_destroy</function>
+			<function>pthread_rwlock_init</function>
+			<function>pthread_rwlock_rdlock</function>
+			<function>pthread_rwlock_trywrlock</function>
+			<function>pthread_rwlock_unlock</function>
+		</calls>
 	</test>
 
 	<test>
@@ -214,6 +416,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_exit</function>
+			<function>pthread_setcancelstate</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+			<function>pthread_setcancelstate</function>
+		</calls>
 	</test>
 
 	<test>
@@ -222,6 +431,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_exit</function>
+			<function>pthread_setcanceltype</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+			<function>pthread_setcanceltype</function>
+		</calls>
 	</test>
 
 	<test>
@@ -230,6 +446,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_spin_destroy</function>
+			<function>pthread_spin_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -238,6 +458,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_spin_destroy</function>
+			<function>pthread_spin_init</function>
+			<function>pthread_spin_lock</function>
+			<function>pthread_spin_unlock</function>
+		</calls>
 	</test>
 
 	<test>
@@ -246,6 +472,19 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_exit</function>
+			<function>pthread_spin_lock</function>
+			<function>pthread_spin_unlock</function>
+			<function>sleep</function>
+			<function>pthread_create</function>
+			<function>pthread_spin_destroy</function>
+			<function>pthread_spin_init</function>
+			<function>pthread_spin_lock</function>
+			<function>pthread_spin_trylock</function>
+			<function>pthread_spin_unlock</function>
+			<function>sleep</function>
+		</calls>
 	</test>
 
 	<test>
@@ -254,6 +493,18 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_exit</function>
+			<function>pthread_exit</function>
+			<function>pthread_setcancelstate</function>
+			<function>pthread_testcancel</function>
+			<function>pthread_testcancel</function>
+			<function>sleep</function>
+			<function>sleep</function>
+			<function>pthread_cancel</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+		</calls>
 	</test>
 
 	<test>
@@ -262,6 +513,17 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_getspecific</function>
+			<function>free</function>
+			<function>pthread_exit</function>
+			<function>pthread_setspecific</function>
+			<function>malloc</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+			<function>pthread_key_create</function>
+			<function>pthread_key_delete</function>
+		</calls>
 	</test>
 
 </list-of-tests>

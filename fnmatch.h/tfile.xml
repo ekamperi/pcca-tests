@@ -6,6 +6,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fnmatch</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +17,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>closedir</function>
+			<function>fnmatch</function>
+			<function>opendir</function>
+			<function>readdir</function>
+		</calls>
 	</test>
 
 </list-of-tests>

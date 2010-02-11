@@ -6,6 +6,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>exit</function>
+			<function>signal</function>
+			<function>closedir</function>
+			<function>opendir</function>
+			<function>signal</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +21,8 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +31,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>malloc</function>
+			<function>memset</function>
+			<function>opendir</function>
+			<function>pathconf</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +46,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>closedir</function>
+			<function>opendir</function>
+			<function>readdir</function>
+			<function>strcmp</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +60,23 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>malloc</function>
+			<function>offsetof</function>
+			<function>pathconf</function>
+			<function>pthread_exit</function>
+			<function>pthread_mutex_lock</function>
+			<function>pthread_mutex_unlock</function>
+			<function>readdir_r</function>
+			<function>strcmp</function>
+			<function>closedir</function>
+			<function>opendir</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+			<function>pthread_mutex_destroy</function>
+			<function>pthread_mutex_init</function>
+		</calls>
 	</test>
 
 </list-of-tests>

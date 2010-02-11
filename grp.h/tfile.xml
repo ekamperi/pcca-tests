@@ -6,6 +6,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>endgrent</function>
+			<function>getgrent</function>
+			<function>setgrent</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +19,14 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>getgid</function>
+			<function>getgrgid</function>
+			<function>getgrgid_r</function>
+			<function>malloc</function>
+			<function>sysconf</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +35,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getgrnam</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +46,16 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>getgrnam_r</function>
+			<function>malloc</function>
+			<function>pthread_exit</function>
+			<function>strcmp</function>
+			<function>sysconf</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +64,8 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+		</calls>
 	</test>
 
 </list-of-tests>

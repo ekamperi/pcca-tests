@@ -6,6 +6,21 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_exit</function>
+			<function>pthread_exit</function>
+			<function>pthread_exit</function>
+			<function>sem_post</function>
+			<function>sem_post</function>
+			<function>sem_post</function>
+			<function>sem_wait</function>
+			<function>sem_wait</function>
+			<function>sem_wait</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+			<function>sem_destroy</function>
+			<function>sem_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +29,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>sem_destroy</function>
+			<function>sem_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +41,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>sem_destroy</function>
+			<function>sem_getvalue</function>
+			<function>sem_init</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +54,26 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>sem_destroy</function>
+			<function>sem_init</function>
+		</calls>
+	</test>
+
+	<test>
+		<desc></desc>
+		<binary>t_sem_init_pshared</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>fork</function>
+			<function>sem_destroy</function>
+			<function>sem_init</function>
+			<function>sem_post</function>
+			<function>sem_wait</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,14 +82,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
-	</test>
-
-	<test>
-		<desc></desc>
-		<binary>t_sem_pshared</binary>
-		<timeout>10</timeout>
-		<iterations>1</iterations>
-		<optional>false</optional>
+		<calls>
+			<function>sem_close</function>
+			<function>sem_open</function>
+			<function>sem_unlink</function>
+		</calls>
 	</test>
 
 	<test>
@@ -54,6 +95,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>clock_gettime</function>
+			<function>sem_destroy</function>
+			<function>sem_init</function>
+			<function>sem_post</function>
+			<function>sem_timedwait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -62,6 +110,18 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_exit</function>
+			<function>sem_post</function>
+			<function>sem_wait</function>
+			<function>pthread_create</function>
+			<function>pthread_exit</function>
+			<function>pthread_join</function>
+			<function>sem_destroy</function>
+			<function>sem_init</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+		</calls>
 	</test>
 
 	<test>
@@ -70,6 +130,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>sem_destroy</function>
+			<function>sem_getvalue</function>
+			<function>sem_init</function>
+			<function>sem_post</function>
+			<function>sem_trywait</function>
+		</calls>
 	</test>
 
 </list-of-tests>

@@ -2,18 +2,13 @@
 <list-of-tests>
 	<test>
 		<desc></desc>
-		<binary>uleader.sh</binary>
-		<timeout>10</timeout>
-		<iterations>1</iterations>
-		<optional>false</optional>
-	</test>
-
-	<test>
-		<desc></desc>
 		<binary>t_access</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>access</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +17,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>access</function>
+			<function>geteuid</function>
+			<function>getuid</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +30,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>alarm</function>
+			<function>signal</function>
+			<function>sleep</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +43,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>chdir</function>
+			<function>free</function>
+			<function>malloc</function>
+			<function>memset</function>
+			<function>pathconf</function>
+		</calls>
 	</test>
 
 	<test>
@@ -46,6 +58,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>confstr</function>
+		</calls>
 	</test>
 
 	<test>
@@ -54,6 +69,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>fchdir</function>
+			<function>open</function>
+		</calls>
 	</test>
 
 	<test>
@@ -62,6 +82,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>fchdir</function>
+			<function>geteuid</function>
+			<function>getuid</function>
+			<function>open</function>
+		</calls>
 	</test>
 
 	<test>
@@ -70,6 +97,17 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fclose</function>
+			<function>fcntl</function>
+			<function>feof</function>
+			<function>fgets</function>
+			<function>fileno</function>
+			<function>fopen</function>
+			<function>fork</function>
+			<function>setbuf</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -78,6 +116,15 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>WIFSIGNALED</function>
+			<function>WTERMSIG</function>
+			<function>fork</function>
+			<function>raise</function>
+			<function>sigaction</function>
+			<function>sigemptyset</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -86,6 +133,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>getcwd</function>
+			<function>malloc</function>
+			<function>pathconf</function>
+		</calls>
 	</test>
 
 	<test>
@@ -94,6 +147,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>getgroups</function>
+			<function>malloc</function>
+		</calls>
 	</test>
 
 	<test>
@@ -102,6 +160,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>gethostid</function>
+		</calls>
 	</test>
 
 	<test>
@@ -110,6 +171,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>gethostname</function>
+			<function>malloc</function>
+			<function>sysconf</function>
+		</calls>
 	</test>
 
 	<test>
@@ -118,6 +185,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getlogin</function>
+		</calls>
 	</test>
 
 	<test>
@@ -126,6 +196,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>getlogin_r</function>
+			<function>malloc</function>
+			<function>sysconf</function>
+		</calls>
 	</test>
 
 	<test>
@@ -134,6 +210,16 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>WIFSIGNALED</function>
+			<function>WTERMSIG</function>
+			<function>fork</function>
+			<function>getpgid</function>
+			<function>getpid</function>
+			<function>setsid</function>
+			<function>sleep</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -142,6 +228,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getpgid</function>
+			<function>getpgrp</function>
+			<function>getpid</function>
+		</calls>
 	</test>
 
 	<test>
@@ -150,6 +241,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getpid</function>
+		</calls>
 	</test>
 
 	<test>
@@ -158,6 +252,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getppid</function>
+		</calls>
 	</test>
 
 	<test>
@@ -166,6 +263,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fork</function>
+			<function>getsid</function>
+			<function>setsid</function>
+			<function>sleep</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -174,6 +278,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getuid</function>
+		</calls>
 	</test>
 
 	<test>
@@ -182,6 +289,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>isatty</function>
+			<function>open</function>
+		</calls>
 	</test>
 
 	<test>
@@ -190,6 +302,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>link</function>
+		</calls>
 	</test>
 
 	<test>
@@ -198,6 +313,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>lockf</function>
+			<function>lseek</function>
+			<function>open</function>
+		</calls>
 	</test>
 
 	<test>
@@ -206,6 +327,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getuid</function>
+			<function>nice</function>
+		</calls>
 	</test>
 
 	<test>
@@ -214,6 +339,15 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>nice</function>
+			<function>nice</function>
+			<function>pthread_exit</function>
+			<function>pthread_exit</function>
+			<function>nice</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+		</calls>
 	</test>
 
 	<test>
@@ -222,6 +356,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>alarm</function>
+			<function>pause</function>
+			<function>signal</function>
+		</calls>
 	</test>
 
 	<test>
@@ -230,22 +369,64 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>fork</function>
+			<function>pipe</function>
+			<function>read</function>
+			<function>strncmp</function>
+			<function>wait</function>
+			<function>write</function>
+		</calls>
 	</test>
 
 	<test>
 		<desc></desc>
 		<binary>t_pipe_fork</binary>
 		<timeout>10</timeout>
-		<iterations>10</iterations>
+		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>SHA1</function>
+			<function>close</function>
+			<function>fork</function>
+			<function>memcmp</function>
+			<function>open</function>
+			<function>pipe</function>
+			<function>rand</function>
+			<function>read</function>
+			<function>srand</function>
+			<function>time</function>
+			<function>wait</function>
+			<function>write</function>
+		</calls>
 	</test>
 
 	<test>
 		<desc></desc>
 		<binary>t_pipe_thr</binary>
 		<timeout>10</timeout>
-		<iterations>10</iterations>
+		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>SHA1</function>
+			<function>SHA1</function>
+			<function>close</function>
+			<function>memcmp</function>
+			<function>open</function>
+			<function>pthread_exit</function>
+			<function>pthread_exit</function>
+			<function>rand</function>
+			<function>read</function>
+			<function>read</function>
+			<function>write</function>
+			<function>pipe</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+			<function>sleep</function>
+			<function>srand</function>
+			<function>time</function>
+		</calls>
 	</test>
 
 	<test>
@@ -254,6 +435,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>malloc</function>
+			<function>memset</function>
+			<function>readlink</function>
+		</calls>
 	</test>
 
 	<test>
@@ -262,14 +449,26 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getegid</function>
+			<function>getgid</function>
+			<function>getegid</function>
+			<function>getgid</function>
+			<function>setregid</function>
+		</calls>
 	</test>
 
 	<test>
 		<desc></desc>
-		<binary>t_setregid_priv</binary>
+		<binary>t_setregid_sgid</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getegid</function>
+			<function>getgid</function>
+			<function>setregid</function>
+		</calls>
 	</test>
 
 	<test>
@@ -278,6 +477,15 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>fork</function>
+			<function>getpgid</function>
+			<function>getpid</function>
+			<function>open</function>
+			<function>tcsetpgrp</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -286,6 +494,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>open</function>
+			<function>ttyname</function>
+		</calls>
 	</test>
 
 	<test>
@@ -294,6 +507,8 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+		</calls>
 	</test>
 
 </list-of-tests>

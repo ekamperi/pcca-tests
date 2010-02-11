@@ -6,6 +6,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>strcmp</function>
+			<function>lfind</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +18,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>strcmp</function>
+			<function>lfind</function>
+			<function>lsearch</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +31,15 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>hcreate</function>
+			<function>hdestroy</function>
+			<function>hsearch</function>
+			<function>rand</function>
+			<function>srand</function>
+			<function>strlen</function>
+			<function>time</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +48,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>tdelete</function>
+			<function>tfind</function>
+			<function>tsearch</function>
+			<function>twalk</function>
+		</calls>
 	</test>
 
 </list-of-tests>

@@ -6,6 +6,14 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>aio_error</function>
+			<function>aio_read</function>
+			<function>aio_return</function>
+			<function>close</function>
+			<function>memset</function>
+			<function>open</function>
+		</calls>
 	</test>
 
 </list-of-tests>

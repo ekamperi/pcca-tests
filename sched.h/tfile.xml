@@ -6,6 +6,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>getpid</function>
+			<function>sched_rr_get_interval</function>
+			<function>signal</function>
+		</calls>
 	</test>
 
 </list-of-tests>

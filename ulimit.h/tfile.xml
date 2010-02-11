@@ -6,6 +6,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fork</function>
+			<function>ulimit</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 </list-of-tests>

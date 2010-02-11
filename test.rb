@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/pkg/bin/ruby
 
 require 'rexml/document'
 include REXML

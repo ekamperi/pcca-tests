@@ -6,6 +6,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cfgetispeed</function>
+			<function>cfsetispeed</function>
+			<function>isatty</function>
+			<function>tcgetattr</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +20,24 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>signal</function>
+			<function>WIFSIGNALED</function>
+			<function>WTERMSIG</function>
+			<function>close</function>
+			<function>fork</function>
+			<function>getpgid</function>
+			<function>getpid</function>
+			<function>isatty</function>
+			<function>open</function>
+			<function>setpgid</function>
+			<function>signal</function>
+			<function>sleep</function>
+			<function>tcdrain</function>
+			<function>tcgetsid</function>
+			<function>tcsetpgrp</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +46,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>isatty</function>
+			<function>open</function>
+			<function>tcgetattr</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +60,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>isatty</function>
+			<function>open</function>
+			<function>tcgetsid</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +74,8 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+		</calls>
 	</test>
 
 </list-of-tests>

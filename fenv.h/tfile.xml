@@ -6,6 +6,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>feclearexcept</function>
+			<function>fetestexcept</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +18,8 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+		</calls>
 	</test>
 
 </list-of-tests>

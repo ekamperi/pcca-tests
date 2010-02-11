@@ -6,6 +6,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>WIFSIGNALED</function>
+			<function>WTERMSIG</function>
+			<function>abort</function>
+			<function>fork</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 </list-of-tests>

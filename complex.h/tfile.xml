@@ -6,6 +6,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cabs</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +18,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>carg</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +30,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cacos</function>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +44,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cacosh</function>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +58,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>casin</function>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -46,6 +72,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>casinh</function>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -54,6 +86,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>catan</function>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -62,6 +100,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>catanh</function>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -70,6 +114,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>ccos</function>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -78,6 +128,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>ccosh</function>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -86,6 +142,14 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>ccos</function>
+			<function>cexp</function>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>csin</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -94,6 +158,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cimag</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -102,6 +170,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cabs</function>
+			<function>cimag</function>
+			<function>clog</function>
+			<function>creal</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -110,6 +185,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>IMAG</function>
+			<function>REAL</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -118,6 +198,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cimag</function>
+			<function>conj</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -126,6 +211,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cimag</function>
+			<function>cpow</function>
+			<function>creal</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -134,6 +225,14 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cimag</function>
+			<function>copysign</function>
+			<function>cproj</function>
+			<function>creal</function>
+			<function>fabs</function>
+			<function>isinf</function>
+		</calls>
 	</test>
 
 	<test>
@@ -142,6 +241,10 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>creal</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -150,6 +253,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>csin</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -158,6 +267,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>csinh</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -166,6 +281,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>csqrt</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -174,6 +295,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>ctan</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -182,6 +309,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cimag</function>
+			<function>creal</function>
+			<function>ctanh</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -190,6 +323,15 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>ccos</function>
+			<function>cexp</function>
+			<function>cimag</function>
+			<function>cpow</function>
+			<function>creal</function>
+			<function>csin</function>
+			<function>fabs</function>
+		</calls>
 	</test>
 
 	<test>
@@ -198,6 +340,8 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+		</calls>
 	</test>
 
 	<test>
@@ -206,6 +350,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>signbit</function>
+		</calls>
 	</test>
 
 </list-of-tests>

@@ -6,6 +6,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>basename</function>
+			<function>memset</function>
+			<function>strcmp</function>
+			<function>strncpy</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +20,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>dirname</function>
+			<function>memset</function>
+			<function>strcmp</function>
+			<function>strncpy</function>
+		</calls>
 	</test>
 
 </list-of-tests>

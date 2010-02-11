@@ -6,6 +6,24 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>unlink</function>
+			<function>dbm_clearerr</function>
+			<function>dbm_close</function>
+			<function>dbm_error</function>
+			<function>dbm_fetch</function>
+			<function>dbm_firstkey</function>
+			<function>dbm_nextkey</function>
+			<function>dbm_open</function>
+			<function>dbm_store</function>
+			<function>memset</function>
+			<function>rand</function>
+			<function>signal</function>
+			<function>srand</function>
+			<function>strcmp</function>
+			<function>time</function>
+			<function>unlink</function>
+		</calls>
 	</test>
 
 </list-of-tests>

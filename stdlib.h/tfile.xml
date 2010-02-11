@@ -6,6 +6,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>posix_memalign</function>
+			<function>realloc</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +19,21 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>WIFSIGNALED</function>
+			<function>WTERMSIG</function>
+			<function>close</function>
+			<function>fork</function>
+			<function>grantpt</function>
+			<function>open</function>
+			<function>posix_openpt</function>
+			<function>ptsname</function>
+			<function>read</function>
+			<function>strncmp</function>
+			<function>unlockpt</function>
+			<function>wait</function>
+			<function>write</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +42,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>memset</function>
+			<function>putenv</function>
+			<function>strncpy</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +55,15 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>pthread_exit</function>
+			<function>qsort</function>
+			<function>rand</function>
+			<function>pthread_create</function>
+			<function>pthread_join</function>
+			<function>srand</function>
+			<function>time</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +72,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>realpath</function>
+		</calls>
 	</test>
 
 	<test>
@@ -46,6 +83,8 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+		</calls>
 	</test>
 
 </list-of-tests>

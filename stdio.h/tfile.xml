@@ -6,6 +6,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>clearerr</function>
+			<function>fclose</function>
+			<function>feof</function>
+			<function>fopen</function>
+			<function>fread</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +21,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>ctermid</function>
+			<function>memset</function>
+			<function>strcmp</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +34,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fclose</function>
+			<function>ferror</function>
+			<function>fopen</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +47,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fclose</function>
+			<function>fileno</function>
+			<function>fopen</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +60,18 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>flockfile</function>
+			<function>ftrylockfile</function>
+			<function>funlockfile</function>
+			<function>pthread_exit</function>
+			<function>fclose</function>
+			<function>flockfile</function>
+			<function>fopen</function>
+			<function>funlockfile</function>
+			<function>pthread_create</function>
+			<function>sleep</function>
+		</calls>
 	</test>
 
 	<test>
@@ -46,6 +80,8 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+		</calls>
 	</test>
 
 	<test>
@@ -54,6 +90,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fileno</function>
+			<function>free</function>
+			<function>fstat</function>
+			<function>malloc</function>
+			<function>tmpfile</function>
+		</calls>
 	</test>
 
 	<test>
@@ -62,6 +105,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>malloc</function>
+			<function>strcmp</function>
+			<function>strncmp</function>
+			<function>tempnam</function>
+		</calls>
 	</test>
 
 </list-of-tests>

@@ -6,6 +6,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cos</function>
+			<function>fabs</function>
+			<function>isnan</function>
+			<function>nan</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +20,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>fdim</function>
+			<function>isnan</function>
+			<function>nan</function>
+			<function>signbit</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +35,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>fdimf</function>
+			<function>isnan</function>
+			<function>nan</function>
+			<function>signbit</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +50,14 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>fdim</function>
+			<function>fdiml</function>
+			<function>isnan</function>
+			<function>nan</function>
+			<function>signbit</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +66,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>fmax</function>
+			<function>isnan</function>
+			<function>nan</function>
+		</calls>
 	</test>
 
 	<test>
@@ -46,6 +80,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>fmaxf</function>
+			<function>isnan</function>
+			<function>nan</function>
+		</calls>
 	</test>
 
 	<test>
@@ -54,6 +94,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>fmaxl</function>
+			<function>isnan</function>
+			<function>nan</function>
+		</calls>
 	</test>
 
 	<test>
@@ -62,6 +108,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>fmin</function>
+			<function>isnan</function>
+			<function>nan</function>
+		</calls>
 	</test>
 
 	<test>
@@ -70,6 +122,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>fminf</function>
+			<function>isnan</function>
+			<function>nan</function>
+		</calls>
 	</test>
 
 	<test>
@@ -78,6 +136,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>fminl</function>
+			<function>isnan</function>
+			<function>nan</function>
+		</calls>
 	</test>
 
 	<test>
@@ -86,6 +150,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>feclearexcept</function>
+			<function>fetestexcept</function>
+			<function>fflush</function>
+			<function>fork</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -94,6 +165,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>isnan</function>
+			<function>nan</function>
+			<function>tgamma</function>
+		</calls>
 	</test>
 
 	<test>
@@ -102,6 +179,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>isnan</function>
+			<function>log</function>
+			<function>nan</function>
+			<function>signbit</function>
+		</calls>
 	</test>
 
 	<test>
@@ -110,6 +194,15 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>feclearexcept</function>
+			<function>fetestexcept</function>
+			<function>isinf</function>
+			<function>isnan</function>
+			<function>nan</function>
+			<function>nearbyint</function>
+			<function>signbit</function>
+		</calls>
 	</test>
 
 	<test>
@@ -118,6 +211,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>isnan</function>
+			<function>nan</function>
+			<function>rint</function>
+		</calls>
 	</test>
 
 	<test>
@@ -126,6 +225,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fabs</function>
+			<function>isnan</function>
+			<function>nan</function>
+			<function>sin</function>
+		</calls>
 	</test>
 
 	<test>
@@ -134,6 +239,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>cos</function>
+			<function>fabs</function>
+			<function>sin</function>
+		</calls>
 	</test>
 
 </list-of-tests>

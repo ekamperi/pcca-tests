@@ -6,6 +6,15 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>ftruncate</function>
+			<function>memset</function>
+			<function>mmap</function>
+			<function>munmap</function>
+			<function>shm_open</function>
+			<function>shm_unlink</function>
+		</calls>
 	</test>
 
 </list-of-tests>

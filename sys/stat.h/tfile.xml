@@ -6,6 +6,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>lstat</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +17,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>mkfifo</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +28,15 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>mkfifo</function>
+			<function>open</function>
+			<function>read</function>
+			<function>strcmp</function>
+			<function>unlink</function>
+			<function>write</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +45,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>S_ISDIR</function>
+			<function>S_ISFIFO</function>
+			<function>S_ISLNK</function>
+			<function>S_ISREG</function>
+			<function>stat</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +60,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>umask</function>
+		</calls>
 	</test>
 
 </list-of-tests>

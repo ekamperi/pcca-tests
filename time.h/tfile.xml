@@ -6,6 +6,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>clock_getres</function>
+			<function>clock_gettime</function>
+			<function>sysconf</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +19,8 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+		</calls>
 	</test>
 
 </list-of-tests>

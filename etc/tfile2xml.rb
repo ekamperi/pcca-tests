@@ -7,6 +7,8 @@ xmlfile.puts '<?xml version="1.0"?>'
 xmlfile.puts "<list-of-tests>"
 
 while (line = tfile.gets)
+        next if line[0].chr == "#"      # Ignore comments in tfiles
+        next if line.include? ".sh"     # Also ignore shell scripts
         xmlfile.puts "\t<test>"
 
         xmlfile.puts "\t\t<desc></desc>"

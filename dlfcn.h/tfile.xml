@@ -6,6 +6,12 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>dlclose</function>
+			<function>dlerror</function>
+			<function>dlopen</function>
+			<function>dlsym</function>
+		</calls>
 	</test>
 
 </list-of-tests>

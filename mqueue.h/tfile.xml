@@ -6,6 +6,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_receive</function>
+			<function>mq_send</function>
+			<function>mq_unlink</function>
+		</calls>
 	</test>
 
 	<test>
@@ -14,6 +21,9 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>mq_close</function>
+		</calls>
 	</test>
 
 	<test>
@@ -22,6 +32,14 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>mq_close</function>
+			<function>mq_notify</function>
+			<function>mq_open</function>
+			<function>mq_send</function>
+			<function>mq_unlink</function>
+			<function>sleep</function>
+		</calls>
 	</test>
 
 	<test>
@@ -30,6 +48,15 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>mq_close</function>
+			<function>mq_notify</function>
+			<function>mq_open</function>
+			<function>mq_send</function>
+			<function>mq_unlink</function>
+			<function>sigaction</function>
+			<function>sleep</function>
+		</calls>
 	</test>
 
 	<test>
@@ -38,6 +65,14 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>malloc</function>
+			<function>memset</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_unlink</function>
+		</calls>
 	</test>
 
 	<test>
@@ -46,6 +81,11 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_unlink</function>
+		</calls>
 	</test>
 
 	<test>
@@ -54,6 +94,16 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>WIFSIGNALED</function>
+			<function>WTERMSIG</function>
+			<function>fork</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_unlink</function>
+			<function>umask</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -62,6 +112,20 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>exit</function>
+			<function>mq_close</function>
+			<function>mq_unlink</function>
+			<function>perror</function>
+			<function>fork</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_receive</function>
+			<function>mq_send</function>
+			<function>mq_unlink</function>
+			<function>strcmp</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -70,6 +134,17 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fork</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_receive</function>
+			<function>mq_send</function>
+			<function>mq_unlink</function>
+			<function>strcmp</function>
+			<function>strlen</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -78,6 +153,21 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>FD_CLR</function>
+			<function>FD_ISSET</function>
+			<function>FD_SET</function>
+			<function>FD_ZERO</function>
+			<function>fork</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_receive</function>
+			<function>mq_send</function>
+			<function>mq_unlink</function>
+			<function>select</function>
+			<function>sleep</function>
+			<function>strcmp</function>
+		</calls>
 	</test>
 
 	<test>
@@ -86,6 +176,16 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>free</function>
+			<function>malloc</function>
+			<function>memset</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_send</function>
+			<function>mq_unlink</function>
+			<function>sysconf</function>
+		</calls>
 	</test>
 
 	<test>
@@ -94,6 +194,19 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>WIFSIGNALED</function>
+			<function>WTERMSIG</function>
+			<function>fork</function>
+			<function>kill</function>
+			<function>memset</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_send</function>
+			<function>mq_unlink</function>
+			<function>sleep</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -102,6 +215,17 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>fork</function>
+			<function>memset</function>
+			<function>mq_close</function>
+			<function>mq_getattr</function>
+			<function>mq_open</function>
+			<function>mq_receive</function>
+			<function>mq_send</function>
+			<function>mq_unlink</function>
+			<function>sleep</function>
+		</calls>
 	</test>
 
 	<test>
@@ -110,6 +234,13 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>memset</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_send</function>
+			<function>mq_unlink</function>
+		</calls>
 	</test>
 
 	<test>
@@ -118,6 +249,14 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>memset</function>
+			<function>mq_close</function>
+			<function>mq_getattr</function>
+			<function>mq_open</function>
+			<function>mq_setattr</function>
+			<function>mq_unlink</function>
+		</calls>
 	</test>
 
 	<test>
@@ -126,6 +265,20 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>WIFSIGNALED</function>
+			<function>WTERMSIG</function>
+			<function>clock_gettime</function>
+			<function>fork</function>
+			<function>memset</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_receive</function>
+			<function>mq_send</function>
+			<function>mq_timedsend</function>
+			<function>mq_unlink</function>
+			<function>wait</function>
+		</calls>
 	</test>
 
 	<test>
@@ -134,6 +287,14 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>memset</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_send</function>
+			<function>mq_timedsend</function>
+			<function>mq_unlink</function>
+		</calls>
 	</test>
 
 	<test>
@@ -142,6 +303,14 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>clock_gettime</function>
+			<function>gettimeofday</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_timedreceive</function>
+			<function>mq_unlink</function>
+		</calls>
 	</test>
 
 	<test>
@@ -150,6 +319,16 @@
 		<timeout>10</timeout>
 		<iterations>1</iterations>
 		<optional>false</optional>
+		<calls>
+			<function>clock_gettime</function>
+			<function>gettimeofday</function>
+			<function>memset</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_send</function>
+			<function>mq_timedsend</function>
+			<function>mq_unlink</function>
+		</calls>
 	</test>
 
 </list-of-tests>
