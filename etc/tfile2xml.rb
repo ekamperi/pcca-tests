@@ -18,6 +18,10 @@ while (line = tfile.gets)
         xmlfile.puts "\t\t<optional>false</optional>"
         xmlfile.puts "\t\t<calls>"
 
+        # This code block is used in conjuction with and after the execution
+        # of `extract-functions.sh' script. For every test case binary, we
+        # we iterate through its cflow file and populate the <calls> parent node
+        # with <function> child nodes.
         ffile = File.new("#{ARGV[0]}/#{line.chop}.c.cflow", "r")
         while (func = ffile.gets)
                 xmlfile.puts "\t\t\t<function>#{func.chop}</function>"
