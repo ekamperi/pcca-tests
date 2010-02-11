@@ -21,7 +21,7 @@ do
 
     # Extract the functions that are called from within this particular C file.
     # But skip assert(), printf() and anything that contains < > symbols.
-    cflow "$file" | egrep -v '<|>|assert|printf' > "$file.cflow"
+    cflow "$file" | egrep -v '<|>|assert|printf' | sort > "$file.cflow"
 
     # Remove leading whitespace.
     # Note: Don't be tempted to use the more common, but severy less portable,
