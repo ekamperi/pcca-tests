@@ -26,7 +26,7 @@ do
     # Remove leading whitespace.
     # Note: Don't be tempted to use the more common, but severy less portable,
     # ^[ \t] construct. Nor use sed -i.
-    sed 's/^[[:blank:]]\{1,\}//g' "$file.cflow" > "$file.cflow.tmp"
+    sed 's/^[[:blank:]]\{1,\}\(.*\)()$/\1/g' "$file.cflow" > "$file.cflow.tmp"
     mv "$file.cflow.tmp" "$file.cflow"
     rm -f "$file.cflow.tmp"
 
