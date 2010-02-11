@@ -1,7 +1,7 @@
-#!/usr/bin/ruby
+#!/usr/pkg/bin/ruby
 
-tfile   = File.new("#{ARGV[0]}", "r")
-xmlfile = File.new("#{ARGV[0]}.xml", "w")
+tfile   = File.new("#{ARGV[0]}/tfile", "r")
+xmlfile = File.new("#{ARGV[0]}/tfile.xml", "w")
 
 xmlfile.puts '<?xml version="1.0"?>'
 xmlfile.puts "<list-of-tests>"
@@ -14,7 +14,15 @@ while (line = tfile.gets)
         xmlfile.puts "\t\t<timeout>10</timeout>"
         xmlfile.puts "\t\t<iterations>1</iterations>"
         xmlfile.puts "\t\t<optional>false</optional>"
+        xmlfile.puts "\t\t<calls>"
 
+        ffile = File.new("#{ARGV[0]}/#{line.chop}.c.cflow", "r")
+        while (func = ffile.gets)
+                xmlfile.puts "\t\t\t<function>#{func.chop}</function>"
+        end
+        ffile.close
+
+        xmlfile.puts "\t\t</calls>"
         xmlfile.puts "\t</test>"
         xmlfile.puts
 end
