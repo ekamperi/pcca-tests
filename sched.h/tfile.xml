@@ -2,6 +2,18 @@
 <list-of-tests>
 	<test>
 		<desc></desc>
+		<binary>t_sched_getparam</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>getpid</function>
+			<function>sched_getparam</function>
+		</calls>
+	</test>
+
+	<test>
+		<desc></desc>
 		<binary>t_sched_rr_get_interval</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>

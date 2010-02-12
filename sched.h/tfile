@@ -1,1 +1,2 @@
+t_sched_getparam
 t_sched_rr_get_interval
