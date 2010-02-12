@@ -24,13 +24,24 @@ def queryxml(xmlfile, function)
     f.close
 end
 
+#Find.find("../") { |p|
+#    # Skip .git
+#    if FileTest.directory?(p) && File.basename(p) == ".git"
+#        Find.prune
+#    else
+#        if File.basename(p) == "tfile.xml"
+#            queryxml(p, "#{ARGV[0]}")
+#        end
+#    end
+#}
+
 Find.find("../") { |p|
     # Skip .git
     if FileTest.directory?(p) && File.basename(p) == ".git"
         Find.prune
     else
-        if File.basename(p) == "tfile.xml"
-            queryxml(p, "#{ARGV[0]}")
+        if File.basename(p) == "functions.list"
+            puts p
         end
     end
 }
