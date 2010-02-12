@@ -1,4 +1,4 @@
-#!/usr/pkg/bin/ruby
+#!/usr/bin/ruby
 
 Dir.chdir("#{ARGV[0]}")
 
