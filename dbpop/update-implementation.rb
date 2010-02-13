@@ -64,7 +64,7 @@ def querytests(binaries)
         return -1
 end
 
-Find.find("../grp.h") { |p|
+Find.find("../") { |p|
         # Skip .git
         if FileTest.directory?(p) && File.basename(p) == ".git"
                 Find.prune
@@ -80,9 +80,9 @@ Find.find("../grp.h") { |p|
                                 rv = querytests(queryfunction(line))
                                 case rv
                                 when 1
-                                        puts "UPDATE psx_functions SET implemented = 'yes' WHERE function_name '#{line}'"
+                                        puts "UPDATE psx_functions SET implemented = 'yes' WHERE function_name '#{line}';"
                                 when -1
-                                        puts "UPDATE psx_functions SET implemented = 'no' WHERE function_name '#{line}'"
+                                        puts "UPDATE psx_functions SET implemented = 'no' WHERE function_name '#{line}';"
                                 when 0
                                         # puts "Pending"
                                 end
