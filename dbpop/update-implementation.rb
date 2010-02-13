@@ -87,8 +87,9 @@ Find.find("../") { |p|
                                 when -1
                                         puts "UPDATE psx_functions SET implemented = 'no' WHERE function_name '#{line}'"
                                 when 0
-                                        puts "Pending"
+                                        # puts "Pending"
                                 end
+                                STDOUT.flush
                         end
                         f.close
                 end
