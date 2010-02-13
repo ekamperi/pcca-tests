@@ -80,9 +80,9 @@ Find.find("../") { |p|
                                 rv = querytests(queryfunction(line))
                                 case rv
                                 when 1
-                                        puts "UPDATE psx_functions SET implemented = 'yes' WHERE function_name '#{line}';"
+                                        puts "UPDATE psx_functions SET implemented = 'yes' WHERE function_name = '#{line}';"
                                 when -1
-                                        puts "UPDATE psx_functions SET implemented = 'no' WHERE function_name '#{line}';"
+                                        puts "UPDATE psx_functions SET implemented = 'no'  WHERE function_name = '#{line}';"
                                 when 0
                                         # puts "Pending"
                                 end
