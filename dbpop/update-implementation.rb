@@ -56,12 +56,6 @@ def querytests(binaries)
                         return 1 if line.include? b[1]
                 end
                 f.close
-
-                f = File.new("#{b[0]}/log.failed-runtime", 'r')
-                while (line = f.gets)
-                        return 1 if line.include? b[1]
-                end
-                f.close
         }
 
         # Require at least 2 failing test cases.
