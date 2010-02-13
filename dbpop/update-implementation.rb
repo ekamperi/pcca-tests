@@ -7,18 +7,16 @@
 # use the audited function.
 
 require 'find'
-require 'rexml/document'
-include REXML
+require 'nokogiri'
 
 def queryxml(xmlfile, function)
         f = File.new(xmlfile, "r")
-        doc = Document.new(f)
+        doc = Nokogiri::XML(f)
 
         binaries = []
-        XPath.each(doc.root,
-                   "//test/calls/function[text()='#{function}']") { |e|
+        doc.xpath("//test/calls/function[text()='#{function}']").each { |e|
                 test = e.parent.parent
-                binary = XPath.first(test, 'binary')
+                binary = test.xpath('binary').first
                 binaries << [File.dirname(xmlfile), binary.text]
         }
 
