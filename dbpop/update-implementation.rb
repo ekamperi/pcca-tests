@@ -64,10 +64,13 @@ def querytests(binaries)
                 f.close
         }
 
+        # Require at least 2 failing test cases.
+        return 0 if binaries[0].size < 2
+
         return -1
 end
 
-Find.find("../") { |p|
+Find.find("../grp.h") { |p|
         # Skip .git
         if FileTest.directory?(p) && File.basename(p) == ".git"
                 Find.prune
