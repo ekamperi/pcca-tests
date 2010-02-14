@@ -1,4 +1,4 @@
-#!/usr/pkg/bin/ruby
+#!/usr/bin/ruby
 #
 # ARGV[0] is the path the tfile.xml file
 # ARGV[1] is the name of the function
@@ -23,7 +23,7 @@ def queryxml(xmlfile, function)
 
         f.close
 
-        return binaries[0]
+        return binaries
 end
 
 def queryfunction(function)
@@ -35,12 +35,12 @@ def queryfunction(function)
                 else
                         if File.basename(p) == "tfile.xml"
                                 tmp = queryxml(p, function)
-                                binaries << tmp if tmp != nil
+                                binaries << tmp if tmp != []
                         end
                 end
         }
 
-        return binaries
+        return binaries[0]
 end
 
 def querytests(binaries)
