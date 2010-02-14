@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/pkg/bin/ruby
 #
 # ARGV[0] is the path the tfile.xml file
 # ARGV[1] is the name of the function
@@ -35,12 +35,12 @@ def queryfunction(function)
                 else
                         if File.basename(p) == "tfile.xml"
                                 tmp = queryxml(p, function)
-                                binaries << tmp if tmp != []
+                                binaries.concat(tmp)
                         end
                 end
         }
 
-        return binaries[0]
+        return binaries
 end
 
 def querytests(binaries)
@@ -83,7 +83,7 @@ Find.find("../") { |p|
                                 when -1
                                         puts "UPDATE psx_functions SET implemented = 'no'  WHERE function_name = '#{line}';"
                                 when 0
-                                        # puts "Pending"
+                                    puts "UPDATE psx_functions SET implemented = 'pending' WHERE function_name = '#{line}';"
                                 end
                                 STDOUT.flush
                         end
