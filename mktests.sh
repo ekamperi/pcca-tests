@@ -281,24 +281,34 @@ fi
 [ -z "$manpages"   ] && [ -z "$symbols" ] &&
 [ -z "$prototypes" ] && usage
 
+timestamp=$(date "+%d-%m-%Y.%H:%M:%S")
+logdir="logs/$timestamp"
+if [ -d "$logdir" ]; then
+    echo "The impossible has happened!"
+    echo "Log directory: $logdir already exists!"
+    exit 1
+fi
+
+mkdir -p "$logdir"
+
 # Man page tests.
-[ ! -z "$manpages" ] && runmanpages "$STARTDIR"
+[ ! -z "$manpages" ] && runmanpages "$STARTDIR" | tee "$logdir/mlinks"
 
 # Symbol tests.
-[ ! -z "$symbols" ] && runsymbols "$STARTDIR"
+[ ! -z "$symbols" ] && runsymbols "$STARTDIR" | tee "$logdir/symbols"
 
 # Prototype tests.
 # They can be executed stand-alone or along with the functional tests.
 if [ ! -z "$prototypes" ] && [ -z "$run" ]
 then
-    runprototypes "$STARTDIR"
+    runprototypes "$STARTDIR" | tee "$logdir/prototypes"
 fi
 
 # Build sandboxes.
 [ ! -z "$sandbox" ] && buildsandboxes "$STARTDIR"
 
 # Build regular tests.
-[ ! -z "$clean"  ] || [ ! -z "$build" ] && buildtests "$STARTDIR"
+[ ! -z "$clean"  ] || [ ! -z "$build" ] && buildtests "$STARTDIR" | tee "$logdir/functional-build"
 
 # Run regular tests.
-[ ! -z "$run"    ] && runtests "$STARTDIR"
+[ ! -z "$run"    ] && runtests "$STARTDIR" | tee "$logdir/functional-run"
