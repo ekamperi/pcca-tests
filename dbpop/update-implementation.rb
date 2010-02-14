@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/pkg/bin/ruby
 #
 # ARGV[0] is the path the tfile.xml file
 # ARGV[1] is the name of the function
@@ -6,6 +6,7 @@
 # The scipt parses the XML file and returns the names of those test cases that
 # use the audited function.
 
+require 'rubygems'
 require 'find'
 require 'nokogiri'
 
@@ -22,7 +23,7 @@ def queryxml(xmlfile, function)
 
         f.close
 
-        return binaries
+        return binaries[0]
 end
 
 def queryfunction(function)
@@ -34,7 +35,7 @@ def queryfunction(function)
                 else
                         if File.basename(p) == "tfile.xml"
                                 tmp = queryxml(p, function)
-                                binaries << tmp if tmp != []
+                                binaries << tmp if tmp != nil
                         end
                 end
         }
@@ -48,7 +49,7 @@ def querytests(binaries)
 
         # If there are test cases, and _at least_ one of them managed to
         # _build_, we assume the function is implemented.
-        binaries[0].each { |b|
+        binaries.each { |b|
                 f = File.new("#{b[0]}/log.passed", 'r')
                 while (line = f.gets)
                         return 1 if line.include? b[1]
@@ -57,7 +58,7 @@ def querytests(binaries)
         }
 
         # Require at least 2 failing test cases.
-        return 0 if binaries[0].size < 2
+        return 0 if binaries.size < 2
 
         return -1
 end
