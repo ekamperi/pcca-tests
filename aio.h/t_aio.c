@@ -47,10 +47,11 @@ main(int argc, char *argv[])
 
 	/* Populate aiocb data structure. */
 	memset(&iocb, 0, sizeof(iocb));
+        iocb.aio_fildes = fd;
+        iocb.aio_offset = 0;
+        iocb.aio_buf = mybuf;
 	iocb.aio_nbytes = sizeof(mybuf);
-	iocb.aio_fildes = fd;
-	iocb.aio_offset = 0;
-	iocb.aio_buf = mybuf;
+	iocb.aio_sigevent.sigev_notify = SIGEV_NONE;
 
 	/* Issue an asynchronous read request. */
 	assert(aio_read(&iocb) != -1);
