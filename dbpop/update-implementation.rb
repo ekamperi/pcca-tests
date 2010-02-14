@@ -1,7 +1,7 @@
 #!/usr/pkg/bin/ruby
 #
 # This script generates SQL statements of the form:
-# UPDATE psx_functions SET implemented = 'xxx' WHERE function_name = 'yyy';#
+# UPDATE psx_functions SET implemented = 'xxx' WHERE function_name = 'yyy';
 #
 # It does so, for every POSIX function as found in the various per-header
 # `function.list' files.
@@ -25,7 +25,7 @@ require 'nokogiri'
 
 #
 # Extract all test cases from `xmlfile', that use `function'.
-# The results are return as an array of the form:
+# The results are returned as an array of the form:
 # [['../mqueue.h', 't_mq_open'], ...]
 #
 def queryxml(xmlfile, function)
