@@ -26,8 +26,8 @@
                         <function>aio_error</function>
                         <function>aio_read</function>
                         <function>aio_return</function>
-                        <function>aio_suspend</function>
                         <function>close</function>
+			<function>lio_listio</function>
                         <function>memset</function>
                         <function>open</function>
                 </calls>
