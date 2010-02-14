@@ -18,7 +18,7 @@
 
        <test>
                 <desc></desc>
-                <binary>t_aio</binary>
+                <binary>t_aio_suspend</binary>
                 <timeout>10</timeout>
                 <iterations>1</iterations>
                 <optional>false</optional>
