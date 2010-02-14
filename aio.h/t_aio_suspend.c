@@ -49,28 +49,26 @@ main(int argc, char *argv[])
 	assert(fd != -1);
 
 	/* Populate the aiocb structures. */
+	memset(iocb, 0, sizeof(iocb));
 	for (i = 0; i < NAIO; i++) {
-		memset(&iocb[i], 0, sizeof(iocb[i]));
 		iocb[i].aio_fildes = fd;
 		iocb[i].aio_offset = 0;
 		iocb[i].aio_buf = mybuf;
 		iocb[i].aio_nbytes = sizeof(mybuf);
 		iocb[i].aio_sigevent.sigev_notify = SIGEV_NONE;
+		iocb[i].aio_lio_opcode = LIO_READ;
 	}
 
-	/* Issue the asynchronous read requests. */
-	for (i = 0; i < NAIO; i++)
-		assert(aio_read(&iocb[i]) != -1);
-
 	/*
-	 * Suspend execution of the calling thread, until all read requests
-	 * are served.
+	 * Issue all the read operations at the same time.
+	 * And suspend until _all of them_ are served.
 	 */
-	const struct aiocb *iocblist[NAIO];
+	struct aiocb *iocblist[NAIO];
 
 	for (i = 0; i < NAIO; i++)
 		iocblist[i] = &iocb[i];
-	aio_suspend(iocblist, NAIO, NULL);
+
+	lio_listio(LIO_WAIT, iocblist, NAIO, NULL);
 
 	/* At this point, no aio operation shall return busy. */
 	for (i = 0; i < NAIO; i++)
