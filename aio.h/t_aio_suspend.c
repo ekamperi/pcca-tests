@@ -68,7 +68,7 @@ main(int argc, char *argv[])
 	for (i = 0; i < NAIO; i++)
 		iocblist[i] = &iocb[i];
 
-	lio_listio(LIO_WAIT, iocblist, NAIO, NULL);
+	assert(lio_listio(LIO_WAIT, iocblist, NAIO, NULL) == 0);
 
 	/* At this point, no aio operation shall return busy. */
 	for (i = 0; i < NAIO; i++)
