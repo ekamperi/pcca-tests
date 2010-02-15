@@ -106,8 +106,8 @@ buildsandbox()
 buildsandboxes()
 {
     # We skip .git/
-    for dir in $(find "$1" -name .git -prune -o \( -type d -name "*.h" \
-	-print \) 2>/dev/null | sort)
+    for dir in $(find "$1" -name .git -prune -o \
+	\( -type d -name "*.h" -print \) 2>/dev/null | sort)
     do
 	if [ -f "$dir/need-sandbox" ]; then
 	    buildsandbox "$dir"
@@ -122,8 +122,8 @@ runmanpages()
     echo
 
     # We skip .git/
-    for dir in $(find "$1" -name .git -prune -o \( -type d -name "*.h" \
-	-print \) 2>/dev/null | sort)
+    for dir in $(find "$1" -name .git -prune -o \
+	\( -type d -name "*.h" -print \) 2>/dev/null | sort)
     do
 	if [ -f "$dir/functions.list" ]; then
 	    ./chkmanpages.sh "$dir/functions.list"
@@ -148,11 +148,10 @@ runsymbols()
 
 runprototypes()
 {
-    for dir in $(find "$1" -name .git -prune -o \( -type d -a ! -name . \) \
-	2>/dev/null | sort)
+    for dir in $(find "$1" -name .git -prune -o \
+	\( -type d -name "*.h" -print \) 2>/dev/null | sort)
     do
-	if [ -d "$dir/prototypes" ]
-	then
+	if [ -d "$dir/prototypes" ]; then
 	    ./pleader.rb "$dir"
 	fi
     done
@@ -160,12 +159,11 @@ runprototypes()
 
 runtests()
 {
-    # We skip the .git/objects/* subdirectories.
-    # We don't look for directories ending with .h only, as we also need to run
-    # tests on utilities as well, e.g. utilities/basemame.
-
-    for dir in $(find "$1" -name .git -prune -o \( -type d -a ! -name . \) \
-	2>/dev/null | sort)
+    # We don't look in directories ending with .h only, as we need to run tests
+    # on utilities as well, e.g. utilities/basemame.
+    for dir in $(find "$1" \
+	\( -name .git -o -name logs -o -name prototypes -o -name sandbox \) \
+	-prune -o \( -type d -a ! -name . -print \) 2>/dev/null | sort)
     do
 	if [ -f "$dir/tfile" ]; then
 	    # Make sure there is no missing sandbox/ directory.
