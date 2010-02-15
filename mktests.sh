@@ -298,3 +298,9 @@ mkdir -p "$logdir"
 
 # Run regular tests.
 [ ! -z "$run"    ] && runtests "$STARTDIR" | tee "$logdir/functional-run"
+
+#
+./getstats.sh > "$logdir/stats"
+./getpassed.sh > "$logdir/passed"
+./getkilled.sh > "$logdir/killed"
+./getfailed.sh > "$logdir/failed"
