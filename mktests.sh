@@ -281,26 +281,32 @@ fi
 mkdir -p "$logdir"
 
 # Man page tests.
-[ ! -z "$manpages" ] && runmanpages "$STARTDIR" | tee "$logdir/mlinks"
+[ ! -z "$manpages" ] && runmanpages "$STARTDIR" 2>&1 \
+    | tee "$logdir/mlinks"
 
 # Symbol tests.
-[ ! -z "$symbols" ] && runsymbols "$STARTDIR" | tee "$logdir/symbols"
+[ ! -z "$symbols" ] && runsymbols "$STARTDIR" 2>&1 \
+    | tee "$logdir/symbols"
 
 # Prototype tests.
 # They can be executed stand-alone or along with the functional tests.
-[ ! -z "$prototypes" ] &&  runprototypes "$STARTDIR" | tee "$logdir/prototypes"
+[ ! -z "$prototypes" ] &&  runprototypes "$STARTDIR" 2>&1 \
+    | tee "$logdir/prototypes"
 
 # Build sandboxes.
-[ ! -z "$sandbox" ] && buildsandboxes "$STARTDIR"
+[ ! -z "$sandbox" ] && buildsandboxes "$STARTDIR" 2>&1 \
+    | tee "$logdir/sandboxes"
 
 # Build regular tests.
-[ ! -z "$clean"  ] || [ ! -z "$build" ] && buildtests "$STARTDIR" | tee "$logdir/functional-build"
+[ ! -z "$clean"  ] || [ ! -z "$build" ] && buildtests "$STARTDIR" 2>&1 \
+    | tee "$logdir/functional-build"
 
 # Run regular tests.
-[ ! -z "$run"    ] && runtests "$STARTDIR" | tee "$logdir/functional-run"
+[ ! -z "$run"    ] && runtests "$STARTDIR" 2>&1 \
+    | tee "$logdir/functional-run"
 
-#
-./getstats.sh > "$logdir/stats"
-./getpassed.sh > "$logdir/passed"
-./getkilled.sh > "$logdir/killed"
-./getfailed.sh > "$logdir/failed"
+# Log statistics
+./getstats.sh 2>&1 > "$logdir/stats"
+./getpassed.sh 2>&1 > "$logdir/passed"
+./getkilled.sh 2>&1 > "$logdir/killed"
+./getfailed.sh 2>&1 > "$logdir/failed"
