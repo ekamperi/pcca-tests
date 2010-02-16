@@ -511,4 +511,14 @@
 		</calls>
 	</test>
 
+	<test>
+		<desc></desc>
+		<binary>uleader.sh</binary>
+		<timeout>20</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+		</calls>
+	</test>
+
 </list-of-tests>
