@@ -204,6 +204,19 @@
 			<function>fabs</function>
 		</calls>
 	</test>
+	
+	<test>
+		<desc></desc>
+		<binary>t_conj2</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>cimag</function>
+			<function>conj</function>
+			<function>fabs</function>
+		</calls>
+	</test>	
 
 	<test>
 		<desc></desc>

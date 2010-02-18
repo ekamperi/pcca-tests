@@ -12,6 +12,7 @@ all:	t_cabs	\
 	t_cimag \
 	t_clog	\
 	t_conj	\
+	t_conj2		\
 	t_complex	\
 	t_cpow	\
 	t_cproj	\
@@ -26,6 +27,7 @@ all:	t_cabs	\
 	t_signbit
 
 CC=gcc
+CC99=gcc -std=c99
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 	-Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual \
@@ -77,6 +79,9 @@ t_complex: t_complex.c
 
 t_conj: t_conj.c
 	$(CC) $(CCFLAGS) $(LIB) t_conj.c -o t_conj
+
+t_conj2: t_conj2.c
+	$(CC99) $(CCFLAGS) $(LIB) t_conj2.c -o t_conj2
 
 t_cpow: t_cpow.c
 	$(CC) $(CCFLAGS) $(LIB) t_cpow.c -o t_cpow
@@ -159,6 +164,9 @@ run:
 
 	@printf "t_conj: "
 	@-./t_conj
+
+	@printf "t_conj2: "
+	@-./t_conj2
 
 	@printf "t_cpow: "
 	@-./t_cpow

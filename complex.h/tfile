@@ -13,6 +13,7 @@ t_cimag
 t_clog
 t_complex
 t_conj
+t_conj2
 t_cpow
 t_cproj
 t_creal
