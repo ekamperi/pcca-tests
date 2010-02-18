@@ -1,4 +1,4 @@
-/*-
+/*
  * Copyright (c) 2008 David Schultz <das@FreeBSD.org>
  * All rights reserved.
  *
@@ -24,15 +24,12 @@
  * SUCH DAMAGE.
  */
 
-/*
- * Tests for conj{,f,l}()
- */
-
 #include <assert.h>
 #include <complex.h>
 #include <fenv.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #pragma	STDC CX_LIMITED_RANGE	off
 
@@ -40,16 +37,17 @@
 static float complex (*libconjf)(float complex) = conjf;
 static double complex (*libconj)(double complex) = conj;
 static long double complex (*libconjl)(long double complex) = conjl;
+
 static float (*libcrealf)(float complex) = crealf;
 static double (*libcreal)(double complex) = creal;
 static long double (*libcreall)(long double complex) = creall;
+
 static float (*libcimagf)(float complex) = cimagf;
 static double (*libcimag)(double complex) = cimag;
 static long double (*libcimagl)(long double complex) = cimagl;
 
 /*
  * Compare d1 and d2 using special rules: NaN == NaN and +0 != -0.
- * Fail an assertion if they differ.
  */
 static int
 fpequal(long double d1, long double d2)
@@ -69,32 +67,30 @@ cfpequal(long double complex d1, long double complex d2)
 }
 
 static const double tests[] = {
-	/* a +  bI */
-	0.0,	0.0,
-	0.0,	1.0,
-	1.0,	0.0,
-	-1.0,	0.0,
-	1.0,	-0.0,
-	0.0,	-1.0,
-	2.0,	4.0,
-	0.0,	INFINITY,
-	0.0,	-INFINITY,
-	INFINITY, 0.0,
-	NAN,	1.0,
-	1.0,	NAN,
-	NAN,	NAN,
-	-INFINITY, INFINITY,
+	/* a   +   bI */
+	 0.0,	    0.0,
+	 0.0,	    1.0,
+	 1.0, 	    0.0,
+	-1.0,	    0.0,
+	 1.0,	   -0.0,
+	 0.0,	   -1.0,
+	 2.0,	    4.0,
+	 0.0,	    INFINITY,
+	 0.0,	   -INFINITY,
+	 INFINITY,   0.0,
+	 NAN,        1.0,
+	 1.0,	     NAN,
+	 NAN,	     NAN,
+	-INFINITY,   INFINITY,
 };
 
 int
-main(int argc, char *argv[])
+main(void)
 {
-	static const int ntests = sizeof(tests) / sizeof(tests[0]) / 2;
+	static const size_t ntests = sizeof(tests) / sizeof(tests[0]) / 2;
+	size_t i;
 	complex float in;
 	complex long double expected;
-	int i;
-
-	printf("1..%d\n", ntests * 3);
 
 	for (i = 0; i < ntests; i++) {
 		__real__ expected = __real__ in = tests[2 * i];
@@ -108,48 +104,23 @@ main(int argc, char *argv[])
 		assert(fpequal(libcimag(in), __imag__ in));
 		assert(fpequal(libcimagl(in), __imag__ in));		
 
+		/* conjf */
 		feclearexcept(FE_ALL_EXCEPT);
-		if (!cfpequal(libconjf(in), expected)) {
-			printf("not ok %d\t# conjf(%#.2g + %#.2gI): "
-			       "wrong value\n",
-			       3 * i + 1, creal(in), cimag(in));
-		} else if (fetestexcept(FE_ALL_EXCEPT)) {
-			printf("not ok %d\t# conjf(%#.2g + %#.2gI): "
-			       "threw an exception\n",
-			       3 * i + 1, creal(in), cimag(in));
-		} else {
-			printf("ok %d\t\t# conjf(%#.2g + %#.2gI)\n",
-			       3 * i + 1, creal(in), cimag(in));
-		}
+		assert(cfpequal(libconjf(in), expected));
+		assert(!fetestexcept(FE_ALL_EXCEPT));
 
+		/* conj */
 		feclearexcept(FE_ALL_EXCEPT);
-		if (!cfpequal(libconj(in), expected)) {
-			printf("not ok %d\t# conj(%#.2g + %#.2gI): "
-			       "wrong value\n",
-			       3 * i + 2, creal(in), cimag(in));
-		} else if (fetestexcept(FE_ALL_EXCEPT)) {
-			printf("not ok %d\t# conj(%#.2g + %#.2gI): "
-			       "threw an exception\n",
-			       3 * i + 2, creal(in), cimag(in));
-		} else {
-			printf("ok %d\t\t# conj(%#.2g + %#.2gI)\n",
-			       3 * i + 2, creal(in), cimag(in));
-		}
+		assert(cfpequal(libconj(in), expected));
+		assert(!fetestexcept(FE_ALL_EXCEPT));
 
+		/* conjl */
 		feclearexcept(FE_ALL_EXCEPT);
-		if (!cfpequal(libconjl(in), expected)) {
-			printf("not ok %d\t# conjl(%#.2g + %#.2gI): "
-			       "wrong value\n",
-			       3 * i + 3, creal(in), cimag(in));
-		} else if (fetestexcept(FE_ALL_EXCEPT)) {
-			printf("not ok %d\t# conjl(%#.2g + %#.2gI): "
-			       "threw an exception\n",
-			       3 * i + 3, creal(in), cimag(in));
-		} else {
-			printf("ok %d\t\t# conjl(%#.2g + %#.2gI)\n",
-			       3 * i + 3, creal(in), cimag(in));
-		}
+		assert(cfpequal(libconjl(in), expected));
+		assert(!fetestexcept(FE_ALL_EXCEPT));
 	}
 
-	return (0);
+	printf("passed\n");
+
+	return (EXIT_SUCCESS);
 }
