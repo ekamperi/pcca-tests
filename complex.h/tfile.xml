@@ -213,8 +213,12 @@
 		<optional>false</optional>
 		<calls>
 			<function>cimag</function>
-			<function>conj</function>
-			<function>fabs</function>
+			<function>copysignl</function>
+			<function>cimagl</function>
+			<function>creall</function>
+			<function>isnan</function>
+			<function>fclearexcept</function>
+			<function>fetestexcept</function>
 		</calls>
 	</test>	
 
