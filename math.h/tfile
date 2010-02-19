@@ -8,6 +8,7 @@ t_fmaxl
 t_fmin
 t_fminf
 t_fminl
+t_fpclassify
 t_generr
 t_tgamma
 t_log

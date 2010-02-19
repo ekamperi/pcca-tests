@@ -8,6 +8,7 @@ all:	t_cos		\
 	t_fdim		\
 	t_fdimf		\
 	t_fdiml 	\
+	t_fpclassify	\
 	t_tgamma	\
 	t_generr	\
 	t_log		\
@@ -54,6 +55,9 @@ t_fdimf: t_fdimf.c
 
 t_fdiml: t_fdiml.c
 	$(CC99) $(CCFLAGS) $(LIB) t_fdiml.c -o t_fdiml
+
+t_fpclassify: t_fpclassify.c
+	$(CC99) $(CCFLAGS) $(LIB) t_fpclassify.c -o t_fpclassify
 
 t_tgamma: t_tgamma.c
 	$(CC99) $(CCFLAGS) $(LIB) t_tgamma.c -o t_tgamma
@@ -109,6 +113,9 @@ run:
 
 	@printf "t_fdiml: "
 	@-./t_fdiml
+
+	@printf "t_fpclassify: "
+	@-./t_fpclassify
 
 	@printf "t_tgamma: "
 	@-./t_tgamma

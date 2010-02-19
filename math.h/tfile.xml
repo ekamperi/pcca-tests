@@ -146,6 +146,17 @@
 
 	<test>
 		<desc></desc>
+		<binary>t_fpclassify</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>fpclassify</function>
+		</calls>
+	</test>
+
+	<test>
+		<desc></desc>
 		<binary>t_generr</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>
