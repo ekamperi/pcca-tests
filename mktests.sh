@@ -4,14 +4,14 @@ usage()
 {
     cat <<EOF
 Usage: `basename $0` -cbrsmy [directory]
--c    Clean stale files from previous builds.
 -b    Build tests from sources.
--r    Run tests.
--s    Construct sandbox/ directories.
+-c    Clean stale files from previous builds.
+-h    Print this help message.
 -m    Run man pages tests.
 -p    Run prototype tests.
+-r    Run tests.
+-s    Construct sandbox/ directories.
 -y    Run symbol tests.
--h    Print this help message.
 At least one of the above options must be specified.
 EOF
 
