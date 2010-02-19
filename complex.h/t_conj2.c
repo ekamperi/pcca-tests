@@ -77,11 +77,11 @@ static const double tests[] = {
 	 2.0,	    4.0,
 	 0.0,	    INFINITY,
 	 0.0,	   -INFINITY,
-	 INFINITY,   0.0,
-	 NAN,        1.0,
-	 1.0,	     NAN,
-	 NAN,	     NAN,
-	-INFINITY,   INFINITY,
+	 INFINITY,  0.0,
+	 NAN,       1.0,
+	 1.0,	    NAN,
+	 NAN,	    NAN,
+	-INFINITY,  INFINITY,
 };
 
 int
