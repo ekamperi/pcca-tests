@@ -1,4 +1,4 @@
-/*-
+/*
  * Copyright (c) 2003 Mike Barcroft <mike@FreeBSD.org>
  * All rights reserved.
  *
@@ -23,11 +23,11 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD$
  */
 
 #include <assert.h>
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 int
@@ -70,6 +70,7 @@ main(void)
 	assert(fpclassify((long double)HUGE_VAL) == FP_INFINITE);
 	assert(fpclassify((long double)NAN) == FP_NAN);
 
-	printf("PASS fpclassify()\n");
-	exit(0);
+	printf("passed\n");
+
+	return(EXIT_SUCCESS);
 }
