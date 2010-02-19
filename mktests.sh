@@ -277,10 +277,10 @@ else
     STARTDIR="."
 fi
 
-# At least one of -c, -b, -r, -s, -m, -y options must be set.
-[ -z "$clean"      ] && [ -z "$build"   ] &&
-[ -z "$run"        ] && [ -z "$sandbox" ] &&
-[ -z "$manpages"   ] && [ -z "$symbols" ] &&
+# At least one of -b, -c, -m, -p, -r, -s, -y options must be set.
+[ -z "$build"      ] && [ -z "$clean"   ] &&
+[ -z "$manpages"   ] && [ -z "$run"     ] &&
+[ -z "$sandbox"    ] && [ -z "$symbols" ] &&
 [ -z "$prototypes" ] && usage
 
 timestamp=$(date "+%d-%m-%Y.%H:%M:%S")
