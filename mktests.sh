@@ -211,6 +211,19 @@ buildtests()
     done
 }
 
+logstatistics()
+{
+    ./getstats.sh 2>&1 > "$1/stats"
+
+    ./getpassed.sh 2>&1 | grep -v "_prot$" > "$1/functional-passed"
+    ./getfailed.sh 2>&1 | grep -v "_prot$" > "$1/functional-failed"
+
+    ./getpassed.sh 2>&1 | grep "_prot$" > "$1/prototypes-passed"
+    ./getfailed.sh 2>&1 | grep "_prot$" > "$1/prototypes-failed"
+
+    ./getkilled.sh 2>&1 > "$1/killed"
+}
+
 # Parse user supplied arguments.
 while getopts "cbrpsmyh" f
 do
@@ -306,12 +319,4 @@ mkdir -p "$logdir"
     | tee "$logdir/functional-run"
 
 # Log statistics
-./getstats.sh 2>&1 > "$logdir/stats"
-
-./getpassed.sh 2>&1 | grep -v "_prot$" > "$logdir/functional-passed"
-./getfailed.sh 2>&1 | grep -v "_prot$" > "$logdir/functional-failed"
-
-./getpassed.sh 2>&1 | grep "_prot$" > "$logdir/prototypes-passed"
-./getfailed.sh 2>&1 | grep "_prot$" > "$logdir/prototypes-failed"
-
-./getkilled.sh 2>&1 > "$logdir/killed"
+logstatistics "$logdir"
