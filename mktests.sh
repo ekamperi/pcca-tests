@@ -178,7 +178,7 @@ runtests()
 buildtests()
 {
     for dir in $(find "$1" -name .git -prune -o \
-        \( -type d -name "*.h" -print \) 2>/dev/null | sort)
+	\( -type d -name "*.h" -print \) 2>/dev/null | sort)
     do
 	# We save the current directory, so we can step into the target, run
 	# 'make' and then return to where we are. We must always cd from the
@@ -215,21 +215,17 @@ buildtests()
 while getopts "cbrpsmyh" f
 do
     case $f in
-	c)
-	    # Clean stale files.
-	    clean=$f
-	    ;;
 	b)
 	    # Build tests.
 	    build=$f
 	    ;;
-	r)
-	    # Run tests.
-	    run=$f
+	c)
+	    # Clean stale files.
+	    clean=$f
 	    ;;
-	s)
-	    # Construct sandobox/ directories.
-	    sandbox=$f
+	h)
+	    # Print a help message.
+	    usage
 	    ;;
 	m)
 	    # Run man page tests.
@@ -239,13 +235,17 @@ do
 	    # Run prototype tests.
 	    prototypes=$
 	    ;;
+	r)
+	    # Run tests.
+	    run=$f
+	    ;;
+	s)
+	    # Construct sandobox/ directories.
+	    sandbox=$f
+	    ;;
 	y)
 	    # Run symbol tests.
 	    symbols=$f
-	    ;;
-	h)
-	    # Print a help message.
-	    usage
 	    ;;
 	\?)
 	    # Same as before.
