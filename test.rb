@@ -102,9 +102,9 @@ doc.root.each_element('//test') { |t|
         }
 }
 
-log_passed.close()
-log_failed_buildtime.close()
-log_failed_runtime.close()
-log_killed.close()
+log_passed.close
+log_failed_buildtime.close
+log_failed_runtime.close
+log_killed.close
 
 file.close
