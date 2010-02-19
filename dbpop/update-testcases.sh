@@ -27,8 +27,8 @@ scanheader()
 }
 
 # Scan all $header/ directories.
-for dir in $(find ".." -name .git -prune -o \( -type d -name "*.h" -print \) \
-    2>/dev/null | sort)
+for dir in $(find ".." -name .git -prune -o \
+    \( -type d -name "*.h" -print \) 2>/dev/null | sort)
 do
     if [ -f "$dir/functions.list" ]; then
         scanheader "$dir"
