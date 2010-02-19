@@ -307,6 +307,11 @@ mkdir -p "$logdir"
 
 # Log statistics
 ./getstats.sh 2>&1 > "$logdir/stats"
-./getpassed.sh 2>&1 > "$logdir/passed"
+
+./getpassed.sh 2>&1 | grep -v "_prot$" > "$logdir/functional-passed"
+./getfailed.sh 2>&1 | grep -v "_prot$" > "$logdir/functional-failed"
+
+./getpassed.sh 2>&1 | grep "_prot$" > "$logdir/prototypes-passed"
+./getfailed.sh 2>&1 | grep "_prot$" > "$logdir/prototypes-failed"
+
 ./getkilled.sh 2>&1 > "$logdir/killed"
-./getfailed.sh 2>&1 > "$logdir/failed"
