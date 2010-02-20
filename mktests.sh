@@ -88,15 +88,15 @@ populatesandbox()
 buildsandbox()
 {
     # Remove old sandbox.
-    rm -rf "$dir/sandbox"
+    rm -rf "$1/sandbox"
 
     # Create new sandbox directory.
-    mkdir "$dir/sandbox"
+    mkdir "$1/sandbox"
 
     # Populate new sandbox directory with stuff.
-    populatesandbox "$dir/sandbox"
+    populatesandbox "$1/sandbox"
 
-    echo "Created $dir/sandbox directory"
+    echo "Created $1/sandbox directory"
 }
 
 buildsandboxes()
