@@ -36,12 +36,12 @@ What you need to run the tests is basically these:
   Limited tests (namely regarding complex arithmetic support) were conducted
   succesfully with clang/llvm.
 * A decent make(1) utility.
-* Ruby 1.8.x or 1.9.x, along with the Nokogiri XML parser.
+* Ruby 1.8.x or 1.9.x.
 * A POSIX compliant shell found in /bin/sh.
   If you can't afford one, you can instead try with bash. For example, Solaris
   10 /bin/sh or even /usr/xpg4/bin/sh don't play nice with us. In any case, you
-  may have to edit the various scripts (mktests.sh, tleader.sh most importantly)
-  to set the path of the shell binary.
+  may have to edit the various scripts (e.g., mktests.sh) to set the path of the
+  shell binary.
 * The sudo(1) utility.
   This is used by mktests.sh script and various Makefiles to set the suid bit to
   certain test case binaries. The ability of these binaries to escalate their
@@ -54,6 +54,8 @@ What you need to run the tests is basically these:
   FreeBSD, which describes how to enable POSIX message queues support. For your
   convenience you can retrieve such files (if any) with the help of
   `getreadme.sh' script.
+* For dbpop/ to work, you will also need the Nokogiri XML parser, as the default
+  one (REXML) is unbearably slow.
 
 If you find a portable way to set the suid bit, without using sudo, please drop
 me a note.
