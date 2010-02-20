@@ -36,6 +36,7 @@ What you need to run the tests is basically these:
   Limited tests (namely regarding complex arithmetic support) were conducted
   succesfully with clang/llvm.
 * A decent make(1) utility.
+* Ruby 1.8.x or 1.9.x, along with the Nokogiri XML parser.
 * A POSIX compliant shell found in /bin/sh.
   If you can't afford one, you can instead try with bash. For example, Solaris
   10 /bin/sh or even /usr/xpg4/bin/sh don't play nice with us. In any case, you
