@@ -3,7 +3,8 @@ all:	t_posix_memalign	\
 	t_putenv		\
 	t_qsort			\
 	t_realpath		\
-	t_stdlib
+	t_stdlib		\
+	t_strtod		\
 
 CC=gcc
 CC99=gcc -std=c99
@@ -32,6 +33,9 @@ t_realpath: t_realpath.c
 t_stdlib: t_stdlib.c
 	$(CC) $(CCFLAGS) $(LIB) t_stdlib.c -o t_stdlib
 
+t_strtod: t_strtod.c
+	$(CC) $(CCFLAGS) t_strtod.c -o t_strtod
+
 clean:
 	git clean -f
 
@@ -53,3 +57,6 @@ run:
 
 	@printf "t_stdlib: "
 	@-./t_stdlib
+
+	@printf "t_strtod: "
+	@-./t_strtod

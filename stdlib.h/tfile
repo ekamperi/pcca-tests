@@ -4,3 +4,4 @@ t_putenv
 t_qsort
 t_realpath
 t_stdlib
+t_strtod

@@ -87,4 +87,16 @@
 		</calls>
 	</test>
 
+	<test>
+		<desc></desc>
+		<binary>t_strtod</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>strtod</function>
+		</calls>
+	</test>
+
+
 </list-of-tests>
