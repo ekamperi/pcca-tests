@@ -28,7 +28,7 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 LIB=-lm
 
 t_const: t_const.c
-	$(CC) $(CCFLAGS) $(LIB) t_const.c -o t_const
+	$(CC99) $(CCFLAGS) $(LIB) t_const.c -o t_const
 
 t_cos: t_cos.c
 	$(CC) $(CCFLAGS) $(LIB) t_cos.c -o t_cos
