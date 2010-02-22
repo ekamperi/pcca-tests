@@ -1,4 +1,5 @@
-all:	t_cos		\
+all:	t_const		\
+	t_cos		\
 	t_fmax		\
 	t_fmaxf		\
 	t_fmaxl		\
@@ -25,6 +26,9 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wshadow -Wwrite-strings -Wno-unused-parameter -Wfloat-equal \
 	-Wswitch -Wbad-function-cast -g
 LIB=-lm
+
+t_const: t_const.c
+	$(CC) $(CCFLAGS) $(LIB) t_const.c -o t_const
 
 t_cos: t_cos.c
 	$(CC) $(CCFLAGS) $(LIB) t_cos.c -o t_cos

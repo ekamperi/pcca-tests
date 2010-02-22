@@ -2,6 +2,16 @@
 <list-of-tests>
 	<test>
 		<desc></desc>
+		<binary>t_const</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+		</calls>
+	</test>
+
+	<test>
+		<desc></desc>
 		<binary>t_cos</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>
