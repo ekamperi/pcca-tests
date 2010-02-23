@@ -8,7 +8,6 @@
  * as initializer elements. Otherwise, this test case will fail to build.
  */
 
-
 #ifdef HUGE_VAL
 double a = HUGE_VAL;
 #endif
@@ -32,7 +31,7 @@ double e = NAN;
 int
 main(void)
 {
-	printf("passed");
+	printf("passed\n");
 
 	return(EXIT_SUCCESS);
 }
