@@ -225,6 +225,18 @@
 			<function>signbit</function>
 		</calls>
 	</test>
+	
+	<test>
+		<desc></desc>
+		<binary>t_pow</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>isinf</function>
+			<function>pow</function>
+		</calls>
+	</test>	
 
 	<test>
 		<desc></desc>

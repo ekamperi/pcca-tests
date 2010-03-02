@@ -14,6 +14,7 @@ all:	t_const		\
 	t_generr	\
 	t_log		\
 	t_nearbyint	\
+	t_pow		\
 	t_rint		\
 	t_sin		\
 	t_trig_ident
@@ -75,6 +76,9 @@ t_log: t_log.c
 t_nearbyint: t_nearbyint.c
 	$(CC99) $(CCFLAGS) $(LIB) t_nearbyint.c -o t_nearbyint
 
+t_pow: t_pow.c
+	$(CC99) $(CCFLAGS) $(LIB) t_pow.c -o t_pow
+
 t_rint: t_rint.c
 	$(CC) $(CCFLAGS) $(LIB) t_rint.c -o t_rint
 
@@ -132,6 +136,9 @@ run:
 
 	@printf "t_rint: "
 	@-./t_rint
+
+	@printf "t_pow: "
+	@-./t_pow
 
 	@printf "t_sin: "
 	@-./t_sin
