@@ -38,7 +38,7 @@ struct tentry {
 	double x;       /* Input */
 	double y;
 	double z;	/* pow output */
-	int exchk;
+	int check;
 } ttable[] = {
 	/*
 	 * For any value of y (including NaN), if x is +1,
@@ -117,7 +117,10 @@ struct tentry {
         { -INFINITY, -5, -0.0, CHK_REG | CHK_SIGN },
         { -INFINITY, -7, -0.0, CHK_REG | CHK_SIGN },
 
-	/* For y < 0 and not an odd integer, if x is -Inf, +0 shall be returned. */
+	/*
+	 * For y < 0 and not an odd integer, if x is -Inf,
+	 * +0 shall be returned.
+	 */
 	{ -INFINITY, -2, +0.0, CHK_REG | CHK_SIGN },
         { -INFINITY, -4, +0.0, CHK_REG | CHK_SIGN },
         { -INFINITY, -6, +0.0, CHK_REG | CHK_SIGN },
@@ -129,7 +132,10 @@ struct tentry {
         { -INFINITY, 5, -INFINITY, CHK_INF | CHK_SIGN },
         { -INFINITY, 7, -INFINITY, CHK_INF | CHK_SIGN },
 
-	/* For y > 0 and not an odd integer, if x is -Inf, +Inf shall be returned. */
+	/*
+	 * For y > 0 and not an odd integer, if x is -Inf,
+	 * +Inf shall be returned.
+	 */
 	{ -INFINITY, 2, +INFINITY, CHK_INF | CHK_SIGN },
 	{ -INFINITY, 4, +INFINITY, CHK_INF | CHK_SIGN },
         { -INFINITY, 6, +INFINITY, CHK_INF | CHK_SIGN },
@@ -158,9 +164,9 @@ struct tentry {
         { -0.0, -3, -HUGE_VAL, CHK_INF | CHK_SIGN },
 
 	/*
-	 * For y < 0 and not an odd integer, if x is +-0, a pole error shall occur
-	 * and HUGE_VAL, HUGE_VALF, and HUGE_VALL shall be returned for pow(),
-	 * powf(), and powl(), respectively.
+	 * For y < 0 and not an odd integer, if x is +-0, a pole error shall
+	 * occur and HUGE_VAL, HUGE_VALF, and HUGE_VALL shall be returned for
+	 * pow(), powf(), and powl(), respectively.
 	 */
         { +0.0, -2, HUGE_VAL, CHK_INF | CHK_SIGN },
         { +0.0, -4, HUGE_VAL, CHK_INF | CHK_SIGN },
@@ -177,19 +183,21 @@ main(void)
 	N = sizeof(ttable) / sizeof(struct tentry);
 	for (i = 0; i < N; i++) {
 		/* Make sure that only allowed checks are set */
-		assert((ttable[i].exchk & ~(CHK_REG | CHK_SIGN | CHK_INF)) == 0);
+		assert((ttable[i].check & ~(CHK_REG | CHK_SIGN | CHK_INF))
+		    == 0);
 
 		/* Don't allow conflicting types to be set */
-		assert((ttable[i].exchk & (CHK_REG | CHK_INF)) != (CHK_REG | CHK_INF));
+		assert((ttable[i].check & (CHK_REG | CHK_INF))
+		    != (CHK_REG | CHK_INF));
 
 		oval = pow(ttable[i].x, ttable[i].y);
-		if (ttable[i].exchk & CHK_REG) {
+		if (ttable[i].check & CHK_REG) {
 			assert(fabs(oval - ttable[i].z) < 0.001);
 		}
-                if (ttable[i].exchk & CHK_INF) {
+                if (ttable[i].check & CHK_INF) {
 			assert(isinf(oval));
 		}
-		if (ttable[i].exchk & CHK_SIGN) {
+		if (ttable[i].check & CHK_SIGN) {
 			assert(signbit(oval) == signbit(ttable[i].z));
 		}
 	}
