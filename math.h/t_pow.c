@@ -40,6 +40,15 @@ struct tentry {
 	double z;	/* pow output */
 	int check;
 } ttable[] = {
+	/* Some rather trivial regular tests */
+	{ 1.0,   1.0,   1.000, CHK_REG },
+	{ 1.0, 100.0,   1.000, CHK_REG },
+	{ 2.0,   2.0,   4.000, CHK_REG },
+	{ 2.0,   3.0,   8.000, CHK_REG },
+	{ 2.5,   2.5,  9.8821, CHK_REG },
+	{ 2.5,   4.1, 42.8108, CHK_REG },
+	{ 3.1,  -2.7, 21.2166, CHK_REG },
+
 	/*
 	 * For any value of y (including NaN), if x is +1,
 	 * 1.0 shall be returned.
