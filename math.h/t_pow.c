@@ -47,7 +47,6 @@ struct tentry {
 	{ 2.0,   3.0,   8.000, CHK_REG },
 	{ 2.5,   2.5,  9.8821, CHK_REG },
 	{ 2.5,   4.1, 42.8108, CHK_REG },
-	{ 3.1,  -2.7, 21.2166, CHK_REG },
 
 	/*
 	 * For any value of y (including NaN), if x is +1,
@@ -204,7 +203,14 @@ main(void)
 			assert(fabs(oval - ttable[i].z) < 0.001);
 		}
                 if (ttable[i].check & CHK_INF) {
+			/*
+			 * Grab the opportunity to cross-check the results and
+			 * at the same time cross-check the functions with
+			 * respect to each other.
+			 */
 			assert(isinf(oval));
+			assert(!isfinite(oval));
+			assert(fpclassify(oval) == FP_INFINITE);
 		}
 		if (ttable[i].check & CHK_SIGN) {
 			assert(signbit(oval) == signbit(ttable[i].z));
