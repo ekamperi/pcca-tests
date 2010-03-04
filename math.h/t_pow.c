@@ -33,8 +33,7 @@
 #define	CHK_REG		(1 << 0)
 #define CHK_ZERO	(1 << 1)
 #define CHK_INF		(1 << 2)
-#define CHK_NAN		(1 << 3)
-#define CHK_SIGN	(1 << 4)
+#define CHK_SIGN	(1 << 3)
 
 struct tentry {
 	double x;       /* Input */
@@ -181,8 +180,6 @@ struct tentry {
 	{ +0.0, -4, HUGE_VAL, CHK_INF | CHK_SIGN },
 	{ -0.0, -2, HUGE_VAL, CHK_INF | CHK_SIGN },
 	{ -0.0, -4, HUGE_VAL, CHK_INF | CHK_SIGN },
-
-	{ +0, +0, NAN, CHK_NAN }
 };
 
 int
@@ -195,7 +192,7 @@ main(void)
 	for (i = 0; i < N; i++) {
 		/* Make sure that only allowed checks are set */
 		assert((ttable[i].check
-			& ~(CHK_REG | CHK_ZERO | CHK_INF | CHK_NAN | CHK_SIGN)) == 0);
+			& ~(CHK_REG | CHK_ZERO | CHK_INF | CHK_SIGN)) == 0);
 
 		/* Don't allow conflicting types to be set */
 		assert((ttable[i].check & (CHK_REG | CHK_INF))
@@ -219,9 +216,6 @@ main(void)
 			assert(isinf(oval));
 			assert(!isfinite(oval));
 			assert(fpclassify(oval) == FP_INFINITE);
-		}
-		if (ttable[i].check & CHK_NAN) {
-			printf("%f\n", oval);
 		}
 		if (ttable[i].check & CHK_SIGN) {
 			assert(signbit(oval) == signbit(ttable[i].z));
