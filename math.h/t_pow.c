@@ -119,7 +119,6 @@ struct tentry {
 	{ +2.0, +INFINITY, +INFINITY, CHK_INF | CHK_SIGN },
 	{ -2.0, +INFINITY, +INFINITY, CHK_INF | CHK_SIGN },
 
-
 	/* For y an odd integer < 0, if x is -Inf, -0 shall be returned. */
 	{ -INFINITY, -1, -0.0, CHK_REG | CHK_SIGN },
 	{ -INFINITY, -3, -0.0, CHK_REG | CHK_SIGN },
