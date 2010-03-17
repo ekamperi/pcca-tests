@@ -2,6 +2,18 @@
 <list-of-tests>
 	<test>
 		<desc></desc>
+		<binary>t_setsockopt</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>setsockopt</function>
+			<function>socket</function>
+		</calls>
+	</test>
+
+	<test>
+		<desc></desc>
 		<binary>t_socket</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>
