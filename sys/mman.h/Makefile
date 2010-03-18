@@ -1,4 +1,5 @@
-all:	t_shm
+all:	t_mlockall	\
+	t_shm
 
 CC=gcc
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -8,6 +9,9 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 	-Wswitch -Wbad-function-cast -g
 LIB=-lrt
 
+t_mlockall: t_mlockall.c
+	$(CC) $(CCFLAGS) t_mlockall.c -o t_mlockall
+
 t_shm: t_shm.c
 	$(CC) $(CCFLAGS) $(LIB) t_shm.c -o t_shm
 
@@ -15,5 +19,8 @@ clean:
 	git clean -f
 
 run:
+	@printf "t_mlockall: "
+	@-/t_mlockall
+
 	@printf "t_shm: "
 	@-./t_shm

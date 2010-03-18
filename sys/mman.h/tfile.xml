@@ -2,6 +2,18 @@
 <list-of-tests>
 	<test>
 		<desc></desc>
+		<binary>t_mlockall</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>mlockall</function>
+			<function>munlockall</function>
+		</calls>
+	</test>
+
+	<test>
+		<desc></desc>
 		<binary>t_shm</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>
