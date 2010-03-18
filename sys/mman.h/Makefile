@@ -20,7 +20,7 @@ clean:
 
 run:
 	@printf "t_mlockall: "
-	@-/t_mlockall
+	@-./t_mlockall
 
 	@printf "t_shm: "
 	@-./t_shm
