@@ -37,7 +37,15 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 
-#define SHM_NAME	"/t_mmap"
+/*
+ * DragonFly implements shared memory objects as normal files, which is why
+ * shm_open("/path/to/shared/object", ...); will fail if the user doesn't have
+ * write permissions on the above path.
+ *
+ * Linux, open/Solaris and FreeBSD do otherwise. In any case, we omit the
+ * leading / to play well with all parties.
+ */
+#define SHM_NAME	"t_mmap"
 #define SHM_SIZE	10000
 
 int
