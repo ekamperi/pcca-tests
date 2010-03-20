@@ -61,7 +61,7 @@ main(void)
 	int nomem = 0;
 
 	for (mmsize = 0; mmsize < SIZE_MAX; mmsize += SHM_SIZE) {
-		mmaddr = mmap (NULL, SHM_SIZE, PROT_READ | PROT_WRITE,
+		mmaddr = mmap(NULL, SHM_SIZE, PROT_READ | PROT_WRITE,
 		    MAP_SHARED, fd, 0);
 		if (mmaddr == MAP_FAILED && errno == ENOMEM) {
 			nomem = 1;
