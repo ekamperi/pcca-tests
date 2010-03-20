@@ -36,6 +36,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <sys/stat.h>
 
 #define SHM_NAME	"/t_mmap_errno"
 
