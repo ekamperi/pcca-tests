@@ -77,7 +77,7 @@ main(void)
 	assert(shm_unlink(SHM_NAME) != -1);
 	assert(close(fd) != -1);
 
-	/* This fuzz was all about this */
+	/* All the fuzz was about this */
 	assert(nomem == 1);
 
 	printf("passed\n");
