@@ -14,6 +14,21 @@
 
 	<test>
 		<desc></desc>
+		<binary>t_mmap</binary>
+		<timeout>20</timeout>
+		<iterations>10</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>ftruncate</function>
+			<function>mmap</function>
+			<function>shm_open</function>
+			<function>shm_unlink</function>
+		</calls>
+	</test>
+
+	<test>
+		<desc></desc>
 		<binary>t_shm</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>
