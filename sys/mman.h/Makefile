@@ -16,7 +16,7 @@ t_mlockall: t_mlockall.c
 	$(CC) $(CCFLAGS) t_mlockall.c -o t_mlockall
 
 t_mmap: t_mmap.c
-	$(CC) $(CCFLAGS) $(LIB) t_mmap.c -o t_mmap
+	$(CC99) $(CCFLAGS) $(LIB) t_mmap.c -o t_mmap
 
 t_mmap_errno: t_mmap_errno.c
 	$(CC99) $(CCFLAGS) $(LIB) t_mmap_errno.c -o t_mmap_errno

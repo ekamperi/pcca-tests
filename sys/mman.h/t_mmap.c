@@ -35,6 +35,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <sys/stat.h>
 
 #define SHM_NAME	"/t_mmap"
 #define SHM_SIZE	10000
@@ -55,7 +56,7 @@ main(void)
 	 * Start mapping progressively more and more memory,
 	 * until we exhaust our address space.
 	 */
-	size_t mmsize = 0;
+	size_t mmsize;
 	void *mmaddr;
 	int nomem = 0;
 
