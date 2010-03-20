@@ -45,13 +45,16 @@
  * Linux, open/Solaris and FreeBSD do otherwise. Specifically, open/Solaris
  * mandates that the path starts with a /. Conditionalize the whole thing,
  * to play nice with all parties.
+ *
+ * Also, make sure that the shared object's name doesn't collide with the
+ * executable's name (in the DragonFly case).
  */
 #ifdef	__DragonFly__
-#define SHM_NAME	"t_mmap"
+#define SHM_NAME	"t_mmap_shm"
 #else
-#define SHM_NAME	"/t_mmap"
+#define SHM_NAME	"/t_mmap_shm"
 #endif
-#define SHM_SIZE	10000
+#define SHM_SIZE	16384
 
 int
 main(void)
