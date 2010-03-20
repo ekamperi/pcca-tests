@@ -42,10 +42,15 @@
  * shm_open("/path/to/shared/object", ...); will fail if the user doesn't have
  * write permissions on the above path.
  *
- * Linux, open/Solaris and FreeBSD do otherwise. In any case, we omit the
- * leading / to play well with all parties.
+ * Linux, open/Solaris and FreeBSD do otherwise. Specifically, open/Solaris
+ * mandates that the path starts with a /. Conditionalize the whole thing,
+ * to play nice with all parties.
  */
+#ifdef	__DragonFly__
 #define SHM_NAME	"t_mmap"
+#else
+#define SHM_NAME	"/t_mmap"
+#endif
 #define SHM_SIZE	10000
 
 int
