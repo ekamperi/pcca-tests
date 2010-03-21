@@ -1,5 +1,4 @@
-all:
-	t_sched_getparam	\
+all:	t_sched_getparam	\
 	t_sched_rr_get_interval
 
 CC=gcc
