@@ -1,4 +1,5 @@
 t_mlockall
 t_mmap
+t_mmap_close
 t_mmap_errno
 t_shm

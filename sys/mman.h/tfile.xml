@@ -29,6 +29,23 @@
 
 	<test>
 		<desc></desc>
+		<binary>t_mmap_close</binary>
+		<timeout>10</timeout>
+		<iterations>10</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>_exit</function>
+			<function>close</function>
+			<function>mmap</function>
+			<function>munmap</function>
+			<function>shm_open</function>
+			<function>shm_unlink</function>
+			<function>signal</function>
+		</calls>
+	</test>
+
+	<test>
+		<desc></desc>
 		<binary>t_mmap_errno</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>
