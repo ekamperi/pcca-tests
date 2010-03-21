@@ -34,6 +34,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
@@ -114,10 +115,18 @@ main(void)
 static void
 myhandler(int sig)
 {
-	/* We only expect SIGSEGV. */
-	assert(sig == SIGSEGV);
-	
-	printf("passed\n");
+	/*
+	 * We only expect SIGSEGV.
+	 *
+	 * We can't use printf(), exit() and the like inside a signal handler.
+	 * Only async-signal safe functions shall be used. For a list, refer to:
+	 *
+	 * http://www.opengroup.org/onlinepubs/9699919799/functions/V2_chap02.html
+	 */
+	if (sig == SIGSEGV) {
+		write(fileno(stdout), "passed\n", strlen("passed\n")+1);
+		_exit(EXIT_SUCCESS);
+	}
 
-	_exit(EXIT_SUCCESS);
+	/* If this is reached, the program will fail, which is what we want. */
 }
