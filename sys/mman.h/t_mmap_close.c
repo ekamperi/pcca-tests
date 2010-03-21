@@ -66,14 +66,6 @@ static void myhandler(int sig);
 int
 main(void)
 {
-	/*
-	 * Install signal handler for SIGSEGV.
-	 *
-	 * We will be needing this one later on, when we will try to access
-	 * an unmapped page.
-	 */
-        assert(signal(SIGSEGV, myhandler) != SIG_ERR);
-
 	/* Create a shared memory object that we will be mmap'ing. */
 	int fd;
 
@@ -98,13 +90,24 @@ main(void)
 	assert(shm_unlink(SHM_NAME) != -1);
 	assert(close(fd) != -1);
 
-	/* Therefore, this shouldn't crash as we haven't called munmap() yet. */
+	/* This shouldn't crash, as we haven't called munmap() yet. */
 	*(char *)mmaddr = 1;
 
 	/* Unmap the pages. */
 	assert(munmap(mmaddr, SHM_SIZE) != -1);
 
-	/* This should raise a SIGSEGV signal being delivered to us. */
+	/*
+	 * Install signal handler for SIGSEGV.
+	 *
+	 * We will be needing this, when we will try to access
+	 * an unmapped page.
+	 */
+	assert(signal(SIGSEGV, myhandler) != SIG_ERR);
+
+	/*
+	 * This should cause a SIGSEGV signal being raised and 
+	 * delivered to us.
+	 */
 	*(char *)mmaddr = 1;
 
 	/* THIS SHOULD NEVER REACH HERE. */
