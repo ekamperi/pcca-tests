@@ -32,7 +32,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int didsegfault = 0;
+volatile sig_atomic_t didsegfault = 0;
 
 /* Function prototypes. */
 static void myhandler(int sig);
