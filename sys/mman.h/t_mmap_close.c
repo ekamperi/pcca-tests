@@ -52,9 +52,9 @@
  * executable's name (in the DragonFly case).
  */
 #ifdef	__DragonFly__
-#define SHM_NAME	"t_mmap_shm_close2"
+#define SHM_NAME	"t_mmap_shm_close"
 #else
-#define SHM_NAME	"/t_mmap_shm_close2"
+#define SHM_NAME	"/t_mmap_shm_close"
 #endif
 #define SHM_SIZE	16384
 
