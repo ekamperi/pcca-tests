@@ -36,10 +36,11 @@
 #define NITER		20
 
 /* Function prototypes. */
-void *parent(void *arg);
-void *child(void *arg);
+static void *parent(void *arg);
+static void *child(void *arg);
 
-int main(void)
+int
+main(void)
 {
 	pthread_t thpool[NTHREADS];
 	size_t i;
@@ -58,7 +59,8 @@ int main(void)
 	return (EXIT_SUCCESS);
 }
 
-void *parent(void *arg)
+static void *
+parent(void *arg)
 {
 	pthread_t thpool[NTHREADS];
 	sem_t mysem;
@@ -84,7 +86,8 @@ void *parent(void *arg)
 	pthread_exit(NULL);
 }
 
-void *child(void *arg)
+static void *
+child(void *arg)
 {
 	sem_t mysem;
 	size_t i;

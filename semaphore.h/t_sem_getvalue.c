@@ -31,7 +31,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void)
+int
+main(void)
 {
 	sem_t mysem;
 	int val = 0;
