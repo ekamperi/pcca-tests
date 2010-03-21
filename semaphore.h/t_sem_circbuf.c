@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2009, Stathis Kamperis
  * All rights reserved.
-
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -47,11 +47,12 @@ sem_t sem_writtenbytes_buf1;
 sem_t sem_writtenbytes_buf2;
 
 /* Function prototypes. */
-void *writer1(void *arg);
-void *writer2(void *arg);
-void *reader(void *arg);
+static void *writer1(void *arg);
+static void *writer2(void *arg);
+static void *reader(void *arg);
 
-int main(void)
+int
+main(void)
 {
 	pthread_t wr1, wr2, rd;
 
@@ -93,7 +94,8 @@ int main(void)
 	return (EXIT_SUCCESS);
 }
 
-void *writer1(void *arg)
+static void *
+writer1(void *arg)
 {
 	size_t i, pos;
 
@@ -110,7 +112,8 @@ void *writer1(void *arg)
 	pthread_exit(NULL);
 }
 
-void *writer2(void *arg)
+static void *
+writer2(void *arg)
 {
 	size_t i, pos;
 
@@ -127,7 +130,8 @@ void *writer2(void *arg)
 	pthread_exit(NULL);
 }
 
-void *reader(void *arg)
+static void *
+reader(void *arg)
 {
 	size_t i, pos;
 
