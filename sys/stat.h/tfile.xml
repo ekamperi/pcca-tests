@@ -13,6 +13,17 @@
 
 	<test>
 		<desc></desc>
+		<binary>t_mkdir_root</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>mkdir</function>
+		</calls>
+	</test>
+
+	<test>
+		<desc></desc>
 		<binary>t_mkfifo</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>
