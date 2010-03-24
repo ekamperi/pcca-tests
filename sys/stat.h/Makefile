@@ -1,5 +1,4 @@
 all:	t_lstat		\
-	t_mkdir_root	\
 	t_mkfifo	\
 	t_mkfifo2	\
 	t_stat		\
@@ -14,9 +13,6 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 
 t_lstat: t_lstat.c
 	$(CC) $(CCFLAGS) t_lstat.c -o t_lstat
-
-t_mkdir_root: t_mkdir_root.c
-	$(CC) $(CCFLAGS) t_mkdir_root.c -o t_mkdir_root
 
 t_mkfifo: t_mkfifo.c
 	$(CC) $(CCFLAGS) t_mkfifo.c -o t_mkfifo
@@ -36,9 +32,6 @@ clean:
 run:
 	@printf "t_lstat: "
 	@-./t_lstat
-
-	@printf "t_mkdir_root: "
-	@-./t_mkdir_root
 
 	@printf "t_mkfifo: "
 	@-./t_mkfifo

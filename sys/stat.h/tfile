@@ -1,5 +1,4 @@
 t_lstat
-t_mkdir_root
 t_mkfifo
 t_mkfifo2
 t_stat
