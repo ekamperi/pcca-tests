@@ -23,4 +23,19 @@
 		</calls>
 	</test>
 
+        <test>
+                <desc></desc>
+                <binary>t_timer</binary>
+                <timeout>10</timeout>
+                <iterations>10</iterations>
+                <optional>false</optional>
+                <calls>
+			<function>sigaction</function>
+			<function>sigemptyset</function>
+			<function>sleep</function>
+			<function>timer_create</function>
+			<function>timer_settime</function>
+                </calls>
+        </test>
+
 </list-of-tests>
