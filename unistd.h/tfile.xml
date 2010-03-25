@@ -144,6 +144,17 @@
 
 	<test>
 		<desc></desc>
+		<binary>t_fsync_errno</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>fsync</function>
+		</calls>
+	</test>
+
+	<test>
+		<desc></desc>
 		<binary>t_getcwd</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>

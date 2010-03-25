@@ -8,6 +8,7 @@ all:	t_access	\
 	t_fork_buf	\
 	t_fork_signal	\
 	t_fsync		\
+	t_fsync_errno	\
 	t_getcwd	\
 	t_getgroups	\
 	t_gethostid	\
@@ -58,7 +59,7 @@ t_alarm: t_alarm.c
 	$(CC) $(CCFLAGS) t_alarm.c -o t_alarm
 
 t_chdir: t_chdir.c
-	$(CC) $(CCFLAGS) t_chdir.c -o t_chdir	
+	$(CC) $(CCFLAGS) t_chdir.c -o t_chdir
 
 t_confstr: t_confstr.c
 	$(CC99) $(CCFLAGS) t_confstr.c -o t_confstr
@@ -79,6 +80,9 @@ t_fork_signal: t_fork_signal.c
 
 t_fsync: t_fsync.c
 	$(CC) $(CCFLAGS) t_fsync.c -o t_fsync
+
+t_fsync_errno: t_fsync_errno.c
+	$(CC) $(CCFLAGS) t_fsync_errno.c -o t_fsync_errno
 
 t_getcwd: t_getcwd.c
 	$(CC) $(CCFLAGS) t_getcwd.c -o t_getcwd
@@ -202,6 +206,9 @@ run:
 
 	@printf "t_fsync: "
 	@-./t_fsync
+
+	@printf "t_fsync_errno: "
+	@-./t_fsync_errno
 
 	@printf "t_getcwd: "
 	@-./t_getcwd

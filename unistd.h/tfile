@@ -9,6 +9,7 @@ t_fchdir_suid
 t_fork_buf
 t_fork_signal
 t_fsync
+t_fsync_errno
 t_getcwd
 t_getgroups
 t_gethostid
