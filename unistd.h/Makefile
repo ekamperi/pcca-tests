@@ -79,10 +79,10 @@ t_fork_signal: t_fork_signal.c
 	$(CC) $(CCFLAGS) t_fork_signal.c -o t_fork_signal
 
 t_fsync: t_fsync.c
-	$(CC) $(CCFLAGS) t_fsync.c -o t_fsync
+	$(CC99) $(CCFLAGS) t_fsync.c -o t_fsync
 
 t_fsync_errno: t_fsync_errno.c
-	$(CC) $(CCFLAGS) -lrt t_fsync_errno.c -o t_fsync_errno
+	$(CC99) $(CCFLAGS) -lrt t_fsync_errno.c -o t_fsync_errno
 
 t_getcwd: t_getcwd.c
 	$(CC) $(CCFLAGS) t_getcwd.c -o t_getcwd

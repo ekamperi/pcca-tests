@@ -46,6 +46,7 @@ main(void)
 	assert(fsync(-2) == -1 && errno == EBADF);
 	assert(fsync(-INT_MAX) == -1 && errno == EBADF);
 
+#if defined(__linux__)
 	/* Try to fsync() an unfsyncable object, such as a pipe */
 	int fd[2];
 
@@ -55,7 +56,9 @@ main(void)
 
 	assert(close(fd[0]) != -1);
 	assert(close(fd[1]) != -1);
+#endif
 
+#if defined(__linux__) || defined(__NetBSD__) || defined(__DragonFLy__)
 	/* Same as before, but use a message queue descriptor */
 #define MQNAME	"/t_fsync_errno_mq"
 	mqd_t md;
@@ -66,7 +69,7 @@ main(void)
 
 	assert(mq_close(md) != -1);
 	assert(mq_unlink(MQNAME) != -1);
-
+#endif
 	printf ("passed\n");
 
 	return (EXIT_SUCCESS);
