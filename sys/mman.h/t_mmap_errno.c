@@ -82,20 +82,28 @@ struct tentry {
 	{ NULL, 0, PROT_WRITE, MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
 	{ NULL, 0, PROT_WRITE, MAP_FIXED,   FD_DONTCARE, 0, EINVAL },
 
-	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_SHARED,  FD_DONTCARE, 0, EINVAL },
-	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
-	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_FIXED,   FD_DONTCARE, 0, EINVAL },
+	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_SHARED,  FD_DONTCARE, 0,
+	  EINVAL },
+	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_PRIVATE, FD_DONTCARE, 0,
+	  EINVAL },
+	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_FIXED,   FD_DONTCARE, 0,
+	  EINVAL },
 
         /*
-	 * The value of flags is invalid (Both MAP_SHARED and MAP_PRIVATE are set)
+	 * The value of flags is invalid (Both MAP_SHARED and MAP_PRIVATE are
+	 * set).
 	 */
-        { NULL, 1, PROT_READ,  MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
-        { NULL, 1, PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+        { NULL, 1, PROT_READ,  MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0,
+	  EINVAL },
+        { NULL, 1, PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0,
+	  EINVAL },
         { NULL, 1, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_PRIVATE,
 	  FD_DONTCARE, 0, EINVAL },
 
-        { NULL, 1024, PROT_READ, MAP_SHARED  | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
-	{ NULL, 1024, PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+        { NULL, 1024, PROT_READ, MAP_SHARED  | MAP_PRIVATE, FD_DONTCARE, 0,
+	  EINVAL },
+	{ NULL, 1024, PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0,
+	  EINVAL },
         { NULL, 1024, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_PRIVATE,
 	  FD_DONTCARE, 0, EINVAL },
 
@@ -107,8 +115,8 @@ struct tentry {
 	  0, EINVAL },
 	{ NULL, 1, PROT_WRITE, ~(MAP_PRIVATE | MAP_SHARED), FD_DONTCARE,
 	  0, EINVAL },
-	{ NULL, 1, PROT_READ | PROT_WRITE, ~(MAP_SHARED | MAP_PRIVATE), FD_DONTCARE,
-	  0, EINVAL },
+	{ NULL, 1, PROT_READ | PROT_WRITE, ~(MAP_SHARED | MAP_PRIVATE),
+	  FD_DONTCARE, 0, EINVAL },
 
 	/*
 	 * The fd is not open for read, regardless of the protection
@@ -129,7 +137,10 @@ struct tentry {
 int
 main(void)
 {
-	/* Create a shared memory object that we will be mmap'ing */
+	/*
+	 * Create shared memory objects that we will be mmap'ing
+	 * One read-only and one write-only.
+	 */
 	int rofd, wofd;
 
 	rofd = shm_open(RO_SHM_NAME, O_CREAT | O_EXCL | O_RDONLY,
@@ -148,7 +159,7 @@ main(void)
 		struct tentry *te = &ttable[i];
 		assert(te);
 
-		/* Override file descriptor accordingly */
+		/* Assign the file descriptor accordingly */
 		switch(te->te_fd) {
 		case FD_DONTCARE:
 			te->te_fd = rofd;
