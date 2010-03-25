@@ -7,6 +7,7 @@ all:	t_access	\
 	t_fchdir_suid	\
 	t_fork_buf	\
 	t_fork_signal	\
+	t_fsync		\
 	t_getcwd	\
 	t_getgroups	\
 	t_gethostid	\
@@ -75,6 +76,9 @@ t_fork_buf: t_fork_buf.c
 
 t_fork_signal: t_fork_signal.c
 	$(CC) $(CCFLAGS) t_fork_signal.c -o t_fork_signal
+
+t_fsync: t_fsync.c
+	$(CC) $(CCFLAGS) t_fsync.c -o t_fsync
 
 t_getcwd: t_getcwd.c
 	$(CC) $(CCFLAGS) t_getcwd.c -o t_getcwd
@@ -195,6 +199,9 @@ run:
 
 	@printf "t_fork_signal: "
 	@-./t_fork_signal
+
+	@printf "t_fsync: "
+	@-./t_fsync
 
 	@printf "t_getcwd: "
 	@-./t_getcwd

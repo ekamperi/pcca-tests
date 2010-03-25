@@ -129,6 +129,21 @@
 
 	<test>
 		<desc></desc>
+		<binary>t_fsync</binary>
+		<timeout>10</timeout>
+		<iterations>10</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>close</function>
+			<function>fsync</function>
+			<function>open</function>
+			<function>unlink</function>
+			<function>write</function>
+		</calls>
+	</test>
+
+	<test>
+		<desc></desc>
 		<binary>t_getcwd</binary>
 		<timeout>10</timeout>
 		<iterations>1</iterations>
