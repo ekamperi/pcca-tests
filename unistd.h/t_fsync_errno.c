@@ -62,6 +62,8 @@ main(void)
 	md = mq_open(MQNAME, O_RDWR | O_CREAT, 777, NULL);
 	assert(md != (mqd_t)-1);
 
+	assert(fsync(md) == -1 && errno == EINVAL);
+
 	assert(mq_close(md) != -1);
 	assert(mq_unlink(MQNAME) != -1);
 

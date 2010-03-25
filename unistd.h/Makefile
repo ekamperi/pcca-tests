@@ -82,7 +82,7 @@ t_fsync: t_fsync.c
 	$(CC) $(CCFLAGS) t_fsync.c -o t_fsync
 
 t_fsync_errno: t_fsync_errno.c
-	$(CC) $(CCFLAGS) t_fsync_errno.c -o t_fsync_errno
+	$(CC) $(CCFLAGS) -lrt t_fsync_errno.c -o t_fsync_errno
 
 t_getcwd: t_getcwd.c
 	$(CC) $(CCFLAGS) t_getcwd.c -o t_getcwd
