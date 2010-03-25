@@ -30,6 +30,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <limits.h>
+#include <mqueue.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -44,6 +45,25 @@ main(void)
 	assert(fsync(-1) == -1 && errno == EBADF);
 	assert(fsync(-2) == -1 && errno == EBADF);
 	assert(fsync(-INT_MAX) == -1 && errno == EBADF);
+
+	/* Try to fsync() an unfsyncable object, such as a pipe */
+	int fd[2];
+
+	assert(pipe(fd) != -1);
+	assert(fsync(fd[0]) == -1 && errno == EINVAL);
+	assert(fsync(fd[1]) == -1 && errno == EINVAL);
+
+	assert(close(fd[0]) != -1);
+	assert(close(fd[1]) != -1);
+
+	/* Same as before, but use a message queue descriptor */
+#define MQNAME	"/t_fsync_errno_mq"
+	mqd_t md;
+	md = mq_open(MQNAME, O_RDWR | O_CREAT, 777, NULL);
+	assert(md != (mqd_t)-1);
+
+	assert(mq_close(md) != -1);
+	assert(mq_unlink(MQNAME) != -1);
 
 	printf ("passed\n");
 

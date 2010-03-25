@@ -149,7 +149,12 @@
 		<iterations>1</iterations>
 		<optional>false</optional>
 		<calls>
+			<function>close</function>
 			<function>fsync</function>
+			<function>mq_close</function>
+			<function>mq_open</function>
+			<function>mq_unlink</function>
+			<function>pipe</function>
 		</calls>
 	</test>
 
