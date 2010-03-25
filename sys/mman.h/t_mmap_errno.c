@@ -65,9 +65,9 @@ struct tentry {
 	{ NULL, 1024, PROT_WRITE, MAP_SHARED,  FD_RDONLY, 0, EACCES },
 
 	/* The fd argument is not a valid open file descriptor. */
-	{ NULL,    1, PROT_READ,  MAP_SHARED,  FD_INVALID, 0, EBADF },
-	{ NULL,    1, PROT_READ,  MAP_PRIVATE, FD_INVALID, 0, EBADF },
-	{ NULL,    1, PROT_READ,  MAP_FIXED,   FD_INVALID, 0, EBADF },
+	{ NULL, 1, PROT_READ,  MAP_SHARED,  FD_INVALID, 0, EBADF },
+	{ NULL, 1, PROT_READ,  MAP_PRIVATE, FD_INVALID, 0, EBADF },
+	{ NULL, 1, PROT_READ,  MAP_FIXED,   FD_INVALID, 0, EBADF },
 
 	{ NULL, 1024, PROT_WRITE, MAP_SHARED,  FD_INVALID, 0, EBADF },
 	{ NULL, 1024, PROT_WRITE, MAP_PRIVATE, FD_INVALID, 0, EBADF },
@@ -89,21 +89,26 @@ struct tentry {
         /*
 	 * The value of flags is invalid (Both MAP_SHARED and MAP_PRIVATE are set)
 	 */
-        { NULL, 1, PROT_READ, MAP_SHARED  | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+        { NULL, 1, PROT_READ,  MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
         { NULL, 1, PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
-        { NULL, 1, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+        { NULL, 1, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_PRIVATE,
+	  FD_DONTCARE, 0, EINVAL },
 
         { NULL, 1024, PROT_READ, MAP_SHARED  | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
 	{ NULL, 1024, PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
-        { NULL, 1024, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+        { NULL, 1024, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_PRIVATE,
+	  FD_DONTCARE, 0, EINVAL },
 
 	/*
 	 * The value of flags is invalid (neither MAP_PRIVATE nor MAP_SHARED
 	 * is set.
 	 */
-	{ NULL, 1, PROT_READ,  ~(MAP_PRIVATE | MAP_SHARED), 0, 0, EINVAL },
-	{ NULL, 1, PROT_WRITE, ~(MAP_PRIVATE | MAP_SHARED), 0, 0, EINVAL },
-	{ NULL, 1, PROT_READ | PROT_WRITE, ~(MAP_SHARED | MAP_PRIVATE), 0, 0, EINVAL },
+	{ NULL, 1, PROT_READ,  ~(MAP_PRIVATE | MAP_SHARED), FD_DONTCARE,
+	  0, EINVAL },
+	{ NULL, 1, PROT_WRITE, ~(MAP_PRIVATE | MAP_SHARED), FD_DONTCARE,
+	  0, EINVAL },
+	{ NULL, 1, PROT_READ | PROT_WRITE, ~(MAP_SHARED | MAP_PRIVATE), FD_DONTCARE,
+	  0, EINVAL },
 
 	/*
 	 * The fd is not open for read, regardless of the protection
@@ -127,10 +132,12 @@ main(void)
 	/* Create a shared memory object that we will be mmap'ing */
 	int rofd, wofd;
 
-	rofd = shm_open(RO_SHM_NAME, O_CREAT | O_EXCL | O_RDONLY, S_IRUSR | S_IWUSR);
+	rofd = shm_open(RO_SHM_NAME, O_CREAT | O_EXCL | O_RDONLY,
+	    S_IRUSR | S_IWUSR);
 	assert(rofd != -1);
 
-	wofd = shm_open(WO_SHM_NAME, O_CREAT | O_EXCL | O_WRONLY, S_IRUSR | S_IWUSR);
+	wofd = shm_open(WO_SHM_NAME, O_CREAT | O_EXCL | O_WRONLY,
+	    S_IRUSR | S_IWUSR);
 	assert(wofd != -1);
 
 	/* Run the tests */
