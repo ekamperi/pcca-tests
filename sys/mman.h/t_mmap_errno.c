@@ -38,7 +38,15 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 
-#define SHM_NAME	"/t_mmap_errno"
+#define RO_SHM_NAME	"/t_mmap_errno_ro"
+#define WO_SHM_NAME	"/t_mmap_errno_wo"
+
+enum fdtype {
+	FD_DONTCARE = -1,
+	FD_RDONLY   = -2,
+	FD_WDONLY   = -3,
+	FD_INVALID  = -4
+};
 
 struct tentry {
 	void *te_addr;
@@ -53,39 +61,41 @@ struct tentry {
 	 * The fd argument is not for write and PROT_WRITE was specified for a
 	 * MAP_SHARED type mapping.
 	 */
-	{ NULL,    1, PROT_WRITE, MAP_SHARED,  0, 0, EACCES },
-	{ NULL, 1024, PROT_WRITE, MAP_SHARED,  0, 0, EACCES },
+	{ NULL,    1, PROT_WRITE, MAP_SHARED,  FD_RDONLY, 0, EACCES },
+	{ NULL, 1024, PROT_WRITE, MAP_SHARED,  FD_RDONLY, 0, EACCES },
 
 	/* The fd argument is not a valid open file descriptor. */
-	{ NULL,    1, PROT_READ,  MAP_SHARED,  -INT_MAX, 0, EBADF },
-	{ NULL,    1, PROT_READ,  MAP_PRIVATE, -INT_MAX, 0, EBADF },
-	{ NULL,    1, PROT_READ,  MAP_FIXED,   -INT_MAX, 0, EBADF },
+	{ NULL,    1, PROT_READ,  MAP_SHARED,  FD_INVALID, 0, EBADF },
+	{ NULL,    1, PROT_READ,  MAP_PRIVATE, FD_INVALID, 0, EBADF },
+	{ NULL,    1, PROT_READ,  MAP_FIXED,   FD_INVALID, 0, EBADF },
 
-	{ NULL, 1024, PROT_WRITE, MAP_SHARED,  -INT_MAX, 0, EBADF },
-	{ NULL, 1024, PROT_WRITE, MAP_PRIVATE, -INT_MAX, 0, EBADF },
-	{ NULL, 1024, PROT_WRITE, MAP_FIXED,   -INT_MAX, 0, EBADF },
+	{ NULL, 1024, PROT_WRITE, MAP_SHARED,  FD_INVALID, 0, EBADF },
+	{ NULL, 1024, PROT_WRITE, MAP_PRIVATE, FD_INVALID, 0, EBADF },
+	{ NULL, 1024, PROT_WRITE, MAP_FIXED,   FD_INVALID, 0, EBADF },
 
 	/* The value of len is zero. */
-	{ NULL, 0, PROT_READ, MAP_SHARED,  0, 0, EINVAL },
-	{ NULL, 0, PROT_READ, MAP_PRIVATE, 0, 0, EINVAL },
-	{ NULL, 0, PROT_READ, MAP_FIXED,   0, 0, EINVAL },
-	{ NULL, 0, PROT_READ, MAP_SHARED  | MAP_PRIVATE, 0, 0, EINVAL },
-	{ NULL, 0, PROT_READ, MAP_SHARED  | MAP_FIXED,   0, 0, EINVAL },
-	{ NULL, 0, PROT_READ, MAP_PRIVATE | MAP_FIXED,   0, 0, EINVAL },
+	{ NULL, 0, PROT_READ, MAP_SHARED,   FD_DONTCARE, 0, EINVAL },
+	{ NULL, 0, PROT_READ, MAP_PRIVATE,  FD_DONTCARE, 0, EINVAL },
+	{ NULL, 0, PROT_READ, MAP_FIXED,    FD_DONTCARE, 0, EINVAL },
 
-	{ NULL, 0, PROT_WRITE, MAP_SHARED,  0, 0, EINVAL },
-	{ NULL, 0, PROT_WRITE, MAP_PRIVATE, 0, 0, EINVAL },
-	{ NULL, 0, PROT_WRITE, MAP_FIXED,   0, 0, EINVAL },
-	{ NULL, 0, PROT_WRITE, MAP_SHARED  | MAP_PRIVATE, 0, 0, EINVAL },
-	{ NULL, 0, PROT_WRITE, MAP_SHARED  | MAP_FIXED,   0, 0, EINVAL },
-	{ NULL, 0, PROT_WRITE, MAP_PRIVATE | MAP_FIXED,   0, 0, EINVAL },
+	{ NULL, 0, PROT_WRITE, MAP_SHARED,  FD_DONTCARE, 0, EINVAL },
+	{ NULL, 0, PROT_WRITE, MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+	{ NULL, 0, PROT_WRITE, MAP_FIXED,   FD_DONTCARE, 0, EINVAL },
 
-	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_SHARED,  0, 0, EINVAL },
-	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_PRIVATE, 0, 0, EINVAL },
-	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_FIXED,   0, 0, EINVAL },
-	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_SHARED  | MAP_PRIVATE, 0, 0, EINVAL },
-	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_SHARED  | MAP_FIXED,   0, 0, EINVAL },
-	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_FIXED,   0, 0, EINVAL },
+	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_SHARED,  FD_DONTCARE, 0, EINVAL },
+	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+	{ NULL, 0, PROT_READ | PROT_WRITE, MAP_FIXED,   FD_DONTCARE, 0, EINVAL },
+
+        /*
+	 * The value of flags is invalid (Both MAP_SHARED and MAP_PRIVATE are set)
+	 */
+        { NULL, 1, PROT_READ, MAP_SHARED  | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+        { NULL, 1, PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+        { NULL, 1, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+
+        { NULL, 1024, PROT_READ, MAP_SHARED  | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+	{ NULL, 1024, PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
+        { NULL, 1024, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_PRIVATE, FD_DONTCARE, 0, EINVAL },
 
 	/*
 	 * The value of flags is invalid (neither MAP_PRIVATE nor MAP_SHARED
@@ -93,17 +103,35 @@ struct tentry {
 	 */
 	{ NULL, 1, PROT_READ,  ~(MAP_PRIVATE | MAP_SHARED), 0, 0, EINVAL },
 	{ NULL, 1, PROT_WRITE, ~(MAP_PRIVATE | MAP_SHARED), 0, 0, EINVAL },
-	{ NULL, 1, PROT_READ | PROT_WRITE, ~(MAP_SHARED | MAP_PRIVATE), 0, 0, EINVAL }
+	{ NULL, 1, PROT_READ | PROT_WRITE, ~(MAP_SHARED | MAP_PRIVATE), 0, 0, EINVAL },
+
+	/*
+	 * The fd is not open for read, regardless of the protection
+	 * specified.
+	 */
+	{ NULL, 1, PROT_READ,  MAP_SHARED,  FD_WDONLY, 0, EACCES },
+	{ NULL, 1, PROT_READ,  MAP_PRIVATE, FD_WDONLY, 0, EACCES },
+	{ NULL, 1, PROT_WRITE, MAP_SHARED,  FD_WDONLY, 0, EACCES },
+	{ NULL, 1, PROT_WRITE, MAP_PRIVATE, FD_WDONLY, 0, EACCES },
+
+	/*
+	 * The fd is not open for write and PROT_WRITE was specified for a
+	 * MAP_SHARED type mapping.
+	 */
+	{ NULL, 1, PROT_WRITE, MAP_SHARED, FD_RDONLY, 0, EACCES }
 };
 
 int
 main(void)
 {
 	/* Create a shared memory object that we will be mmap'ing */
-	int fd;
+	int rofd, wofd;
 
-	fd = shm_open(SHM_NAME, O_CREAT | O_EXCL | O_RDONLY, S_IRUSR | S_IWUSR);
-	assert(fd != -1);
+	rofd = shm_open(RO_SHM_NAME, O_CREAT | O_EXCL | O_RDONLY, S_IRUSR | S_IWUSR);
+	assert(rofd != -1);
+
+	wofd = shm_open(WO_SHM_NAME, O_CREAT | O_EXCL | O_WRONLY, S_IRUSR | S_IWUSR);
+	assert(wofd != -1);
 
 	/* Run the tests */
 	size_t i, N;
@@ -113,9 +141,24 @@ main(void)
 		struct tentry *te = &ttable[i];
 		assert(te);
 
-		/* Override file descriptor */
-		if (te->te_fd != -INT_MAX)
-			te->te_fd = fd;
+		/* Override file descriptor accordingly */
+		switch(te->te_fd) {
+		case FD_DONTCARE:
+			te->te_fd = rofd;
+			break;
+		case FD_RDONLY:
+			te->te_fd = rofd;
+			break;
+		case FD_WDONLY:
+			te->te_fd = wofd;
+			break;
+		case FD_INVALID:
+			te->te_fd = -1;
+			break;
+		default:
+			assert(0);
+			/* NEVER REACHED */
+		}
 
 		assert(mmap(te->te_addr, te->te_len, te->te_prot, te->te_flags,
 			te->te_fd, te->te_off) == MAP_FAILED
@@ -123,8 +166,10 @@ main(void)
 	}
 
 	/* Cleanup */
-	assert(shm_unlink(SHM_NAME) != -1);
-	assert(close(fd) != -1);
+	assert(shm_unlink(RO_SHM_NAME) != -1);
+	assert(shm_unlink(WO_SHM_NAME) != -1);
+	assert(close(rofd) != -1);
+	assert(close(wofd) != -1);
 
 	printf("passed\n");
 
