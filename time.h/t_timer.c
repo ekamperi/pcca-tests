@@ -55,7 +55,7 @@ myhandler2(int sig)
 		++signal2;
 	} else {
 		/* Severely penalize spurious signals */
-		signal1 -= 1000;
+		signal2 -= 1000;
 	}
 }
 
