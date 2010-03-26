@@ -40,15 +40,23 @@ volatile sig_atomic_t signal2 = 0;
 static void
 myhandler1(int sig)
 {
-	if (sig == SIGUSR1)
+	if (sig == SIGUSR1) {
 		++signal1;
+	} else {
+		/* Severely penalize spurious signals */
+		signal1 -= 1000;
+	}
 }
 
 static void
 myhandler2(int sig)
 {
-	if (sig == SIGUSR2)
+	if (sig == SIGUSR2) {
 		++signal2;
+	} else {
+		/* Severely penalize spurious signals */
+		signal1 -= 1000;
+	}
 }
 
 int
