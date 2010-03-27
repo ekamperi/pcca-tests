@@ -1,4 +1,5 @@
-all:	t_shm
+all:	t_shm	\
+	t_shmat	\
 
 CC99=gcc -std=c99
 CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
@@ -10,9 +11,15 @@ CCFLAGS=-Wall -W -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 t_shm: t_shm.c
 	$(CC99) $(CCFLAGS) $(LIB) t_shm.c -o t_shm
 
+t_shmat: t_shmat.c
+	$(CC99) $(CCFLAGS) $(LIB) t_shmat.c -o t_shmat
+
 clean:
 	git clean -f
 
 run:
 	@printf "t_shm: "
 	@-./t_shm
+
+	@printf "t_shmat: "
+	@-./t_shmat

@@ -10,4 +10,19 @@
 		</calls>
 	</test>
 
+
+	<test>
+		<desc></desc>
+		<binary>t_shmat</binary>
+		<timeout>10</timeout>
+		<iterations>1</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>memset</function>
+			<function>shmat</function>
+			<function>shmctl</function>
+			<function>shmget</function>
+		</calls>
+	</test>
+
 </list-of-tests>
