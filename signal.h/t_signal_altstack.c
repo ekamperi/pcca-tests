@@ -86,6 +86,9 @@ main(void)
 		assert(kill(getpid(), SIGUSR1) != -1);
 	}
 
+	/* Sleep a bit, just to be sure that the last signal made it through */
+	sleep(1);
+
 	/* Make sure nothing was lost in translation */
 	assert(cnt == NSIGNALS);
 
