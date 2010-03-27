@@ -10,4 +10,19 @@
 		</calls>
 	</test>
 
+	<test>
+		<desc></desc>
+		<binary>t_signal_altstack</binary>
+		<timeout>10</timeout>
+		<iterations>10</iterations>
+		<optional>false</optional>
+		<calls>
+			<function>kill</function>
+			<function>malloc</function>
+			<function>sigaction</function>
+			<function>sigaltstack</function>
+			<function>sigemptyset</function>
+		</calls>
+	</test>
+
 </list-of-tests>
