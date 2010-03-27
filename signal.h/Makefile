@@ -21,3 +21,6 @@ clean:
 run:
 	@printf "t_signal: "
 	@-./t_signal
+
+	@printf "t_signal_altstack: "
+	@-./t_signal_altstack
