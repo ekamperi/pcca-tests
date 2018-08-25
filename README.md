@@ -54,7 +54,6 @@ What you need to run the tests is basically these:
 If you find a portable way to set the suid bit, without using sudo, please drop
 me a note.
 
-
 ## RUNNING THE TESTS - AUTOMATED MODE
 
 You may run the tests in two ways, either automatically via the mktests.sh
@@ -73,11 +72,11 @@ Here is a usual workflow:
 
     pcca-tests% ./mktests.sh -c	     # Clean files from previous build/run
     pcca-tests% ./mktests.sh -s	     # Construct sandbox/ directories
-    ...	      		   	     # Messages from the construction
+    ...	      		   	             # Messages from the construction
     pcca-tests% ./mktests.sh -b	     # Build test cases
-    ...	      		   	     # Messages from compilation
+    ...	      		   	             # Messages from compilation
     pcca-tests% ./mktests.sh -r	     # Run tests (if none given, . is assumed
-                                         # as the top level directory to start from)
+                                     # as the top level directory to start from)
     pcca-tests% ./mktests.sh -r
     /aio.h/t_aio: Assertion failed: (aio_read(&iocb) != -1), function main, file
     t_aio.c, line 56.
@@ -97,7 +96,7 @@ build the tests and 'make run' to run them.
 
     pcca-tests% cd stdio.h
     pcca-tests/stdio.h% make
-    ...				# Messages from gcc compilation
+    ...				                # Messages from gcc compilation
     pcca-tests/stdio.h% make run
     t_clearerr: passed
     t_ctermid: passed
@@ -230,19 +229,19 @@ $header.h/ directory that needs one, there must have a file 'need-sandbox' in
 it. No need for that file to contain anything at all, just exist. But, it MUST
 be tracked by git:
 
-pcca-tests% mkdir foo.h
-pcca-tests% cd foo.h
-pcca-tests/foo.h% touch need-sandbox
-pcca-tests/foo.h% git add need-sandbox
-pcca-tests/foo.h% git commit -m "foo.h: Add need-sandbox file"
-...
-pcca-tests%
-pcca-tests% ./mktests.sh -s ./foo.h
-Created ./foo.h/sandbox directory
-pcca-tests%
-pcca-tests% ls ./foo.h/sandbox
-dir000    dir666  dirloop  file000  file666  fileloop  infloop2  notatty
-dir555    dir777  fifo	  file555  file777  infloop   notadir   rootfile600
+    pcca-tests% mkdir foo.h
+    pcca-tests% cd foo.h
+    pcca-tests/foo.h% touch need-sandbox
+    pcca-tests/foo.h% git add need-sandbox
+    pcca-tests/foo.h% git commit -m "foo.h: Add need-sandbox file"
+    ...
+    pcca-tests%
+    pcca-tests% ./mktests.sh -s ./foo.h
+    Created ./foo.h/sandbox directory
+    pcca-tests%
+    pcca-tests% ls ./foo.h/sandbox
+    dir000    dir666  dirloop  file000  file666  fileloop  infloop2  notatty
+    dir555    dir777  fifo	  file555  file777  infloop   notadir   rootfile600
 
 We could have supplied only one top-level such directory, and have let the tests
 refer to it via ../../sandbox/* and so on. The reason for separate $header.h/
@@ -270,9 +269,8 @@ XXX: What about Solaris 10 and later?
 mount the medium where the tests reside as 'nosuid' (or similar). Again, this is
 because some tests have the set-user-ID bit set, eg. unistd.h/t_access2. Running
 them in a context where the uid can't be escalated, it will result in a false
-failed test.
-If you want to get the list of suid binaries in the repository, after you have
-built the tests, type:
+failed test. If you want to get the list of suid binaries in the repository,
+after you have built the tests, type:
 
     pcca-tests% find . -type f \( -perm -4000 -o -perm -2000 \) -exec \
     > ls -lh {} \; 2>/dev/null
