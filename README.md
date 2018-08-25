@@ -272,10 +272,10 @@ them in a context where the uid can't be escalated, it will result in a false
 failed test. If you want to get the list of suid binaries in the repository,
 after you have built the tests, type:
 
-    pcca-tests% find . -type f \( -perm -4000 -o -perm -2000 \) -exec \
-    > ls -lh {} \; 2>/dev/null
-    -rwsr-xr-x  1 root  beket   6.9K Aug 12 00:09 ./unistd.h/t_access2
-    pcca-tests%
+        pcca-tests% find . -type f \( -perm -4000 -o -perm -2000 \) -exec \
+        > ls -lh {} \; 2>/dev/null
+        -rwsr-xr-x  1 root  beket   6.9K Aug 12 00:09 ./unistd.h/t_access2
+        pcca-tests%
 
 * If you try to grep(1) recursively inside a $header.h directory that contains
 a sandbox/ directory, grep may block indefinitely in 'fifoor' state or similar.
@@ -289,10 +289,10 @@ with mktests.sh -c and then grep.
 * If you try to find(1) inside a repository that has the sandbox/ directories in
 it, errors will be printed to your console:
 
-    pcca-tests% find . -name foo
-    find: ./unistd.h/sandbox/dir000: Permission denied
-    ...
-    pcca-tests%
+        pcca-tests% find . -name foo
+        find: ./unistd.h/sandbox/dir000: Permission denied
+        ...
+        pcca-tests%
 
 These are harmless but annoying nonetheless. You can try the following:
 * Redirect stderr to null (e.g., find . -name foo 2>/dev/null).
@@ -305,25 +305,25 @@ These are harmless but annoying nonetheless. You can try the following:
 * Log files are generated ONLY when tests are executed via mktests.sh and NOT
 manually with make && make run.
 
-    pcca-tests% ./mktests.sh -c
-    pcca-tests% cd stdio.h
-    pcca-tests/stdio.h% make
-    ...
-    pcca-tests/stdio.h% make run
-    ...
-    pcca-tests% ./getstats.sh ./stdio.h
-    ...
-    >>> Results from last run
-            Passed :        0
-            Failed :        0
-    pcca-tests% ./mktests.sh -r ./stdio.h
-    ...
-    pcca-tests% ./getstats.sh ./stdio.h
-    ...
-    >>> Results from last run
-            Passed :        7
-            Failed :        0
-    pcca-tests%
+        pcca-tests% ./mktests.sh -c
+        pcca-tests% cd stdio.h
+        pcca-tests/stdio.h% make
+        ...
+        pcca-tests/stdio.h% make run
+        ...
+        pcca-tests% ./getstats.sh ./stdio.h
+        ...
+        >>> Results from last run
+                Passed :        0
+                Failed :        0
+        pcca-tests% ./mktests.sh -r ./stdio.h
+        ...
+        pcca-tests% ./getstats.sh ./stdio.h
+        ...
+        >>> Results from last run
+                Passed :        7
+                Failed :        0
+        pcca-tests%
 
 ## EXPORTING TEST REPOSITORY TO A GIT-LESS HOST
 
